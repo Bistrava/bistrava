@@ -1,0 +1,1716 @@
+[
+  {
+    "id": "BIS-016",
+    "supplierHost": "ggv.si",
+    "query": "Cintropur NW25",
+    "matchScore": 0.475,
+    "supplierProductId": 63,
+    "name": "Filter za vodo Cintropur NW25",
+    "slug": "filter-za-vodo-cintropur-nw25",
+    "permalink": "https://ggv.si/izdelek/filter-za-vodo-cintropur-nw25/",
+    "sku": "010395",
+    "shortDescription": "Vodni filtri Cintropur® so namenjeni filtraciji gospodinjskih in industrijskih vodnih sistemov ter zbiranju in čiščenju deževnice, izvirske ali pitne vode. Cintropur® izvaja mehansko filtracijo delcev.",
+    "description": "Cintropur NW25 je zasnovan za srednje pretoke (do 5,5 m³ / h) in zagotavlja visoko učinkovitost pri odstranjevanju delov iz vode ter visokokakovostno filtracijo za različne potrebe v okolju.\nFiltrirni delci se zaradi centrifugalne sile usedajo na dno, kar omogoča, da se površina filtrirne vrečke ne maši in s tem podaljša dolgo dobo same vrečke.\nIzdelani so iz nerjavečih in korozijsko odpornih materialov, kar zagotavlja uporabo filtrov v prehrambeni industriji, industriji za proizvodnjo pijač,… .\nV filtre se lahko vgradi filtrirne vrečke različne mikronaže: 5, 10, 25, 50, 100, 150, 300 ali pa se filtre, namesto vrečke, napolni z aktivnim ogljem, s polifosfati,… .\nFilter je primeren tudi za toplotne črpalke voda / voda (150 mcr).\nLastnosti:\nDvojna filtracija s centrifugalno predfiltracijo (Vortex učinek)\nNizek padec tlaka\nEkskluziven, ekonomičen in poceni sistem filtrirnih vrečk\nFinost filtracije od 1– 300 mcr\nTesnjenje glave in priključkov je zagotovljeno zahvaljujoč sistemu O-ring\nDolga življenjska doba\nZelo nizki stroški vzdrževanja – zamenjava vrečke 3x letno",
+    "price": {
+      "price": "10980",
+      "regular_price": "10980",
+      "sale_price": "9882",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Filter_NW25.jpg",
+        "name": "Filter_NW25",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Filter_NW25_1.jpg",
+        "name": "LEAD Technologies Inc. V1.01",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Model",
+        "taxonomy": null,
+        "has_variations": true,
+        "terms": [
+          {
+            "id": 0,
+            "name": "NW25",
+            "slug": "NW25"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Priklop",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "3/4 (1″)",
+            "slug": "3/4 (1″)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "5,5 m³ / h",
+            "slug": "5,5 m³ / h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Teža",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "1,2 kg",
+            "slug": "1,2 kg"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Višina",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "31,4 cm",
+            "slug": "31,4 cm"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Širina",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "26,9 cm",
+            "slug": "26,9 cm"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Delovni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "10 bar",
+            "slug": "10 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Max. delovni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "16 bar",
+            "slug": "16 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Max. delovna temperatura",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "50 °C",
+            "slug": "50 °C"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-020",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "Filter vložek predfilter 5 mikron PP",
+    "matchScore": 1.0,
+    "supplierProductId": 1789,
+    "name": "Filter vložek predfilter 5 mikron PP",
+    "slug": "filter-vlozek-predfilter-5-mikron-pp",
+    "permalink": "https://filtri-za-vodo.si/trgovina/nadomestni-filter-vlozki/filter-vlozek-predfilter-5-mikron-pp/",
+    "sku": "PE-209200",
+    "shortDescription": "Filter vložek sediment, 10'', 5 mikron, filtracija delcev (pesek, blato, mivka, rja, …), življenska doba 6-12 mesecev (odvisno od kvalitete vode) …",
+    "description": "FILTER VLOŽEK PREDFILTER 5 MIKRON PP\nSistem: predfilter – podpultni, UV strelizacija, ohišje 10′ …\nŽivljenjska doba: 6 -12 mesecev\nNamen: filtracija delcev (pesek, blato, mivka, rja, …)\nSestava: polipropilen\nFinost filtracije: 5 mcr\nVelikost: 10′",
+    "price": {
+      "price": "1699",
+      "regular_price": "1699",
+      "sale_price": "1699",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/07/pe-209200-filter-vlozek-predfilter-5-mikron-pp.jpg",
+        "name": "1250-PE-209200 &#8211; Filter vložek predfilter 5 mikron PP",
+        "alt": "Filter vložek predfilter 5 mikron PP"
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-029",
+    "supplierHost": "ggv.si",
+    "query": "Prašek za dezinfekcijo ionske smole",
+    "matchScore": 0.736,
+    "supplierProductId": 7331,
+    "name": "Prašek za dezinfekcijo ionske smole (mehčalne naprave)",
+    "slug": "prasek-za-dezinfekcijo-ionske-smole-mehcalne-naprave",
+    "permalink": "https://ggv.si/izdelek/prasek-za-dezinfekcijo-ionske-smole-mehcalne-naprave/",
+    "sku": "010806",
+    "shortDescription": "Prašek za dezinfekcijo ionske smole je granulirani izdelek za čiščenje in dezinfekcijo ionske smole, ki se nahaja v mehčalni napravi. (30 g)",
+    "description": "Prašek za dezinfekcijo ionske smole je granulirani izdelek za čiščenje in dezinfekcijo ionske smole, ki se nahaja v mehčalni napravi. Odličen je za odstranjevanje in preprečevanje kontaminacije (združevanje) ionskih smol z železom in drugimi kovinami.\nUPORABA\nEnkrat letno (na 12 mesecev) je priporočljivo, da vsebino vrečke stresete v posodo za solnico v razmerju 1 g praška / 1 l ionske smole. Torej, če imate nameščeno 30 L napravo to pomeni celo vrečko, v primeru 12 L pa pol vrečke. Počakajte 10 – 15 minut, da se prašek raztopi, nato pa ročno zaženite regeneracijo. V primeru večje kontaminacije (združevanja) postopek ponovite.",
+    "price": {
+      "price": "1399",
+      "regular_price": "1399",
+      "sale_price": "999",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/10/Vrecka-za-dez.-smole-1.jpg",
+        "name": "Vrečka za dez. smole",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Količina",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "30 g",
+            "slug": "30 g"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Razmerje",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "1 g praška / 1 l ionske smole",
+            "slug": "1 g praška / 1 l ionske smole"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-030",
+    "supplierHost": "ggv.si",
+    "query": "Tabletirana sol 25 kg",
+    "matchScore": 1.0,
+    "supplierProductId": 60,
+    "name": "Tabletirana sol 25 kg",
+    "slug": "tabletirana-sol-25-kg",
+    "permalink": "https://ggv.si/izdelek/tabletirana-sol-25-kg/",
+    "sku": "010001",
+    "shortDescription": "Sol ima pri mehčalni napravi pomembno vlogo, saj poskrbi, da se nasičena ionska masa (smola) spet povrne v mehčalne spodobnosti in tako zagotovi nemoteno mehčanje vode.\n* Primerna tudi za dezinfekcijo bazenske vode.\nDOSTAVA SOLI NI NA VOLJO! Na voljo je le osebni prevzem na Vrhniki.",
+    "description": "DOSTAVA SOLI NI NA VOLJO! Na voljo je le osebni prevzem na Vrhniki.\nSol ima pri mehčalni napravi pomembno vlogo, saj poskrbi, da se nasičena ionska masa (smola) spet povrne v mehčalne spodobnosti in tako zagotovi nemoteno mehčanje vode.\nEnostavno doziranje za profesionalno mehčanje.\nVarovanje stroja in ostalih strojev, ki za svoje delovanje potrebujejo vodo, pred vodnim kamnom.\nOptimalna trdnost.\nREGENERACIJA MEHČALNE NAPRAVE\nKo je ionska masa (smola) naprave za mehčanje vode nasičena s kalcijevimi in magnezijevimi ioni se učinek mehčanja zmanjša. Za povrnitev mehčalnih sposobnosti je potrebno ionsko maso (smolo) mehčalne naprave regenerirati. Pri postopku regeneracije se opravi spiranje ionske mase s koncentrirano raztopino soli (NaCl). Pri tem se kalcijevimi in magnezijevimi ioni iz funkcionalnih skupin ionske mase zamenjajo z natrijem in tako je ionska masa mehčalne naprave – ionskega izmenjevalca zopet pripravljena za učinkovito mehčanje vode. Pri regeneraciji se v fazi izpiranja ionske mase (smole) slana voda izteka v odtok, trdoto izhodne vode pa se nastavi z mešanjem mehke in vodovodne vode.\n* Primerna tudi za dezinfekcijo bazenske vode. Uporablja se za bazene pri katerih za dezinfekcijo skrbi elektrolizna naprava. Sol ustreza standardom EN 973 Tip A.",
+    "price": {
+      "price": "1999",
+      "regular_price": "1999",
+      "sale_price": "1499",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Tabletovana_Sol.jpg",
+        "name": "Tabletovana_Sol",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Tabletovana_Sol_1.webp",
+        "name": "Tabletovana_Sol_1",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-038",
+    "supplierHost": "ggv.si",
+    "query": "Filter za vodo z regulatorjem tlaka Gevor",
+    "matchScore": 1.0,
+    "supplierProductId": 6866,
+    "name": "Filter za vodo z regulatorjem tlaka Gevor",
+    "slug": "filter-za-vodo-z-regulatorjem-tlaka-gevor",
+    "permalink": "https://ggv.si/izdelek/filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+    "sku": "010802",
+    "shortDescription": "Gevor filtri predstavljajo revolucijo na trgu zanesljivih in natančnih filtrov za uravnavanje vhodnega tlaka.",
+    "description": "Filtri Gevor s 40-mikronsko natančnostjo filtracije iz vode odstranijo tudi droben pesek (63 – 100 µm), ki je prisoten v vodovodnem omrežju, s čimer se zaščitijo gospodinjske sisteme ter naprave (mehčalne naprave). V primerjavi z izdelki na trgu večja filtrirna površina pomeni manjši padec tlaka, kar se kaže kot pomembna prednost pri tuširanju ali pri večjem številu porabnikov vode hkrati.\nFilter iz nerjavečega jekla SS316L se lahko preprosto očisti s “strganjem” umazanije s površine s pomočjo vrtenja spodnjega dela ohišja filtra. Filter je skladen s certifikati NSF/SGS – opravil je test odpornosti proti zmrzovanju pri -30 °C, test tlačnega sunka pri 12 barih ter eksplozijski test pri 50 barih v skladu s standardom.\nV primerjavi z osnovnim modelom (brez regulatorja tlaka) je ta opremljen z manometrom za tlak, tako lahko stalno spremljamo tlak.\n*Če imate kakršnekoli težave z napravami, ki uporabljajo vodo, je prva stvar, ki jo moramo preveriti, višina vhodnega tlaka (pritiska).",
+    "price": {
+      "price": "34160",
+      "regular_price": "34160",
+      "sale_price": "34160",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/09/Gevor_GGV_Tlak_2.webp",
+        "name": "Gevor_GGV_Tlak_2",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Priklop",
+        "taxonomy": null,
+        "has_variations": true,
+        "terms": [
+          {
+            "id": 0,
+            "name": "1\"",
+            "slug": "1\""
+          },
+          {
+            "id": 0,
+            "name": "3/4\"",
+            "slug": "3/4\""
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "do 3m³/h",
+            "slug": "do 3m³/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Filtracija",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "40 µm",
+            "slug": "40 µm"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-040",
+    "supplierHost": "ggv.si",
+    "query": "Avtomatski samočistlni filter za vodo z regulatorjem tlaka Gevor",
+    "matchScore": 1.0,
+    "supplierProductId": 7942,
+    "name": "Avtomatski samočistlni filter za vodo z regulatorjem tlaka Gevor",
+    "slug": "avtomatski-filter-za-vodo-z-regulatorjem-tlaka-gevor",
+    "permalink": "https://ggv.si/izdelek/avtomatski-filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+    "sku": "010802.1",
+    "shortDescription": "Gevor filtri predstavljajo revolucijo na trgu zanesljivih in natančnih filtrov za uravnavanje vhodnega tlaka.",
+    "description": "Filtri Gevor s 40-mikronsko natančnostjo filtracije iz vode odstranijo tudi droben pesek (63 – 100 µm), ki je prisoten v vodovodnem omrežju, s čimer se zaščitijo gospodinjske sisteme ter naprave (mehčalne naprave). V primerjavi z izdelki na trgu večja filtrirna površina pomeni manjši padec tlaka, kar se kaže kot pomembna prednost pri tuširanju ali pri večjem številu porabnikov vode hkrati.\nPredfilter namenjen učinkovitemu čiščenju vode v celotnem gospodinjstvu. Opremljen je z zaslonom na dotik, preko katerega je mogoče nastaviti samodejno izpiranje filtra v izbranih časovnih intervalih. Naprava lahko deluje bodisi na baterije bodisi prek stalnega električnega priklopa. Vgrajen nadzorni sistem spremlja delovanje ventila in ob zaznavi nepravilnosti sproži opozorilo, s čimer pomaga preprečevati morebitna puščanja. Dvojni manometer omogoča sprotno spremljanje vhodnega in izhodnega tlaka. Robustna medeninasta glava ter ohišje iz ojačanih materialov zagotavljata zanesljivo delovanje tudi v zahtevnejših pogojih. Filtracija z mrežico iz nerjavečega jekla (40 µm, SS316L) učinkovito odstranjuje mehanske delce iz vode, pri čemer ni potrebe po redni menjavi filtrirnega vložka.\nFilter iz nerjavečega jekla SS316L se lahko preprosto očisti s “strganjem” umazanije s površine s pomočjo vrtenja spodnjega dela ohišja filtra. Filter je skladen s certifikati NSF/SGS – opravil je test odpornosti proti zmrzovanju pri -30 °C, test tlačnega sunka pri 12 barih ter eksplozijski test pri 50 barih v skladu s standardom.\nV primerjavi z osnovnim modelom (brez regulatorja tlaka) je ta opremljen z manometrom za tlak, tako lahko stalno spremljamo tlak.\n*Če imate kakršnekoli težave z napravami, ki uporabljajo vodo, je prva stvar, ki jo moramo preveriti, višina vhodnega tlaka (pritiska).",
+    "price": {
+      "price": "47580",
+      "regular_price": "47580",
+      "sale_price": "47580",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2026/01/Avtomatski_Gevor_GGV.webp",
+        "name": "Avtomatski_Gevor_GGV",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Priklop",
+        "taxonomy": null,
+        "has_variations": true,
+        "terms": [
+          {
+            "id": 0,
+            "name": "5/4\"",
+            "slug": "5/4\""
+          },
+          {
+            "id": 0,
+            "name": "1\"",
+            "slug": "1\""
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "do 8m³/h",
+            "slug": "do 8m³/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Filtracija",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "40 µm",
+            "slug": "40 µm"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-041",
+    "supplierHost": "ggv.si",
+    "query": "Filter za vodo Gevor",
+    "matchScore": 1.0,
+    "supplierProductId": 6872,
+    "name": "Filter za vodo Gevor",
+    "slug": "filter-za-vodo-gevor",
+    "permalink": "https://ggv.si/izdelek/filter-za-vodo-gevor/",
+    "sku": "010803",
+    "shortDescription": "Gevor filtri predstavljajo revolucijo na trgu zanesljivih in natančnih filtrov za uravnavanje vhodnega tlaka.",
+    "description": "Filtri Gevor s 40-mikronsko natančnostjo filtracije iz vode odstranijo tudi droben pesek (63 – 100 µm), ki je prisoten v vodovodnem omrežju, s čimer se zaščitijo gospodinjske sisteme ter naprave (mehčalne naprave). V primerjavi z izdelki na trgu večja filtrirna površina pomeni manjši padec tlaka, kar se kaže kot pomembna prednost pri tuširanju ali pri večjem številu porabnikov vode hkrati.\nFilter iz nerjavečega jekla SS316L se lahko preprosto očisti s “strganjem” umazanije s površine s pomočjo vrtenja spodnjega dela ohišja filtra. Filter je skladen s certifikati NSF/SGS – opravil je test odpornosti proti zmrzovanju pri -30 °C, test tlačnega sunka pri 12 barih ter eksplozijski test pri 50 barih v skladu s standardom.\n*Če imate kakršnekoli težave z napravami, ki uporabljajo vodo, je prva stvar, ki jo moramo preveriti, višina vhodnega tlaka (pritiska).",
+    "price": {
+      "price": "18300",
+      "regular_price": "18300",
+      "sale_price": "18300",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/09/Gevor_GGV_BT_1.webp",
+        "name": "Gevor_GGV_BT_1",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/09/Gevor_GGV_BT_2.jpg",
+        "name": "Gevor_GGV_BT_2",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Priklop",
+        "taxonomy": null,
+        "has_variations": true,
+        "terms": [
+          {
+            "id": 0,
+            "name": "1\"",
+            "slug": "1\""
+          },
+          {
+            "id": 0,
+            "name": "3/4″",
+            "slug": "3/4″"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "do 3m³/h",
+            "slug": "do 3m³/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Filtracija",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "40 µm",
+            "slug": "40 µm"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-054",
+    "supplierHost": "ggv.si",
+    "query": "Filter za pralni stroj s fosfati",
+    "matchScore": 1.0,
+    "supplierProductId": 5901,
+    "name": "Filter za pralni stroj s fosfati",
+    "slug": "filter-za-pralni-stroj-s-fosfati",
+    "permalink": "https://ggv.si/izdelek/filter-za-pralni-stroj-s-fosfati/",
+    "sku": "010346",
+    "shortDescription": "Filter za pralni stroj s fosfati",
+    "description": "Filter se enostavno namesti na standardne dovodne cevke pri pralnem ali pomivalnem stroju. Odpravlja vse težave, povezane z usedlinami in vodnim kamnom.\nPolifosfati raztopljeni v vodi delujejo na karbonate in preprečujejo, da bi se odlagali na cevi in grelnike.\nFilter vsebuje 160 g polifosfatnih kristalčkov in je preizkušen, da zagotavlja odlične rezultate že pri prvi uporabi.",
+    "price": {
+      "price": "1830",
+      "regular_price": "1830",
+      "sale_price": "1830",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/05/Filter_Za_Pralni_Stroj_Fosfati_2.jpg",
+        "name": "Filter_Za_Pralni_Stroj_Fosfati_2",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Dovodni / odvodni navoj",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "3/4 ″",
+            "slug": "3/4 ″"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Višina",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "130 mm",
+            "slug": "130 mm"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Material",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Ojačani poliprolen, SAN",
+            "slug": "Ojačani poliprolen, SAN"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Polnilo",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Natrijev polifosfat v kristalih 6/10",
+            "slug": "Natrijev polifosfat v kristalih 6/10"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Max. temperatura",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "35 °C",
+            "slug": "35 °C"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Max. tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "7 bar",
+            "slug": "7 bar"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-060",
+    "supplierHost": "konik.si",
+    "query": "AQ800",
+    "matchScore": 0.344,
+    "supplierProductId": 33774,
+    "name": "MEHČALNA NAPRAVA AQ800",
+    "slug": "mehcalna-naprava",
+    "permalink": "https://konik.si/izdelek/mehcalna-naprava/",
+    "sku": "",
+    "shortDescription": "Kompaktna in visoko učinkovita mehčalna naprava.\nMehčalna naprava AQ800 je napredna alternativa klasičnim mehčalnim napravam za cel dom.\nRaztopina je izjemno učinkovita z majhno porabo soli in majhno količino vode, ki je potrebna za regeneracijo.",
+    "description": "MEHČALNA NAPRAVA AQ800\nPredstavljamo vam avtomatsko MEHČALNO NAPRAVO AQUAPHOR 800, ki zagotavlja mehko vodo z izjemno nizko porabo soli ter učinkovito odstranjevanje železa.\nObloge na umivalnikih, kadeh, tuš kabinah, wc školjkah bodo postale preteklost.\nPosoda, kozarci in pribor bodo brez madežev, obleke, perilo in brisače pa mehkejše in čistejše z manjšo uporabo čistilnih sredstev. Mehka voda bo postopoma odstranila stare obloge vodnega kamna, kar bo izboljšalo učinkovitost grelcev in povečalo pretok vode.\nZakaj MEHČALNA NAPRAVA AQ800?\nNizka poraba soli, kompaktna in visoko učinkovita mehčalna naprava.\nMehčalna naprava AQ800 je napredna alternativa klasičnim mehčalnim napravam za cel dom.\nRaztopina je izjemno učinkovita z majhno porabo soli in majhno količino vode, ki je potrebna za regeneracijo.\nAQ800 vsebuje 23 L smole za izmenjavo iona, odporne na klor.\nJe priljubljena rešitev za obdelavo trde vode – tako v hišah kot v apartmajih.\nSistem ne zavzema več prostora kot pralni stroj, zato ni potrebe po ločenem prostoru.\nMEHČALNA NAPRAVA AQ800\nPrihranek soli do 60%\nZahvaljujoč edinstveni zasnovi rezervoarja in izjemno fini smoli za izmenjavo iona je učinkovitost soli največja.\n2-v-1: mehčanje vode & odstranjevanje železa.\nOdstranitev visoke koncentracije Fe (do 15 mg/L koncentracije v vodi) in trdote soli.\nIzjemno majhna uporaba vode za regeneracijo.\nInovativni, patentirani dvojni jedrni ventili mehčalne naprave.\nDesetletna garancija za glavne dele. Debela stena iz homogenega stekleno napolnjenega kompozita bo služila več kot 10 let, pri klasičnih mehčalnih napravah pa običajno manj kot 7 let.\nNizko vzdrževanje.\nPoleg nizke porabe soli v sistemu, io-izmenjava smole traja 5-krat dlje kot v tipičnih mehčalnih napravah.\nDeluje učinkovito tudi pri zelo nizkem tlaku iz pipe.\nNSF certificiran\nAQUAPHOR zagotavljajo dolgoročno delovanje brez težav ob minimalni količini porabljene vode.\nTehnični podatki – Mehčalna naprava AQ800\nDelovanje naprave\nNajvečja kompenzirana trdota: 1200 mg/L (70 °dH)\nNajvečja redukcija železovega oksida: 10 mg/L\nMinimalni pH: 7\nTemperatura vode in okolice: +4 °C do +49 °C\nDelovni tlak vode: 1,4 – 7 bar\nNajvečji pretok za odtok med regeneracijo: 7,6 L/min\nPadec pretoka pri servisnem pretoku (1 bar): 20,8 L/min\nPadec tlaka pri 22,7 L/min: 1 bar\nKrmilnik: merjeni (samodejna prilagoditev porabi)\nPriključki in hidravlika\nVodovodne povezave: 1″ (25 mm) moški navoj\nMinimalni notranji premer odtočne cevi: 16 mm (5/8″)\nDimenzije in teža\nVelikost rezervoarja za medij (Ø × višina): 26,7 × 66 cm\nVišina naprave: 70,6 cm\nTloris (širina × globina): 40,4 × 48,5 cm\nTeža: 48 kg\nFiltracijski medij\nSmola: 28 litrov (fina mrežasta, odporna na klor)\nKako mehčalna naprava odstrani vodni kamen iz vode?\nNaprava mehča vodo s pomočjo izmenjave ionov soli z ioni apnenca v vodi. Za učinkovito delovanje IONSKI IZMENJEVALEC potrebuje sol, ki se dodaja v napravo. Da voda ne bi imela slanega okusa, jo naprava pred izstopom avtomatično izpere v odtok. Za delovanje je potrebno IONSKI IZMENJEVALEC priključiti na napetost.\nPriporočljivo mesto montaže – za merilcem vode (števcem) na vhodu vodovodne napeljave v objekt.\nZakaj je boljša mehka voda od trde?\nTrda voda se na prvi pogled zdi neškodljiva, a dolgoročno vpliva na kakovost življenja, zdravje in stroške gospodinjstva. Mehka voda pa prinaša udobje, prihranke in zaščito za vaše naprave.\nTrda voda v gospodinjstvu – skriti stroški in težave\nNeopaženi tat v vašem domu\nTrda voda vsebuje veliko kalcija in magnezija, ki zmanjšata učinkovitost vode kot čistilnega sredstva. Zato za enak rezultat porabimo:\nveč mila, šampona in zobne paste,\nveč detergentov za posodo, perilo in čiščenje,\nveč vode za izpiranje.\nPo izračunih lahko gospodinjstvo z mehko vodo prihrani tudi do 50 % pri čistilih in vodi.\nVodni kamen – težava v ceveh in napravah\nNajbolj viden znak trde vode so bele obloge vodnega kamna. Te se nabirajo v:\nkopalnici (umivalniki, tuši, školjke),\nkuhinji (pipe, posoda, kozarci),\ngospodinjskih aparatih (pralni stroj, pomivalni stroj, bojler, kavni aparat).\nZaradi vodnega kamna se naprave hitreje kvarijo, porabijo več energije in zahtevajo več vzdrževanja.\nVpliv na zdravje kože in las\nTrda voda kožo in lase izsušuje. Posledice so:\nsrbeča in razdražena koža,\nzamašene pore,\nsuhi in težko razčesani lasje.\nŠe posebej občutljivi so dojenčki in otroci. Raziskave kažejo, da je življenje v območju s trdo vodo povezano z do 87 % večjim tveganjem za pojav ekcema pri dojenčkih.\nSlabši okus hrane in pijače\nTrda voda vpliva tudi na kuhanje:\nčaj in kava izgubita okus in barvo,\nkruh in pecivo izpadejo slabše, ker je voda ključna sestavina testa,\nhrana ne razvije polnega okusa in arome.\nPravi ljubitelji kave, čaja in kulinarike zato prisegajo na mehko vodo.\nZakaj izbrati našo storitev mehčalnih naprav?\nPonujamo strokovno svetovanje, montažo in servis mehčalnih naprav za vodo. Poskrbimo, da vaša naprava deluje optimalno, vi pa uživate v mehki vodi brez skrbi.\nNaše storitve vključujejo:\nredno polnjenje z regeneracijsko soljo,\npregled in čiščenje sistema,\nsvetovanje glede izbire naprave, prilagojene vaši vodi in potrebam gospodinjstva.\nPrednosti naše storitve\ndaljša življenjska doba naprav,\nnižji stroški energije,\nmanjši stroški vzdrževanja,\nmehka voda brez vodnega kamna.\nKontaktirajte nas še danes in poskrbite za kakovostno vodo v vašem domu!\nZa več informacij\npokličite 041 631 598 ali\npišite na trgovina@konik.si\nVzdrževanja filtrirnih sistemov\nNekaj primerov montaže:\nBUČE\nLITIJA\nLJUBLJANA\nKOPER\nTREBNJE\nŠMARTNO pri Slovenj Gradcu\nCIRKOVCE\nVUZENICA",
+    "price": {
+      "price": "84200",
+      "regular_price": "84200",
+      "sale_price": "84200",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://mlgntoixg1dl.i.optimole.com/cb:4FU9.4a2/w:auto/h:auto/q:mauto/f:best/https://konik.si/wp-content/uploads/2023/03/MEHCALNANAPRAVAAQ800-e1786104701673.png",
+        "name": "MEHČALNANAPRAVAAQ800",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-061",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "Core 110 Compact",
+    "matchScore": 0.448,
+    "supplierProductId": 6253,
+    "name": "Ionska mehčalna naprava Tehnofan Core 110 Compact",
+    "slug": "ionska-mehcalna-naprava-tehnofan-core-110-compact",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/",
+    "sku": "ES-FU1013CABDVCR",
+    "shortDescription": "Cenovno ugodna ionska mečalna naprava z 11L ionske smole, 3/4'' priključkek, dimenzije 47x27x43mm, max.pretok 1,2m3/h, mehčalna kapaciteta 28,1 (m3 x°D), poraba 01,2 kg soli in 60 L vode /regeneracijo. Delovni tlak 2-6 bar.Proizvedeno v Belgiji, ventilska glava Clack, by-pass. Odlična tudi za polnjenje sistemov.",
+    "description": "Mehčalna naprava Ecosoft CORE 110 – kompakten mehčalec vode za manjša gospodinjstva\nEcosoft CORE 110 je izjemno kompakten mehčalec vode za stanovanja, manjše hiše in gospodinjstva do 3 oseb. Zmanjšuje vodni kamen in ščiti aparate.\nTrda voda lahko hitro povzroči obloge vodnega kamna, slabše delovanje naprav in večjo porabo čistil. Ecosoft CORE 110 je kompakten mehčalec vode, zasnovan posebej za manjša gospodinjstva, apartmaje in stanovanja, kjer je pomembna kombinacija učinkovitega mehčanja vode in majhnih dimenzij.\nZaradi višine približno 467 mm je naprava primerna tudi za vgradnjo pod pomivalno korito ali v manjšo omarico, kjer je prostor omejen. Kljub kompaktni velikosti nudi zanesljivo zaščito pred vodnim kamnom in je primerna za vsakodnevno uporabo v gospodinjstvih do 3 oseb.\nMehka voda pripomore k daljši življenjski dobi gospodinjskih aparatov, čistejši posodi, mehkejšemu perilu in manj vidnim sledem vodnega kamna na armaturah, tuš kabini ter sanitarni keramiki. Uporaba mehčalca vode lahko zmanjša tudi potrebo po agresivnih čistilih, saj se obloge vodnega kamna tvorijo počasneje.\nEcosoft CORE 110 je zato idealna izbira za uporabnike, ki iščejo majhno, učinkovito in sodobno mehčalno napravo za dom.\nGlavne prednosti\nIzjemno kompaktna mehčalna naprava za manjše prostore\nPrimerna za stanovanja, apartmaje in manjše hiše\nNamenjena gospodinjstvom do 3 oseb\nPomaga zmanjšati nastajanje vodnega kamna\nŠčiti pralni stroj, pomivalni stroj, bojler, pipe in cevi\nPrimerna za vgradnjo pod korito, v kopalnico ali utility prostor\nPrispeva k mehkejšemu perilu in čistejši posodi\nManj sledi vodnega kamna na armaturah in sanitarni keramiki",
+    "price": {
+      "price": "79398",
+      "regular_price": "79398",
+      "sale_price": "79398",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/core-110mm.jpg.webp",
+        "name": "core-110mm.jpg",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/6565.jpg",
+        "name": "6565",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/46546.jpg",
+        "name": "46546",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/5445.jpg",
+        "name": "5445",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/5412.jpg",
+        "name": "5412",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/78.jpg",
+        "name": "78",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/core-110mm.jpg.webp",
+        "name": "core-110mm.jpg",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/878-1.jpg",
+        "name": "878",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/457-1.jpg",
+        "name": "457",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-064",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "VD18",
+    "matchScore": 0.596,
+    "supplierProductId": 5824,
+    "name": "Mehčalna naprava Tehnofan VD18",
+    "slug": "mehcalna-naprava-tehnofan-vd18",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd18/",
+    "sku": "PE-960451",
+    "shortDescription": "Mehčalna naprava Tehnofan VD18, priklop 1'', 18L ionske mase, maks. pretok 1,5 m3/h, kapaciteta mehčanja 65,7 °dHm3, dimnezija ŠxVxG: 244x1068x420 mm, vstopni tlak 2,5-8 bar, poraba soli/regeneracija: 1,1 - 4,5 kg, temp. območje: 4 - 35 °C",
+    "description": "Osnovni opis\nNaprava deluje kot ionski mehčalec (izmenjava ionov), namenjena odstranjevanju trdote vode (kalcijevih in magnezijevih ionov).\nNamenjena je izboljšanju kakovosti vode, preprečevanju nalaganja vodnega kamna, povečanju življenjske dobe aparatov, zmanjšanju porabe detergentov in energije.\nOblikovana je tako, da je kompaktna in primerna tudi za vgradnjo pod pult ali na prostor, kjer je omejena višina.\nSprednja maska je snemljiva, kar olajša vzdrževanje.\nVmesnik (IMD display) z dotiknimi gumbi za nastavitev in pregledovanje delovanja.\nVgrajen by‑pass ventil.",
+    "price": {
+      "price": "101504",
+      "regular_price": "101504",
+      "sale_price": "101504",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2025/09/vd18.jpg",
+        "name": "vd18",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-066",
+    "supplierHost": "ggv.si",
+    "query": "ELBA 12",
+    "matchScore": 0.741,
+    "supplierProductId": 109,
+    "name": "Ionska mehčalna naprava ELBA 12",
+    "slug": "ionska-mehcalna-naprava-elba12",
+    "permalink": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba12/",
+    "sku": "010220",
+    "shortDescription": "Ionska mehčalna naprava ELBA 12 je primerna za manjše stanovanjske objekte, za posamezne stroje ali za mehčanje samo dovoda tople vode.",
+    "description": "Kako deluje mehčalna naprava z ionsko izmenjavo?\nMehčalna naprava z ionsko izmenjavo je preprosta in učinkovita rešitev za odstranjevanje vodnega kamna iz vode. Deluje na osnovi kemičnega procesa, imenovanega ionska izmenjava, pri katerem iz vode odstranjuje trdovratne minerale, kot sta kalcij in magnezij, ki povzročata trdoto vode.\nDelovanje naprave v treh korakih:\nFiltriranje vode skozi ionsko smolo\nTrda voda teče skozi poseben rezervoar, napolnjen z ionsko smolo. Smola vsebuje natrijeve ione, ki zamenjajo kalcijeve in magnezijeve ione v vodi. Tako se ti minerali odstranijo, voda pa postane mehka.\nKopičenje trdih mineralov na smoli\nKalcijevi in magnezijevi ioni se vežejo na smolo, ki jih zadrži, dokler ni nasičena.\nRegeneracija smole\nKo je smola nasičena, naprava samodejno sproži regeneracijski proces na podlagi volumna porabljene vode. Ta poteka s pomočjo slanice, pripravljene iz soli, ki izpere nakopičene trde minerale iz smole in obnovi njeno učinkovitost za nadaljnjo uporabo.\nPrednosti mehke vode:\nZaščita naprav in površin: Mehka voda preprečuje nabiranje vodnega kamna v grelcih, pralnih strojih in drugih gospodinjskih napravah in površinah.\nManjša poraba detergentov: Z mehko vodo potrebujete manj mila in detergentov za enak učinek.\nBoljša kakovost vode za telo: Mehka voda je prijaznejša do kože, las in oblačil, zniža se poraba mila in balzamov.\nBoljši okus napitkov: Kave in čaji v gostinstvu so pripravljeni z mehko vodo saj trda voda lahko prekrije subtilne arome kave in čaja. Mehka voda omogoča, da se razvijejo polni okusi, kar prinaša bolj bogat in prijeten napitek.\nNaše mehčalne naprave so enostavne za uporabo, energetsko varčne in zagotavljajo dolgotrajno rešitev za težave s trdo vodo.\nKako izbrati pravo mehčalno napravo?\nZa pomoč si pomagajte z našim vprašalnikom, ki vam bo, glede na podane odgovore, priporočal mehčalno napravo za vaš dom (LINK) ali pa nam na mail posredujete spodnje podatke;\nNamen uporabe (stanovanjski objekt, industrija, stroji…)\nOkvirno mesečno porabo vode \nVelikost priklopa in maksimalni trenutni pretok.\nMONTAŽA MEHČALNE NAPRAVE \nMontaža ne predstavlja večjega posega v objekt in je navadno opravljena v nekaj urah. Za montažo je poleg dovoda vode potreben še priklop na odtok in na električno omrežje. Pred napravo priporočamo montažo filtra za zaščito pred grobimi in finimi delci.\nVZDRŽEVANJE\nRedno vzdrževanje naprave je zgolj preverjanje in dodajanje tabletirane soli. Poraba tabletirane soli je odvisna od porabe in trdote vode, navadno je med 0,5 in 1,0 kg tabletirane soli na 1 m3 porabljene vode.",
+    "price": {
+      "price": "71980",
+      "regular_price": "71980",
+      "sale_price": "71980",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/image-5.png",
+        "name": "image (5)",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Elba_12.5.jpg",
+        "name": "Elba_12.5",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Maksimalni pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 1200 l/h",
+            "slug": "Do 1200 l/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Maksimalni delavni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 6 bar",
+            "slug": "Do 6 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Kapaciteta na regeneracijo",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "75 ÷ °F = m3 oz. 2 - 3 m³\n75 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)",
+            "slug": "75 ÷ °F = m3 oz. 2 - 3 m³\n75 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Dimenzije",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "65 cm x 50 cm x 35 cm (VxGxŠ)",
+            "slug": "65 cm x 50 cm x 35 cm (VxGxŠ)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Poraba soli in vode",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Cca. 1.8 kg soli in 90 litrov vode na regeneracijo.",
+            "slug": "Cca. 1.8 kg soli in 90 litrov vode na regeneracijo."
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-067",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "Optimo CS Mini 12L",
+    "matchScore": 0.801,
+    "supplierProductId": 1537,
+    "name": "Ionska mehčalna naprava Tehnofan-PENTAIR Optimo CS mini 12L",
+    "slug": "ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/",
+    "sku": "PA-4035739",
+    "shortDescription": "Profesionalna ionska mečalna naprava, 12L ionske smole, 3/4'' priključkek, dimenzije 591x438x280mm, max.pretok 1,2 m3/h, mehčalna kapaciteta 48 °fxm3, poraba 1,5 kg soli in 77 L vode/regeneracijo, LCD zaslon, alarm za nivo soli, delovni tlak min-max 1.4-8,3bar",
+    "description": "IONSKA MEHČALNA NAPRAVA TEHNOFAN-PENTAIR OPTIMO CS MINI 12L\nOptimalna voda za vaše naprave. Naša serija H2Optimo ponuja široko paleto velikosti, zato boste vedno našli primeren model za vaše potrebe. Od velikih modelov, ki so popolni za mehčanje vse vode, ki se uporablja v vaši hiši (Point-Of-Entry), do ultra-kompaktnih modelov, ki so posebej razviti za mehčanje vode za eno samo napravo (Point-Of-Use). Vsi mehčniki vode H2Optimo so primerni za uporabo z vodo do 65°C, zato ni pomembno ali vaša oprema deluje na oskrbi s hladno ali toplo vodo.\nZNAČILNOSTI\nKompaktna oblika\nIntegrirani protipovratni ventili – vhod in izhod\nOpcijski set koles (na modelu 9 in 12 litrov, koda # RSEP-39083)\nPrimeren za uporabo z vročo vodo (do 65°C)\nElektronski krmilnik za zagon regeneracije\nCertifikati: CE, ACS, PZH\nPREDNOSTI\nVsestranski\nPrimeren za prostorsko omejenim prostor\nEnostavna nastavitev, potrebno je vpisati le trdoto vode\nUčinkovita in efektivna regeneracija\nPOMIVALNI STROJ\nPosoda in kozarci brez madežev\nzmanjšana poraba detergenta in vode za izpiranje\nohranjanje učinkovitosti in podaljšanje\nživljenjske dobe pomivalnega stroja\nodprava problemov, stroškov in dela zaradi vzdrževanja\nni potrebe po kemikalijah za odtok\nPENTAIR H2OPTIMO Plus – SLO",
+    "price": {
+      "price": "90612",
+      "regular_price": "90612",
+      "sale_price": "90612",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/07/pa-4035739-ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l.jpg",
+        "name": "1356-PA-4035739 &#8211; Ionska mehčalna naprava Tehnofan-PENTAIR Optimo CS mini 12L",
+        "alt": "Ionska mehčalna naprava Tehnofan-PENTAIR Optimo CS mini 12L"
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/03/IqSoft-acc1-web-2.png",
+        "name": "IqSoft-acc1-web",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/03/H2optimo-acc03-web.png",
+        "name": "H2optimo-acc03-web",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/03/H2optimo-acc02-web.png",
+        "name": "H2optimo-acc02-web",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/03/H2optimo-acc01-web.png",
+        "name": "H2optimo-acc01-web",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/03/1-H2optimo-family-web.png",
+        "name": "1-H2optimo-family-web",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-069",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "VD12",
+    "matchScore": 0.596,
+    "supplierProductId": 5823,
+    "name": "Mehčalna naprava Tehnofan VD12",
+    "slug": "mehcalna-naprava-tehnofan-vd12",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd12/",
+    "sku": "PE-960450",
+    "shortDescription": "Mehčalna naprava Tehnofan VD12, priklop 1'', 12L ionske mase, maks. pretok1,3 m3/h, kapaciteta mehčanja 33,7 °dHm3, dimnezija ŠxVxG: 244x787x420 mm, vstopni tlak 2,5-8 bar, poraba soli/regeneracija: 0,72 - 1,4 kg, temp. območje: 4 - 35 °C",
+    "description": "Osnovni opis\nMehčalna naprava deluje na principu ionske izmenjave (ionski mehčalec), namenjena za odstranjevanje trdote vode (Ca²⁺, Mg²⁺). Namenjena je zaščiti vodovodnih sistemov, naprav in zmanjšanju nalaganja vodnega kamna. Vgrajen je by‑pass ventil. Naprava ima kompaktne dimenzije in je primerna tudi za vgradnjo, kjer ni prevelike višine.",
+    "price": {
+      "price": "93940",
+      "regular_price": "93940",
+      "sale_price": "93940",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2025/09/vd.jpg",
+        "name": "vd",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-071",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "Core 250 CI",
+    "matchScore": 0.77,
+    "supplierProductId": 6254,
+    "name": "Ionska mehčalna naprava Tehnofan Core 250 CI",
+    "slug": "ionska-mehcalna-naprava-tehnofan-core-250-ci",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/",
+    "sku": "ES-FU1024CABCIMVCR",
+    "shortDescription": "Cenovno ugodna ionska mečalna naprava z 24L ionske smole, 3/4'' priključkek, dimenzije 793x270x430mm, max.pretok 1,8m3/h, mehčalna kapaciteta 56,2 (m3 x°D), poraba 2,9 kg soli in 70 L vode /regeneracijo. Delovni tlak 2-6 bar.Proizvedeno v Belgiji, ventilska glava Clack CI, integriran mešalni ventil.",
+    "description": "Mehčalna naprava Ecosoft CORE 250 – kompaktni mehčalec vode za dom\nEcosoft CORE 250 je kompakten 24-litrski mehčalec vode za gospodinjstva do 5 oseb. Zmanjšuje vodni kamen, ščiti aparate in izboljša udobje pri vsakodnevni uporabi vode.\nMehčalna naprava Ecosoft CORE 250 je odlična izbira za gospodinjstva, ki želijo učinkovito zmanjšati trdoto vode in zaščititi vodovodne instalacije, bojler, pralni stroj, pomivalni stroj ter druge naprave pred nalaganjem vodnega kamna. Zaradi kompaktne zasnove je primerna za vgradnjo v kopalnico, utility prostor ali drug tehnični kotiček doma.\nZ 24-litrsko kapaciteto filtrirnega medija je Ecosoft CORE 250 zasnovan za večja gospodinjstva, do približno 5 oseb, kjer je poraba vode višja in je zanesljivo mehčanje vode še posebej pomembno.\nTrda voda je pogosta težava v številnih domovih, saj povzroča nalaganje vodnega kamna na armaturah, grelcih, ceveh in gospodinjskih aparatih. Ecosoft CORE 250 je kompaktna mehčalna naprava, ki pomaga zmanjšati vsebnost mineralov, odgovornih za nastanek vodnega kamna, ter tako prispeva k boljši zaščiti celotnega vodovodnega sistema.\nMehčalec vode Ecosoft CORE 250 je primeren za uporabo z vodo iz javnega vodovoda in je zasnovan za stanovanja, hiše ter gospodinjstva z več uporabniki. Njegova kompaktna oblika omogoča enostavno umestitev tudi tam, kjer je prostor omejen, hkrati pa zagotavlja zmogljivost, ki zadostuje za vsakodnevne potrebe družine.\nZ uporabo mehke vode lahko zmanjšate obloge na pipah, tuš kabini in sanitarni keramiki, izboljšate učinkovitost pralnih in pomivalnih sredstev ter podaljšate življenjsko dobo naprav, ki za delovanje uporabljajo vodo. Mehkejša voda pomeni tudi prijetnejši občutek pri tuširanju, mehkejše perilo in manj sledi na posodi po pomivanju.\nGlavne prednosti:\nKompaktna mehčalna naprava za stanovanja in hiše\nPrimerna za gospodinjstva do 5 oseb\n24-litrski sistem za učinkovito mehčanje vode\nPomaga zmanjšati nastajanje vodnega kamna\nŠčiti bojler, pralni stroj, pomivalni stroj, pipe in cevi\nPrimerna za vgradnjo v kopalnico, utility ali tehnični prostor\nPrispeva k manjši porabi čistil in detergentov\nIzboljša udobje pri vsakodnevni uporabi vode",
+    "price": {
+      "price": "89768",
+      "regular_price": "89768",
+      "sale_price": "89768",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/core-250mm_0.jpg.webp",
+        "name": "core-250mm_0.jpg",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/785.jpg",
+        "name": "785",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/878.jpg",
+        "name": "878",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/457.jpg",
+        "name": "457",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/545.jpg",
+        "name": "545",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/02.jpg",
+        "name": "02",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/Zajeta-slika.jpg",
+        "name": "Zajeta slika",
+        "alt": ""
+      },
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2026/05/core-250mm_0.jpg.webp",
+        "name": "core-250mm_0.jpg",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-074",
+    "supplierHost": "ggv.si",
+    "query": "Wireless Water Guard",
+    "matchScore": 0.89,
+    "supplierProductId": 1053,
+    "name": "Sistem proti izlitju (Wireless Water Guard)",
+    "slug": "sistem-proti-izlitju-wireless-water-guard",
+    "permalink": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/",
+    "sku": "",
+    "shortDescription": "Wireless Water Guard je naprava, ki na podlagi signala, prejetega od brezžičnih senzorjev, zapre glavni dovod, s čimer prepreči nadaljnji pretok vode in škodo v primeru poškodbe cevi ali sistema.",
+    "description": "Sistem proti izlitju (Wireless Water Guard) je naprava, ki na podlagi signala, prejetega od brezžičnih senzorjev, zapre glavni dovod, s čimer prepreči nadaljnji pretok vode in škodo v primeru poškodbe cevi ali sistema.\nElektrični ventil se namesti na glavni dovod vode v objekt, senzorje (do 5 kosov) pa lahko poljubno razporedite po objektu.\nPrimer: Ste na dopustu 🌞 in iz cevi nepričakovano začne puščati voda.\n❌ Brez sistema WWG bo voda tekla še naprej in uničila talne obloge, pohištvo ter zalila nižje prostore.\n✅ S sistemom WWG se bo dovod vode takoj, ko voda doseže senzor, zaprl in tako preprečil nadaljnjo škodo.💪",
+    "price": {
+      "price": "20000",
+      "regular_price": "25000",
+      "sale_price": "20000",
+      "price_range": {
+        "min_amount": "20000",
+        "max_amount": "20800"
+      },
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/image-6.png",
+        "name": "image (6)",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/WWG_Proti_Izlitju_2.jpg",
+        "name": "WWG_Proti_Izlitju_2",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/WWG_Proti_Izlitju_3_Senzor.jpg",
+        "name": "WWG_Proti_Izlitju_3_Senzor",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Priklop",
+        "taxonomy": null,
+        "has_variations": true,
+        "terms": [
+          {
+            "id": 0,
+            "name": "1\"",
+            "slug": "1\""
+          },
+          {
+            "id": 0,
+            "name": "¾\"",
+            "slug": "¾\""
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-077",
+    "supplierHost": "ggv.si",
+    "query": "ELBA 30",
+    "matchScore": 0.741,
+    "supplierProductId": 56,
+    "name": "Ionska mehčalna naprava ELBA 30",
+    "slug": "ionska-mehcalna-naprava-elba-30",
+    "permalink": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba-30/",
+    "sku": "010003",
+    "shortDescription": "Ionska mehčalna naprava ELBA 30 je naša najbolj prodajana mehčalna naprava za eno in dvostanovanjske objekte.",
+    "description": "Kako deluje mehčalna naprava z ionsko izmenjavo?\nMehčalna naprava z ionsko izmenjavo je preprosta in učinkovita rešitev za odstranjevanje vodnega kamna iz vode. Deluje na osnovi kemičnega procesa, imenovanega ionska izmenjava, pri katerem iz vode odstranjuje trdovratne minerale, kot sta kalcij in magnezij, ki povzročata trdoto vode.\nDelovanje naprave v treh korakih:\nFiltriranje vode skozi ionsko smolo\nTrda voda teče skozi poseben rezervoar, napolnjen z ionsko smolo. Smola vsebuje natrijeve ione, ki zamenjajo kalcijeve in magnezijeve ione v vodi. Tako se ti minerali odstranijo, voda pa postane mehka.\nKopičenje trdih mineralov na smoli\nKalcijevi in magnezijevi ioni se vežejo na smolo, ki jih zadrži, dokler ni nasičena.\nRegeneracija smole\nKo je smola nasičena, naprava samodejno sproži regeneracijski proces na podlagi volumna porabljene vode. Ta poteka s pomočjo slanice, pripravljene iz soli, ki izpere nakopičene trde minerale iz smole in obnovi njeno učinkovitost za nadaljnjo uporabo.\nPrednosti mehke vode:\nZaščita naprav in površin: Mehka voda preprečuje nabiranje vodnega kamna v grelcih, pralnih strojih in drugih gospodinjskih napravah in površinah.\nManjša poraba detergentov: Z mehko vodo potrebujete manj mila in detergentov za enak učinek.\nBoljša kakovost vode za telo: Mehka voda je prijaznejša do kože, las in oblačil, zniža se poraba mila in balzamov.\nBoljši okus napitkov: Kave in čaji v gostinstvu so pripravljeni z mehko vodo saj trda voda lahko prekrije subtilne arome kave in čaja. Mehka voda omogoča, da se razvijejo polni okusi, kar prinaša bolj bogat in prijeten napitek.\nNaše mehčalne naprave so enostavne za uporabo, energetsko varčne in zagotavljajo dolgotrajno rešitev za težave s trdo vodo.\nKako izbrati pravo mehčalno napravo?\nZa pomoč si pomagajte z našim vprašalnikom, ki vam bo, glede na podane odgovore, priporočal mehčalno napravo za vaš dom (LINK) ali pa nam na mail posredujete spodnje podatke;\nNamen uporabe (stanovanjski objekt, industrija, stroji…)\nOkvirno mesečno porabo vode \nVelikost priklopa in maksimalni trenutni pretok.\nMONTAŽA MEHČALNE NAPRAVE \nMontaža ne predstavlja večjega posega v objekt in je navadno opravljena v nekaj urah. Za montažo je poleg dovoda vode potreben še priklop na odtok in na električno omrežje. Pred napravo priporočamo montažo filtra za zaščito pred grobimi in finimi delci.\nVZDRŽEVANJE\nRedno vzdrževanje naprave je zgolj preverjanje in dodajanje tabletirane soli. Poraba tabletirane soli je odvisna od porabe in trdote vode, navadno je med 0,5 in 1,0 kg tabletirane soli na 1 m3 porabljene vode.",
+    "price": {
+      "price": "89090",
+      "regular_price": "89090",
+      "sale_price": "89090",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/image-4.png",
+        "name": "image (4)",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/Elba_30_GGV.webp",
+        "name": "Elba_30_GGV",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Maksimalni pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 2500 l/h",
+            "slug": "Do 2500 l/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Maksimalni delovni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 6 bar",
+            "slug": "Do 6 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Kapaciteta na regeneracijo",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "180 ÷ °F = m3 oz. 5 - 6 m³\n180 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)",
+            "slug": "180 ÷ °F = m3 oz. 5 - 6 m³\n180 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Dimenzije",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "110 cm x 50 cm x 35 cm (VxGxŠ)",
+            "slug": "110 cm x 50 cm x 35 cm (VxGxŠ)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Poraba soli in vode",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Cca. 4.5 kg soli in 160 litrov vode na regeneracijo.",
+            "slug": "Cca. 4.5 kg soli in 160 litrov vode na regeneracijo."
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-082",
+    "supplierHost": "konik.si",
+    "query": "Adriatica 15L",
+    "matchScore": 0.881,
+    "supplierProductId": 874,
+    "name": "Mehčalna naprava ADRIATICA 15L",
+    "slug": "mehcalna-naprava-adriatica-15l",
+    "permalink": "https://konik.si/izdelek/mehcalna-naprava-adriatica-15l/",
+    "sku": "",
+    "shortDescription": "Mehčalna naprava Adriatica 15l fizično odstranjuje vodni kamen in s tem ščiti cevi vašega vodovoda in nanj priključene naprave.\nZagotavlja lažje čiščenje in manjšo porabo čistil.\nPrimerna za 25m3 mesečne porabe vode.\nUREDIMO VAM TUDI MONTAŽO – POKLIČITE NAS!",
+    "description": "Mehčalna naprava Adriatica 15l za vodo\nMehčalna naprava Adriatica fizično odstranjuje vodni kamen in s tem ščiti cevi vašega vodovoda in nanj priključene naprave.\nZagotavlja lažje čiščenje in manjšo porabo čistil.\nPRIMERNOST:\nMehčalna naprava je primerena za področja z visoko stopnjo trdote, starejše in novejše vodovodne sisteme, stanovanjske objekte.\nKAKO MEHČALNA NAPRAVA OZ. IONSKI IZMENJEVALEC ODSTRANI VODNI KAMEN IZ VODE?\nNaprava mehča vodo s pomočjo izmenjave ionov soli z ioni apnenca v vodi.\nZa učinkovito delovanje IONSKI IZMENJEVALEC tako potrebuje sol. ki se dodaja v napravo.\nDa voda ne bi imela slanega okusa, jo naprava pred izstopom avtomatično izpere v odtok.\nZa delovanje je potrebno IONSKI IZMENJEVALEC priključiti na napetost.\nMONTAŽA MEHČALNE NAPRAVE\nPriporočljivo mesto montaže za merilcem vode (števcem) na vhodu vodovodne napeljave v objekt, skupaj z vstopnim filtrom Cintropur ali Ydrokalk.\nPREDNOSTI MEHČALNE NAPRAVE\npovrečna poraba: ena vreča soli (25 kg) na osebo,\ndeluje na tabletirano, granulirano, ali blok sol,\nenostavna montaža in vzdrževanje,\nregeneracija se izvaja avtomatično,\nneobčutljiva na spremembe pritiska,\nzelo tiho delovanje\nPREDNOST UPORABE MEHKE VODE\nZ umivanjem in kopanjem v mehki vodi bo občutek vaše kože mnogo bolj gladek in čist, lasje bodo mehkejši in bolj voljni.\nZ uporabo mehke vode boste prihranili pri čistilnih sredstvih in šamponih.\nObloge na umivalnikih, kadeh, tuš kabinah, wc školjkah bodo postale preteklost.\nPosoda, kozarci in pribor bodo brez madežev, obleke, perilo in brisače pa mehkejše in čistejše z manjšo uporabo čistilnih sredstev.\nPranje avtomobila bo lažje, voda pa ne bo puščala madežev.\nMehka voda zmanjšuje probleme ljudi z ekscemi, saj voda ne vsebuje majhnih abrazivnih delcev, ki so običajno prisotni v trdi vodi.\nPrivarčevali boste pri vzdrževanju in popravilih hišnih aparatov, pralno pomivalnih strojev, tušev ipd.\nMehka voda bo postopno odstranila stare obloge vodnega kamna, kar bo izboljšalo učinkovitost grelcev in povečalo pretok.",
+    "price": {
+      "price": "87840",
+      "regular_price": "87840",
+      "sale_price": "87840",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://mlgntoixg1dl.i.optimole.com/cb:4FU9.4a2/w:auto/h:auto/q:mauto/f:best/https://konik.si/wp-content/uploads/2021/02/Mehcalnanaprava-ADRIATICA-e1786104430200.png",
+        "name": "Mehčalnanaprava-ADRIATICA",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-083",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "AntraciteAzure 250 Clack Compact",
+    "matchScore": 0.898,
+    "supplierProductId": 4219,
+    "name": "Ionska mehčalna naprava Tehnofan AntraciteAzure 250 Clack Compact",
+    "slug": "ionska-mehcalna-naprava-tehnofan-antraciteazure-250-clack-compact",
+    "permalink": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-antraciteazure-250-clack-compact/",
+    "sku": "ES-FU1035CABGDV",
+    "shortDescription": "Ionska mečalna naprava z 25L ionske smole, 1'' priključkek, dimenzije 1095x360x565 mm, max.pretok 2,5 m3/h, mehčalna kapaciteta 5 m3 x 250mg/l CaCO3, poraba 2kg soli in 100 L vode /regeneracijo. Delovni tlak 2-6 bar. Proizvedeno v Belgiji, ventilska glava Clack, by-pass.",
+    "description": "Opis izdelka\nIonska mehčalna naprava Tehnofan AntraciteAzure 250 Clack Compact je zasnovana za učinkovito mehčanje vode v gospodinjstvih in manjših poslovnih objektih. S pomočjo napredne ionske izmenjave odstranjuje trdoto vode, kar preprečuje nastanek vodnega kamna in podaljša življenjsko dobo vodovodnih inštalacij ter naprav.\nPrednosti:\nZaščita pred vodnim kamnom: Preprečuje nastanek vodnega kamna na ceveh in napravah.\nPodaljšana življenjska doba naprav: Zmanjšana obraba naprav zaradi mehčane vode.\nVarčna poraba: Optimizirana poraba soli in vode med regeneracijo.\nEnostavno vzdrževanje: Preprosto polnjenje soli in enostavno čiščenje naprave.",
+    "price": {
+      "price": "118584",
+      "regular_price": "118584",
+      "sale_price": "118584",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2025/06/FU1035CABGDV-01_0.png",
+        "name": "FU1035CABGDV-01_0",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-084",
+    "supplierHost": "ggv.si",
+    "query": "Dodatni senzor",
+    "matchScore": 0.618,
+    "supplierProductId": 7973,
+    "name": "Dodatni senzor za sistem proti izlitju (Wireless Water Guard)",
+    "slug": "senzor-sistem-proti-izlitju-wireless-water-guard",
+    "permalink": "https://ggv.si/izdelek/senzor-sistem-proti-izlitju-wireless-water-guard/",
+    "sku": "010554",
+    "shortDescription": "Brezžični senzor za sistem proti izlitju (WWG).",
+    "description": "Sistem proti izlitju (Wireless Water Guard) je naprava, ki na podlagi signala, prejetega od brezžičnih senzorjev, zapre glavni dovod, s čimer prepreči nadaljnji pretok vode in škodo v primeru poškodbe cevi ali sistema.\nElektrični ventil se namesti na glavni dovod vode v objekt, senzorje (do 5 kosov) pa lahko poljubno razporedite po objektu.\nPrimer: Ste na dopustu 🌞 in iz cevi nepričakovano začne puščati voda.\n❌ Brez sistema WWG bo voda tekla še naprej in uničila talne obloge, pohištvo ter zalila nižje prostore.\n✅ S sistemom WWG se bo dovod vode takoj, ko voda doseže senzor, zaprl in tako preprečil nadaljnjo škodo.💪",
+    "price": {
+      "price": "4898",
+      "regular_price": "4898",
+      "sale_price": "4898",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/WWG_Proti_Izlitju_3_Senzor.jpg",
+        "name": "WWG_Proti_Izlitju_3_Senzor",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/WWG_Proti_Izlitju_3_Senzor.jpg",
+        "name": "WWG_Proti_Izlitju_3_Senzor",
+        "alt": ""
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-076",
+    "supplierHost": "ggv.si",
+    "query": "slug:ionska-mehcalna-naprava-midnight-12",
+    "matchScore": 1,
+    "supplierProductId": 111,
+    "name": "Ionska pametna mehčalna naprava MIDNIGHT 12",
+    "slug": "ionska-mehcalna-naprava-midnight-12",
+    "permalink": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/",
+    "sku": "010625",
+    "shortDescription": "Ionska pametna mehčalna naprava MIDNIGHT 12 je najsodobnejša mehčalna naprava, ki združuje dizajn, funkcionalnost, povezljivost in ekonomičnost.",
+    "description": "Sodobna, elegantna zunanjost in napredna notranjost z bogatimi funkcijami.\nČudovita črna barva Midnight daje občutek prestiža tudi v osrednjih prostorih doma.\n✔ WiFi nadzor zagotavlja stalno povezavo z vrhunsko mehčalno napravo Midnight. S pomočjo posebej razvite aplikacije lahko z enim klikom preverite ključne informacije kot so čas in trajanje regeneracije ter količina pretoka vode.\n✔ SafeHOME funkcija za zaščito pred izlitjem vode.\nNaprava spremlja količino in pretok vode ter lahko zazna morebitne počene cevi ali puščanje vode. Po potrebi avtomatsko zapre glavni dovod, da prepreči škodo.\n✔ BIO dezinfekcija ionske smole.\nMed regeneracijo naprava izvaja avtomatsko dezinfekcijo ionske smole z uporabo klora iz tabletirane soli, kar preprečuje razvoj bakterij.\n✔ Opozorilo na pomanjkanje soli.\nNaprava samodejno izračuna porabo soli glede na vneseno količino in pravočasno pošlje opozorilo za ponovno polnjenje.\nZa povezavo krmilne glave z omrežjem Wi-Fi je potrebno uporabiti omrežje frekvenčnega pasu 2,4 GHz! \nLink za prenos aplikacije. \n*Primerna za hišo, stanovanje, objekt do 3 osebe oz. mesečno porabo do 12 m³.",
+    "price": {
+      "price": "99900",
+      "regular_price": "99900",
+      "sale_price": "99900",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/image-3.png",
+        "name": "image (3)",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/4141.png",
+        "name": "4141",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight12.jpg",
+        "name": "Midnight12",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight5.jpg",
+        "name": "Midnight5",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight4.jpg",
+        "name": "Midnight4",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight3.jpg",
+        "name": "Midnight3",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight.jpg",
+        "name": "Midnight",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Maksimalni pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 1500 l/h",
+            "slug": "Do 1500 l/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Maksimalni delovni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 6 bar",
+            "slug": "Do 6 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Kapaciteta na regeneracijo",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "54 ÷ °F = m³ oz. 1,5 - 2,5 m³\n54 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)",
+            "slug": "54 ÷ °F = m³ oz. 1,5 - 2,5 m³\n54 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Dimenzije",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "55 cm x 45 cm x 32 cm (VxŠxG)",
+            "slug": "55 cm x 45 cm x 32 cm (VxŠxG)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Poraba soli in vode",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Cca. 1.6 kg soli in 90 litrov vode na regeneracijo.",
+            "slug": "Cca. 1.6 kg soli in 90 litrov vode na regeneracijo."
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-078",
+    "supplierHost": "ggv.si",
+    "query": "slug:ionska-mehcalna-naprava-midnight-30",
+    "matchScore": 1,
+    "supplierProductId": 121,
+    "name": "Ionska pametna mehčalna naprava MIDNIGHT 30",
+    "slug": "ionska-mehcalna-naprava-midnight-30",
+    "permalink": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/",
+    "sku": "010515",
+    "shortDescription": "Ionska pametna mehčalna naprava MIDNIGHT 30 je najsodobnejša mehčalna naprava, ki združuje dizajn, funkcionalnost, povezljivost in ekonomičnost.",
+    "description": "Sodobna, elegantna zunanjost in napredna notranjost z bogatimi funkcijami.\nČudovita črna barva Midnight daje občutek prestiža tudi v osrednjih prostorih doma.\n✔ WiFi nadzor zagotavlja stalno povezavo z vrhunsko mehčalno napravo Midnight. S pomočjo posebej razvite aplikacije lahko z enim klikom preverite ključne informacije kot so čas in trajanje regeneracije ter količina pretoka vode.\n✔ SafeHOME funkcija za zaščito pred izlitjem vode.\nNaprava spremlja količino in pretok vode ter lahko zazna morebitne počene cevi ali puščanje vode. Po potrebi avtomatsko zapre glavni dovod, da prepreči škodo.\n✔ BIO dezinfekcija ionske smole.\nMed regeneracijo naprava izvaja avtomatsko dezinfekcijo ionske smole z uporabo klora iz tabletirane soli, kar preprečuje razvoj bakterij.\n✔ Opozorilo na pomanjkanje soli.\nNaprava samodejno izračuna porabo soli glede na vneseno količino in pravočasno pošlje opozorilo za ponovno polnjenje.\nZa povezavo krmilne glave z omrežjem Wi-Fi je potrebno uporabiti omrežje frekvenčnega pasu 2,4 GHz! \nLink za prenos aplikacije. \n*Primerna za hišo, stanovanje, objekt do 7 oseb oz. mesečno porabo do 25 m³.",
+    "price": {
+      "price": "119900",
+      "regular_price": "119900",
+      "sale_price": "119900",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/image-2.png",
+        "name": "image (2)",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/4141.png",
+        "name": "4141",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/euro-clear_midnight_2_back_white.jpg",
+        "name": "euro-clear_midnight_2_back_white",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight5.jpg",
+        "name": "Midnight5",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight4.jpg",
+        "name": "Midnight4",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight3.jpg",
+        "name": "Midnight3",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2024/12/Midnight.jpg",
+        "name": "Midnight",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Maksimalni pretok",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 2500 l/h",
+            "slug": "Do 2500 l/h"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Maksimalni delovni tlak",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Do 6 bar",
+            "slug": "Do 6 bar"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Kapaciteta na regeneracijo",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "160 ÷ °F = m³ oz. 5 - 6 m³\n160 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)",
+            "slug": "160 ÷ °F = m³ oz. 5 - 6 m³\n160 (sprejemljivka) ÷ °F (trdota v francoskih stopinjah) = m³ (koliko vode bo naprava zmehčala, preden bo izvedla regeneracijo)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Dimenzije",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "112 cm x 45 cm x 32 cm (VxGxŠ)",
+            "slug": "112 cm x 45 cm x 32 cm (VxGxŠ)"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "name": "Poraba soli in vode",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "Cca. 4.5 kg soli in 160 litrov vode na regeneracijo.",
+            "slug": "Cca. 4.5 kg soli in 160 litrov vode na regeneracijo."
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-008",
+    "supplierHost": "ggv.si",
+    "query": "Kapljice za merjenje trdote vode",
+    "matchScore": 1,
+    "supplierProductId": 1061,
+    "name": "Kapljice za merjenje trdote vode °frH",
+    "slug": "kapljice-za-merjenje-trdote-vode-dh-fh",
+    "permalink": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/",
+    "sku": "010058",
+    "shortDescription": "Kapljice za merjenje trdote vode so ena izmed najpreprostejših in najhitrejših metod za natančno določanje trdote vode.",
+    "description": "Kapljice za merjenje trdote vode so ena izmed najpreprostejših in najhitrejših metod za natančno določanje trdote vode.\nS pomočjo kapljic dobimo podatek o trdoti vode, kateri nam med drugim pomaga pri izračunu porabe soli za spiranje mehčalne naprave (ionske smole).\nPOSTOPEK \nPriloženo stekleno čašo dobro operite, očistite in posušite.\nČašo napolnite z vodo do oznake 5 ml in vanjo počasi dodajaje kapljice titranta.\nPozorno štejte kapljice in po vsaki dodani kapljici čašo premešajte. Ko se voda iz rdeče barve spremeni v zeleno je postopek končan.\nGlede na število dodanih kapljic titranta je enaka vrednost trdote vode.\nPAZI! Pozorno poglej kakšna je enota kapljic! (Primer: 1 drop – 1 °frH). Trdota vode se meri francoskih (°frH) stopinjah.\nIzdelek hranite izven dosega otrok.\nPriloženo:\nKapljice za merjene trdote vode (°frH).\nSteklena čaša.\nNavodila za uporabo.",
+    "price": {
+      "price": "1987",
+      "regular_price": "1987",
+      "sale_price": "1490",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ",",
+      "currency_thousand_separator": ".",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/Trdota_Vode_Kapljice_3.jpg",
+        "name": "Trdota_Vode_Kapljice_3",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/Trdota_Vode_Kapljice_2.avif",
+        "name": "Trdota_Vode_Kapljice_2",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/Trdota_Vode_Tabela_2.jpg",
+        "name": "Trdota_Vode_Tabela_2",
+        "alt": ""
+      },
+      {
+        "src": "https://ggv.si/wp-content/uploads/2025/02/Trdota_Vode_Preracun_3.jpg",
+        "name": "Trdota_Vode_Preračun_3",
+        "alt": ""
+      }
+    ],
+    "attributes": [
+      {
+        "id": 0,
+        "name": "Enota",
+        "taxonomy": null,
+        "has_variations": false,
+        "terms": [
+          {
+            "id": 0,
+            "name": "°frH",
+            "slug": "°frH"
+          }
+        ]
+      }
+    ],
+    "isInStock": true
+  },
+  {
+    "id": "BIS-086",
+    "supplierHost": "filtri-za-vodo.si",
+    "query": "slug:reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr",
+    "matchScore": 1,
+    "supplierProductId": 3347,
+    "name": "Regulator tlaka- reducirni ventil 3/4 &#8211; membranski z merilno regulacijo in filtrom 800mcr",
+    "slug": "reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr",
+    "permalink": "https://filtri-za-vodo.si/trgovina/ohisja-pipe-drugo/drugo/reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr/",
+    "sku": "RB-29090500",
+    "shortDescription": "Reducirni membranski ventil 3/4'' industrijske kvalitete z označeno regulacijo 0,7-8 bar, 800 mikron filtrom, nastavkom za manometer, PN25, max 80C, Ohišje antidezinfekcijska medenina v krom izvedbi in MM UNI-EN-ISO 228.",
+    "description": "Membranski reducirni ventil z integriranim filtrom je zasnovan za stabilno regulacijo tlaka vode v sistemih in hkrati zaščito cevi in naprav pred delci do 800 mikronov. Kombinacija regulatorja tlaka, filtra in merilne regulacije omogoča natančen nadzor delovanja.\nPrednosti\nNatančna regulacija tlaka vode znotraj sistema\nFiltracija grobih delcev (do 800 microns) ščiti pred poškodbami cevi in sistemskih komponent\nMembranska izvedba omogoča stabilno delovanje pod spreminjajočimi se vhodnimi tlaki\nOhišje iz medenine z zunanjim kromom kombinira odpornost na korozijo in estetski izgled\nMožnost priklopa merilnika tlaka izboljša spremljanje delovanja sistema",
+    "price": {
+      "price": "8418",
+      "regular_price": "8418",
+      "sale_price": "8418",
+      "price_range": null,
+      "currency_code": "EUR",
+      "currency_symbol": "€",
+      "currency_minor_unit": 2,
+      "currency_decimal_separator": ".",
+      "currency_thousand_separator": ",",
+      "currency_prefix": "",
+      "currency_suffix": " €"
+    },
+    "images": [
+      {
+        "src": "https://filtri-za-vodo.si/wp-content/uploads/2024/07/rb-29090500-reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr.jpg",
+        "name": "9338-RB-29090500 &#8211; Reducirni ventil &#8211; membranski z merilno regulacijo in filtrom 800mcr",
+        "alt": "Reducirni ventil - membranski z merilno regulacijo in filtrom 800mcr"
+      }
+    ],
+    "attributes": [],
+    "isInStock": true
+  }
+]

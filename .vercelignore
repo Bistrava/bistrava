@@ -1,0 +1,15 @@
+# Local source material and development artifacts are not needed by the site.
+data/
+docs/
+/supabase/
+scripts/
+tests/
+test-results/
+playwright-report/
+tmp/
+.tmp/
+.uv-cache/
+.pnpm-store/
+brand/
+bistrava/
+*.pdf

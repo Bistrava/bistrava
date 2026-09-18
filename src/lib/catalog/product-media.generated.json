@@ -1,0 +1,986 @@
+[
+  {
+    "id": "BIS-008",
+    "images": [
+      {
+        "url": "/products/test-trdote-vode/official-1.jpg",
+        "altSl": "Kapljice za merjenje trdote vode °frH – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/"
+      },
+      {
+        "url": "/products/test-trdote-vode/official-2.avif",
+        "altSl": "Kapljice za merjenje trdote vode °frH – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/"
+      },
+      {
+        "url": "/products/test-trdote-vode/official-3.jpg",
+        "altSl": "Kapljice za merjenje trdote vode °frH – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/"
+      },
+      {
+        "url": "/products/test-trdote-vode/official-4.jpg",
+        "altSl": "Kapljice za merjenje trdote vode °frH – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-016",
+    "images": [
+      {
+        "url": "/products/cintropur-nw25-vodni-filter/official-1.jpg",
+        "altSl": "Cintropur NW25 – vodni filter za celo hišo – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-vodo-cintropur-nw25/"
+      },
+      {
+        "url": "/products/cintropur-nw25-vodni-filter/official-2.jpg",
+        "altSl": "Cintropur NW25 – vodni filter za celo hišo – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-vodo-cintropur-nw25/"
+      },
+      {
+        "url": "/products/cintropur-nw25-vodni-filter/bistrava-panel-1.svg",
+        "altSl": "Cintropur NW25 – vodni filter za celo hišo – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/cintropur-nw25-vodni-filter"
+      },
+      {
+        "url": "/products/cintropur-nw25-vodni-filter/bistrava-panel-2.svg",
+        "altSl": "Cintropur NW25 – vodni filter za celo hišo – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/cintropur-nw25-vodni-filter"
+      }
+    ]
+  },
+  {
+    "id": "BIS-020",
+    "images": [
+      {
+        "url": "/products/sedimentni-filter-5-mikronov/official-1.jpg",
+        "altSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/nadomestni-filter-vlozki/filter-vlozek-predfilter-5-mikron-pp/"
+      },
+      {
+        "url": "/products/sedimentni-filter-5-mikronov/bistrava-panel-1.svg",
+        "altSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/sedimentni-filter-5-mikronov"
+      },
+      {
+        "url": "/products/sedimentni-filter-5-mikronov/bistrava-panel-2.svg",
+        "altSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/sedimentni-filter-5-mikronov"
+      },
+      {
+        "url": "/products/sedimentni-filter-5-mikronov/bistrava-panel-3.svg",
+        "altSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/sedimentni-filter-5-mikronov"
+      }
+    ]
+  },
+  {
+    "id": "BIS-029",
+    "images": [
+      {
+        "url": "/products/dezinfekcija-ionske-smole/official-1.jpg",
+        "altSl": "Prašek za dezinfekcijo ionske smole 30 g – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/prasek-za-dezinfekcijo-ionske-smole-mehcalne-naprave/"
+      },
+      {
+        "url": "/products/dezinfekcija-ionske-smole/bistrava-panel-1.svg",
+        "altSl": "Prašek za dezinfekcijo ionske smole 30 g – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/dezinfekcija-ionske-smole"
+      },
+      {
+        "url": "/products/dezinfekcija-ionske-smole/bistrava-panel-2.svg",
+        "altSl": "Prašek za dezinfekcijo ionske smole 30 g – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/dezinfekcija-ionske-smole"
+      },
+      {
+        "url": "/products/dezinfekcija-ionske-smole/bistrava-panel-3.svg",
+        "altSl": "Prašek za dezinfekcijo ionske smole 30 g – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/dezinfekcija-ionske-smole"
+      }
+    ]
+  },
+  {
+    "id": "BIS-030",
+    "images": [
+      {
+        "url": "/products/tabletirana-sol-25-kg/official-1.jpg",
+        "altSl": "Tabletirana sol za mehčalne naprave 25 kg – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/tabletirana-sol-25-kg/"
+      },
+      {
+        "url": "/products/tabletirana-sol-25-kg/official-2.webp",
+        "altSl": "Tabletirana sol za mehčalne naprave 25 kg – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/tabletirana-sol-25-kg/"
+      },
+      {
+        "url": "/products/tabletirana-sol-25-kg/bistrava-panel-1.svg",
+        "altSl": "Tabletirana sol za mehčalne naprave 25 kg – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/tabletirana-sol-25-kg"
+      },
+      {
+        "url": "/products/tabletirana-sol-25-kg/bistrava-panel-2.svg",
+        "altSl": "Tabletirana sol za mehčalne naprave 25 kg – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/tabletirana-sol-25-kg"
+      }
+    ]
+  },
+  {
+    "id": "BIS-038",
+    "images": [
+      {
+        "url": "/products/filter-z-regulatorjem-tlaka/official-1.webp",
+        "altSl": "Gevor – filter za vodo z regulatorjem tlaka – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-vodo-z-regulatorjem-tlaka-gevor/"
+      },
+      {
+        "url": "/products/filter-z-regulatorjem-tlaka/bistrava-panel-1.svg",
+        "altSl": "Gevor – filter za vodo z regulatorjem tlaka – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-z-regulatorjem-tlaka"
+      },
+      {
+        "url": "/products/filter-z-regulatorjem-tlaka/bistrava-panel-2.svg",
+        "altSl": "Gevor – filter za vodo z regulatorjem tlaka – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-z-regulatorjem-tlaka"
+      },
+      {
+        "url": "/products/filter-z-regulatorjem-tlaka/bistrava-panel-3.svg",
+        "altSl": "Gevor – filter za vodo z regulatorjem tlaka – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-z-regulatorjem-tlaka"
+      }
+    ]
+  },
+  {
+    "id": "BIS-040",
+    "images": [
+      {
+        "url": "/products/avtomatski-samocistilni-filter/official-1.webp",
+        "altSl": "Gevor – avtomatski samočistilni filter z regulatorjem tlaka – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/avtomatski-filter-za-vodo-z-regulatorjem-tlaka-gevor/"
+      },
+      {
+        "url": "/products/avtomatski-samocistilni-filter/bistrava-panel-1.svg",
+        "altSl": "Gevor – avtomatski samočistilni filter z regulatorjem tlaka – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/avtomatski-samocistilni-filter"
+      },
+      {
+        "url": "/products/avtomatski-samocistilni-filter/bistrava-panel-2.svg",
+        "altSl": "Gevor – avtomatski samočistilni filter z regulatorjem tlaka – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/avtomatski-samocistilni-filter"
+      },
+      {
+        "url": "/products/avtomatski-samocistilni-filter/bistrava-panel-3.svg",
+        "altSl": "Gevor – avtomatski samočistilni filter z regulatorjem tlaka – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/avtomatski-samocistilni-filter"
+      }
+    ]
+  },
+  {
+    "id": "BIS-041",
+    "images": [
+      {
+        "url": "/products/samocistilni-filter-za-vodo/official-1.webp",
+        "altSl": "Gevor – samočistilni filter za vodo – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-vodo-gevor/"
+      },
+      {
+        "url": "/products/samocistilni-filter-za-vodo/official-2.jpg",
+        "altSl": "Gevor – samočistilni filter za vodo – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-vodo-gevor/"
+      },
+      {
+        "url": "/products/samocistilni-filter-za-vodo/bistrava-panel-1.svg",
+        "altSl": "Gevor – samočistilni filter za vodo – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/samocistilni-filter-za-vodo"
+      },
+      {
+        "url": "/products/samocistilni-filter-za-vodo/bistrava-panel-2.svg",
+        "altSl": "Gevor – samočistilni filter za vodo – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/samocistilni-filter-za-vodo"
+      }
+    ]
+  },
+  {
+    "id": "BIS-054",
+    "images": [
+      {
+        "url": "/products/filter-za-pralni-stroj/official-1.jpg",
+        "altSl": "Polifosfatni filter za pralni ali pomivalni stroj – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/filter-za-pralni-stroj-s-fosfati/"
+      },
+      {
+        "url": "/products/filter-za-pralni-stroj/bistrava-panel-1.svg",
+        "altSl": "Polifosfatni filter za pralni ali pomivalni stroj – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-za-pralni-stroj"
+      },
+      {
+        "url": "/products/filter-za-pralni-stroj/bistrava-panel-2.svg",
+        "altSl": "Polifosfatni filter za pralni ali pomivalni stroj – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-za-pralni-stroj"
+      },
+      {
+        "url": "/products/filter-za-pralni-stroj/bistrava-panel-3.svg",
+        "altSl": "Polifosfatni filter za pralni ali pomivalni stroj – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/filter-za-pralni-stroj"
+      }
+    ]
+  },
+  {
+    "id": "BIS-060",
+    "images": [
+      {
+        "url": "/products/mehcalna-naprava-aq800/official-1.png",
+        "altSl": "Aquaphor AQ800 – mehčalna naprava za vodo – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Konik d.o.o.",
+        "sourceUrl": "https://konik.si/izdelek/mehcalna-naprava/"
+      },
+      {
+        "url": "/products/mehcalna-naprava-aq800/bistrava-panel-1.svg",
+        "altSl": "Aquaphor AQ800 – mehčalna naprava za vodo – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-aq800"
+      },
+      {
+        "url": "/products/mehcalna-naprava-aq800/bistrava-panel-2.svg",
+        "altSl": "Aquaphor AQ800 – mehčalna naprava za vodo – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-aq800"
+      },
+      {
+        "url": "/products/mehcalna-naprava-aq800/bistrava-panel-3.svg",
+        "altSl": "Aquaphor AQ800 – mehčalna naprava za vodo – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-aq800"
+      }
+    ]
+  },
+  {
+    "id": "BIS-061",
+    "images": [
+      {
+        "url": "/products/mehcalec-vode-compact/official-1.webp",
+        "altSl": "Tehnofan Core 110 Compact – kompaktni mehčalec vode – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/"
+      },
+      {
+        "url": "/products/mehcalec-vode-compact/official-2.jpg",
+        "altSl": "Tehnofan Core 110 Compact – kompaktni mehčalec vode – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/"
+      },
+      {
+        "url": "/products/mehcalec-vode-compact/official-3.jpg",
+        "altSl": "Tehnofan Core 110 Compact – kompaktni mehčalec vode – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/"
+      },
+      {
+        "url": "/products/mehcalec-vode-compact/official-4.jpg",
+        "altSl": "Tehnofan Core 110 Compact – kompaktni mehčalec vode – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-064",
+    "images": [
+      {
+        "url": "/products/mehcalna-naprava-vd18/official-1.jpg",
+        "altSl": "Tehnofan VD18 – mehčalna naprava za vodo – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd18/"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd18/bistrava-panel-1.svg",
+        "altSl": "Tehnofan VD18 – mehčalna naprava za vodo – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd18"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd18/bistrava-panel-2.svg",
+        "altSl": "Tehnofan VD18 – mehčalna naprava za vodo – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd18"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd18/bistrava-panel-3.svg",
+        "altSl": "Tehnofan VD18 – mehčalna naprava za vodo – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd18"
+      }
+    ]
+  },
+  {
+    "id": "BIS-066",
+    "images": [
+      {
+        "url": "/products/mehcalec-vode-12-l/official-1.png",
+        "altSl": "ELBA 12 – kompaktna ionska mehčalna naprava – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba12/"
+      },
+      {
+        "url": "/products/mehcalec-vode-12-l/official-2.jpg",
+        "altSl": "ELBA 12 – kompaktna ionska mehčalna naprava – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba12/"
+      },
+      {
+        "url": "/products/mehcalec-vode-12-l/bistrava-panel-1.svg",
+        "altSl": "ELBA 12 – kompaktna ionska mehčalna naprava – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalec-vode-12-l"
+      },
+      {
+        "url": "/products/mehcalec-vode-12-l/bistrava-panel-2.svg",
+        "altSl": "ELBA 12 – kompaktna ionska mehčalna naprava – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalec-vode-12-l"
+      }
+    ]
+  },
+  {
+    "id": "BIS-067",
+    "images": [
+      {
+        "url": "/products/kompaktni-mehcalec-vode-12-l/official-1.jpg",
+        "altSl": "Pentair Optimo CS Mini 12 L – kompaktni mehčalec vode – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/"
+      },
+      {
+        "url": "/products/kompaktni-mehcalec-vode-12-l/official-2.png",
+        "altSl": "Pentair Optimo CS Mini 12 L – kompaktni mehčalec vode – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/"
+      },
+      {
+        "url": "/products/kompaktni-mehcalec-vode-12-l/official-3.png",
+        "altSl": "Pentair Optimo CS Mini 12 L – kompaktni mehčalec vode – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/"
+      },
+      {
+        "url": "/products/kompaktni-mehcalec-vode-12-l/official-4.png",
+        "altSl": "Pentair Optimo CS Mini 12 L – kompaktni mehčalec vode – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-069",
+    "images": [
+      {
+        "url": "/products/mehcalna-naprava-vd12/official-1.jpg",
+        "altSl": "Tehnofan VD12 – mehčalna naprava za vodo – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd12/"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd12/bistrava-panel-1.svg",
+        "altSl": "Tehnofan VD12 – mehčalna naprava za vodo – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd12"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd12/bistrava-panel-2.svg",
+        "altSl": "Tehnofan VD12 – mehčalna naprava za vodo – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd12"
+      },
+      {
+        "url": "/products/mehcalna-naprava-vd12/bistrava-panel-3.svg",
+        "altSl": "Tehnofan VD12 – mehčalna naprava za vodo – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-vd12"
+      }
+    ]
+  },
+  {
+    "id": "BIS-071",
+    "images": [
+      {
+        "url": "/products/ionski-mehcalec-vode/official-1.webp",
+        "altSl": "Tehnofan Core 250 CI – ionski mehčalec vode – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/"
+      },
+      {
+        "url": "/products/ionski-mehcalec-vode/official-2.jpg",
+        "altSl": "Tehnofan Core 250 CI – ionski mehčalec vode – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/"
+      },
+      {
+        "url": "/products/ionski-mehcalec-vode/official-3.jpg",
+        "altSl": "Tehnofan Core 250 CI – ionski mehčalec vode – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/"
+      },
+      {
+        "url": "/products/ionski-mehcalec-vode/official-4.jpg",
+        "altSl": "Tehnofan Core 250 CI – ionski mehčalec vode – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-074",
+    "images": [
+      {
+        "url": "/products/zascita-pred-izlitjem-vode/official-1.png",
+        "altSl": "Wireless Water Guard – sistem proti izlitju vode – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/"
+      },
+      {
+        "url": "/products/zascita-pred-izlitjem-vode/official-2.jpg",
+        "altSl": "Wireless Water Guard – sistem proti izlitju vode – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/"
+      },
+      {
+        "url": "/products/zascita-pred-izlitjem-vode/official-3.jpg",
+        "altSl": "Wireless Water Guard – sistem proti izlitju vode – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/"
+      },
+      {
+        "url": "/products/zascita-pred-izlitjem-vode/bistrava-panel-1.svg",
+        "altSl": "Wireless Water Guard – sistem proti izlitju vode – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/zascita-pred-izlitjem-vode"
+      }
+    ]
+  },
+  {
+    "id": "BIS-076",
+    "images": [
+      {
+        "url": "/products/pametni-mehcalec-vode/official-1.png",
+        "altSl": "Midnight 12 – pametna mehčalna naprava – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/"
+      },
+      {
+        "url": "/products/pametni-mehcalec-vode/official-2.png",
+        "altSl": "Midnight 12 – pametna mehčalna naprava – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/"
+      },
+      {
+        "url": "/products/pametni-mehcalec-vode/official-3.jpg",
+        "altSl": "Midnight 12 – pametna mehčalna naprava – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/"
+      },
+      {
+        "url": "/products/pametni-mehcalec-vode/official-4.jpg",
+        "altSl": "Midnight 12 – pametna mehčalna naprava – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-077",
+    "images": [
+      {
+        "url": "/products/mehcalec-vode-30-l/official-1.png",
+        "altSl": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba-30/"
+      },
+      {
+        "url": "/products/mehcalec-vode-30-l/official-2.webp",
+        "altSl": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba-30/"
+      },
+      {
+        "url": "/products/mehcalec-vode-30-l/bistrava-panel-1.svg",
+        "altSl": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalec-vode-30-l"
+      },
+      {
+        "url": "/products/mehcalec-vode-30-l/bistrava-panel-2.svg",
+        "altSl": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalec-vode-30-l"
+      }
+    ]
+  },
+  {
+    "id": "BIS-078",
+    "images": [
+      {
+        "url": "/products/pametna-mehcalna-naprava-30-l/official-1.png",
+        "altSl": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/"
+      },
+      {
+        "url": "/products/pametna-mehcalna-naprava-30-l/official-2.png",
+        "altSl": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 2",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/"
+      },
+      {
+        "url": "/products/pametna-mehcalna-naprava-30-l/official-3.jpg",
+        "altSl": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 3",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/"
+      },
+      {
+        "url": "/products/pametna-mehcalna-naprava-30-l/official-4.jpg",
+        "altSl": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti – uradni prikaz izdelka 4",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/"
+      }
+    ]
+  },
+  {
+    "id": "BIS-082",
+    "images": [
+      {
+        "url": "/products/mehcalna-naprava-15-l/official-1.png",
+        "altSl": "Adriatica 15 L – ionska mehčalna naprava – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Konik d.o.o.",
+        "sourceUrl": "https://konik.si/izdelek/mehcalna-naprava-adriatica-15l/"
+      },
+      {
+        "url": "/products/mehcalna-naprava-15-l/bistrava-panel-1.svg",
+        "altSl": "Adriatica 15 L – ionska mehčalna naprava – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-15-l"
+      },
+      {
+        "url": "/products/mehcalna-naprava-15-l/bistrava-panel-2.svg",
+        "altSl": "Adriatica 15 L – ionska mehčalna naprava – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-15-l"
+      },
+      {
+        "url": "/products/mehcalna-naprava-15-l/bistrava-panel-3.svg",
+        "altSl": "Adriatica 15 L – ionska mehčalna naprava – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/mehcalna-naprava-15-l"
+      }
+    ]
+  },
+  {
+    "id": "BIS-083",
+    "images": [
+      {
+        "url": "/products/clack-mehcalna-naprava/official-1.png",
+        "altSl": "AntraciteAzure 250 Clack Compact – mehčalna naprava – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-antraciteazure-250-clack-compact/"
+      },
+      {
+        "url": "/products/clack-mehcalna-naprava/bistrava-panel-1.svg",
+        "altSl": "AntraciteAzure 250 Clack Compact – mehčalna naprava – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/clack-mehcalna-naprava"
+      },
+      {
+        "url": "/products/clack-mehcalna-naprava/bistrava-panel-2.svg",
+        "altSl": "AntraciteAzure 250 Clack Compact – mehčalna naprava – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/clack-mehcalna-naprava"
+      },
+      {
+        "url": "/products/clack-mehcalna-naprava/bistrava-panel-3.svg",
+        "altSl": "AntraciteAzure 250 Clack Compact – mehčalna naprava – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/clack-mehcalna-naprava"
+      }
+    ]
+  },
+  {
+    "id": "BIS-084",
+    "images": [
+      {
+        "url": "/products/senzor-za-izlitje-vode/official-1.jpg",
+        "altSl": "Dodatni senzor Wireless Water Guard za izlitje vode – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "GGV d.o.o.",
+        "sourceUrl": "https://ggv.si/izdelek/senzor-sistem-proti-izlitju-wireless-water-guard/"
+      },
+      {
+        "url": "/products/senzor-za-izlitje-vode/bistrava-panel-1.svg",
+        "altSl": "Dodatni senzor Wireless Water Guard za izlitje vode – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/senzor-za-izlitje-vode"
+      },
+      {
+        "url": "/products/senzor-za-izlitje-vode/bistrava-panel-2.svg",
+        "altSl": "Dodatni senzor Wireless Water Guard za izlitje vode – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/senzor-za-izlitje-vode"
+      },
+      {
+        "url": "/products/senzor-za-izlitje-vode/bistrava-panel-3.svg",
+        "altSl": "Dodatni senzor Wireless Water Guard za izlitje vode – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/senzor-za-izlitje-vode"
+      }
+    ]
+  },
+  {
+    "id": "BIS-086",
+    "images": [
+      {
+        "url": "/products/regulator-tlaka-za-vodo/official-1.jpg",
+        "altSl": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom – uradni prikaz izdelka 1",
+        "width": 1200,
+        "height": 1200,
+        "kind": "official",
+        "sourceName": "Tehnofan d.o.o.",
+        "sourceUrl": "https://filtri-za-vodo.si/trgovina/ohisja-pipe-drugo/drugo/reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr/"
+      },
+      {
+        "url": "/products/regulator-tlaka-za-vodo/bistrava-panel-1.svg",
+        "altSl": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom – ključne lastnosti",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/regulator-tlaka-za-vodo"
+      },
+      {
+        "url": "/products/regulator-tlaka-za-vodo/bistrava-panel-2.svg",
+        "altSl": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom – tehnični podatki",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/regulator-tlaka-za-vodo"
+      },
+      {
+        "url": "/products/regulator-tlaka-za-vodo/bistrava-panel-3.svg",
+        "altSl": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom – uporaba in načrtovanje",
+        "width": 1200,
+        "height": 1200,
+        "kind": "information",
+        "sourceName": "Bistrava",
+        "sourceUrl": "/izdelki/regulator-tlaka-za-vodo"
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+import type { Metadata } from "next";
+import { CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+
+export const metadata: Metadata = {
+  title: "O Bistravi",
+  description:
+    "Bistrava je slovenska specializirana trgovina in svetovalna znamka za mehčanje vode ter zaščito pred vodnim kamnom.",
+  alternates: { canonical: "/o-nas" },
+};
+
+export default function AboutPage() {
+  return (
+    <>
+      <div className="container"><Breadcrumbs items={[{ label: "O nas", href: "/o-nas" }]} /></div>
+      <section className="info-hero"><div className="container"><p className="section-kicker">Jasna voda. Mirna odločitev.</p><h1>Bistrava je specialist za mehko vodo.</h1><p>Naš cilj je tehnično temo spremeniti v razumljiv postopek: meritev, izbira, ponudba, montaža in vzdrževanje.</p></div></section>
+      <section className="section"><div className="container about-principle-grid">
+        <article className="card"><CheckCircle2 aria-hidden="true" /><h2>Jasno</h2><p>Uporabljamo naravno slovenščino, primerljive podatke in vidne omejitve.</p></article>
+        <article className="card"><CheckCircle2 aria-hidden="true" /><h2>Strokovno</h2><p>Izbira se začne z meritvijo ter konča s potrjenim tehničnim listom in izvedljivostjo.</p></article>
+        <article className="card"><CheckCircle2 aria-hidden="true" /><h2>Odgovorno</h2><p>Ne izmišljamo cen, certifikatov, zaloge, garancij, ocen ali zdravstvenih trditev.</p></article>
+      </div></section>
+      <section className="section home-cta"><div className="container cta-panel"><div><p className="section-kicker">Vaš dom, vaši podatki</p><h2>Začnimo pri trdoti vode.</h2><p>Konfigurator pripravi profil rešitve, nato lahko zahtevate individualni pregled.</p></div><Link className="button button-primary" href="/izbira-mehcalca">Odprite konfigurator</Link></div></section>
+    </>
+  );
+}

@@ -1,0 +1,481 @@
+[
+  {
+    "id": "BIS-008",
+    "nameSl": "Kapljice za merjenje trdote vode °frH",
+    "technology": "Titracijsko merjenje skupne trdote vode",
+    "shortDescriptionSl": "Kapljice za merjenje trdote vode omogočajo hiter titracijski preizkus 5 ml vzorca in odčitek skupne trdote v francoskih stopinjah °frH.",
+    "descriptionSl": "Kapljice za merjenje trdote vode °frH so praktičen pripomoček za preverjanje vode pred izbiro ali nastavitvijo mehčalne naprave. V priloženo čašo odmerite 5 ml vode, titrant dodajate po kapljicah in vzorec po vsaki kapljici premešate. Ko se barva spremeni iz rdeče v zeleno, število porabljenih kapljic odčitate skladno z enoto konkretnega reagenta.\n\nRezultat pomaga pri oceni trdote vode in pravilni nastavitvi regeneracije ionskega mehčalca. Komplet vsebuje reagent, stekleno čašo in navodila. Reagent hranite zunaj dosega otrok in pri razlagi rezultata vedno upoštevajte enoto °frH, navedeno na embalaži.",
+    "seoTitle": "Kapljice za merjenje trdote vode °frH | Bistrava",
+    "seoDescriptionSl": "Kapljice za hiter test trdote vode v °frH. Preverite postopek s 5 ml vzorca, vsebino kompleta, javno ceno vira in možnosti svetovanja.",
+    "highlightsSl": ["Titracijski odčitek v °frH", "Vzorec vode 5 ml", "Barvni prehod iz rdeče v zeleno", "Priložena čaša in navodila"],
+    "technicalSpecifications": [
+      {"labelSl": "Metoda", "valueSl": "Kapljična titracija"},
+      {"labelSl": "Enota", "valueSl": "°frH"},
+      {"labelSl": "Volumen vzorca", "valueSl": "5 ml"},
+      {"labelSl": "Končna barva", "valueSl": "Zelena"},
+      {"labelSl": "V kompletu", "valueSl": "Titrant, steklena čaša in navodila"},
+      {"labelSl": "Varnost", "valueSl": "Hraniti zunaj dosega otrok"}
+    ],
+    "typed": {"installationRequired": false, "electricityRequired": false, "drainRequired": false, "bypassIncluded": false}
+  },
+  {
+    "id": "BIS-016",
+    "nameSl": "Cintropur NW25 – vodni filter za celo hišo",
+    "technology": "Mehanska filtracija z Vortex predfiltracijo",
+    "shortDescriptionSl": "Cintropur NW25 je mehanski vodni filter za pretok do 5,5 m³/h, z zamenljivimi filtrirnimi vrečkami in priključkom 3/4″ oziroma 1″.",
+    "descriptionSl": "Cintropur NW25 je vodni filter za mehansko odstranjevanje delcev iz pitne, izvirske ali deževnice ter za zaščito hišnih in manjših industrijskih vodnih sistemov. Centrifugalni Vortex učinek večje delce usmeri proti dnu ohišja, zato se filtrirna vrečka počasneje obremenjuje in padec tlaka ostaja nižji.\n\nModel sprejme vrečke različnih finosti, od fine do grobe filtracije, zato se izbira vložka prilagodi analizi vode in namenu uporabe. Največji navedeni pretok je 5,5 m³/h, delovni tlak 10 bar, največja delovna temperatura pa 50 °C. Pred montažo je treba potrditi priključek, zahtevano finost filtracije in dovolj prostora za servis.",
+    "seoTitle": "Cintropur NW25 vodni filter za hišo | Bistrava",
+    "seoDescriptionSl": "Cintropur NW25 za mehansko filtracijo vode do 5,5 m³/h. Preverite priključke, tlak, mere, filtrirne vrečke in strokovno montažo.",
+    "highlightsSl": ["Pretok do 5,5 m³/h", "Vortex centrifugalna predfiltracija", "Filtrirne vrečke različnih finosti", "Nizek padec tlaka"],
+    "technicalSpecifications": [
+      {"labelSl": "Model", "valueSl": "Cintropur NW25"},
+      {"labelSl": "Priključek", "valueSl": "3/4″ oziroma 1″"},
+      {"labelSl": "Največji pretok", "valueSl": "5,5 m³/h"},
+      {"labelSl": "Finost vrečk", "valueSl": "5, 10, 25, 50, 100, 150 ali 300 µm"},
+      {"labelSl": "Delovni tlak", "valueSl": "10 bar"},
+      {"labelSl": "Največji tlak", "valueSl": "16 bar"},
+      {"labelSl": "Največja temperatura", "valueSl": "50 °C"},
+      {"labelSl": "Mere", "valueSl": "višina 31,4 cm; širina 26,9 cm"},
+      {"labelSl": "Teža", "valueSl": "1,2 kg"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 91.67, "connectionSize": "3/4″ oziroma 1″", "dimensions": "31,4 × 26,9 cm (V × Š)", "weightKg": 1.2, "installationRequired": true, "electricityRequired": false, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-020",
+    "nameSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov",
+    "technology": "Mehanska sedimentna filtracija iz polipropilena",
+    "shortDescriptionSl": "Polipropilenski sedimentni vložek 10″ s finostjo 5 µm zadržuje pesek, blato, mivko in rjo v standardnih filtrirnih ohišjih.",
+    "descriptionSl": "Sedimentni filtrirni vložek 10″ – 5 mikronov je namenjen mehanski predfiltraciji vode v standardnem desetpalčnem ohišju. Ekstrudiran polipropilen zadržuje drobne mehanske delce, kot so pesek, blato, mivka in rja, ter tako razbremeni naslednje stopnje filtracije in naprave za obdelavo vode.\n\nDobavitelj navaja običajno življenjsko dobo od 6 do 12 mesecev, dejanski interval menjave pa je odvisen od kakovosti in porabe vode ter padca tlaka. Pred naročilom preverite dolžino ohišja, zahtevano finost in smer pretoka sistema.",
+    "seoTitle": "Sedimentni filter 10″ 5 mikronov | Bistrava",
+    "seoDescriptionSl": "Sedimentni filtrirni vložek 10″ iz polipropilena, finost 5 µm. Za pesek, rjo in mivko; preverite združljivost ter interval menjave.",
+    "highlightsSl": ["Standardna velikost 10″", "Finost filtracije 5 µm", "Ekstrudiran polipropilen", "Za pesek, blato, mivko in rjo"],
+    "technicalSpecifications": [
+      {"labelSl": "Tip", "valueSl": "Sedimentni predfilter"},
+      {"labelSl": "Velikost", "valueSl": "10″"},
+      {"labelSl": "Finost", "valueSl": "5 µm"},
+      {"labelSl": "Material", "valueSl": "Polipropilen"},
+      {"labelSl": "Okvirna življenjska doba", "valueSl": "6–12 mesecev, odvisno od vode"},
+      {"labelSl": "Namen", "valueSl": "Mehanski delci, pesek, blato, mivka in rja"}
+    ],
+    "typed": {"installationRequired": false, "electricityRequired": false, "drainRequired": false, "bypassIncluded": false}
+  },
+  {
+    "id": "BIS-029",
+    "nameSl": "Prašek za dezinfekcijo ionske smole 30 g",
+    "technology": "Čiščenje in dezinfekcija ionske izmenjevalne smole",
+    "shortDescriptionSl": "30-gramski prašek za letno čiščenje ionske smole se dozira v razmerju 1 g na 1 l smole in uporabi skupaj z ročno regeneracijo.",
+    "descriptionSl": "Prašek za dezinfekcijo ionske smole je granuliran vzdrževalni izdelek za mehčalne naprave. Namenjen je čiščenju smole in zmanjševanju obremenitve z železom ter drugimi kovinami, ki lahko sčasoma poslabšajo delovanje ionskega izmenjevalca.\n\nDobavitelj priporoča uporabo enkrat na 12 mesecev v razmerju 1 g praška na 1 l ionske smole. Odmerjeno količino stresete v posodo za sol, počakate 10–15 minut, nato ročno sprožite regeneracijo. Pred uporabo preverite navodila proizvajalca konkretne mehčalne naprave in ustrezen volumen smole.",
+    "seoTitle": "Dezinfekcija ionske smole 30 g | Bistrava",
+    "seoDescriptionSl": "Prašek za čiščenje in dezinfekcijo ionske smole. Pakiranje 30 g, razmerje 1 g/l smole in priporočena uporaba enkrat letno.",
+    "highlightsSl": ["Pakiranje 30 g", "Odmerjanje 1 g na 1 l smole", "Priporočena letna uporaba", "Uporaba z ročno regeneracijo"],
+    "technicalSpecifications": [
+      {"labelSl": "Količina", "valueSl": "30 g"},
+      {"labelSl": "Odmerjanje", "valueSl": "1 g na 1 l ionske smole"},
+      {"labelSl": "Čas raztapljanja", "valueSl": "10–15 minut"},
+      {"labelSl": "Priporočeni interval", "valueSl": "12 mesecev"},
+      {"labelSl": "Naslednji korak", "valueSl": "Ročni zagon regeneracije"}
+    ],
+    "typed": {"installationRequired": false, "electricityRequired": false, "drainRequired": false, "bypassIncluded": false}
+  },
+  {
+    "id": "BIS-030",
+    "nameSl": "Tabletirana sol za mehčalne naprave 25 kg",
+    "technology": "Regeneracijska sol za ionske mehčalne naprave",
+    "shortDescriptionSl": "Tabletirana sol v 25-kilogramski vreči zagotavlja pripravo slanice za regeneracijo ionske smole in ustreza standardu EN 973 tip A.",
+    "descriptionSl": "Tabletirana sol za mehčalne naprave 25 kg se uporablja za pripravo slanice, s katero se med regeneracijo obnovi sposobnost ionske smole za vezavo kalcijevih in magnezijevih ionov. Enakomerne tablete omogočajo preprosto doziranje in pomagajo zmanjšati nastajanje grud v posodi za sol.\n\nIzdelek po podatkih dobavitelja ustreza standardu EN 973 tip A in je primeren tudi za bazenske sisteme z elektrolizno dezinfekcijo, če to dovoljuje proizvajalec opreme. Poraba je odvisna od trdote vode, porabe in nastavitev naprave. Vir navaja samo osebni prevzem na Vrhniki, zato je treba način dobave pred naročilom posebej preveriti.",
+    "seoTitle": "Tabletirana sol za mehčalec 25 kg | Bistrava",
+    "seoDescriptionSl": "Tabletirana regeneracijska sol 25 kg za ionske mehčalne naprave. Standard EN 973 tip A, enostavno doziranje in informacije o prevzemu.",
+    "highlightsSl": ["Vreča 25 kg", "Za regeneracijo ionske smole", "Standard EN 973 tip A", "Enakomerne solne tablete"],
+    "technicalSpecifications": [
+      {"labelSl": "Pakiranje", "valueSl": "25 kg"},
+      {"labelSl": "Oblika", "valueSl": "Tabletirana sol"},
+      {"labelSl": "Namen", "valueSl": "Regeneracija ionske izmenjevalne smole"},
+      {"labelSl": "Standard", "valueSl": "EN 973 tip A"},
+      {"labelSl": "Dobava pri viru", "valueSl": "Osebni prevzem na Vrhniki"}
+    ],
+    "typed": {"installationRequired": false, "electricityRequired": false, "drainRequired": false, "bypassIncluded": false, "certifications": ["EN 973 tip A"]}
+  },
+  {
+    "id": "BIS-038",
+    "nameSl": "Gevor – filter za vodo z regulatorjem tlaka",
+    "technology": "Samočistilna mehanska filtracija in regulacija tlaka",
+    "shortDescriptionSl": "Gevor združuje 40-mikronski filter iz nerjavnega jekla SS316L, regulator tlaka in manometer za pretok do 3 m³/h.",
+    "descriptionSl": "Gevor filter za vodo z regulatorjem tlaka je vhodni hišni predfilter za mehanske delce in hkratno uravnavanje tlaka. Mrežica iz nerjavnega jekla SS316L s finostjo 40 µm zadržuje droben pesek in druge delce, večja filtrirna površina pa pomaga omejiti padec tlaka pri sočasni porabi vode.\n\nMrežico očistite z vrtenjem spodnjega dela ohišja, zato redna menjava filtrirnega vložka ni predvidena. Model je na voljo s priključkom 3/4″ ali 1″, dobavitelj navaja pretok do 3 m³/h. Regulator in manometer omogočata nastavitev ter spremljanje vhodnega tlaka; končno nastavitev mora opraviti usposobljen monter.",
+    "seoTitle": "Gevor filter z regulatorjem tlaka | Bistrava",
+    "seoDescriptionSl": "Gevor samočistilni filter 40 µm z regulatorjem tlaka, manometrom, mrežico SS316L in pretokom do 3 m³/h. Priključek 3/4″ ali 1″.",
+    "highlightsSl": ["Filtracija 40 µm", "Vgrajen regulator tlaka", "Mrežica SS316L", "Pretok do 3 m³/h"],
+    "technicalSpecifications": [
+      {"labelSl": "Finost filtracije", "valueSl": "40 µm"},
+      {"labelSl": "Material mrežice", "valueSl": "Nerjavno jeklo SS316L"},
+      {"labelSl": "Priključek", "valueSl": "3/4″ ali 1″"},
+      {"labelSl": "Največji pretok", "valueSl": "3 m³/h"},
+      {"labelSl": "Nadzor tlaka", "valueSl": "Regulator in manometer"},
+      {"labelSl": "Čiščenje", "valueSl": "Ročno strganje z vrtenjem spodnjega dela"},
+      {"labelSl": "Preizkusi po navedbi vira", "valueSl": "NSF/SGS, tlačni sunek 12 bar, porušni test 50 bar"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 50, "connectionSize": "3/4″ ali 1″", "installationRequired": true, "electricityRequired": false, "certifications": ["NSF/SGS – navedba dobavitelja"], "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-040",
+    "nameSl": "Gevor – avtomatski samočistilni filter z regulatorjem tlaka",
+    "technology": "Avtomatska mehanska filtracija in regulacija tlaka",
+    "shortDescriptionSl": "Avtomatski Gevor predfilter ima 40-µm mrežico SS316L, nastavljivo časovno izpiranje, dvojni manometer in pretok do 8 m³/h.",
+    "descriptionSl": "Avtomatski samočistilni filter Gevor je namenjen vhodni filtraciji vode za celoten objekt. Nerjavna mrežica SS316L s finostjo 40 µm zadržuje mehanske delce, zaslon na dotik pa omogoča nastavitev samodejnega izpiranja v izbranih časovnih intervalih. Večja filtrirna površina je prilagojena pretoku do 8 m³/h.\n\nDvojni manometer prikazuje vhodni in izhodni tlak, vgrajeni nadzor ventila pa opozori na nepravilnosti delovanja. Naprava lahko deluje na baterije ali s stalnim električnim priklopom. Na voljo sta priključka 1″ in 5/4″; pred montažo je treba zagotoviti primeren odvod izpiralne vode, prostor za servis in pravilno nastavitev tlaka.",
+    "seoTitle": "Avtomatski Gevor samočistilni filter | Bistrava",
+    "seoDescriptionSl": "Avtomatski Gevor filter 40 µm z regulatorjem tlaka, dvojnim manometrom in pretokom do 8 m³/h. Priključek 1″ ali 5/4″.",
+    "highlightsSl": ["Samodejno časovno izpiranje", "Pretok do 8 m³/h", "Dvojni manometer", "Mrežica SS316L, 40 µm"],
+    "technicalSpecifications": [
+      {"labelSl": "Finost filtracije", "valueSl": "40 µm"},
+      {"labelSl": "Material mrežice", "valueSl": "Nerjavno jeklo SS316L"},
+      {"labelSl": "Priključek", "valueSl": "1″ ali 5/4″"},
+      {"labelSl": "Največji pretok", "valueSl": "8 m³/h"},
+      {"labelSl": "Izpiranje", "valueSl": "Samodejno, po časovnem intervalu"},
+      {"labelSl": "Napajanje", "valueSl": "Baterije ali stalni električni priklop"},
+      {"labelSl": "Nadzor", "valueSl": "Zaslon na dotik in dvojni manometer"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 133.33, "connectionSize": "1″ ali 5/4″", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-041",
+    "nameSl": "Gevor – samočistilni filter za vodo",
+    "technology": "Samočistilna mehanska filtracija",
+    "shortDescriptionSl": "Osnovni Gevor samočistilni filter uporablja 40-µm mrežico SS316L za mehansko zaščito hišnega vodovoda pri pretoku do 3 m³/h.",
+    "descriptionSl": "Gevor samočistilni filter za vodo je kompaktna rešitev za mehansko predfiltracijo na vhodu v objekt. Filtrirna mrežica iz nerjavnega jekla SS316L s finostjo 40 µm zadržuje pesek, rjo in druge delce ter pomaga zaščititi armature, grelnike in naprave za nadaljnjo obdelavo vode.\n\nMrežica se očisti z vrtenjem spodnjega dela ohišja, brez običajne menjave vložka. Dobavitelj navaja največji pretok 3 m³/h in izbiro priključka 3/4″ ali 1″. Osnovni model nima funkcije regulacije tlaka, zato je treba tlak in potrebo po ločenem regulatorju preveriti pred montažo.",
+    "seoTitle": "Gevor samočistilni filter za vodo | Bistrava",
+    "seoDescriptionSl": "Gevor mehanski filter 40 µm z mrežico SS316L, ročnim samočiščenjem in pretokom do 3 m³/h. Izbira priključka 3/4″ ali 1″.",
+    "highlightsSl": ["Filtracija 40 µm", "Mrežica SS316L", "Ročno samočiščenje", "Pretok do 3 m³/h"],
+    "technicalSpecifications": [
+      {"labelSl": "Finost filtracije", "valueSl": "40 µm"},
+      {"labelSl": "Material mrežice", "valueSl": "Nerjavno jeklo SS316L"},
+      {"labelSl": "Priključek", "valueSl": "3/4″ ali 1″"},
+      {"labelSl": "Največji pretok", "valueSl": "3 m³/h"},
+      {"labelSl": "Čiščenje", "valueSl": "Ročno strganje z vrtenjem spodnjega dela"},
+      {"labelSl": "Regulator tlaka", "valueSl": "Ni del osnovnega modela"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 50, "connectionSize": "3/4″ ali 1″", "installationRequired": true, "electricityRequired": false, "certifications": ["NSF/SGS – navedba dobavitelja"], "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-054",
+    "nameSl": "Polifosfatni filter za pralni ali pomivalni stroj",
+    "technology": "Doziranje natrijevega polifosfata za ciljno zaščito",
+    "shortDescriptionSl": "Kompaktni polifosfatni filter s priključkom 3/4″ in 160 g kristalov je namenjen zaščiti posameznega pralnega ali pomivalnega stroja.",
+    "descriptionSl": "Polifosfatni filter se namesti na standardni dovod vode pred pralnim ali pomivalnim strojem. Natrijev polifosfat deluje na karbonate v vodi in pomaga omejevati njihovo odlaganje na ceveh ter grelnih elementih posamezne naprave. To je ciljna zaščita porabnika in ni enakovredna centralnemu mehčanju vode z ionsko izmenjavo.\n\nOhišje je visoko 130 mm, vsebuje 160 g polifosfatnih kristalov ter uporablja 3/4-palčni vhodni in izhodni navoj. Dobavitelj navaja največji tlak 7 bar in temperaturo 35 °C. Pred uporabo je treba preveriti kakovost vode, navodila proizvajalca aparata ter primernost za predvideni dovod.",
+    "seoTitle": "Polifosfatni filter za pralni stroj | Bistrava",
+    "seoDescriptionSl": "Polifosfatni filter 3/4″ s 160 g kristalov za ciljno zaščito pralnega ali pomivalnega stroja. Največ 7 bar in 35 °C.",
+    "highlightsSl": ["Priključek 3/4″", "160 g polifosfatnih kristalov", "Za posamezen gospodinjski aparat", "Največji tlak 7 bar"],
+    "technicalSpecifications": [
+      {"labelSl": "Priključek", "valueSl": "3/4″ vhod in izhod"},
+      {"labelSl": "Polnilo", "valueSl": "160 g natrijevega polifosfata, kristali 6/10"},
+      {"labelSl": "Material ohišja", "valueSl": "Ojačani polipropilen in SAN"},
+      {"labelSl": "Višina", "valueSl": "130 mm"},
+      {"labelSl": "Največji tlak", "valueSl": "7 bar"},
+      {"labelSl": "Največja temperatura", "valueSl": "35 °C"}
+    ],
+    "typed": {"connectionSize": "3/4″", "dimensions": "130 mm (višina)", "installationRequired": true, "electricityRequired": false, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-060",
+    "nameSl": "Aquaphor AQ800 – mehčalna naprava za vodo",
+    "technology": "Ionska izmenjava z dodatnim zmanjševanjem železa",
+    "shortDescriptionSl": "Aquaphor AQ800 je kompaktna avtomatska mehčalna naprava z 1″ priključkom, delovnim tlakom 1,4–7 bar in dodatnim zmanjševanjem železa.",
+    "descriptionSl": "Aquaphor AQ800 je kompaktna mehčalna naprava za celoten dom, ki uporablja fino ionsko izmenjevalno smolo za zmanjševanje trdote vode ter železa. Zasnova je usmerjena v učinkovito regeneracijo z manjšo porabo soli in vode, zato je zanimiva za hiše in apartmaje, kjer je prostor omejen.\n\nTehnična tabela vira navaja 1-palčni priključek, delovni tlak 1,4–7 bar, temperaturno območje 4–49 °C in ohišje višine 70,6 cm. Vir na isti strani navaja dve različni količini smole, zato mora dobavitelj pred ponudbo potrditi dejanski volumen konkretne izvedbe. Za montažo so potrebni dovod, odtok najmanj 16 mm, električno napajanje in dovolj prostora za servis.",
+    "seoTitle": "Aquaphor AQ800 mehčalna naprava | Bistrava",
+    "seoDescriptionSl": "Aquaphor AQ800 za mehčanje vode in zmanjševanje železa. Preverite priključek 1″, tlak, mere, temperaturo ter pogoje strokovne montaže.",
+    "highlightsSl": ["Mehčanje vode in zmanjševanje železa", "Kompaktno ohišje", "Delovni tlak 1,4–7 bar", "Priključek 1″"],
+    "technicalSpecifications": [
+      {"labelSl": "Tehnologija", "valueSl": "Ionska izmenjava"},
+      {"labelSl": "Priključek", "valueSl": "1″ (25 mm), zunanji navoj"},
+      {"labelSl": "Delovni tlak", "valueSl": "1,4–7 bar"},
+      {"labelSl": "Temperatura vode in okolice", "valueSl": "4–49 °C"},
+      {"labelSl": "Servisni pretok pri padcu 1 bar", "valueSl": "20,8 l/min"},
+      {"labelSl": "Odtočna cev", "valueSl": "najmanj 16 mm"},
+      {"labelSl": "Mere", "valueSl": "70,6 × 40,4 × 48,5 cm (V × Š × G)"},
+      {"labelSl": "Teža", "valueSl": "48 kg"},
+      {"labelSl": "Volumen smole", "valueSl": "vir navaja 23 l in 28 l; potrebna potrditev izvedbe"}
+    ],
+    "typed": {"nominalFlowLitersPerMinute": 20.8, "connectionSize": "1″", "regenerationMode": "Samodejna volumetrična regeneracija", "dimensions": "70,6 × 40,4 × 48,5 cm (V × Š × G)", "weightKg": 48, "drainRequired": true, "electricityRequired": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-061",
+    "nameSl": "Tehnofan Core 110 Compact – kompaktni mehčalec vode",
+    "technology": "Ionska izmenjava z volumetričnim krmiljenjem Clack",
+    "shortDescriptionSl": "Core 110 Compact je 11-litrski ionski mehčalec za gospodinjstva do treh oseb, s pretokom do 1,2 m³/h in priključkom 3/4″.",
+    "descriptionSl": "Tehnofan Core 110 Compact je majhna ionska mehčalna naprava za stanovanja, apartmaje in manjše hiše do približno treh oseb. Enajst litrov ionske smole zmanjšuje kalcijeve in magnezijeve ione, ki povzročajo trdoto vode, Clackova ventilska glava pa krmili regeneracijo glede na porabo.\n\nNaprava je visoka približno 467 mm in je zato primerna za tehnične niše ali vgradnjo pod pult, če so zagotovljeni priključki in servisni dostop. Dobavitelj navaja pretok do 1,2 m³/h, delovni tlak 2–6 bar ter porabo približno 1,2 kg soli in 60 l vode na regeneracijo. Pred izbiro preverite izmerjeno trdoto in največjo sočasno porabo.",
+    "seoTitle": "Core 110 Compact mehčalec vode | Bistrava",
+    "seoDescriptionSl": "Kompaktni Core 110 z 11 l smole za dom do treh oseb. Pretok 1,2 m³/h, priključek 3/4″, Clackova glava in vgrajen bypass.",
+    "highlightsSl": ["11 l ionske smole", "Za gospodinjstva do 3 oseb", "Pretok do 1,2 m³/h", "Ventilska glava Clack"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "11 l"},
+      {"labelSl": "Priključek", "valueSl": "3/4″"},
+      {"labelSl": "Največji pretok", "valueSl": "1,2 m³/h"},
+      {"labelSl": "Kapaciteta mehčanja", "valueSl": "28,1 m³ × °dH"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "približno 1,2 kg soli in 60 l vode"},
+      {"labelSl": "Delovni tlak", "valueSl": "2–6 bar"},
+      {"labelSl": "Mere", "valueSl": "približno 467 × 270 × 430 mm (V × Š × G)"},
+      {"labelSl": "Krmilna glava", "valueSl": "Clack, z bypassom"}
+    ],
+    "typed": {"householdSizeMin": 1, "householdSizeMax": 3, "resinVolumeLiters": 11, "maxFlowLitersPerMinute": 20, "connectionSize": "3/4″", "regenerationMode": "Volumetrična regeneracija, glava Clack", "saltConsumptionKg": 1.2, "dimensions": "467 × 270 × 430 mm (V × Š × G)", "drainRequired": true, "electricityRequired": true, "bypassIncluded": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-064",
+    "nameSl": "Tehnofan VD18 – mehčalna naprava za vodo",
+    "technology": "Ionska izmenjava z elektronskim krmiljenjem",
+    "shortDescriptionSl": "Tehnofan VD18 ima 18 l ionske smole, priključek 1″, pretok do 1,5 m³/h, vgrajen bypass in ohišje širine 244 mm.",
+    "descriptionSl": "Tehnofan VD18 je ozka ionska mehčalna naprava za centralno zmanjševanje trdote vode. Osemnajst litrov ionske smole veže kalcijeve in magnezijeve ione, elektronski vmesnik z dotiknimi tipkami pa omogoča nastavitev ter pregled delovanja. Snemljiva sprednja maska olajša servis, vgrajeni bypass pa omogoča obvod naprave.\n\nDobavitelj navaja največji pretok 1,5 m³/h, priključek 1″, delovni tlak 2,5–8 bar in temperaturo vode 4–35 °C. Ohišje meri 244 × 1068 × 420 mm. Poraba soli je odvisna od nastavitve regeneracije, zato mora biti naprava dimenzionirana glede na trdoto, porabo in sočasni pretok objekta.",
+    "seoTitle": "Tehnofan VD18 mehčalna naprava | Bistrava",
+    "seoDescriptionSl": "Tehnofan VD18 z 18 l ionske smole, pretokom 1,5 m³/h, priključkom 1″ in bypassom. Preverite mere, tlak in porabo regeneracije.",
+    "highlightsSl": ["18 l ionske smole", "Pretok do 1,5 m³/h", "Ozek kabinet širine 244 mm", "Vgrajen bypass"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "18 l"},
+      {"labelSl": "Priključek", "valueSl": "1″"},
+      {"labelSl": "Največji pretok", "valueSl": "1,5 m³/h"},
+      {"labelSl": "Kapaciteta mehčanja", "valueSl": "65,7 °dH × m³"},
+      {"labelSl": "Poraba soli", "valueSl": "1,1–4,5 kg na regeneracijo"},
+      {"labelSl": "Vstopni tlak", "valueSl": "2,5–8 bar"},
+      {"labelSl": "Temperatura vode", "valueSl": "4–35 °C"},
+      {"labelSl": "Mere", "valueSl": "244 × 1068 × 420 mm (Š × V × G)"}
+    ],
+    "typed": {"resinVolumeLiters": 18, "maxFlowLitersPerMinute": 25, "connectionSize": "1″", "regenerationMode": "Elektronsko krmiljena ionska regeneracija", "dimensions": "244 × 1068 × 420 mm (Š × V × G)", "drainRequired": true, "electricityRequired": true, "bypassIncluded": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-066",
+    "nameSl": "ELBA 12 – kompaktna ionska mehčalna naprava",
+    "technology": "Volumetrično krmiljena ionska izmenjava",
+    "shortDescriptionSl": "ELBA 12 je kompaktna ionska mehčalna naprava za manjše objekte, posamezne stroje ali dovod tople vode, s pretokom do 1,2 m³/h.",
+    "descriptionSl": "ELBA 12 je avtomatska ionska mehčalna naprava za manjše stanovanjske objekte, posamezne porabnike ali mehčanje dovoda tople vode. Med delovanjem ionska smola kalcijeve in magnezijeve ione zamenja z natrijevimi; regeneracija se nato samodejno sproži glede na izmerjeno porabo vode.\n\nDobavitelj navaja pretok do 1,2 m³/h, največji delovni tlak 6 bar in kapaciteto približno 2–3 m³ med regeneracijama, odvisno od trdote. Ohišje meri 65 × 50 × 35 cm. Za regeneracijo porabi približno 1,8 kg soli in 90 l vode, zato montaža zahteva dovod, odtok, električno napajanje in prostor za polnjenje soli.",
+    "seoTitle": "ELBA 12 kompaktni mehčalec vode | Bistrava",
+    "seoDescriptionSl": "ELBA 12 za manjše objekte in posamezne porabnike. Pretok do 1,2 m³/h, volumetrična regeneracija ter približno 1,8 kg soli na cikel.",
+    "highlightsSl": ["Pretok do 1,2 m³/h", "Za manjše objekte ali posamezen porabnik", "Volumetrična regeneracija", "Kompaktne mere"],
+    "technicalSpecifications": [
+      {"labelSl": "Največji pretok", "valueSl": "1,2 m³/h"},
+      {"labelSl": "Največji delovni tlak", "valueSl": "6 bar"},
+      {"labelSl": "Kapaciteta med regeneracijama", "valueSl": "približno 2–3 m³, odvisno od trdote"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "približno 1,8 kg soli in 90 l vode"},
+      {"labelSl": "Mere", "valueSl": "65 × 50 × 35 cm (V × G × Š)"},
+      {"labelSl": "Regeneracija", "valueSl": "Samodejna glede na porabo vode"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 20, "regenerationMode": "Samodejna volumetrična regeneracija", "saltConsumptionKg": 1.8, "dimensions": "65 × 50 × 35 cm (V × G × Š)", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-067",
+    "nameSl": "Pentair Optimo CS Mini 12 L – kompaktni mehčalec vode",
+    "technology": "Elektronsko krmiljena ionska izmenjava",
+    "shortDescriptionSl": "Pentair Optimo CS Mini ima 12 l ionske smole, pretok do 1,2 m³/h, priključek 3/4″, LCD-zaslon in opozorilo za sol.",
+    "descriptionSl": "Pentair Optimo CS Mini 12 L je profesionalni kompaktni ionski mehčalec za prostorsko omejene namestitve in zaščito posamezne naprave ali manjšega vodnega sistema. Elektronski krmilnik sproža regeneracijo, LCD-zaslon prikazuje stanje, alarm pa opozori na nizek nivo soli.\n\nDobavitelj navaja 12 l ionske smole, pretok do 1,2 m³/h, delovni tlak 1,4–8,3 bar ter priključek 3/4″. Naprava porabi približno 1,5 kg soli in 77 l vode na regeneracijo ter je primerna za vodo do 65 °C. Certifikati CE, ACS in PZH so navedeni na strani dobavitelja.",
+    "seoTitle": "Pentair Optimo CS Mini 12 L | Bistrava",
+    "seoDescriptionSl": "Kompaktni Pentair Optimo CS Mini z 12 l smole, pretokom 1,2 m³/h, LCD-zaslonom in alarmom za sol. Primeren tudi za vodo do 65 °C.",
+    "highlightsSl": ["12 l ionske smole", "Pretok do 1,2 m³/h", "LCD-zaslon in alarm za sol", "Za vodo do 65 °C"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "12 l"},
+      {"labelSl": "Priključek", "valueSl": "3/4″"},
+      {"labelSl": "Največji pretok", "valueSl": "1,2 m³/h"},
+      {"labelSl": "Kapaciteta mehčanja", "valueSl": "48 °f × m³"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "1,5 kg soli in 77 l vode"},
+      {"labelSl": "Delovni tlak", "valueSl": "1,4–8,3 bar"},
+      {"labelSl": "Največja temperatura vode", "valueSl": "65 °C"},
+      {"labelSl": "Mere", "valueSl": "591 × 438 × 280 mm"},
+      {"labelSl": "Certifikati", "valueSl": "CE, ACS, PZH"}
+    ],
+    "typed": {"resinVolumeLiters": 12, "maxFlowLitersPerMinute": 20, "connectionSize": "3/4″", "regenerationMode": "Elektronsko krmiljena regeneracija", "saltConsumptionKg": 1.5, "dimensions": "591 × 438 × 280 mm", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "certifications": ["CE", "ACS", "PZH"]}
+  },
+  {
+    "id": "BIS-069",
+    "nameSl": "Tehnofan VD12 – mehčalna naprava za vodo",
+    "technology": "Ionska izmenjava z elektronskim krmiljenjem",
+    "shortDescriptionSl": "Tehnofan VD12 je ozek 12-litrski ionski mehčalec s priključkom 1″, pretokom do 1,3 m³/h in vgrajenim bypassom.",
+    "descriptionSl": "Tehnofan VD12 je kompaktna ionska mehčalna naprava za zmanjševanje kalcijevih in magnezijevih ionov v vodi. Zaradi širine 244 mm in višine 787 mm je primerna za prostore, kjer je tloris omejen, vgrajeni bypass pa omogoča obvod pri servisu.\n\nModel vsebuje 12 l ionske smole, uporablja 1-palčni priključek in po podatkih dobavitelja dosega pretok do 1,3 m³/h. Delovni tlak je 2,5–8 bar, temperaturno območje 4–35 °C, poraba soli pa 0,72–1,4 kg na regeneracijo. Končno nastavitev regeneracije je treba prilagoditi izmerjeni trdoti in dejanski porabi vode.",
+    "seoTitle": "Tehnofan VD12 mehčalna naprava | Bistrava",
+    "seoDescriptionSl": "Tehnofan VD12 z 12 l smole, pretokom 1,3 m³/h, priključkom 1″ in bypassom. Preverite tlak, mere in porabo soli na regeneracijo.",
+    "highlightsSl": ["12 l ionske smole", "Pretok do 1,3 m³/h", "Ozek kabinet širine 244 mm", "Vgrajen bypass"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "12 l"},
+      {"labelSl": "Priključek", "valueSl": "1″"},
+      {"labelSl": "Največji pretok", "valueSl": "1,3 m³/h"},
+      {"labelSl": "Kapaciteta mehčanja", "valueSl": "33,7 °dH × m³"},
+      {"labelSl": "Poraba soli", "valueSl": "0,72–1,4 kg na regeneracijo"},
+      {"labelSl": "Vstopni tlak", "valueSl": "2,5–8 bar"},
+      {"labelSl": "Temperatura vode", "valueSl": "4–35 °C"},
+      {"labelSl": "Mere", "valueSl": "244 × 787 × 420 mm (Š × V × G)"}
+    ],
+    "typed": {"resinVolumeLiters": 12, "maxFlowLitersPerMinute": 21.67, "connectionSize": "1″", "regenerationMode": "Elektronsko krmiljena ionska regeneracija", "dimensions": "244 × 787 × 420 mm (Š × V × G)", "drainRequired": true, "electricityRequired": true, "bypassIncluded": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-071",
+    "nameSl": "Tehnofan Core 250 CI – ionski mehčalec vode",
+    "technology": "Ionska izmenjava s krmilno glavo Clack CI",
+    "shortDescriptionSl": "Core 250 CI je 24-litrski mehčalec za gospodinjstva do pet oseb, s pretokom do 1,8 m³/h in integriranim mešalnim ventilom.",
+    "descriptionSl": "Tehnofan Core 250 CI je kompaktna ionska mehčalna naprava za hiše in stanovanja z do približno petimi uporabniki. Štiriindvajset litrov ionske smole zmanjšuje trdoto vode, Clackova glava CI pa krmili regeneracijo glede na porabo. Integrirani mešalni ventil omogoča nastavitev želene preostale trdote.\n\nDobavitelj navaja pretok do 1,8 m³/h, priključek 3/4″, delovni tlak 2–6 bar ter kapaciteto 56,2 m³ × °dH. En cikel porabi približno 2,9 kg soli in 70 l vode. Pred izbiro preverite največji sočasni pretok, izmerjeno trdoto ter prostor za odtok, električni priklop in servis.",
+    "seoTitle": "Core 250 CI mehčalec vode za dom | Bistrava",
+    "seoDescriptionSl": "Core 250 CI z 24 l ionske smole za dom do pet oseb. Pretok 1,8 m³/h, glava Clack CI in integriran mešalni ventil.",
+    "highlightsSl": ["24 l ionske smole", "Za gospodinjstva do 5 oseb", "Pretok do 1,8 m³/h", "Clack CI in mešalni ventil"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "24 l"},
+      {"labelSl": "Priključek", "valueSl": "3/4″"},
+      {"labelSl": "Največji pretok", "valueSl": "1,8 m³/h"},
+      {"labelSl": "Kapaciteta mehčanja", "valueSl": "56,2 m³ × °dH"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "2,9 kg soli in 70 l vode"},
+      {"labelSl": "Delovni tlak", "valueSl": "2–6 bar"},
+      {"labelSl": "Mere", "valueSl": "793 × 270 × 430 mm (V × Š × G)"},
+      {"labelSl": "Krmilna glava", "valueSl": "Clack CI z mešalnim ventilom"}
+    ],
+    "typed": {"householdSizeMin": 2, "householdSizeMax": 5, "resinVolumeLiters": 24, "maxFlowLitersPerMinute": 30, "connectionSize": "3/4″", "regenerationMode": "Volumetrična regeneracija, Clack CI", "saltConsumptionKg": 2.9, "dimensions": "793 × 270 × 430 mm (V × Š × G)", "drainRequired": true, "electricityRequired": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-074",
+    "nameSl": "Wireless Water Guard – sistem proti izlitju vode",
+    "technology": "Brezžično zaznavanje vode in samodejno zapiranje dovoda",
+    "shortDescriptionSl": "Wireless Water Guard ob zaznavi vode prek brezžičnega senzorja zapre električni ventil na glavnem dovodu; podpira do pet senzorjev.",
+    "descriptionSl": "Wireless Water Guard je sistem za omejevanje škode ob izlitju vode. Brezžični senzorji se razporedijo ob pralni stroj, pomivalni stroj, grelnik ali druga tvegana mesta. Ko senzor zazna vodo, krmilna enota pošlje ukaz električnemu ventilu in zapre glavni dovod.\n\nVentil se namesti na glavno vodovodno cev, sistem pa podpira do pet senzorjev. Na voljo sta priključka 3/4″ in 1″. Naprava ne nadomešča pravilne izvedbe vodovoda ali rednega pregleda cevi; pred montažo je treba preveriti dostop do ventila, radijski doseg, napajanje ter možnost ročnega upravljanja ob servisu.",
+    "seoTitle": "Wireless Water Guard proti izlitju | Bistrava",
+    "seoDescriptionSl": "Wireless Water Guard ob zaznavi vode samodejno zapre glavni dovod. Električni ventil 3/4″ ali 1″ ter podpora za do pet senzorjev.",
+    "highlightsSl": ["Samodejno zapiranje glavnega dovoda", "Brezžični senzorji", "Do 5 senzorjev", "Priključek 3/4″ ali 1″"],
+    "technicalSpecifications": [
+      {"labelSl": "Način delovanja", "valueSl": "Brezžični signal senzorja in električno zapiranje ventila"},
+      {"labelSl": "Priključek ventila", "valueSl": "3/4″ ali 1″"},
+      {"labelSl": "Največje število senzorjev", "valueSl": "5"},
+      {"labelSl": "Mesto ventila", "valueSl": "Glavni dovod vode"},
+      {"labelSl": "Namen", "valueSl": "Omejevanje nadaljnjega iztekanja vode"}
+    ],
+    "typed": {"connectionSize": "3/4″ ali 1″", "installationRequired": true, "electricityRequired": true}
+  },
+  {
+    "id": "BIS-076",
+    "nameSl": "Midnight 12 – pametna mehčalna naprava",
+    "technology": "Pametna ionska izmenjava z Wi‑Fi nadzorom",
+    "shortDescriptionSl": "Midnight 12 je pametni ionski mehčalec za do tri osebe, s pretokom do 1,5 m³/h, Wi‑Fi nadzorom, SafeHOME zaščito in opozorilom za sol.",
+    "descriptionSl": "Midnight 12 je kompaktna pametna mehčalna naprava za hišo ali stanovanje z do približno tremi osebami oziroma mesečno porabo do 12 m³. Ionska izmenjava zmanjšuje trdoto vode, aplikacija pa prek omrežja Wi‑Fi 2,4 GHz omogoča pregled pretoka, časa regeneracije in opozoril.\n\nFunkcija SafeHOME spremlja nenavadno porabo in lahko zapre dovod ob zaznanem puščanju. Med regeneracijo naprava izvaja BIO-dezinfekcijo smole, sistem pa opozori tudi na nizko količino soli. Dobavitelj navaja pretok do 1,5 m³/h, tlak do 6 bar ter približno 1,6 kg soli in 90 l vode na regeneracijo.",
+    "seoTitle": "Midnight 12 pametni mehčalec vode | Bistrava",
+    "seoDescriptionSl": "Midnight 12 za do tri osebe: Wi‑Fi nadzor, SafeHOME, BIO-dezinfekcija, pretok 1,5 m³/h in opozorilo za sol. Preverite pogoje montaže.",
+    "highlightsSl": ["Za gospodinjstva do 3 oseb", "Wi‑Fi nadzor 2,4 GHz", "SafeHOME zaščita pred izlitjem", "BIO-dezinfekcija smole"],
+    "technicalSpecifications": [
+      {"labelSl": "Priporočena uporaba", "valueSl": "Do 3 osebe oziroma do 12 m³/mesec"},
+      {"labelSl": "Največji pretok", "valueSl": "1,5 m³/h"},
+      {"labelSl": "Največji delovni tlak", "valueSl": "6 bar"},
+      {"labelSl": "Kapaciteta med regeneracijama", "valueSl": "približno 1,5–2,5 m³, odvisno od trdote"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "približno 1,6 kg soli in 90 l vode"},
+      {"labelSl": "Mere", "valueSl": "55 × 45 × 32 cm (V × Š × G)"},
+      {"labelSl": "Povezljivost", "valueSl": "Wi‑Fi 2,4 GHz in mobilna aplikacija"},
+      {"labelSl": "Varnostne funkcije", "valueSl": "SafeHOME, BIO-dezinfekcija in opozorilo za sol"}
+    ],
+    "typed": {"householdSizeMin": 1, "householdSizeMax": 3, "maxFlowLitersPerMinute": 25, "regenerationMode": "Pametna volumetrična regeneracija", "saltConsumptionKg": 1.6, "dimensions": "55 × 45 × 32 cm (V × Š × G)", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-077",
+    "nameSl": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti",
+    "technology": "Volumetrično krmiljena ionska izmenjava",
+    "shortDescriptionSl": "ELBA 30 je zmogljiv ionski mehčalec za eno- ali dvostanovanjske objekte, s pretokom do 2,5 m³/h in volumetrično regeneracijo.",
+    "descriptionSl": "ELBA 30 je centralna ionska mehčalna naprava za večje gospodinjstvo ter eno- ali dvostanovanjski objekt. Ionska smola zmanjšuje kalcijeve in magnezijeve ione, krmilnik pa regeneracijo samodejno sproži glede na dejansko količino porabljene vode.\n\nDobavitelj navaja pretok do 2,5 m³/h, največji delovni tlak 6 bar in kapaciteto približno 5–6 m³ med regeneracijama, odvisno od trdote. Posamezna regeneracija porabi približno 4,5 kg soli in 160 l vode. Zaradi višine 110 cm je treba pred montažo preveriti prostor, dovod, odtok, napajanje in servisni dostop.",
+    "seoTitle": "ELBA 30 zmogljivi mehčalec vode | Bistrava",
+    "seoDescriptionSl": "ELBA 30 za večje gospodinjstvo ali dvostanovanjski objekt. Pretok do 2,5 m³/h, volumetrična regeneracija in kapaciteta okoli 5–6 m³.",
+    "highlightsSl": ["Za eno- ali dvostanovanjske objekte", "Pretok do 2,5 m³/h", "Kapaciteta približno 5–6 m³", "Volumetrična regeneracija"],
+    "technicalSpecifications": [
+      {"labelSl": "Največji pretok", "valueSl": "2,5 m³/h"},
+      {"labelSl": "Največji delovni tlak", "valueSl": "6 bar"},
+      {"labelSl": "Kapaciteta med regeneracijama", "valueSl": "približno 5–6 m³, odvisno od trdote"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "približno 4,5 kg soli in 160 l vode"},
+      {"labelSl": "Mere", "valueSl": "110 × 50 × 35 cm (V × G × Š)"},
+      {"labelSl": "Regeneracija", "valueSl": "Samodejna glede na porabo vode"}
+    ],
+    "typed": {"maxFlowLitersPerMinute": 41.67, "regenerationMode": "Samodejna volumetrična regeneracija", "saltConsumptionKg": 4.5, "dimensions": "110 × 50 × 35 cm (V × G × Š)", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-078",
+    "nameSl": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti",
+    "technology": "Pametna ionska izmenjava z Wi‑Fi nadzorom",
+    "shortDescriptionSl": "Midnight 30 je pametni ionski mehčalec za do sedem oseb, s pretokom do 2,5 m³/h, Wi‑Fi nadzorom, SafeHOME zaščito in opozorilom za sol.",
+    "descriptionSl": "Midnight 30 je pametna mehčalna naprava za večjo hišo ali objekt z do približno sedmimi osebami oziroma mesečno porabo do 25 m³. Ionska izmenjava zmanjšuje trdoto vode, aplikacija pa prek omrežja Wi‑Fi 2,4 GHz prikazuje pretok, regeneracijo in pomembna opozorila.\n\nSafeHOME spremlja nenavadno porabo in lahko ob zaznanem puščanju zapre dovod. BIO-dezinfekcija med regeneracijo pomaga vzdrževati ionsko smolo, opozorilo za sol pa poenostavi redno oskrbo. Dobavitelj navaja pretok do 2,5 m³/h, tlak do 6 bar ter približno 4,5 kg soli in 160 l vode na regeneracijo.",
+    "seoTitle": "Midnight 30 pametni mehčalec vode | Bistrava",
+    "seoDescriptionSl": "Midnight 30 za do sedem oseb: Wi‑Fi, SafeHOME, BIO-dezinfekcija, pretok 2,5 m³/h in opozorilo za sol. Preverite dimenzioniranje.",
+    "highlightsSl": ["Za gospodinjstva do 7 oseb", "Wi‑Fi nadzor 2,4 GHz", "SafeHOME zaščita pred izlitjem", "Pretok do 2,5 m³/h"],
+    "technicalSpecifications": [
+      {"labelSl": "Priporočena uporaba", "valueSl": "Do 7 oseb oziroma do 25 m³/mesec"},
+      {"labelSl": "Največji pretok", "valueSl": "2,5 m³/h"},
+      {"labelSl": "Največji delovni tlak", "valueSl": "6 bar"},
+      {"labelSl": "Kapaciteta med regeneracijama", "valueSl": "približno 5–6 m³, odvisno od trdote"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "približno 4,5 kg soli in 160 l vode"},
+      {"labelSl": "Mere", "valueSl": "112 × 45 × 32 cm (V × G × Š)"},
+      {"labelSl": "Povezljivost", "valueSl": "Wi‑Fi 2,4 GHz in mobilna aplikacija"},
+      {"labelSl": "Varnostne funkcije", "valueSl": "SafeHOME, BIO-dezinfekcija in opozorilo za sol"}
+    ],
+    "typed": {"householdSizeMin": 3, "householdSizeMax": 7, "maxFlowLitersPerMinute": 41.67, "regenerationMode": "Pametna volumetrična regeneracija", "saltConsumptionKg": 4.5, "dimensions": "112 × 45 × 32 cm (V × G × Š)", "drainRequired": true, "electricityRequired": true, "installationRequired": true, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-082",
+    "nameSl": "Adriatica 15 L – ionska mehčalna naprava",
+    "technology": "Samodejna ionska izmenjava",
+    "shortDescriptionSl": "Adriatica 15 L je avtomatska ionska mehčalna naprava za stanovanjske objekte z mesečno porabo vode do približno 25 m³.",
+    "descriptionSl": "Adriatica 15 L je centralna mehčalna naprava za hiše in druge stanovanjske objekte na območjih s trdo vodo. Ionska izmenjava fizično zmanjšuje kalcijeve in magnezijeve ione ter tako pomaga omejevati nastajanje vodnega kamna v ceveh, grelnikih, armaturah in gospodinjskih aparatih.\n\nDobavitelj jo priporoča za mesečno porabo do približno 25 m³. Regeneracija poteka samodejno in uporablja regeneracijsko sol, zato so za vgradnjo potrebni dovod, odtok, električni priklop ter dovolj prostora za polnjenje soli in servis. Pred končno izbiro je treba potrditi pretok, trdoto vode, priključne mere in nastavitve konkretne izvedbe.",
+    "seoTitle": "Adriatica 15 L mehčalna naprava | Bistrava",
+    "seoDescriptionSl": "Adriatica 15 L je avtomatski ionski mehčalec za stanovanjske objekte z mesečno porabo do približno 25 m³. Preverite montažne pogoje.",
+    "highlightsSl": ["15-litrska izvedba", "Do približno 25 m³ mesečne porabe", "Samodejna regeneracija", "Za stanovanjske objekte"],
+    "technicalSpecifications": [
+      {"labelSl": "Tehnologija", "valueSl": "Ionska izmenjava"},
+      {"labelSl": "Nazivna izvedba", "valueSl": "15 l"},
+      {"labelSl": "Priporočena mesečna poraba", "valueSl": "do približno 25 m³"},
+      {"labelSl": "Regeneracija", "valueSl": "Samodejna z regeneracijsko soljo"},
+      {"labelSl": "Montažni pogoji", "valueSl": "Dovod vode, odtok, električni priklop in servisni prostor"}
+    ],
+    "typed": {"resinVolumeLiters": 15, "regenerationMode": "Samodejna ionska regeneracija", "drainRequired": true, "electricityRequired": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-083",
+    "nameSl": "AntraciteAzure 250 Clack Compact – mehčalna naprava",
+    "technology": "Ionska izmenjava s krmilno glavo Clack",
+    "shortDescriptionSl": "AntraciteAzure 250 Clack Compact ima 25 l ionske smole, priključek 1″, pretok do 2,5 m³/h in vgrajen bypass.",
+    "descriptionSl": "AntraciteAzure 250 Clack Compact je centralna ionska mehčalna naprava za gospodinjstva in manjše poslovne objekte. Petindvajset litrov ionske smole zmanjšuje trdoto vode, ventilska glava Clack pa krmili regeneracijo. Kompaktno kabinetno ohišje združuje posodo za smolo in solnico.\n\nDobavitelj navaja priključek 1″, pretok do 2,5 m³/h, delovni tlak 2–6 bar in kapaciteto 5 m³ pri vhodni koncentraciji 250 mg/l CaCO₃. Ena regeneracija porabi približno 2 kg soli in 100 l vode. Pred montažo je treba potrditi izmerjeno trdoto, sočasni pretok ter prostor za odtok, napajanje in servis.",
+    "seoTitle": "AntraciteAzure 250 Clack Compact | Bistrava",
+    "seoDescriptionSl": "AntraciteAzure 250 Clack Compact s 25 l smole, pretokom 2,5 m³/h, priključkom 1″ in bypassom. Preverite tlak, mere in regeneracijo.",
+    "highlightsSl": ["25 l ionske smole", "Pretok do 2,5 m³/h", "Ventilska glava Clack", "Vgrajen bypass"],
+    "technicalSpecifications": [
+      {"labelSl": "Volumen smole", "valueSl": "25 l"},
+      {"labelSl": "Priključek", "valueSl": "1″"},
+      {"labelSl": "Največji pretok", "valueSl": "2,5 m³/h"},
+      {"labelSl": "Kapaciteta", "valueSl": "5 m³ pri 250 mg/l CaCO₃"},
+      {"labelSl": "Poraba na regeneracijo", "valueSl": "2 kg soli in 100 l vode"},
+      {"labelSl": "Delovni tlak", "valueSl": "2–6 bar"},
+      {"labelSl": "Mere", "valueSl": "1095 × 360 × 565 mm"},
+      {"labelSl": "Krmilna glava", "valueSl": "Clack z bypassom"}
+    ],
+    "typed": {"resinVolumeLiters": 25, "maxFlowLitersPerMinute": 41.67, "connectionSize": "1″", "regenerationMode": "Volumetrična regeneracija, glava Clack", "saltConsumptionKg": 2, "dimensions": "1095 × 360 × 565 mm", "drainRequired": true, "electricityRequired": true, "bypassIncluded": true, "installationRequired": true}
+  },
+  {
+    "id": "BIS-084",
+    "nameSl": "Dodatni senzor Wireless Water Guard za izlitje vode",
+    "technology": "Brezžično zaznavanje prisotnosti vode",
+    "shortDescriptionSl": "Dodatni brezžični senzor razširi sistem Wireless Water Guard in zazna vodo na izbranem tveganem mestu; sistem podpira do pet senzorjev.",
+    "descriptionSl": "Dodatni senzor Wireless Water Guard se namesti na mesto, kjer je možen izliv vode, na primer ob pralnem ali pomivalnem stroju, grelniku, filtru ali razdelilniku. Ko tipalo zazna vodo, brezžično obvesti združljivo krmilno enoto, ki prek električnega ventila zapre glavni dovod.\n\nSenzor je razširitev sistema WWG in samostojno ne more zapreti vode. Dobavitelj navaja možnost povezave do petih senzorjev v en sistem. Pred namestitvijo preverite radijski doseg, napajanje oziroma baterijo, združljivost z obstoječo enoto in izberite mesto, kjer bo tipalo hitro prišlo v stik z izteklo vodo.",
+    "seoTitle": "Dodatni senzor Wireless Water Guard | Bistrava",
+    "seoDescriptionSl": "Dodatni brezžični senzor za sistem Wireless Water Guard. Zazna izlitje na tveganem mestu; združljiv sistem lahko poveže do pet senzorjev.",
+    "highlightsSl": ["Razširitev sistema WWG", "Brezžično zaznavanje vode", "Postavitev ob tvegan porabnik", "Do 5 senzorjev v sistemu"],
+    "technicalSpecifications": [
+      {"labelSl": "Tip", "valueSl": "Brezžični senzor prisotnosti vode"},
+      {"labelSl": "Združljivost", "valueSl": "Wireless Water Guard"},
+      {"labelSl": "Največ senzorjev v sistemu", "valueSl": "5"},
+      {"labelSl": "Samostojno delovanje", "valueSl": "Ne; potrebna je združljiva krmilna enota in ventil"},
+      {"labelSl": "Priporočena mesta", "valueSl": "Pralni stroj, pomivalni stroj, grelnik, filter ali razdelilnik"}
+    ],
+    "typed": {"installationRequired": false, "electricityRequired": true, "drainRequired": false, "bypassIncluded": false, "warrantyMonths": 24}
+  },
+  {
+    "id": "BIS-086",
+    "nameSl": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom",
+    "technology": "Membranska regulacija tlaka z grobo filtracijo",
+    "shortDescriptionSl": "Tehnofan RB-29090500 je membranski reducirni ventil 3/4″ z območjem 0,7–8 bar, filtrom 800 µm, PN25 in nastavkom za manometer.",
+    "descriptionSl": "Tehnofan RB-29090500 združuje membranski regulator tlaka in grobi filter v enem kromiranem medeninastem ohišju. Regulator stabilizira izhodni tlak ob spremembah vhodnega tlaka, 800-mikronski filter pa zadržuje večje delce in pomaga zaščititi cevi ter priključene komponente.\n\nVentil ima priključek 3/4″, označeno nastavitveno območje 0,7–8 bar, tlačni razred PN25 in največjo delovno temperaturo 80 °C. Nastavek omogoča priklop manometra za nadzor nastavitve. Montažo, smer pretoka in začetni tlak mora preveriti strokovno usposobljena oseba.",
+    "seoTitle": "Regulator tlaka 3/4″ s filtrom | Bistrava",
+    "seoDescriptionSl": "Tehnofan RB-29090500: membranski regulator 3/4″, nastavitev 0,7–8 bar, filter 800 µm, PN25 in priključek za manometer.",
+    "highlightsSl": ["Priključek 3/4″", "Nastavitev 0,7–8 bar", "Integrirani filter 800 µm", "Tlačni razred PN25"],
+    "technicalSpecifications": [
+      {"labelSl": "Model / SKU", "valueSl": "RB-29090500"},
+      {"labelSl": "Tip", "valueSl": "Membranski reducirni ventil z merilno regulacijo"},
+      {"labelSl": "Priključek", "valueSl": "3/4″"},
+      {"labelSl": "Območje regulacije", "valueSl": "0,7–8 bar"},
+      {"labelSl": "Finost filtra", "valueSl": "800 µm"},
+      {"labelSl": "Tlačni razred", "valueSl": "PN25"},
+      {"labelSl": "Največja temperatura", "valueSl": "80 °C"},
+      {"labelSl": "Material", "valueSl": "Kromirana medenina"},
+      {"labelSl": "Standard priključkov", "valueSl": "MM UNI-EN-ISO 228"}
+    ],
+    "typed": {"connectionSize": "3/4″", "installationRequired": true, "electricityRequired": false, "certifications": ["UNI-EN-ISO 228"]}
+  }
+]

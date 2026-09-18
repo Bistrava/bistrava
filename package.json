@@ -1,0 +1,48 @@
+{
+  "name": "bistrava",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "visual:check": "node scripts/visual-check.mjs",
+    "email:dev": "email dev --dir src/emails --port 3001",
+    "catalog:import": "uv run --with openpyxl python scripts/import-seo-catalog.py data/source/Bistrava-SEO-Keywords-Slovenia.xlsx src/lib/catalog/seo-products.generated.json",
+    "catalog:seed:sql": "uv run --cache-dir .uv-cache --no-project python scripts/export-specialist-catalog-sql.py src/lib/catalog/seo-products.generated.json src/lib/catalog/supplier-prices.verified.json src/lib/catalog/product-content.verified.json src/lib/catalog/product-media.generated.json supabase/seed-specialist-products.sql",
+    "catalog:seed:archived:sql": "node scripts/export-archived-catalog-sql.mjs",
+    "catalog:media:upload": "node scripts/upload-product-media.mjs --upload"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.3",
+    "lucide-react": "^1.33.0",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-email": "^6.9.2",
+    "resend": "^6.22.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@react-email/ui": "^6.9.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.2",
+    "sharp": "0.35.4",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^4.1.11"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

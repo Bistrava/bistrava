@@ -41,7 +41,7 @@ export function CartPageClient() {
       <div className="empty-state card">
         <ShoppingBag aria-hidden="true" size={38} />
         <h1>Vaša košarica je prazna.</h1>
-        <p>Ko bodo preverjeni izdelki aktivirani za spletni nakup, jih lahko dodate tukaj.</p>
+        <p>Dodajte izdelke iz trgovine in jih primerjajte pred zaključkom nakupa.</p>
         <Link className="button button-primary" href="/mehcalci-vode">
           Preglejte izdelke
         </Link>
@@ -111,9 +111,8 @@ export function CartPageClient() {
         <Link className="button button-primary" href="/blagajna">
           Nadaljujte na blagajno <ArrowRight aria-hidden="true" size={18} />
         </Link>
-        <small>Cene in zaloga bodo pred oddajo naročila ponovno preverjene na strežniku.</small>
+        <small>Informativne cene in razpoložljivost bodo potrjene pred sprejemom naročila.</small>
       </aside>
     </div>
   );
 }
-

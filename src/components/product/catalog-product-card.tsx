@@ -8,6 +8,8 @@ import { formatMoney } from "@/lib/commerce/money";
 import type { CatalogProduct } from "@/types/catalog";
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
+  const cartPriceCents = product.priceCents ?? product.supplierPriceCents;
+
   return (
     <article className="catalog-product-card card">
       {product.images[0] ? (
@@ -54,20 +56,16 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
             Oglejte si izdelek
             <ArrowUpRight aria-hidden="true" size={17} />
           </Link>
-          {product.status === "active" &&
-          product.salesMode === "buy_now" &&
-          product.priceCents !== null &&
-          product.stockStatus === "in_stock" &&
-          product.stockQuantity > 0 ? (
+          {cartPriceCents !== null ? (
             <QuickAddToCart
               product={{
                 sku: product.sku,
                 slug: product.slug,
                 nameSl: product.nameSl,
-                unitPriceCents: product.priceCents,
+                unitPriceCents: cartPriceCents,
                 imageUrl: product.images[0]?.url ?? null,
                 imageAltSl: product.images[0]?.altSl ?? product.nameSl,
-                stockQuantity: product.stockQuantity,
+                stockQuantity: Math.max(product.stockQuantity, 1),
               }}
             />
           ) : null}

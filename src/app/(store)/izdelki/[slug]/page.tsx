@@ -93,6 +93,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const category = getCatalogCategory(product.categorySlug);
   if (!category) notFound();
   const details = getCategoryDetails(product.categorySlug);
+  const cartPriceCents = product.priceCents ?? product.supplierPriceCents;
   const relatedProducts = getProductsByCategory(product.categorySlug)
     .filter((candidate) => candidate.slug !== product.slug)
     .slice(0, 3);
@@ -192,25 +193,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </a>
               ) : null}
             </div>
-            {product.status === "active" &&
-            product.salesMode === "buy_now" &&
-            product.priceCents !== null &&
-            product.stockStatus === "in_stock" &&
-            product.stockQuantity > 0 ? (
+            {cartPriceCents !== null ? (
               <AddToCart
                 product={{
                   sku: product.sku,
                   slug: product.slug,
                   nameSl: product.nameSl,
-                  unitPriceCents: product.priceCents,
+                  unitPriceCents: cartPriceCents,
                   imageUrl: product.images[0]?.url ?? null,
                   imageAltSl: product.images[0]?.altSl ?? product.nameSl,
-                  stockQuantity: product.stockQuantity,
+                  stockQuantity: Math.max(product.stockQuantity, 1),
                 }}
               />
             ) : (
               <Link className="button button-primary" href="/mehcalci-vode#katalog">
-                Nadaljujte z nakupovanjem
+                Oglejte si druge izdelke
               </Link>
             )}
             <dl className="product-quick-facts">

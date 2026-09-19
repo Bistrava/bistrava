@@ -21,11 +21,27 @@ test("specialist catalog displays every curated product", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: /Izdelki za mehko vodo/ })).toBeVisible();
   await expect(page.getByRole("heading", { name: "24 izdelkov v štirih skupinah" })).toBeVisible();
   await expect(page.locator(".catalog-product-card")).toHaveCount(24);
+  await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(24);
   await Promise.all([
     page.waitForURL(/\/izdelki\//),
     page.locator(".catalog-product-card h3 a").first().click(),
   ]);
   await expect(page.getByText("Izdelek v katalogu", { exact: true }).first()).toBeVisible();
+});
+
+test("a catalog product can be added to the persistent cart", async ({ page }) => {
+  await page.goto("/mehcalci-vode");
+  const firstProduct = page.locator(".catalog-product-card").first();
+  const productName = await firstProduct.locator("h3").innerText();
+
+  await firstProduct.getByRole("button", { name: "V košarico" }).click();
+  await expect(firstProduct.getByRole("button", { name: "Dodano" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Košarica, 1 izdelkov" })).toBeVisible();
+
+  await page.goto("/kosarica");
+  await expect(page.getByRole("heading", { level: 1, name: "Košarica" })).toBeVisible();
+  await expect(page.locator(".cart-line")).toHaveCount(1);
+  await expect(page.locator(".cart-line h2")).toHaveText(productName);
 });
 
 test("draft product has a canonical URL and no Product or Offer schema", async ({ page }) => {

@@ -6,8 +6,8 @@ import { CatalogProductCard } from "@/components/product/catalog-product-card";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import {
   allCategories,
+  catalogProducts,
   getProductsByCategory,
-  specialistProducts,
 } from "@/lib/catalog/catalog";
 import { getActiveCatalogProducts } from "@/lib/catalog/repository";
 
@@ -107,12 +107,12 @@ export default async function WaterSoftenersPage() {
         <div className="container">
           <div className="category-results-heading">
             <div>
-              <p className="section-kicker">Ločen katalog v pripravi</p>
-              <h2>{specialistProducts.length} specializiranih osnutkov</h2>
+              <p className="section-kicker">Celoten katalog</p>
+              <h2>{catalogProducts.length} izdelkov in rešitev</h2>
             </div>
             <p>
-              Vsaka kartica ima kratki in dolgi opis ter popoln tehnični okvir.
-              Neznane cene, zaloga in specifikacije so jasno označene kot nepotrjene.
+              Vse uvožene kartice so prikazane na enem mestu. Neznane cene,
+              zaloga in specifikacije so jasno označene kot nepotrjene.
             </p>
           </div>
           {allCategories.map((category) => {

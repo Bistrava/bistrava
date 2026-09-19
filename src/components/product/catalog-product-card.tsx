@@ -8,7 +8,7 @@ import { formatMoney } from "@/lib/commerce/money";
 import type { CatalogProduct } from "@/types/catalog";
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
-  const isDraft = product.status === "draft";
+  const isPreparing = product.status !== "active";
 
   return (
     <article className="catalog-product-card card">
@@ -35,8 +35,8 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
       <div className="catalog-product-card-content">
         <div className="catalog-product-card-topline">
           <span className="eyebrow">
-            {isDraft
-              ? "Osnutek - ni v prodaji"
+            {isPreparing
+              ? "V pripravi - ni v prodaji"
               : product.stockStatus === "in_stock"
                 ? "Aktivna ponudba"
                 : "Dobavljivost po preverbi"}

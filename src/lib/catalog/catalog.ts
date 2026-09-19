@@ -297,7 +297,7 @@ const categoriesBySlug = new Map(
 const productsByCategory = new Map(
   allCategories.map((category) => [
     category.slug,
-    specialistProducts.filter(
+    catalogProducts.filter(
       (product) => product.categorySlug === category.slug,
     ),
   ]),

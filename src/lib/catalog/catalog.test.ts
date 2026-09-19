@@ -5,6 +5,7 @@ import {
   archivedProducts,
   catalogProducts,
   getCatalogCategory,
+  getProductsByCategory,
   specialistProducts,
 } from "@/lib/catalog/catalog";
 
@@ -23,6 +24,15 @@ describe("SEO catalog import", () => {
     for (const product of catalogProducts) {
       expect(getCatalogCategory(product.categorySlug)).toBeDefined();
     }
+  });
+
+  it("exposes all imported products through the public category groups", () => {
+    const groupedProducts = allCategories.flatMap((category) =>
+      getProductsByCategory(category.slug),
+    );
+
+    expect(groupedProducts).toHaveLength(86);
+    expect(new Set(groupedProducts.map((product) => product.id)).size).toBe(86);
   });
 
   it("keeps a focused 24-product draft catalog and archives the rest", () => {

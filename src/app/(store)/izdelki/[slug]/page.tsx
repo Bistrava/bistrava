@@ -9,11 +9,11 @@ import { CatalogProductCard } from "@/components/product/catalog-product-card";
 import { CatalogProductVisual } from "@/components/product/catalog-product-visual";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import {
+  catalogProducts,
+  getCatalogProduct,
   getCatalogCategory,
   getCategoryDetails,
   getProductsByCategory,
-  getSpecialistProduct,
-  specialistProducts,
 } from "@/lib/catalog/catalog";
 import { getActiveCatalogProduct } from "@/lib/catalog/repository";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -51,12 +51,12 @@ const stockLabels = {
 } as const;
 
 export function generateStaticParams() {
-  return specialistProducts.map((product) => ({ slug: product.slug }));
+  return catalogProducts.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = (await getActiveCatalogProduct(slug)) ?? getSpecialistProduct(slug);
+  const product = (await getActiveCatalogProduct(slug)) ?? getCatalogProduct(slug);
   if (!product) return {};
 
   return {
@@ -87,7 +87,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = (await getActiveCatalogProduct(slug)) ?? getSpecialistProduct(slug);
+  const product = (await getActiveCatalogProduct(slug)) ?? getCatalogProduct(slug);
   if (!product) notFound();
 
   const category = getCatalogCategory(product.categorySlug);
@@ -143,12 +143,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
           )}
           <div className="product-summary">
             <span className="eyebrow">
-              {product.status === "active" ? "Aktivna produktna kartica" : "Osnutek - izdelek ni v prodaji"}
+              {product.status === "active" ? "Aktivna produktna kartica" : "V pripravi - izdelek ni v prodaji"}
             </span>
             <p className="product-brand">{product.brand}</p>
             <h1>{product.nameSl}</h1>
             <p className="product-short-description">{product.shortDescriptionSl}</p>
-            {product.status === "draft" ? (
+            {product.status !== "active" ? (
               <div className="demo-warning">
                 <Info aria-hidden="true" size={20} />
                 <p>
@@ -181,7 +181,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     ? `${product.supplierPriceNoteSl} ${product.supplierPriceIncludesVat ? "Vključuje DDV. " : ""}Preverjeno ${formatObservedDate(product.supplierPriceObservedAt!)}.`
                     : "Čaka na identifikacijo točnega modela in veljaven vir cene."}
               </small>
-              {product.status === "draft" && product.supplierPriceSourceUrl ? (
+              {product.status !== "active" && product.supplierPriceSourceUrl ? (
                 <a
                   className="supplier-price-source"
                   href={product.supplierPriceSourceUrl}

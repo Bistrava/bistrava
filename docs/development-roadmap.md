@@ -3,7 +3,7 @@
 ## Phase 1 — foundation (current)
 
 - Brand-aligned responsive specialist storefront and complete public route structure.
-- 24 enriched catalog drafts, 62 archived source references, and a strict activation gate.
+- 24 enriched catalog drafts with images and verified supplier prices, plus a strict activation gate.
 - Supabase SSR clients, session proxy, admin login, role checks, migrations, RLS, and storage policies.
 - Validated quote/configurator/service forms, Supabase persistence, Resend templates, spam trap, and rate limiting.
 - SEO metadata, sitemap, robots, Merchant feed, visible/schema-aligned FAQ, Article data, and canonical redirects.

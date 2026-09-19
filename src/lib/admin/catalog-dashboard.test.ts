@@ -23,13 +23,13 @@ describe("admin catalog dashboard", () => {
     expect(readiness.missing).toContain("publicStock");
   });
 
-  it("summarizes the preserved and specialist catalog", () => {
+  it("summarizes the retained specialist catalog", () => {
     const metrics = getAdminCatalogMetrics();
 
     expect(metrics.total).toBe(24);
     expect(metrics.drafts).toBe(24);
     expect(metrics.active).toBe(0);
-    expect(metrics.archived).toBe(62);
+    expect(metrics.archived).toBe(0);
     expect(metrics.missingSellingPrice).toBe(24);
   });
 });

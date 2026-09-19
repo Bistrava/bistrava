@@ -41,13 +41,12 @@ Legacy URLs are redirected permanently where a direct equivalent exists. Draft p
 
 ## Catalog state and activation gate
 
-- 86 source references remain preserved.
+- The source workbook remains preserved for audit and re-import.
 - 24 water-softening/scale specialist references have a Slovenian short description, long description, characteristic framework, SEO title/description, and canonical route.
-- 62 unrelated or lower-priority references are archived, not deleted.
+- References without both an image and a verified price are excluded from the application and deleted from Supabase.
 - The owner-provided default quantity of 5 is stored as an **internal** starting quantity only.
 - All 24 candidates use `stock_status = 'unverified'`; the storefront never claims that five units are publicly available.
-- 22 exact product matches have a dated public source-price observation, VAT flag, source name/URL, and an explicit disclaimer. These observations are public retail prices, not negotiated acquisition costs or Bistrava selling prices.
-- `BIS-008` and `BIS-086` remain unpriced because their generic titles do not identify an exact supplier model.
+- All 24 retained products have a dated public source-price observation, VAT flag, source name/URL, and an explicit disclaimer. These observations are public retail prices, not negotiated acquisition costs or Bistrava selling prices.
 - Bistrava retail price, compare-at price, exact technical values, certifications, documents, warranty, lead time, and product photography remain empty unless verified.
 - A product can be indexed, shown in the active offer, or exported to Merchant Center only after an approved Supabase row is `active` and passes the relevant field checks.
 
@@ -57,7 +56,7 @@ Regenerate the reviewable SQL:
 pnpm catalog:seed:sql
 ```
 
-The generated file is `supabase/seed-specialist-products.sql`. It archives the other `BIS-%` rows without deleting them.
+The generated file is `supabase/seed-specialist-products.sql`. Database cleanup is handled by the catalog pruning migration.
 
 ## Supabase setup
 

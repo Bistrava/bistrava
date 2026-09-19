@@ -20,16 +20,13 @@ installation guidance live in `src/lib/catalog/catalog.ts`. Verified Slovenian
 product copy lives in `src/lib/catalog/product-content.verified.json`; the
 four-image manifests live in `src/lib/catalog/product-media.generated.json`.
 
-To store all source references in a linked Supabase project, generate and review
-both SQL files. The first imports 24 specialist drafts; the second imports the
-other 62 records as archived products in their original source categories.
-The archived import preserves existing database rows on repeat runs.
+To store the retained catalog in a linked Supabase project, generate and review
+the specialist SQL file. It imports the 24 drafts that have both product images
+and a verified supplier price. Other source references are not seeded.
 
 ```bash
 pnpm catalog:seed:sql
-pnpm catalog:seed:archived:sql
 pnpm dlx supabase db query --linked --file supabase/seed-specialist-products.sql
-pnpm dlx supabase db query --linked --file supabase/seed-archived-products.sql
 ```
 
 The generated files do not create public offers. To transfer the four-image
@@ -47,9 +44,9 @@ allows raster media only. The original files remain under `public/products`.
 
 ## Current publication state
 
-All 86 workbook products have a unique Slovenian route, title, H1,
-meta-description, self-referencing canonical, parent category, breadcrumbs, and
-related-product links. The 24 specialist drafts additionally have original
+The 24 retained specialist drafts have a unique Slovenian route, title, H1,
+meta-description, self-referencing canonical, parent category, breadcrumbs,
+original
 Slovenian descriptions, supplier-sourced specifications, traceable public price
 observations, and four-image galleries. They remain `noindex, follow` and are
 excluded from the sitemap until Bistrava approves availability, warranty,

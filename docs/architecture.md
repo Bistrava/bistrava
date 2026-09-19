@@ -2,7 +2,7 @@
 
 ## Scope
 
-This phase establishes the specialist Bistrava experience without enabling unverified commerce. The 86 imported source references are preserved locally; 24 enriched specialist candidates are exposed as `draft` cards and 62 are `archived`. Supabase is the activation source of truth: only a matching `active` database row can enter the public offer, sitemap, or Merchant feed.
+This phase establishes the specialist Bistrava experience without enabling unverified commerce. The source import is preserved locally, while the working catalog retains 24 enriched specialist candidates with images and verified supplier prices. References without an image and a price are excluded from the application and removed from Supabase. Supabase is the activation source of truth: only a matching `active` database row can enter the public offer, sitemap, or Merchant feed.
 
 ## Application boundaries
 

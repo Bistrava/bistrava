@@ -10,12 +10,18 @@ import {
 } from "@/lib/catalog/catalog";
 
 describe("SEO catalog import", () => {
-  it("contains every workbook product with unique IDs and slugs", () => {
-    expect(catalogProducts).toHaveLength(86);
-    expect(new Set(catalogProducts.map((product) => product.id)).size).toBe(86);
+  it("keeps only products that have an image and a verified price", () => {
+    expect(catalogProducts).toHaveLength(24);
+    expect(new Set(catalogProducts.map((product) => product.id)).size).toBe(24);
     expect(new Set(catalogProducts.map((product) => product.slug)).size).toBe(
-      86,
+      24,
     );
+    expect(catalogProducts.every((product) => product.images.length > 0)).toBe(true);
+    expect(
+      catalogProducts.every(
+        (product) => product.priceCents !== null || product.supplierPriceCents !== null,
+      ),
+    ).toBe(true);
   });
 
   it("maps every product to an existing category", () => {
@@ -31,13 +37,13 @@ describe("SEO catalog import", () => {
       getProductsByCategory(category.slug),
     );
 
-    expect(groupedProducts).toHaveLength(86);
-    expect(new Set(groupedProducts.map((product) => product.id)).size).toBe(86);
+    expect(groupedProducts).toHaveLength(24);
+    expect(new Set(groupedProducts.map((product) => product.id)).size).toBe(24);
   });
 
-  it("keeps a focused 24-product draft catalog and archives the rest", () => {
+  it("keeps a focused 24-product draft catalog and removes incomplete references", () => {
     expect(specialistProducts).toHaveLength(24);
-    expect(archivedProducts).toHaveLength(62);
+    expect(archivedProducts).toHaveLength(0);
 
     for (const product of specialistProducts) {
       expect(product.status).toBe("draft");
@@ -90,14 +96,4 @@ describe("SEO catalog import", () => {
     }
   });
 
-  it("preserves the workbook priority distribution", () => {
-    const counts = Object.groupBy(
-      catalogProducts,
-      (product) => product.priority,
-    );
-
-    expect(counts["Prednost A"]).toHaveLength(36);
-    expect(counts["Prednost B"]).toHaveLength(32);
-    expect(counts.Test).toHaveLength(18);
-  });
 });

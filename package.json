@@ -15,7 +15,6 @@
     "email:dev": "email dev --dir src/emails --port 3001",
     "catalog:import": "uv run --with openpyxl python scripts/import-seo-catalog.py data/source/Bistrava-SEO-Keywords-Slovenia.xlsx src/lib/catalog/seo-products.generated.json",
     "catalog:seed:sql": "uv run --cache-dir .uv-cache --no-project python scripts/export-specialist-catalog-sql.py src/lib/catalog/seo-products.generated.json src/lib/catalog/supplier-prices.verified.json src/lib/catalog/product-content.verified.json src/lib/catalog/product-media.generated.json supabase/seed-specialist-products.sql",
-    "catalog:seed:archived:sql": "node scripts/export-archived-catalog-sql.mjs",
     "catalog:media:upload": "node scripts/upload-product-media.mjs --upload"
   },
   "dependencies": {

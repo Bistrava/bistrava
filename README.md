@@ -2,7 +2,7 @@
 
 Bistrava is a Slovenian specialist storefront for soft water and scale prevention. It uses Next.js App Router, TypeScript, Tailwind CSS, Supabase, Resend, React Email, Zod, Vitest, and Playwright.
 
-The public experience includes the specialist information architecture, a deterministic softener configurator, protected inquiry flows, ten editorial guide drafts, technical SEO, Consent Mode v2, and a catalog activation gate. Of the 86 source references, 24 are enriched specialist drafts with verified Slovenian copy, technical specifications, supplier-source provenance, and four-image galleries; 62 are archived. No product is presented as purchasable until its commercial data is approved and its database status is explicitly changed to `active`.
+The public experience includes the specialist information architecture, a deterministic softener configurator, protected inquiry flows, ten editorial guide drafts, technical SEO, Consent Mode v2, and a catalog activation gate. The retained catalog contains 24 enriched specialist drafts with verified Slovenian copy, technical specifications, supplier-source provenance, prices, and four-image galleries. Source references without both an image and a price are excluded and removed from Supabase. No product is presented as purchasable until its commercial data is approved and its database status is explicitly changed to `active`.
 
 ## Local development
 
@@ -34,12 +34,6 @@ Regenerate the reviewable SQL for the 24 specialist drafts:
 
 ```bash
 pnpm catalog:seed:sql
-```
-
-Regenerate the SQL for the other 62 source references, kept archived in Supabase:
-
-```bash
-pnpm catalog:seed:archived:sql
 ```
 
 After importing the 24 specialist drafts, upload their four-image galleries to

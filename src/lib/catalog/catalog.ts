@@ -275,9 +275,13 @@ function enrichProduct(source: SourceCatalogProduct): CatalogProduct {
   };
 }
 
-export const catalogProducts = (productData as SourceCatalogProduct[]).map(
-  enrichProduct,
-);
+export const catalogProducts = (productData as SourceCatalogProduct[])
+  .map(enrichProduct)
+  .filter(
+    (product) =>
+      product.images.length > 0 &&
+      (product.priceCents !== null || product.supplierPriceCents !== null),
+  );
 export const specialistProducts = catalogProducts.filter(
   (product) => product.status !== "archived",
 );

@@ -1,31 +1,31 @@
 import { expect, test } from "@playwright/test";
 
-test("homepage presents the specialist positioning and primary journeys", async ({ page }) => {
+test("homepage presents the specialist shop and product journeys", async ({ page }) => {
   await page.goto("/");
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: "Mehka voda. Manj vodnega kamna. Več udobja doma.",
+      name: "Izdelki za mehko vodo in dom brez vodnega kamna.",
     }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Izberite pravi mehčalec" }).first()).toBeVisible();
-  await expect(page.getByText("Trenutno ni aktivnih spletnih izdelkov.")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Nakupujte izdelke/ })).toBeVisible();
+  await expect(page.locator(".catalog-product-card")).toHaveCount(6);
   const structuredData = await page
     .locator('script[type="application/ld+json"]')
     .allTextContents();
   expect(structuredData.some((value) => value.includes('"@type":"FAQPage"'))).toBe(true);
 });
 
-test("specialist catalog separates drafts from active offers", async ({ page }) => {
+test("specialist catalog displays every curated product", async ({ page }) => {
   await page.goto("/mehcalci-vode");
-  await expect(page.getByRole("heading", { level: 1, name: /Mehčalci vode za manj vodnega kamna/ })).toBeVisible();
-  await expect(page.getByText("24 specializiranih osnutkov")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: /Izdelki za mehko vodo/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "24 izdelkov v štirih skupinah" })).toBeVisible();
   await expect(page.locator(".catalog-product-card")).toHaveCount(24);
   await Promise.all([
     page.waitForURL(/\/izdelki\//),
     page.locator(".catalog-product-card h3 a").first().click(),
   ]);
-  await expect(page.getByText("Osnutek - izdelek ni v prodaji")).toBeVisible();
+  await expect(page.getByText("Izdelek v katalogu", { exact: true }).first()).toBeVisible();
 });
 
 test("draft product has a canonical URL and no Product or Offer schema", async ({ page }) => {
@@ -57,7 +57,7 @@ test("legacy product URL redirects to the Slovenian plural route", async ({ page
   await expect(page).toHaveURL(/\/izdelki\/mehcalec-vode-12-l$/);
 });
 
-test("configurator shows contact details only after a deterministic result", async ({ page }) => {
+test("selection guide returns a result without collecting contact details", async ({ page }) => {
   await page.goto("/izbira-mehcalca");
   await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
   await page.getByLabel("Trdote še ne poznam").uncheck();
@@ -66,7 +66,8 @@ test("configurator shows contact details only after a deterministic result", asy
   await page.getByRole("button", { name: "Naprej" }).click();
   await page.getByRole("button", { name: "Prikažite rezultat" }).click();
   await expect(page.getByRole("heading", { name: "Priporočeni profili rešitve" })).toBeVisible();
-  await expect(page.getByLabel("Ime in priimek")).toBeVisible();
+  await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Oglejte si izdelke/ })).toBeVisible();
   await expect(page.locator(".recommendation-grid article")).toHaveCount(2);
 });
 
@@ -75,10 +76,10 @@ test("mobile menu exposes the required navigation", async ({ page }, testInfo) =
   await page.goto("/");
   await page.getByLabel("Odpri meni").click();
   const navigation = page.getByRole("navigation", { name: "Mobilna navigacija" });
-  await expect(navigation.getByRole("link", { name: "Mehčalci vode", exact: true })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Rešitve proti vodnemu kamnu" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Izbira mehčalca" })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Montaža in servis" })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Trgovina", exact: true })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Vodni kamen" })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Vodnik za izbiro" })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Vodniki", exact: true })).toBeVisible();
 });
 
 test("critical routes have content, no error overlay and no horizontal overflow", async ({ page }) => {
@@ -97,15 +98,12 @@ test("critical routes have content, no error overlay and no horizontal overflow"
     "/trda-voda",
     "/mehcalec-vode-za-hiso",
     "/mehcalec-vode-za-stanovanje",
-    "/montaza-mehcalca-vode",
-    "/servis-mehcalnih-naprav",
     "/sol-za-mehcalec-vode",
     "/test-trdote-vode",
     "/izbira-mehcalca",
     "/vodici",
     "/pogosta-vprasanja",
     "/o-nas",
-    "/kontakt",
   ]) {
     const response = await page.goto(route, { waitUntil: "domcontentloaded" });
     expect(response?.ok(), route).toBe(true);
@@ -145,11 +143,13 @@ test("privacy choice can be changed from the footer", async ({ page }) => {
   await expect(banner).toBeVisible();
 });
 
-test("contact form preserves UTM attribution without exposing it", async ({ page }) => {
-  await page.goto("/kontakt?utm_source=google&utm_medium=cpc&utm_campaign=mehka-voda");
-  await expect(page.locator('input[name="utmSource"]')).toHaveValue("google");
-  await expect(page.locator('input[name="utmMedium"]')).toHaveValue("cpc");
-  await expect(page.locator('input[name="utmCampaign"]')).toHaveValue("mehka-voda");
+test("legacy service and contact pages redirect into the shop", async ({ page }) => {
+  for (const route of ["/kontakt", "/montaza-mehcalca-vode", "/montaza-in-vzdrzevanje"]) {
+    await page.goto(route);
+    await expect(page).toHaveURL(/\/mehcalci-vode$/);
+  }
+  await page.goto("/servis-mehcalnih-naprav");
+  await expect(page).toHaveURL(/\/vodici$/);
 });
 
 test("guest cart persists quantities and checkout stays commercially gated", async ({ page }) => {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Check, Info } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
@@ -9,17 +9,15 @@ import {
   catalogProducts,
   getProductsByCategory,
 } from "@/lib/catalog/catalog";
-import { getActiveCatalogProducts } from "@/lib/catalog/repository";
 
 export const metadata: Metadata = {
   title: "Mehčalci vode za hišo in stanovanje",
   description:
-    "Primerjajte pristope za mehčanje vode, preverite pogoje montaže in preglejte strokovno pripravljen katalog Bistrava.",
+    "Oglejte si specializiran izbor mehčalcev vode, zaščite naprav, merilnih pripomočkov ter izdelkov za vzdrževanje.",
   alternates: { canonical: "/mehcalci-vode" },
 };
 
 export default async function WaterSoftenersPage() {
-  const activeProducts = await getActiveCatalogProducts();
   return (
     <>
       <div className="container">
@@ -28,18 +26,18 @@ export default async function WaterSoftenersPage() {
       <section className="category-hero">
         <div className="container category-hero-grid">
           <div>
-            <p className="section-kicker">Bistrava - strokovnjak za mehko vodo</p>
-            <h1>Mehčalci vode za manj vodnega kamna doma</h1>
+            <p className="section-kicker">Specializirana spletna trgovina Bistrava</p>
+            <h1>Izdelki za mehko vodo in manj vodnega kamna</h1>
             <p>
-              Prava naprava je rezultat meritve trdote, ocene porabe in pretoka ter
-              preverjenih pogojev montaže. Modela ne izbiramo samo po številu oseb.
+              Primerjajte mehčalce, zaščito posameznih naprav, teste trdote in
+              izdelke za redno vzdrževanje na enem mestu.
             </p>
             <div className="hero-actions">
-              <Link className="button button-primary" href="/izbira-mehcalca">
-                Izberite pravi mehčalec <ArrowRight aria-hidden="true" size={18} />
+              <Link className="button button-primary" href="#katalog">
+                Oglejte si vse izdelke <ArrowRight aria-hidden="true" size={18} />
               </Link>
-              <Link className="button button-secondary" href="/kontakt?vrsta=ponudba">
-                Zahtevajte ponudbo
+              <Link className="button button-secondary" href="/izbira-mehcalca">
+                Vodnik za izbiro
               </Link>
             </div>
           </div>
@@ -79,40 +77,16 @@ export default async function WaterSoftenersPage() {
         </div>
       </section>
 
-      <section className="section active-catalog-section">
-        <div className="container">
-          <p className="section-kicker">Aktivna ponudba</p>
-          <h2>Objavljeni so samo popolnoma preverjeni izdelki</h2>
-          {activeProducts.length === 0 ? (
-            <div className="empty-catalog card">
-              <Info aria-hidden="true" size={28} />
-              <div>
-                <h3>Spletna prodaja še nima aktivnih izdelkov.</h3>
-                <p>
-                  Nobenega osnutka ne prikazujemo kot dobavljiv izdelek. Do potrditve
-                  dobaviteljskih cenikov in tehničnih listov lahko zahtevate individualno ponudbo.
-                </p>
-              </div>
-              <Link className="button button-secondary" href="/kontakt?vrsta=ponudba">Zahtevajte ponudbo</Link>
-            </div>
-          ) : (
-            <div className="catalog-product-grid">
-              {activeProducts.map((product) => <CatalogProductCard key={product.id} product={product} />)}
-            </div>
-          )}
-        </div>
-      </section>
-
       <section className="section category-products" id="katalog">
         <div className="container">
           <div className="category-results-heading">
             <div>
-              <p className="section-kicker">Celoten katalog</p>
-              <h2>{catalogProducts.length} izdelkov in rešitev</h2>
+              <p className="section-kicker">Trgovina</p>
+              <h2>{catalogProducts.length} izdelkov v štirih skupinah</h2>
             </div>
             <p>
-              Vse uvožene kartice so prikazane na enem mestu. Neznane cene,
-              zaloga in specifikacije so jasno označene kot nepotrjene.
+              Vsak izdelek ima fotografije, opis, tehnične podatke in sledljiv vir
+              informativne cene. Razpoložljivost je označena na produktni kartici.
             </p>
           </div>
           {allCategories.map((category) => {

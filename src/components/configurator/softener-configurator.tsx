@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
-import { InquiryForm } from "@/components/forms/inquiry-form";
 import {
   recommendSolutions,
   type ConfiguratorInput,
@@ -71,7 +71,7 @@ export function SoftenerConfigurator() {
         {[1, 2, 3, 4].map((item) => (
           <span key={item} className={item <= step ? "is-active" : ""}>
             <b>{item}</b>
-            <small>{["Voda", "Dom", "Montaža", "Rezultat"][item - 1]}</small>
+            <small>{["Voda", "Dom", "Pogoji", "Rezultat"][item - 1]}</small>
           </span>
         ))}
       </div>
@@ -79,7 +79,7 @@ export function SoftenerConfigurator() {
       {step === 1 ? (
         <fieldset className="configurator-step">
           <legend>Lokacija in trdota vode</legend>
-          <p>Poštna številka nam pomaga pri ponudbi, vendar trdote iz lokacije ne ugibamo.</p>
+          <p>Lokacija pomaga opisati vodni vir, vendar trdote iz kraja ne ugibamo.</p>
           <div className="form-row">
             <div className="form-field">
               <label htmlFor="cfg-municipality">Občina ali kraj</label>
@@ -158,7 +158,7 @@ export function SoftenerConfigurator() {
 
       {step === 3 ? (
         <fieldset className="configurator-step">
-          <legend>Prostor in montaža</legend>
+          <legend>Prostor in priključki</legend>
           <div className="form-row">
             <div className="form-field">
               <label htmlFor="cfg-space">Razpoložljiv prostor</label>
@@ -172,9 +172,9 @@ export function SoftenerConfigurator() {
             </div>
           </div>
           <div className="form-field">
-            <label htmlFor="cfg-installation">Potrebujete montažo?</label>
+              <label htmlFor="cfg-installation">Način namestitve</label>
             <select id="cfg-installation" value={input.installationNeed} onChange={(event) => update("installationNeed", event.target.value as ConfiguratorInput["installationNeed"])}>
-              <option value="unsure">Potrebujem nasvet</option><option value="yes">Da</option><option value="no">Ne</option>
+                <option value="unsure">Še ni določeno</option><option value="yes">Strokovna namestitev</option><option value="no">Samostojna namestitev</option>
             </select>
           </div>
           <p className="notice">Rezultat je profil rešitve, ne avtomatska potrditev konkretnega izdelka ali cene.</p>
@@ -204,16 +204,10 @@ export function SoftenerConfigurator() {
               ))}
             </div>
           ) : null}
-          <div className="configurator-contact">
-            <InquiryForm
-              type="configurator"
-              title="Shranite rezultat in zahtevajte pregled"
-              description="Kontaktne podatke zahtevamo šele zdaj, po prikazu rezultata. Z oddajo se rezultat shrani skupaj z vašim soglasjem."
-              defaultMunicipality={input.municipality}
-              defaultPostalCode={input.postalCode}
-              defaultMessage="Prosim za pregled rezultata konfiguratorja in pripravo naslednjega koraka."
-              payload={{ input, result }}
-            />
+          <div className="configurator-actions">
+            <Link className="button button-primary" href="/mehcalci-vode#katalog">
+              Oglejte si izdelke <ArrowRight aria-hidden="true" size={18} />
+            </Link>
           </div>
         </div>
       ) : null}

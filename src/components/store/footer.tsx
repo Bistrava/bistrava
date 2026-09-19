@@ -5,16 +5,16 @@ import type { Route } from "next";
 import { PrivacySettingsButton } from "@/components/analytics/consent-banner";
 
 const solutionLinks = [
-  ["Mehčalci vode", "/mehcalci-vode"],
-  ["Trda voda", "/trda-voda"],
-  ["Vodni kamen", "/vodni-kamen"],
-  ["Izbira mehčalca", "/izbira-mehcalca"],
+  ["Vsi izdelki", "/mehcalci-vode#katalog"],
+  ["Mehčalci vode", "/mehcalci-vode#mehcalci-vode"],
+  ["Zaščita naprav", "/mehcalci-vode#ciljna-zascita"],
+  ["Sol in vzdrževanje", "/mehcalci-vode#sol-in-vzdrzevanje"],
 ] as const;
 
 const supportLinks = [
-  ["Montaža mehčalca", "/montaza-mehcalca-vode"],
-  ["Servis naprav", "/servis-mehcalnih-naprav"],
-  ["Sol za mehčalec", "/sol-za-mehcalec-vode"],
+  ["Vodnik za izbiro", "/izbira-mehcalca"],
+  ["Trda voda", "/trda-voda"],
+  ["Vodni kamen", "/vodni-kamen"],
   ["Test trdote", "/test-trdote-vode"],
   ["Vodniki", "/vodici"],
   ["Pogosta vprašanja", "/pogosta-vprasanja"],
@@ -43,14 +43,14 @@ export function Footer() {
           <p className="footer-tagline">Mehka voda. Pametna izbira.</p>
           <p>Bistrava - strokovnjak za mehko vodo brez vodnega kamna.</p>
         </div>
-        <FooterColumn title="Rešitve" links={solutionLinks} />
-        <FooterColumn title="Podpora" links={supportLinks} />
+        <FooterColumn title="Trgovina" links={solutionLinks} />
+        <FooterColumn title="Nasveti" links={supportLinks} />
         <FooterColumn title="Informacije" links={legalLinks} />
       </div>
       <div className="container footer-bottom">
         <p>© {new Date().getFullYear()} Bistrava. Vse pravice pridržane.</p>
         <div>
-          <p>Prodajni in pravni podatki, označeni kot osnutek, še niso javna ponudba.</p>
+          <p>Preverite podatke na produktni kartici pred nakupom.</p>
           <PrivacySettingsButton />
         </div>
       </div>

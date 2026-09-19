@@ -5,12 +5,11 @@ import { CartLink } from "@/components/cart/cart-link";
 import { MobileMenu } from "@/components/store/mobile-menu";
 
 export const mainNavigation = [
-  { href: "/mehcalci-vode", label: "Mehčalci vode" },
-  { href: "/vodni-kamen", label: "Rešitve proti vodnemu kamnu" },
-  { href: "/izbira-mehcalca", label: "Izbira mehčalca" },
-  { href: "/montaza-mehcalca-vode", label: "Montaža in servis" },
+  { href: "/mehcalci-vode", label: "Trgovina" },
+  { href: "/vodni-kamen", label: "Vodni kamen" },
+  { href: "/izbira-mehcalca", label: "Vodnik za izbiro" },
   { href: "/vodici", label: "Vodniki" },
-  { href: "/kontakt", label: "Kontakt" },
+  { href: "/pogosta-vprasanja", label: "Pogosta vprašanja" },
 ] as const;
 
 export function Header() {
@@ -18,7 +17,7 @@ export function Header() {
     <header className="site-header">
       <div className="utility-bar">
         <div className="container utility-inner">
-          <p>Analiza, svetovanje, mehčalci vode, montaža in vzdrževanje.</p>
+          <p>Specializirana spletna trgovina za mehčanje in zaščito vode.</p>
           <Link href="/test-trdote-vode">Kako izmeriti trdoto?</Link>
         </div>
       </div>
@@ -39,8 +38,8 @@ export function Header() {
         </nav>
         <div className="header-tools">
           <CartLink />
-          <Link className="button button-primary header-quote-button" href="/kontakt?vrsta=ponudba">
-            Ponudba
+          <Link className="button button-primary header-quote-button" href="/mehcalci-vode#katalog">
+            Izdelki
           </Link>
           <MobileMenu items={mainNavigation} />
         </div>

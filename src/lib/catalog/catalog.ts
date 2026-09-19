@@ -32,11 +32,11 @@ export const allCategories: Category[] = [
   },
   {
     slug: "meritve-in-montaza",
-    name: "Meritve in montaža",
-    shortName: "Meritve in montaža",
+    name: "Meritve in dodatki",
+    shortName: "Meritve in dodatki",
     description:
-      "Pripomočki in elementi za preverjanje trdote ter strokovno pripravo vodovodnega priključka.",
-    problem: "Podatki in pogoji pred izbiro",
+      "Pripomočki za preverjanje trdote vode ter dodatki za izbiro in uporabo opreme.",
+    problem: "Meritve in uporabni dodatki",
     icon: "gauge",
   },
   {

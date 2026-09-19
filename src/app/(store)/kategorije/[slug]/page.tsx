@@ -83,16 +83,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="container">
           <div className="category-results-heading">
             <div>
-              <p className="section-kicker">Katalog v pripravi</p>
+              <p className="section-kicker">Izdelki v kategoriji</p>
               <h2>
                 {products.length > 0
-                  ? `${products.length} produktnih kartic`
-                  : "Ponudba bo dodana po preverbi"}
+                  ? `${products.length} izdelkov`
+                  : "Izdelki bodo dodani kmalu"}
               </h2>
             </div>
             <p>
-              Kartice imajo potrjene nazive in SEO-osnovo. Cena, zaloga,
-              lastnosti in prodajni pogoji še niso objavljeni.
+              Primerjajte fotografije, opise, tehnične lastnosti in informativne cene.
             </p>
           </div>
 
@@ -112,8 +111,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                   in strokovno vsebino.
                 </p>
               </div>
-              <Link className="button button-secondary" href="/kontakt">
-                Pošljite vprašanje
+              <Link className="button button-secondary" href="/mehcalci-vode#katalog">
+                Oglejte si vse izdelke
               </Link>
             </div>
           )}

@@ -143,7 +143,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           )}
           <div className="product-summary">
             <span className="eyebrow">
-              {product.status === "active" ? "Aktivna produktna kartica" : "V pripravi - izdelek ni v prodaji"}
+              {product.status === "active" ? "Na voljo za nakup" : "Izdelek v katalogu"}
             </span>
             <p className="product-brand">{product.brand}</p>
             <h1>{product.nameSl}</h1>
@@ -152,9 +152,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div className="demo-warning">
                 <Info aria-hidden="true" size={20} />
                 <p>
-                  Kartica je ločena od aktivne ponudbe. Javno ceno in tehnične podatke smo
-                  povzeli iz navedenega vira; dobavljivost, garancijo in končno ponudbo
-                  Bistrava je treba pred naročilom še potrditi.
+                  Fotografije, tehnične podatke in informativno ceno smo povzeli iz
+                  navedenega vira. Spletni nakup tega izdelka bo omogočen po potrditvi
+                  prodajne cene, zaloge in garancijskih pogojev Bistrava.
                 </p>
               </div>
             ) : null}
@@ -209,8 +209,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 }}
               />
             ) : (
-              <Link className="button button-primary" href={`/kontakt?vrsta=ponudba&izdelek=${product.slug}`}>
-                {product.status === "active" ? "Zahtevajte ponudbo" : "Zahtevajte preverbo ponudbe"}
+              <Link className="button button-primary" href="/mehcalci-vode#katalog">
+                Nadaljujte z nakupovanjem
               </Link>
             )}
             <dl className="product-quick-facts">
@@ -287,8 +287,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <section className="section related-products-section">
           <div className="container">
             <div className="category-results-heading">
-              <div><p className="section-kicker">Osnutki za primerjavo</p><h2>Drugi kandidati v isti skupini</h2></div>
-              <Link className="button button-secondary" href="/mehcalci-vode#katalog">Celoten katalog v pripravi</Link>
+              <div><p className="section-kicker">Primerjajte izdelke</p><h2>Drugi izdelki v isti skupini</h2></div>
+              <Link className="button button-secondary" href="/mehcalci-vode#katalog">Celoten katalog</Link>
             </div>
             <div className="catalog-product-grid">
               {relatedProducts.map((relatedProduct) => <CatalogProductCard key={relatedProduct.id} product={relatedProduct} />)}

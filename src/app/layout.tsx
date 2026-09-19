@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Bistrava",
   },
   description:
-    "Bistrava pomaga izbrati mehčalec vode za hišo ali stanovanje: analiza trdote, svetovanje, ponudba, montaža in vzdrževanje v Sloveniji.",
+    "Specializirana spletna trgovina z mehčalci vode, zaščito pred vodnim kamnom, merilnimi pripomočki in strokovnimi vodniki.",
   applicationName: siteConfig.name,
   alternates: { canonical: "/" },
   openGraph: {
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     url: "/",
     siteName: siteConfig.name,
     title: "Mehka voda. Manj vodnega kamna. Več udobja doma.",
-    description: "Analiza, svetovanje, mehčalci vode, montaža in vzdrževanje.",
+    description: "Specializirana trgovina za mehčanje in zaščito vode.",
     images: [{ url: "/media/bistrava-water-mineral-v1.png", width: 1729, height: 910, alt: "Abstraktna tekstura čiste vode in svetlega minerala" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Bistrava - strokovnjak za mehko vodo",
-    description: "Analiza, svetovanje, mehčalci vode, montaža in vzdrževanje.",
+    description: "Specializirana trgovina za mehčanje in zaščito vode.",
     images: ["/media/bistrava-water-mineral-v1.png"],
   },
 };

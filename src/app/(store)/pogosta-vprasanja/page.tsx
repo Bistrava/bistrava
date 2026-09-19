@@ -34,9 +34,9 @@ export default function FrequentlyAskedQuestionsPage() {
             </details>
           ))}
           <div className="faq-contact card">
-            <h2>Niste našli svojega vprašanja?</h2>
-            <p>Pošljite trdoto, porabo in fotografije mesta montaže.</p>
-            <Link className="button button-primary" href="/kontakt">Vprašajte Bistravo</Link>
+            <h2>Želite primerjati izdelke?</h2>
+            <p>V katalogu so zbrane fotografije, tehnični podatki in informativne cene.</p>
+            <Link className="button button-primary" href="/mehcalci-vode#katalog">Odprite trgovino</Link>
           </div>
         </div>
       </section>

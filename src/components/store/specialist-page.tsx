@@ -19,11 +19,11 @@ export function SpecialistPage({ page }: { page: SpecialistPageContent }) {
             <p>{page.intro}</p>
             <div className="hero-actions">
               <Link className="button button-primary" href="/izbira-mehcalca">
-                Izberite pravi profil
+                Vodnik za izbiro
                 <ArrowRight aria-hidden="true" size={18} />
               </Link>
-              <Link className="button button-secondary" href="/kontakt">
-                Zahtevajte ponudbo
+              <Link className="button button-secondary" href="/mehcalci-vode#katalog">
+                Oglejte si izdelke
               </Link>
             </div>
           </div>
@@ -70,7 +70,7 @@ export function SpecialistPage({ page }: { page: SpecialistPageContent }) {
           <p className="section-kicker">Nadaljujte brez ugibanja</p>
           <h2>Povezane vsebine in naslednji koraki</h2>
           <div className="related-link-grid">
-            {page.related.map((item) => (
+            {page.related.filter((item) => !item.href.startsWith("/kontakt") && !item.href.startsWith("/montaza") && !item.href.startsWith("/servis")).map((item) => (
               <Link className="card" href={item.href as Route} key={item.href}>
                 {item.label} <ArrowRight aria-hidden="true" size={18} />
               </Link>

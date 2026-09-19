@@ -8,8 +8,6 @@ import { formatMoney } from "@/lib/commerce/money";
 import type { CatalogProduct } from "@/types/catalog";
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
-  const isPreparing = product.status !== "active";
-
   return (
     <article className="catalog-product-card card">
       {product.images[0] ? (
@@ -35,11 +33,9 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
       <div className="catalog-product-card-content">
         <div className="catalog-product-card-topline">
           <span className="eyebrow">
-            {isPreparing
-              ? "V pripravi - ni v prodaji"
-              : product.stockStatus === "in_stock"
+            {product.status === "active" && product.stockStatus === "in_stock"
                 ? "Aktivna ponudba"
-                : "Dobavljivost po preverbi"}
+                : "Izdelek v katalogu"}
           </span>
           <span>{product.sku}</span>
         </div>
@@ -48,12 +44,14 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
           <Link href={`/izdelki/${product.slug}`}>{product.nameSl}</Link>
         </h3>
         <p>{product.shortDescriptionSl}</p>
-        {product.status === "active" && product.priceCents !== null ? (
+        {product.priceCents !== null ? (
           <strong className="product-card-price">{formatMoney(product.priceCents)}</strong>
+        ) : product.supplierPriceCents !== null ? (
+          <strong className="product-card-price">Informativno od {formatMoney(product.supplierPriceCents)}</strong>
         ) : null}
         <div className="catalog-product-card-actions">
           <Link className="catalog-product-card-link" href={`/izdelki/${product.slug}`}>
-            Odprite produktno kartico
+            Oglejte si izdelek
             <ArrowUpRight aria-hidden="true" size={17} />
           </Link>
           {product.status === "active" &&

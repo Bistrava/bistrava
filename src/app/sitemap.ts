@@ -12,15 +12,12 @@ const marketingRoutes = [
   "/trda-voda",
   "/mehcalec-vode-za-hiso",
   "/mehcalec-vode-za-stanovanje",
-  "/montaza-mehcalca-vode",
-  "/servis-mehcalnih-naprav",
   "/sol-za-mehcalec-vode",
   "/test-trdote-vode",
   "/izbira-mehcalca",
   "/vodici",
   "/pogosta-vprasanja",
   "/o-nas",
-  "/kontakt",
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

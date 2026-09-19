@@ -27,7 +27,22 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/montaza-in-vzdrzevanje",
-        destination: "/montaza-mehcalca-vode",
+        destination: "/mehcalci-vode",
+        permanent: true,
+      },
+      {
+        source: "/montaza-mehcalca-vode",
+        destination: "/mehcalci-vode",
+        permanent: true,
+      },
+      {
+        source: "/servis-mehcalnih-naprav",
+        destination: "/vodici",
+        permanent: true,
+      },
+      {
+        source: "/kontakt",
+        destination: "/mehcalci-vode",
         permanent: true,
       },
       {

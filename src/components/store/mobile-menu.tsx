@@ -27,8 +27,8 @@ export function MobileMenu({ items }: MobileMenuProps) {
       <nav aria-label="Mobilna navigacija">
         {items.map((item) => <Link key={item.href} href={item.href as Route}>{item.label}</Link>)}
         <div className="mobile-menu-actions">
-          <Link href="/kontakt?vrsta=ponudba">Zahtevajte ponudbo</Link>
-          <Link href="/pogosta-vprasanja">Pogosta vprašanja</Link>
+          <Link href="/mehcalci-vode#katalog">Vsi izdelki</Link>
+          <Link href="/test-trdote-vode">Kako izmeriti trdoto?</Link>
         </div>
       </nav>
     </details>

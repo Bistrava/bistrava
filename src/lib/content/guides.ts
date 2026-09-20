@@ -13,130 +13,450 @@ export const guides: Guide[] = [
     slug: "kaj-je-trda-voda",
     title: "Kaj je trda voda in zakaj nastaja vodni kamen",
     excerpt: "Razumljiva razlaga trdote, kalcija, magnezija in nastanka mineralnih oblog doma.",
-    readingTime: "6 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "8 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Trdota je merljiva lastnost vode", paragraphs: ["Trdota opisuje predvsem količino raztopljenih kalcijevih in magnezijevih ionov. Za primerjavo in dimenzioniranje opreme potrebujete številčno vrednost z jasno navedeno enoto."] },
-      { title: "Kako nastane vodni kamen", paragraphs: ["Pri segrevanju ali izhlapevanju se del mineralov izloči v obloge. Zato so posledice pogosto najbolj vidne na grelnih elementih, armaturah in površinah, kjer voda zastaja ali se suši."] },
-      { title: "Kdaj meriti", paragraphs: ["Vidne obloge so razlog za meritev, ne nadomestilo zanjo. Rezultat povežite s porabo, pretokom in mestom, kjer želite ukrepati."] },
+      {
+        title: "Trdota je merljiva lastnost vode",
+        paragraphs: [
+          "Trdota vode opisuje predvsem količino raztopljenih kalcijevih in magnezijevih ionov. Minerali pridejo v vodo med njenim prehajanjem skozi kamnine in tla, zato se trdota razlikuje med vodnimi viri in oskrbovalnimi območji. Trda voda sama po sebi ni isto kot onesnažena voda; izraz opisuje mineralno sestavo.",
+          "V Sloveniji se trdota pogosto navaja v nemških stopinjah, označenih z °dH, srečate pa lahko tudi mmol/l ali mg/l CaCO₃. Pri primerjavi rezultatov vedno preverite enoto. Številka brez enote ni dovolj za izbiro opreme ali primerjavo dveh meritev.",
+        ],
+      },
+      {
+        title: "Kako nastane vodni kamen",
+        paragraphs: [
+          "Ko se trda voda segreva ali izhlapeva, se del raztopljenih mineralov izloči v trdne obloge. Zato vodni kamen najprej opazimo na grelnikih, kuhalnikih, prhah, armaturah in steklu tuš kabine. Bele sledi po sušenju so običajno bolj izrazite tam, kjer je voda trša.",
+          "Količina oblog ni odvisna samo od trdote. Vplivajo tudi temperatura, poraba, pogostost sušenja kapljic in zasnova naprave. Dve gospodinjstvi z enako trdoto lahko zato opazita različno količino oblog.",
+        ],
+      },
+      {
+        title: "Kaj lahko opazite doma",
+        paragraphs: [
+          "Pogosti znaki so belkast rob okoli pipe, moten videz stekla, obloge na grelcu kuhalnika in hitrejše nalaganje usedlin na pršni glavi. Ti znaki kažejo, da je meritev smiselna, vendar iz njihovega videza ne morete zanesljivo določiti natančne trdote.",
+          "Obloge lahko povečajo potrebo po čiščenju in vplivajo na vzdrževanje naprav, ki segrevajo vodo. Pred nakupom rešitve preverite tudi navodila proizvajalca bojlerja, pralnega ali pomivalnega stroja.",
+        ],
+      },
+      {
+        title: "Meritev pred izbiro izdelka",
+        paragraphs: [
+          "Za prvo orientacijo uporabite podatek lokalnega dobavitelja vode, testni listič ali kapljični test. Če se oskrba spreminja med različnimi vodnimi viri, je domača meritev uporabnejša od starega splošnega podatka za celotno občino.",
+          "Rezultat zapišite skupaj z datumom, mestom odvzema in uporabljeno metodo. Za izbiro mehčalca ga povežite s številom oseb, mesečno porabo in največjim sočasnim pretokom v domu.",
+        ],
+      },
+      {
+        title: "Katera rešitev je smiselna",
+        paragraphs: [
+          "Ionski mehčalec zmanjšuje trdoto vode, medtem ko filtri za delce, dozirni sistemi in drugi izdelki rešujejo drugačne naloge. Najprej določite, ali želite obdelati vodo za celoten dom ali zaščititi samo posamezno napravo.",
+          "Primerjajte dejanski način delovanja, pretok, dimenzije, priključke in zahteve za vzdrževanje. Dober nakup se začne z jasno težavo in meritvijo, ne samo z imenom tehnologije na embalaži.",
+        ],
+      },
     ],
   },
   {
     slug: "kako-izmeriti-trdoto-vode",
     title: "Kako izmeriti trdoto vode doma",
     excerpt: "Kaj zabeležiti pri testnem lističu, kapljičnem testu ali podatku lokalnega dobavitelja vode.",
-    readingTime: "7 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "8 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Izberite metodo z jasno enoto", paragraphs: ["Uporabite test z navedenim merilnim območjem in sledite času odčitavanja iz navodil. Pri podatku dobavitelja preverite oskrbovalno območje in datum."] },
-      { title: "Zapišite okoliščine", paragraphs: ["Zabeležite mesto odvzema, vir vode, datum, rezultat in enoto. Tako bo meritev uporabna tudi pri kasnejši primerjavi."] },
-      { title: "Kdaj rezultat preveriti", paragraphs: ["Ob nejasnem ali nepričakovanem rezultatu meritev ponovite. Pri lastnem viru ali drugih težavah je lahko potrebna širša ustrezna analiza."] },
+      {
+        title: "Najprej preverite podatek dobavitelja",
+        paragraphs: [
+          "Lokalni dobavitelj vode pogosto objavi trdoto za posamezno oskrbovalno območje. Preverite, ali se podatek nanaša na vaš naslov, iz katerega obdobja je in v kateri enoti je zapisan. Povprečje za več virov je lahko manj uporabno od meritve na domači pipi.",
+          "Če uporabljate lasten vodni vir, osnovni test trdote ne nadomesti širše analize kakovosti vode. Trdota pove nekaj o kalciju in magneziju, ne poda pa celotne slike o mikrobioloških ali drugih kemijskih lastnostih.",
+        ],
+      },
+      {
+        title: "Merjenje s testnim lističem",
+        paragraphs: [
+          "Listič za predpisani čas pomočite v svež vzorec in ga nato primerjajte z barvno lestvico v času, ki ga določa proizvajalec. Predolg stik z vodo ali prepozno odčitavanje lahko spremeni barvo in rezultat.",
+          "Lističi so hitri in priročni, vendar pogosto pokažejo območje namesto ene natančne vrednosti. Za grobo razvrstitev vode je to lahko dovolj, za natančnejše dimenzioniranje pa je primernejši kapljični test ali laboratorijski podatek.",
+        ],
+      },
+      {
+        title: "Merjenje s kapljičnim testom",
+        paragraphs: [
+          "Pri kapljičnem testu odmerite količino vode, nato dodajate reagent po navodilih, dokler se barva ne spremeni. Število kapljic se pretvori v trdoto po pravilu, navedenem pri konkretnem kompletu. Ne uporabljajte pretvorbe iz drugega testa.",
+          "Stekleničko držite navpično, da so kapljice podobne velikosti, in vzorec po vsaki kapljici nežno premešajte. Posodo pred meritvijo sperite z vodo, ki jo boste testirali.",
+        ],
+      },
+      {
+        title: "Kako dobiti primerljiv rezultat",
+        paragraphs: [
+          "Vzemite hladno vodo na mestu, ki predstavlja dovod v dom, in pustite, da nekaj časa teče. Ne merite takoj za obstoječim filtrom ali mehčalcem, če želite poznati vhodno trdoto. Za preverjanje delovanja naprave pa izmerite vzorec pred njo in za njo.",
+          "Zapišite datum, uro, mesto odvzema, rezultat, enoto in metodo. Če dobite presenetljiv rezultat, meritev ponovite z novim vzorcem. Dve podobni meritvi sta boljša osnova za odločitev kot en sam nejasen odčitek.",
+        ],
+      },
+      {
+        title: "Kako rezultat uporabiti pri nakupu",
+        paragraphs: [
+          "Trdota je samo eden od vhodnih podatkov. Mehčalec mora ustrezati tudi porabi vode, največjemu pretoku, tlaku, velikosti priključka in prostoru, ki je na voljo. Pri zelo spremenljivi trdoti uporabite višjo zanesljivo izmerjeno vrednost in preverite priporočila proizvajalca.",
+          "Rezultat vnesite v vodnik za izbiro Bistrava, nato primerjajte izdelke po kapaciteti in potrjenem delovnem pretoku. Meritev shranite, saj jo boste potrebovali tudi pri začetni nastavitvi naprave.",
+        ],
+      },
     ],
   },
   {
     slug: "kako-deluje-mehcalec-vode",
     title: "Kako deluje ionski mehčalec vode",
     excerpt: "Ionska izmenjava, regeneracija s slanico in omejitve, ki jih je treba poznati pred nakupom.",
-    readingTime: "8 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "9 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Ionska izmenjava", paragraphs: ["Pri ionskem mehčanju smola veže predvsem kalcijeve in magnezijeve ione ter jih nadomešča z natrijevimi. To je drugačen način delovanja od rešitev, ki mineralov iz vode ne odstranjujejo."] },
-      { title: "Regeneracija", paragraphs: ["Ko je sposobnost smole zmanjšana, krmiljenje izvede regeneracijo s slanico. Poraba soli in vode je odvisna od konkretnega sistema, nastavitev, trdote in porabe."] },
-      { title: "Pogoji za delovanje", paragraphs: ["Naprava potrebuje ustrezen priključek, tlak, pretok, odtok, prostor za servis in pogosto električno napajanje. Končne zahteve določa proizvajalec."] },
+      {
+        title: "Kaj se dogaja v posodi s smolo",
+        paragraphs: [
+          "Ionski mehčalec vsebuje smolo, skozi katero teče voda. Smola veže predvsem kalcijeve in magnezijeve ione, povezane s trdoto, ter jih izmenja z natrijevimi ioni. Na izhodu je zato trdota nižja, količina raztopljenih mineralnih snovi pa ni nujno manjša.",
+          "To je bistvena razlika med mehčalcem in mehanskim filtrom. Filter zadrži delce določene velikosti, ionska izmenjava pa deluje na raztopljene ione. Ena tehnologija zato ne nadomesti samodejno druge.",
+        ],
+      },
+      {
+        title: "Zakaj je potrebna regeneracija",
+        paragraphs: [
+          "Smola lahko veže omejeno količino kalcija in magnezija. Ko se njena kapaciteta približa izčrpanju, naprava iz posode za sol pripravi slanico in z njo obnovi sposobnost smole za naslednji cikel.",
+          "Sodobno krmiljenje lahko regeneracijo sproži glede na izmerjeno porabo, čas ali kombinacijo nastavitev. Volumetrično krmiljenje običajno bolje sledi dejanski uporabi kot regeneracija samo po fiksnem koledarju, vendar mora biti pravilno nastavljeno.",
+        ],
+      },
+      {
+        title: "Kapaciteta in pretok nista ista podatek",
+        paragraphs: [
+          "Kapaciteta pove, koliko trdote lahko naprava obdela med regeneracijama. Pretok pa pove, koliko vode lahko v določenem trenutku preide skozi napravo ob sprejemljivem padcu tlaka. Za udobno uporabo morata biti primerna oba podatka.",
+          "Premajhen pretok se lahko pokaže kot slabši tlak med hkratnim tuširanjem in uporabo drugih porabnikov. Prevelika naprava pa ni samodejno boljša, saj lahko pomeni nepotrebno velikost, daljše mirovanje vode ali neprimerne cikle regeneracije.",
+        ],
+      },
+      {
+        title: "Kaj naprava potrebuje za delovanje",
+        paragraphs: [
+          "Običajna vgradnja zahteva primeren dovod, odtok za regeneracijsko vodo, prostor za varno polnjenje soli in pogosto električno napajanje. Obvod omogoča, da lahko napravo izločite iz sistema med vzdrževanjem.",
+          "Pred izbiro preverite dovoljeni tlak, temperaturo vode, velikost priključka, mere naprave in navodila za odtok. Končne zahteve vedno določa dokumentacija konkretnega modela.",
+        ],
+      },
+      {
+        title: "Kaj pričakovati pri uporabi",
+        paragraphs: [
+          "Po pravilni nastavitvi spremljajte nivo soli, morebitna opozorila in spremembe porabe. Občasna regeneracija je normalen del delovanja. Čas regeneracije se pogosto nastavi na obdobje, ko je poraba vode najmanjša.",
+          "Mehčalec zahteva redno vzdrževanje in ne rešuje vseh težav z vodo. Motnost, delci, vonj ali posebnosti lastnega vodnega vira potrebujejo ločeno oceno in ustrezno tehnologijo.",
+        ],
+      },
     ],
   },
   {
     slug: "mehcalec-vode-za-hiso-vodic",
-    title: "Mehčalec vode za hišo: podatki pred ponudbo",
+    title: "Mehčalec vode za hišo: podatki pred nakupom",
     excerpt: "Kontrolni seznam za trdoto, porabo, kopalnice, pretok, prostor in priključke.",
-    readingTime: "7 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "9 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Poraba in sočasni pretok", paragraphs: ["Število oseb je samo izhodišče. Pomembna sta običajna mesečna poraba in največje število porabnikov, ki delujejo hkrati."] },
-      { title: "Prostor za napravo", paragraphs: ["Izmerite širino, višino in globino ter pustite prostor za polnjenje soli, uporabo obvoda in servis."] },
-      { title: "Priprava fotografij", paragraphs: ["Fotografirajte dovod, ventile, premer cevi, odtok in napajanje. Tako se obseg montaže lažje določi pred obiskom."] },
+      {
+        title: "Začnite z meritvijo in porabo",
+        paragraphs: [
+          "Izmerite trdoto vhodne vode in poglejte račune za zadnjih nekaj mesecev. Mesečna poraba pokaže približno dnevno količino vode, trdota pa mineralno obremenitev, ki jo mora prevzeti smola.",
+          "Če se število stanovalcev ali poraba med letom močno spreminja, zapišite običajno in največjo uporabo. Počitniška hiša, stalno naseljena hiša in objekt z več apartmaji potrebujejo različne premisleke.",
+        ],
+      },
+      {
+        title: "Ocenite največji sočasni pretok",
+        paragraphs: [
+          "Preštejte kopalnice in večje porabnike, ki lahko delujejo hkrati. Tuš, polnjenje kadi, pralni stroj in kuhinjska pipa ustvarijo kratkotrajno potrebo, ki je mesečni račun ne pokaže.",
+          "V tehničnem listu primerjajte nazivni oziroma delovni pretok ter pogoje, pri katerih je izmerjen. Samo podatek o litrih smole še ne potrdi, da bo tlak pri sočasni uporabi ustrezen.",
+        ],
+      },
+      {
+        title: "Preverite prostor in priključke",
+        paragraphs: [
+          "Izmerite širino, globino in višino mesta vgradnje. Upoštevajte odpiranje pokrova, polnjenje soli, priklop cevi in dostop za vzdrževanje. Fotografija brez merila pogosto ni dovolj za presojo prostora.",
+          "Preverite premer glavnega dovoda, tlak, bližino odtoka, električno vtičnico in možnost obvoda. Zunanji ali neogrevani prostor mora ustrezati dovoljenemu temperaturnemu območju naprave.",
+        ],
+      },
+      {
+        title: "Primerjajte stroške uporabe",
+        paragraphs: [
+          "Poleg nakupne cene primerjajte porabo soli in vode na regeneracijo, pogostost ciklov, garancijo ter dostopnost potrošnega materiala. Nizka cena naprave ne pove, koliko bo stala njena uporaba v več letih.",
+          "Preverite tudi, kaj je vključeno v kompletu: obvod, priključni elementi, cev za odtok ali začetna količina soli niso vedno del osnovnega paketa.",
+        ],
+      },
+      {
+        title: "Kontrolni seznam pred nakupom",
+        paragraphs: [
+          "Pripravite trdoto v °dH, mesečno porabo, število oseb, kopalnic in večjih porabnikov. Nato zapišite tlak, premer cevi, mere prostora ter razpoložljiv odtok in napajanje.",
+          "Izdelek izberite šele, ko se podatki ujemajo z njegovim tehničnim listom. Če ključni podatek manjka, primerjavo začasno omejite na modele, pri katerih ga proizvajalec jasno objavlja.",
+        ],
+      },
     ],
   },
   {
     slug: "mehcalec-vode-za-stanovanje-vodic",
     title: "Mehčalec vode za stanovanje: preverba izvedljivosti",
     excerpt: "Kako preveriti individualni dovod, prostor, odtok in pravila posega v večstanovanjski stavbi.",
-    readingTime: "6 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "8 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Kateri dovod oskrbuje stanovanje", paragraphs: ["Pred izbiro je treba potrditi, da dostopna cev oskrbuje želene porabnike in da poseg ne vpliva na skupno napeljavo brez ustreznega dogovora."] },
-      { title: "Kompaktno ne pomeni brez zahtev", paragraphs: ["Tudi manjša naprava potrebuje varen odtok, napajanje, obvod in servisni dostop v skladu z navodili modela."] },
-      { title: "Druga pot", paragraphs: ["Če centralna vgradnja ni izvedljiva, lahko preverite ciljno zaščito posamezne naprave. Učinek take rešitve mora biti opisan natančno in brez enačenja z ionskim mehčanjem."] },
+      {
+        title: "Poiščite pravi dovod",
+        paragraphs: [
+          "Najprej potrdite, katera cev oskrbuje samo vaše stanovanje. Dostopna cev ob števcu ni vedno primerna za poseg, skupni vodi pa lahko spadajo med skupne dele stavbe.",
+          "Preverite pravila upravljanja stavbe in dostop do zapornega ventila. Izbrana točka mora omogočati varno izločitev naprave brez vpliva na oskrbo drugih stanovanj.",
+        ],
+      },
+      {
+        title: "Kompaktna naprava še vedno potrebuje prostor",
+        paragraphs: [
+          "Izmerite celotno nišo in ne samo tlorisa naprave. Potrebujete prostor za priključne cevi, odpiranje pokrova, dodajanje soli ter dostop do krmilnika in obvoda.",
+          "Pri omarici preverite tudi prezračevanje, zaščito pred morebitnim iztekanjem in nosilnost tal. Naprava je zaradi vode, smole in soli težja, kot kaže prazna masa v katalogu.",
+        ],
+      },
+      {
+        title: "Odtok in električno napajanje",
+        paragraphs: [
+          "Ionski mehčalec med regeneracijo odvaja vodo, zato potrebuje ustrezno izveden odtok po navodilih proizvajalca. Dolga, dvignjena ali nepravilno pritrjena odtočna cev lahko povzroči težave pri delovanju.",
+          "Večina kompaktnih modelov potrebuje tudi električno napajanje. Podaljški v mokrem okolju niso dobra trajna rešitev; preverite položaj primerne vtičnice in dolžino priloženega kabla.",
+        ],
+      },
+      {
+        title: "Izbira zmogljivosti za stanovanje",
+        paragraphs: [
+          "Manjše gospodinjstvo pogosto potrebuje manjšo kapaciteto, vendar mora naprava še vedno prenesti trenutni pretok pri tuširanju in uporabi kuhinje. Število oseb je izhodišče, ne edino merilo.",
+          "Primerjajte trdoto, porabo, delovni pretok, mere in hrup oziroma čas regeneracije. Pri postavitvi blizu spalnega prostora je časovni program regeneracije posebej uporaben.",
+        ],
+      },
+      {
+        title: "Če centralna vgradnja ni mogoča",
+        paragraphs: [
+          "Zaščita posameznega grelnika ali aparata je lahko izvedljiva tam, kjer ni dostopa do glavnega dovoda. Takšna rešitev deluje samo na izbranem odseku in ne zagotavlja nujno enakega učinka kot mehčanje vse vode v stanovanju.",
+          "Pred nakupom jasno določite, kateri porabnik želite zaščititi, kakšen je priključek in kakšen učinek izdelek dejansko navaja. Tako ne boste primerjali izdelkov, ki rešujejo različne naloge.",
+        ],
+      },
     ],
   },
   {
     slug: "kako-dimenzionirati-mehcalec-vode",
     title: "Kako dimenzionirati mehčalec vode",
     excerpt: "Zakaj trdota, poraba, pretok in kapaciteta smole sodijo v isti izračun.",
-    readingTime: "9 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "10 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Vhodni podatki", paragraphs: ["Za dimenzioniranje potrebujete trdoto, količino porabljene vode in največji sočasni pretok. Pri modelu nato preverite potrjeno kapaciteto in delovni pretok."] },
-      { title: "Regeneracija in rezerva", paragraphs: ["Cilj ni največja možna naprava, temveč primeren interval regeneracije in dovolj pretoka za dejansko uporabo. Izračun mora temeljiti na tehničnem listu modela."] },
-      { title: "Končna preverba", paragraphs: ["Pred naročilom primerjajte priključke, tlak, odtok, napajanje, obvod, mere in servisne zahteve."] },
+      {
+        title: "Štirje podatki za začetek",
+        paragraphs: [
+          "Za smiselno dimenzioniranje potrebujete trdoto vhodne vode, dnevno ali mesečno porabo, največji sočasni pretok in tehnično kapaciteto konkretne naprave. Vsak podatek odgovarja na drugo vprašanje.",
+          "Trdota in poraba določata, kako hitro se izrablja kapaciteta smole. Sočasni pretok določa, ali lahko naprava oskrbi odprte pipe brez motečega padca tlaka.",
+        ],
+      },
+      {
+        title: "Od mesečne porabe do dnevne obremenitve",
+        paragraphs: [
+          "Mesečno porabo z računa delite s številom dni v obračunskem obdobju. Tako dobite boljšo osnovo kot splošna ocena na osebo. Upoštevajte sezonske spremembe in občasno večje število uporabnikov.",
+          "Za primerjavo naprav uporabite isto obdobje in isto enoto. Če proizvajalec kapaciteto navaja v drugi obliki, potrebujete njegov postopek pretvorbe; neposredno primerjanje različnih enot lahko zavede.",
+        ],
+      },
+      {
+        title: "Kapaciteta med regeneracijama",
+        paragraphs: [
+          "Primerna naprava naj obdela smiselno količino vode med regeneracijama, ne da bi smola redno dosegala popolno izčrpanost. Krmiljenje potrebuje pravilno vneseno trdoto in po potrebi varnostno rezervo.",
+          "Prevelika rezerva poveča pogostost regeneracij in porabo, premajhna pa lahko povzroči preboj trdote pred naslednjim ciklom. Uporabite nastavitve, ki jih dovoljuje proizvajalec konkretnega modela.",
+        ],
+      },
+      {
+        title: "Preverite delovni pretok",
+        paragraphs: [
+          "Seštejte verjetne sočasne porabnike, na primer dve prhi in kuhinjsko pipo. Rezultat primerjajte z nazivnim ali priporočenim delovnim pretokom, ne samo z največjo kratkotrajno vrednostjo.",
+          "Upoštevajte tudi padec tlaka skozi napravo in obstoječe stanje napeljave. Visok oglaševani pretok brez navedenih merilnih pogojev ni dovolj zanesljiv za odločitev.",
+        ],
+      },
+      {
+        title: "Pogoste napake pri izbiri",
+        paragraphs: [
+          "Najpogostejše bližnjice so izbira samo po številu oseb, nakup največje naprave ali primerjava zgolj po litrih smole. Nobena od teh metod ne preveri hkrati kapacitete, pretoka in prostorskih pogojev.",
+          "Pred nakupom preverite še tlak, premer priključka, odtok, napajanje, obvod, mere in porabo soli. Če so podatki na produktni strani nepopolni, poiščite tehnični list proizvajalca.",
+        ],
+      },
     ],
   },
   {
     slug: "montaza-mehcalca-vode-kontrolni-seznam",
-    title: "Montaža mehčalca vode: kontrolni seznam",
-    excerpt: "Od ogleda in ponudbe do montaže, nastavitve, preizkusa in predaje uporabniku.",
-    readingTime: "8 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    title: "Namestitev mehčalca vode: kontrolni seznam",
+    excerpt: "Kaj preveriti na dovodu, odtoku in napajanju ter kako varno pripraviti prvi zagon naprave.",
+    readingTime: "9 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Pred montažo", paragraphs: ["Potrdijo se model, obseg del, priključki, zaporni ventili, odtok, napajanje in možnost obvoda. Nejasnosti morajo biti zapisane v ponudbi."] },
-      { title: "Med montažo", paragraphs: ["Montaža sledi navodilom naprave in dobri vodovodni praksi. Po priklopu se preverita tesnost in pravilna smer pretoka."] },
-      { title: "Predaja", paragraphs: ["Uporabnik prejme razlago nastavitev, obvoda, polnjenja soli, opozoril in načrta vzdrževanja."] },
+      {
+        title: "Izberite primerno mesto",
+        paragraphs: [
+          "Naprava naj bo na suhem, stabilnem in pred zmrzaljo zaščitenem mestu blizu glavnega dovoda. Okoli nje pustite prostor za priključke, odpiranje pokrova, dodajanje soli in redno vzdrževanje.",
+          "Preverite mere napolnjene naprave in predvidite možnost nadzora morebitnega iztekanja. Tla morajo prenesti maso naprave, vode in zaloge soli.",
+        ],
+      },
+      {
+        title: "Dovod, tlak in smer pretoka",
+        paragraphs: [
+          "Pred delom zaprite dovod in sprostite tlak v napeljavi. Preverite dovoljeni delovni tlak, velikost priključkov in puščico smeri pretoka na napravi. Vhod in izhod ne smeta biti zamenjana.",
+          "Pred mehčalcem je lahko smiseln ustrezen mehanski predfilter, če to dovoljuje zasnova sistema. Njegova velikost mora ohraniti potreben pretok in ne sme povzročiti čezmernega padca tlaka.",
+        ],
+      },
+      {
+        title: "Obvod, odtok in preliv",
+        paragraphs: [
+          "Obvod omogoča oskrbo z vodo, ko je naprava izločena zaradi vzdrževanja. Ventili morajo biti dostopni in jasno postavljeni v položaj, ki ga uporabnik razume.",
+          "Odtočno in prelivno cev izvedite po navodilih proizvajalca, brez pregibov in z zahtevanim zračnim razmikom, kjer je predpisan. Preliv ni nadomestilo za pravilno priključen regeneracijski odtok.",
+        ],
+      },
+      {
+        title: "Napajanje in prvi zagon",
+        paragraphs: [
+          "Uporabite ustrezno in dostopno električno vtičnico. Krmilnik nastavite z dejansko trdoto, časom in drugimi podatki, ki jih zahteva priročnik. Splošne nastavitve z interneta niso nujno pravilne za vaš model.",
+          "Pred odpiranjem polnega pretoka počasi napolnite sistem, izpustite zrak in preverite vse spoje. Izvedite postopek prvega zagona ter regeneracije samo v zaporedju, ki ga določa proizvajalec.",
+        ],
+      },
+      {
+        title: "Preverjanje po namestitvi",
+        paragraphs: [
+          "Preverite tesnost, tlak na porabnikih, delovanje obvoda in prost pretok v odtok. Nato izmerite trdoto vhodne ter obdelane vode in rezultat zapišite skupaj z začetnimi nastavitvami.",
+          "Shranite navodila, račun, serijsko številko in datum zagona. Posege v vodovodno napeljavo naj izvede usposobljena oseba v skladu z navodili naprave in lokalnimi zahtevami.",
+        ],
+      },
     ],
   },
   {
     slug: "vzdrzevanje-mehcalne-naprave",
     title: "Vzdrževanje mehčalne naprave",
-    excerpt: "Kaj spremljati med redno uporabo in katere podatke pripraviti za servis.",
-    readingTime: "7 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    excerpt: "Kaj spremljati med redno uporabo in kako pravočasno prepoznati odstopanja v delovanju.",
+    readingTime: "8 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Upoštevajte navodila modela", paragraphs: ["Intervali niso univerzalni. Vrsta soli, čiščenje, razkuževanje in servisni postopki morajo slediti uradnim navodilom konkretne naprave."] },
-      { title: "Vodite osnovni zapis", paragraphs: ["Zapišite datume polnjenja, servisov, sprememb nastavitev in morebitnih kod. Nenadna sprememba porabe je podatek za pregled."] },
-      { title: "Priprava servisnega zahtevka", paragraphs: ["Pošljite znamko, model, serijsko oznako, fotografije in jasen opis opaženega delovanja."] },
+      {
+        title: "Navodila modela imajo prednost",
+        paragraphs: [
+          "Intervali čiščenja, dovoljena sol in servisni postopki se razlikujejo med modeli. Osnovni načrt zato vedno začnite z uradnimi navodili in garancijskimi pogoji svoje naprave.",
+          "Zapišite znamko, model in serijsko številko. Tako boste pri nakupu potrošnega materiala ali iskanju dokumentacije preverjali pravo različico.",
+        ],
+      },
+      {
+        title: "Redno preverjajte sol",
+        paragraphs: [
+          "Nivo soli preverjajte v preglednih časovnih presledkih in jo dodajte, preden je posoda predolgo prazna. Uporabite vrsto soli, ki jo dovoljuje proizvajalec, ter pazite, da v posodo ne pridejo umazanija ali tujki.",
+          "Če je sol videti polna, vendar se nivo dalj časa ne znižuje, preverite možnost strjene plasti oziroma solnega mostu po postopku iz navodil. Ne udarjajte po posodi z ostrim ali težkim predmetom.",
+        ],
+      },
+      {
+        title: "Spremljajte delovanje in porabo",
+        paragraphs: [
+          "Občasno zapišite stanje števca, datume polnjenja soli in morebitne kode na zaslonu. Nenadna sprememba porabe soli ali pogostosti regeneracije je razlog za preverjanje nastavitev in napeljave.",
+          "Trdoto za napravo izmerite po enaki metodi kot ob zagonu. Primerljiv zapis lažje pokaže spremembo kot ocena na podlagi občutka pri umivanju.",
+        ],
+      },
+      {
+        title: "Čistoča in daljše mirovanje",
+        paragraphs: [
+          "Zunanjost, pokrov in območje okoli soli ohranjajte čiste. Za čiščenje ali razkuževanje notranjih delov uporabljajte samo postopke in sredstva, dovoljena za konkretni model.",
+          "Pred daljšim mirovanjem preverite priporočila proizvajalca. Po vrnitvi ne spreminjajte nastavitev na pamet, temveč sledite postopku ponovnega zagona.",
+        ],
+      },
+      {
+        title: "Znaki, ki zahtevajo pregled",
+        paragraphs: [
+          "Stalno odtekanje vode, puščanje, nenavaden hrup, ponavljajoča se napaka ali občutna sprememba tlaka zahtevajo hiter pregled. Ob iztekanju uporabite obvod oziroma zaprite ustrezen ventil, če to lahko storite varno.",
+          "Za diagnostiko pripravite fotografijo zaslona, opis težave, datum zadnje regeneracije, nivo soli in zadnjo meritev trdote. Ne razstavljajte tlačnih delov brez ustreznega znanja.",
+        ],
+      },
     ],
   },
   {
     slug: "sol-za-mehcalec-vode-vodic",
     title: "Sol za mehčalec vode: izbira in uporaba",
     excerpt: "Zakaj se sol uporablja, kaj preveriti na embalaži in kako spremljati porabo.",
-    readingTime: "6 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "7 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Vloga soli", paragraphs: ["Sol se uporablja za pripravo slanice med regeneracijo ionske smole. Ne gre za dodatek, ki bi ga bilo smiselno izbirati brez navodil naprave."] },
-      { title: "Izbira", paragraphs: ["Preverite dovoljeno obliko in kakovost, pogoje shranjevanja ter težo pakiranja. Cena ni edini podatek."] },
-      { title: "Poraba", paragraphs: ["Poraba je odvisna od trdote, porabe, nastavitev in zasnove naprave. Primerjajte jo šele ob potrjenih podatkih modela."] },
+      {
+        title: "Vloga soli pri regeneraciji",
+        paragraphs: [
+          "Sol se v ionskem mehčalcu uporablja za pripravo slanice, ki med regeneracijo obnovi sposobnost smole. Ne dodaja se v pitno vodo kot običajna sestavina, temveč sodeluje v ločenem regeneracijskem ciklu.",
+          "Brez primerne količine soli naprava po izrabi kapacitete ne more pravilno obnoviti smole. Posledica je lahko postopno vračanje trdote na izhodu.",
+        ],
+      },
+      {
+        title: "Tablete, peleti ali druga oblika",
+        paragraphs: [
+          "Uporabite obliko in kakovost, ki jo dovoljuje proizvajalec naprave. Tabletirana sol je pogosta zaradi enakomerne oblike in priročnega polnjenja, vendar oznaka na embalaži še vedno mora ustrezati zahtevam modela.",
+          "Ne mešajte naključno različnih izdelkov in ne uporabljajte soli z dodatki, ki niso namenjeni mehčalnim napravam. Nečistoče lahko povečajo količino usedlin v posodi za slanico.",
+        ],
+      },
+      {
+        title: "Kaj preveriti na embalaži",
+        paragraphs: [
+          "Preberite namen uporabe, sestavo, maso pakiranja, pogoje shranjevanja in morebitne navedene standarde. Embalaža mora biti nepoškodovana, vsebina pa suha in brez vidne umazanije.",
+          "Pri primerjavi cene upoštevajte ceno na kilogram in težo, ki jo lahko varno prenašate. Večje pakiranje ni prednost, če ga ne morete hraniti na suhem.",
+        ],
+      },
+      {
+        title: "Pravilno polnjenje in shranjevanje",
+        paragraphs: [
+          "Pred polnjenjem preverite nivo in stanje soli. Ne prekrijte delov, ki morajo po navodilih ostati vidni, in ne nasujte več od dovoljene količine. Pokrov po polnjenju dobro zaprite.",
+          "Rezervna pakiranja hranite dvignjena od tal, v suhem prostoru in zaščitena pred poškodbami. Sol hitro veže vlago, zato odprte vreče dobro zaprite.",
+        ],
+      },
+      {
+        title: "Kako razumeti porabo soli",
+        paragraphs: [
+          "Poraba je odvisna od trdote, količine vode, kapacitete smole, nastavitev in učinkovitosti regeneracije. Smiselno jo primerjate šele, ko poznate iste vhodne pogoje.",
+          "Vodite preprost zapis datumov in dodanih količin. Če se poraba brez spremembe navad izrazito poveča ali zmanjša, preverite nastavitve, morebitno puščanje in pravilno tvorbo slanice.",
+        ],
+      },
     ],
   },
   {
     slug: "mehcalec-ali-zascita-proti-kamnu",
     title: "Mehčalec ali druga zaščita proti vodnemu kamnu",
     excerpt: "Kako ločiti odstranjevanje trdote od rešitev, ki mineralov iz vode ne odstranijo.",
-    readingTime: "8 min branja",
-    status: "draft",
-    updatedAt: "2026-08-23",
+    readingTime: "9 min branja",
+    status: "published",
+    updatedAt: "2026-09-20",
     sections: [
-      { title: "Najprej definirajte učinek", paragraphs: ["Ionski mehčalec zmanjšuje trdoto z odstranjevanjem kalcijevih in magnezijevih ionov. Druge tehnologije imajo lahko drugačen cilj in jih ne opisujemo kot mehčalce, če teh ionov ne odstranijo."] },
-      { title: "Celoten dom ali posamezna naprava", paragraphs: ["Centralna rešitev vpliva na ves oskrbovani razvod. Ciljna zaščita je omejena na določen porabnik ali odsek, zato je primerjava odvisna od vašega cilja."] },
-      { title: "Dokazila in omejitve", paragraphs: ["Preverite uradno opisan način delovanja, merljive učinke, omejitve, zahtevano vzdrževanje in združljivost z napeljavo."] },
+      {
+        title: "Najprej določite želeni učinek",
+        paragraphs: [
+          "Vprašajte se, ali želite izmerljivo zmanjšati trdoto, zadržati mehanske delce ali zaščititi samo določen grelnik oziroma aparat. Izdelki z različnimi cilji niso neposredni nadomestki.",
+          "Pred primerjavo zapišite začetno trdoto in mesto uporabe. Tako lahko preverite, ali proizvajalec opisuje učinek, ki ustreza vaši težavi.",
+        ],
+      },
+      {
+        title: "Ionski mehčalec",
+        paragraphs: [
+          "Ionski mehčalec zmanjšuje koncentracijo kalcijevih in magnezijevih ionov z ionsko izmenjavo. Učinek lahko preverite z meritvijo trdote pred napravo in za njo.",
+          "Za delovanje potrebuje regeneracijsko sol, odtok, prostor in pravilne nastavitve. Primeren je, ko želite obdelati večji del ali celoten vodovodni razvod in so pogoji za vgradnjo izpolnjeni.",
+        ],
+      },
+      {
+        title: "Filtri in ciljna zaščita",
+        paragraphs: [
+          "Mehanski filter zadržuje delce glede na svojo filtracijsko stopnjo, ne odstranjuje pa samodejno raztopljene trdote. Vložek je treba menjati ali čistiti po navodilih in glede na dejansko obremenitev.",
+          "Ciljna rešitev pred posamezno napravo lahko zmanjša določeno tveganje na tem mestu, vendar ne vpliva na preostali dom. Vedno preverite opisan način delovanja in omejitve izdelka.",
+        ],
+      },
+      {
+        title: "Kako presojati druge tehnologije",
+        paragraphs: [
+          "Pri napravah, ki mineralov ne odstranjujejo, ne pričakujte enakega rezultata na testu trdote kot pri ionski izmenjavi. Zahtevajte jasno razlago merljivega učinka, pogojev uporabe in potrebnega vzdrževanja.",
+          "Posebej previdno presojajte splošne obljube brez tehničnega lista, navedenega pretoka ali omejitev. Fotografije čiste cevi same po sebi niso dovolj za primerjavo izdelkov.",
+        ],
+      },
+      {
+        title: "Odločitev po korakih",
+        paragraphs: [
+          "Izmerite trdoto, določite območje zaščite in preverite pretok, priključke ter prostor. Nato ločeno primerjajte začetno ceno, potrošni material, vzdrževanje in pričakovano življenjsko dobo.",
+          "Izberite rešitev, katere učinek se ujema z vašim ciljem in ga lahko preverite. Če želite nižjo trdoto v celotnem domu, primerjajte mehčalce; če rešujete delce ali en porabnik, preglejte ustrezno namensko kategorijo.",
+        ],
+      },
     ],
   },
 ];

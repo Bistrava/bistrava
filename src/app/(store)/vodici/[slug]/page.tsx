@@ -39,7 +39,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
       </div>
       <article className="guide-article">
         <header className="narrow-container">
-          <span className="eyebrow">Osnutek - strokovni pregled še sledi</span>
+          <span className="eyebrow">Vodnik Bistrava</span>
           <h1>{guide.title}</h1>
           <p>{guide.excerpt}</p>
           <small>{guide.readingTime} · Posodobljeno {guide.updatedAt}</small>
@@ -54,9 +54,12 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <div className="article-checklist">
             <CheckCircle2 aria-hidden="true" />
             <div>
-              <h2>Naslednji korak</h2>
-              <p>Za izbiro pripravite meritev trdote, podatke o porabi in fotografije mesta montaže.</p>
-              <Link className="button button-primary" href="/izbira-mehcalca">Odprite konfigurator</Link>
+              <h2>Nadaljujte z izbiro</h2>
+              <p>Uporabite pridobljeno znanje v vodniku za izbiro ali primerjajte izdelke v trgovini.</p>
+              <div className="hero-actions">
+                <Link className="button button-primary" href="/mehcalci-vode#katalog">Oglejte si izdelke</Link>
+                <Link className="button button-secondary" href="/izbira-mehcalca">Vodnik za izbiro</Link>
+              </div>
             </div>
           </div>
         </div>

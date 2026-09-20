@@ -87,6 +87,19 @@ test("selection guide returns a result without collecting contact details", asyn
   await expect(page.locator(".recommendation-grid article")).toHaveCount(2);
 });
 
+test("published guides contain complete practical articles", async ({ page }) => {
+  await page.goto("/vodici");
+  await expect(page.locator(".guide-list-card")).toHaveCount(10);
+  await expect(page.getByText("Objavljen vodnik")).toHaveCount(10);
+  await expect(page.getByText(/Osnutek vodnika/)).toHaveCount(0);
+
+  await page.locator(".guide-list-card").first().click();
+  await expect(page.getByRole("heading", { level: 1, name: "Kaj je trda voda in zakaj nastaja vodni kamen" })).toBeVisible();
+  await expect(page.locator(".article-body > section")).toHaveCount(5);
+  await expect(page.getByText("Trdota je merljiva lastnost vode", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Oglejte si izdelke" })).toBeVisible();
+});
+
 test("mobile menu exposes the required navigation", async ({ page }, testInfo) => {
   test.skip(!testInfo.project.name.startsWith("mobile"), "Mobile project only");
   await page.goto("/");

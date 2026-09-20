@@ -21,8 +21,8 @@ export default function GuidesPage() {
           <p className="section-kicker">Bistrava znanje</p>
           <h1>Vodniki za mehko vodo brez ugibanja</h1>
           <p>
-            Mirne in praktične razlage o meritvah, tehnologiji, montaži in
-            vzdrževanju. Osnutki so jasno označeni do končnega strokovnega pregleda.
+            Praktične razlage o meritvah, tehnologiji, izbiri, namestitvi in
+            vzdrževanju opreme za mehko vodo.
           </p>
         </div>
       </section>
@@ -31,7 +31,7 @@ export default function GuidesPage() {
           {guides.map((guide) => (
             <Link className="guide-list-card card" href={`/vodici/${guide.slug}`} key={guide.slug}>
               <BookOpen aria-hidden="true" size={30} />
-              <span className="eyebrow">Osnutek vodnika</span>
+              <span className="eyebrow">Objavljen vodnik</span>
               <h2>{guide.title}</h2>
               <p>{guide.excerpt}</p>
               <span>{guide.readingTime} <ArrowRight aria-hidden="true" size={18} /></span>

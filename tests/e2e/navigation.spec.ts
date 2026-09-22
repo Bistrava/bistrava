@@ -10,6 +10,8 @@ test("homepage presents the specialist shop and product journeys", async ({ page
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Nakupujte izdelke/ })).toBeVisible();
   await expect(page.locator(".catalog-product-card")).toHaveCount(6);
+  await expect(page.getByRole("heading", { name: "Zaupanje se začne z resničnimi izkušnjami." })).toBeVisible();
+  await expect(page.locator('[data-review-track="primary"] .review-standard-card')).toHaveCount(10);
   const structuredData = await page
     .locator('script[type="application/ld+json"]')
     .allTextContents();
@@ -150,6 +152,13 @@ test("critical routes have content, no error overlay and no horizontal overflow"
     "/vodici",
     "/pogosta-vprasanja",
     "/o-nas",
+    "/kontakt",
+    "/dostava",
+    "/placila",
+    "/vracila",
+    "/zasebnost",
+    "/splosni-pogoji-poslovanja",
+    "/pravna-obvestila",
   ]) {
     const response = await page.goto(route, { waitUntil: "domcontentloaded" });
     expect(response?.ok(), route).toBe(true);
@@ -163,6 +172,22 @@ test("critical routes have content, no error overlay and no horizontal overflow"
     await expect(page.locator("[data-nextjs-dialog]")).toHaveCount(0);
   }
   expect(browserErrors).toEqual([]);
+});
+
+test("store policies explain ordering, delivery, returns and privacy", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto("/splosni-pogoji-poslovanja");
+  await expect(page.getByRole("heading", { level: 1, name: "Splošni pogoji poslovanja" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "4. Postopek naročila" })).toBeVisible();
+  await expect(page.getByText(/Evropska platforma ODR je bila 20. julija 2025 ukinjena/)).toBeVisible();
+
+  await page.goto("/vracila");
+  await expect(page.getByRole("heading", { name: "14-dnevna pravica do odstopa" })).toBeVisible();
+  await expect(page.getByText(/najpozneje v 14 dneh od prejema obvestila/)).toBeVisible();
+
+  await page.goto("/zasebnost");
+  await expect(page.getByRole("heading", { level: 1, name: "Politika zasebnosti" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "7. Vaše pravice" })).toBeVisible();
 });
 
 test("robots, sitemap and Merchant feed are reachable", async ({ request }) => {
@@ -189,8 +214,8 @@ test("privacy choice can be changed from the footer", async ({ page }) => {
   await expect(banner).toBeVisible();
 });
 
-test("legacy service and contact pages redirect into the shop", async ({ page }) => {
-  for (const route of ["/kontakt", "/montaza-mehcalca-vode", "/montaza-in-vzdrzevanje", "/vodni-kamen"]) {
+test("legacy service pages redirect into the shop", async ({ page }) => {
+  for (const route of ["/montaza-mehcalca-vode", "/montaza-in-vzdrzevanje", "/vodni-kamen"]) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/mehcalci-vode$/);
   }

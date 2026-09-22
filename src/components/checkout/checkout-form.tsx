@@ -188,7 +188,7 @@ export function CheckoutForm({
             <input type="checkbox" name="termsAccepted" required />
             <span>
               Potrjujem, da sem pregledal/-a podatke naročila ter se strinjam s trenutno
-              različico <Link href="/pravna-obvestila">prodajnih pogojev</Link> in
+              različico <Link href="/splosni-pogoji-poslovanja">splošnih pogojev poslovanja</Link> in
               <Link href="/zasebnost"> politiko zasebnosti</Link>.
             </span>
           </label>

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { ClipboardCheck, MapPin, ShieldCheck } from "lucide-react";
+import { MessagesSquare, PackageSearch, RotateCcw, ShieldCheck } from "lucide-react";
 
 import { InquiryForm } from "@/components/forms/inquiry-form";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Kontakt in ponudba za mehčalec vode",
+  title: "Kontakt in pomoč kupcem",
   description:
-    "Pošljite podatke o trdoti vode, gospodinjstvu in mestu montaže za svetovanje ali pripravo ponudbe.",
+    "Kontaktirajte Bistravo glede izbire izdelka, združljivosti, naročila, dostave, vračila ali reklamacije.",
   alternates: { canonical: "/kontakt" },
 };
 
@@ -19,56 +19,45 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const params = await searchParams;
   const requestKind = typeof params.vrsta === "string" ? params.vrsta : "kontakt";
   const productSlug = typeof params.izdelek === "string" ? params.izdelek : undefined;
-  const type =
-    requestKind === "ponudba"
-      ? "quote"
-      : requestKind === "montaza"
-        ? "installation"
-        : requestKind === "servis"
-          ? "service"
-          : requestKind === "svetovanje"
-            ? "advice"
-            : "contact";
+  const type = requestKind === "ponudba" ? "quote" : requestKind === "svetovanje" ? "advice" : "contact";
 
   return (
     <>
-      <div className="container">
-        <Breadcrumbs items={[{ label: "Kontakt", href: "/kontakt" }]} />
-      </div>
-      <section className="info-hero">
+      <div className="container"><Breadcrumbs items={[{ label: "Kontakt", href: "/kontakt" }]} /></div>
+      <section className="info-hero contact-hero">
         <div className="container">
-          <p className="section-kicker">Analiza, svetovanje in ponudba</p>
-          <h1>Opišite vodo, gospodinjstvo in prostor.</h1>
-          <p>
-            Več uporabnih podatkov pomeni natančnejši naslednji korak. Če trdote
-            še ne poznate, to preprosto napišite - ne bomo ugibali.
-          </p>
+          <p className="section-kicker">Pomoč pred nakupom in po njem</p>
+          <h1>Kako vam lahko pomagamo?</h1>
+          <p>Pošljite vprašanje o izdelku, združljivosti, naročilu, dostavi, vračilu ali reklamaciji. Več konkretnih podatkov nam omogoči natančnejši odgovor.</p>
         </div>
       </section>
-      <section className="section">
+      <section className="section contact-support-section">
+        <div className="container contact-topic-grid">
+          <article className="card"><PackageSearch aria-hidden="true" /><h2>Izbira izdelka</h2><p>Dodajte povezavo ali ime izdelka, namen uporabe in podatke o obstoječem sistemu.</p></article>
+          <article className="card"><MessagesSquare aria-hidden="true" /><h2>Naročilo in dostava</h2><p>Navedite številko naročila, ime kupca in kratko vprašanje brez podatkov plačilne kartice.</p></article>
+          <article className="card"><RotateCcw aria-hidden="true" /><h2>Vračilo ali reklamacija</h2><p>Opišite stanje izdelka ter priložite fotografije, ko prejmete nadaljnja navodila.</p></article>
+        </div>
+      </section>
+      <section className="section contact-form-section">
         <div className="container contact-grid contact-grid-wide">
           <div className="contact-details card">
-            <ClipboardCheck aria-hidden="true" />
-            <h2>Kaj je koristno priložiti</h2>
-            <p>
-              Trdoto v °dH, število oseb in kopalnic, mesečno porabo, fotografije
-              dovoda, prostor, odtok ter premer priključka, če ga poznate.
-            </p>
-            <MapPin aria-hidden="true" />
-            <h2>Območje</h2>
-            <p>Začetni trg in jezik storitve: Slovenija.</p>
             <ShieldCheck aria-hidden="true" />
-            <h2>Brez nepreverjenih obljub</h2>
-            <p>
-              Oddaja obrazca ni potrditev cene, zaloge, termina, garancije ali
-              primernosti konkretnega izdelka.
-            </p>
+            <h2>Za hitrejši odgovor</h2>
+            <ul>
+              <li>pri izdelku navedite model ali povezavo,</li>
+              <li>pri naročilu dodajte referenčno številko,</li>
+              <li>pri združljivosti opišite priključek in namen,</li>
+              <li>ne pošiljajte gesel ali celotnih podatkov kartice.</li>
+            </ul>
+            <h2>Uradni kontaktni podatki</h2>
+            <p>Javni e-poštni naslov, telefon in poslovni naslov bodo objavljeni po potrditvi podatkov ponudnika. Do takrat uporabite varen obrazec.</p>
           </div>
           <InquiryForm
             type={type}
             productSlug={productSlug}
-            title={type === "quote" ? "Zahtevajte preverbo ponudbe" : "Pošljite podatke za pregled"}
-            defaultMessage={productSlug ? `Zanima me preverba izdelka: ${productSlug}. ` : ""}
+            title={type === "quote" ? "Pošljite vprašanje o ponudbi" : "Pošljite sporočilo"}
+            description="Odgovor bomo poslali na navedeni e-poštni naslov."
+            defaultMessage={productSlug ? `Zanima me izdelek: ${productSlug}. ` : ""}
           />
         </div>
       </section>

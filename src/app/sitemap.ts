@@ -17,6 +17,7 @@ const marketingRoutes = [
   "/vodici",
   "/pogosta-vprasanja",
   "/o-nas",
+  "/kontakt",
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

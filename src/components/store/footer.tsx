@@ -20,12 +20,15 @@ const supportLinks = [
 ] as const;
 
 const legalLinks = [
+  ["O Bistravi", "/o-nas"],
+  ["Kontakt", "/kontakt"],
+  ["Splošni pogoji", "/splosni-pogoji-poslovanja"],
   ["Pravno obvestilo", "/pravna-obvestila"],
   ["Dostava", "/dostava"],
   ["Plačila", "/placila"],
-  ["Vračila", "/vracila"],
-  ["Garancija", "/garancija"],
-  ["Zasebnost", "/zasebnost"],
+  ["Vračila in povračila", "/vracila"],
+  ["Garancija in skladnost", "/garancija"],
+  ["Politika zasebnosti", "/zasebnost"],
   ["Piškotki", "/piskotki"],
 ] as const;
 

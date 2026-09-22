@@ -18,8 +18,8 @@ test("homepage presents the specialist shop and product journeys", async ({ page
 
 test("specialist catalog displays every curated product", async ({ page }) => {
   await page.goto("/mehcalci-vode");
-  await expect(page.getByRole("heading", { level: 1, name: /Izdelki za mehko vodo/ })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "24 izdelkov v štirih skupinah" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1, name: "24 izdelkov v štirih skupinah" })).toBeVisible();
+  await expect(page.locator(".category-hero, .specialist-catalog-intro")).toHaveCount(0);
   await expect(page.locator(".catalog-product-card")).toHaveCount(24);
   await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(24);
   await Promise.all([

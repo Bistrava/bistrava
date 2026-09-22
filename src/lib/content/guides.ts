@@ -5,6 +5,12 @@ export type Guide = {
   readingTime: string;
   status: "draft" | "published";
   updatedAt: string;
+  comparison: {
+    title: string;
+    caption: string;
+    columns: string[];
+    rows: string[][];
+  };
   sections: Array<{ title: string; paragraphs: string[] }>;
 };
 
@@ -15,7 +21,18 @@ export const guides: Guide[] = [
     excerpt: "Razumljiva razlaga trdote, kalcija, magnezija in nastanka mineralnih oblog doma.",
     readingTime: "8 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Primerjava znakov trde vode",
+      caption: "Vidni znaki so uporabna usmeritev, natančno stanje pa potrdi meritev.",
+      columns: ["Kaj opazite", "Možna razlaga", "Kako preveriti", "Smiseln naslednji korak"],
+      rows: [
+        ["Bele sledi na armaturah", "Minerali ostanejo po sušenju kapljic", "Izmerite vhodno trdoto", "Primerjajte rešitve za celoten dom"],
+        ["Obloge v kuhalniku", "Segrevanje pospeši izločanje mineralov", "Primerjajte stanje in rezultat testa", "Preverite mehčanje ali ciljno zaščito"],
+        ["Motno steklo prhe", "Ponavljajoče sušenje trde vode", "Ponovite meritev na hladni pipi", "Ocenite pogostost čiščenja in območje zaščite"],
+        ["Brez vidnih oblog", "Trdota je lahko nižja ali posledice manj opazne", "Ne sklepajte brez meritve", "Ukrepajte le, če obstaja jasna potreba"],
+      ],
+    },
     sections: [
       {
         title: "Trdota je merljiva lastnost vode",
@@ -60,7 +77,18 @@ export const guides: Guide[] = [
     excerpt: "Kaj zabeležiti pri testnem lističu, kapljičnem testu ali podatku lokalnega dobavitelja vode.",
     readingTime: "8 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Primerjava načinov merjenja",
+      caption: "Izberite metodo glede na potrebno natančnost in namen rezultata.",
+      columns: ["Metoda", "Prednost", "Omejitev", "Najprimernejša uporaba"],
+      rows: [
+        ["Podatek dobavitelja", "Brez nakupa testa", "Lahko je povprečen ali starejši", "Prva orientacija za oskrbovalno območje"],
+        ["Testni listič", "Hiter in preprost", "Pogosto pokaže samo območje", "Groba domača preverba"],
+        ["Kapljični test", "Bolj razločen rezultat", "Zahteva pravilen volumen in štetje", "Izbira in nastavitev mehčalca"],
+        ["Laboratorijska analiza", "Širši nabor podatkov", "Višji strošek in daljši postopek", "Lasten vir ali več težav z vodo"],
+      ],
+    },
     sections: [
       {
         title: "Najprej preverite podatek dobavitelja",
@@ -105,7 +133,18 @@ export const guides: Guide[] = [
     excerpt: "Ionska izmenjava, regeneracija s slanico in omejitve, ki jih je treba poznati pred nakupom.",
     readingTime: "9 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Mehčalec in druge vrste obdelave",
+      caption: "Tehnologije imajo različne naloge in se lahko med seboj dopolnjujejo.",
+      columns: ["Rešitev", "Kaj obravnava", "Kaj potrebuje", "Česa ne nadomesti"],
+      rows: [
+        ["Ionski mehčalec", "Kalcijeve in magnezijeve ione", "Sol, odtok, prostor in nastavitev", "Filtracije delcev ali celotne analize vode"],
+        ["Mehanski filter", "Delce nad določeno velikostjo", "Združljiv vložek in menjave", "Zmanjšanja raztopljene trdote"],
+        ["Ciljna zaščita", "Določen aparat ali odsek", "Pravilen priključek in pretok", "Obdelave celotnega doma"],
+        ["Analiza vode", "Poda podatke o vzorcu", "Pravilen odvzem in ustrezno metodo", "Naprave za obdelavo vode"],
+      ],
+    },
     sections: [
       {
         title: "Kaj se dogaja v posodi s smolo",
@@ -150,7 +189,18 @@ export const guides: Guide[] = [
     excerpt: "Kontrolni seznam za trdoto, porabo, kopalnice, pretok, prostor in priključke.",
     readingTime: "9 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Primerjava profilov uporabe v hiši",
+      caption: "Profil pomaga zožiti izbor; končno velikost določijo meritev, poraba in tehnični list.",
+      columns: ["Profil", "Značilna uporaba", "Ključni podatek", "Na kaj paziti"],
+      rows: [
+        ["Manjša poraba", "Manj oseb in ena kopalnica", "Kapaciteta pri izmerjeni trdoti", "Da pretok še vedno zadostuje"],
+        ["Običajna družinska hiša", "Več vsakodnevnih porabnikov", "Poraba in sočasni pretok", "Razumno pogostost regeneracije"],
+        ["Več kopalnic", "Sočasno tuširanje in drugi porabniki", "Potrjen delovni pretok", "Padec tlaka skozi napravo"],
+        ["Spremenljiva zasedenost", "Apartma ali pogosti gostje", "Največja realna poraba", "Nastavitve za obdobja mirovanja"],
+      ],
+    },
     sections: [
       {
         title: "Začnite z meritvijo in porabo",
@@ -195,7 +245,18 @@ export const guides: Guide[] = [
     excerpt: "Kako preveriti individualni dovod, prostor, odtok in pravila posega v večstanovanjski stavbi.",
     readingTime: "8 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Primerjava možnosti za stanovanje",
+      caption: "Izvedljivost je odvisna od dovoda, prostora in območja, ki ga želite zaščititi.",
+      columns: ["Možnost", "Prednost", "Glavni pogoj", "Omejitev"],
+      rows: [
+        ["Kompaktni centralni mehčalec", "Obravnava celoten dovod stanovanja", "Individualni dovod, odtok in napajanje", "Potrebuje servisni prostor"],
+        ["Mehčalec za posamezen odsek", "Manjši poseg", "Dostopen dovod izbranega odseka", "Ne obravnava vseh porabnikov"],
+        ["Ciljna zaščita aparata", "Usmerjena zaščita enega porabnika", "Združljiv priključek in tehnologija", "Ni enaka centralnemu mehčanju"],
+        ["Brez naprave", "Brez posega in vzdrževanja", "Redno čiščenje in spremljanje", "Obloge ostanejo del uporabe"],
+      ],
+    },
     sections: [
       {
         title: "Poiščite pravi dovod",
@@ -240,7 +301,18 @@ export const guides: Guide[] = [
     excerpt: "Zakaj trdota, poraba, pretok in kapaciteta smole sodijo v isti izračun.",
     readingTime: "10 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Kaj pove posamezen podatek",
+      caption: "Dimenzioniranje je zanesljivo šele, ko se podatki obravnavajo skupaj.",
+      columns: ["Podatek", "Kaj določa", "Če je ocenjen prenizko", "Če ga prezrete"],
+      rows: [
+        ["Trdota vode", "Mineralno obremenitev smole", "Prehiter preboj trdote", "Napačne nastavitve regeneracije"],
+        ["Dnevna poraba", "Obdelano količino med cikli", "Prepogoste regeneracije", "Neprimerna kapaciteta"],
+        ["Sočasni pretok", "Udobje pri več odprtih porabnikih", "Padec tlaka", "Slaba uporabniška izkušnja"],
+        ["Kapaciteta naprave", "Količino dela med regeneracijama", "Premalo rezerve", "Nakup brez primerljive osnove"],
+      ],
+    },
     sections: [
       {
         title: "Štirje podatki za začetek",
@@ -285,7 +357,19 @@ export const guides: Guide[] = [
     excerpt: "Kaj preveriti na dovodu, odtoku in napajanju ter kako varno pripraviti prvi zagon naprave.",
     readingTime: "9 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Kontrolna tabela namestitve",
+      caption: "Vsako točko preverite glede na navodila izbranega modela in dejansko napeljavo.",
+      columns: ["Področje", "Preverite pred delom", "Preverite po zagonu", "Pogosta napaka"],
+      rows: [
+        ["Dovod", "Tlak, premer in smer pretoka", "Tesnost in tlak na pipah", "Zamenjan vhod in izhod"],
+        ["Odtok", "Pot, višino in način priklopa", "Prost pretok med regeneracijo", "Pregib ali nepravilna višina cevi"],
+        ["Obvod", "Dostopnost vseh ventilov", "Pravilne delovne položaje", "Nejasna postavitev ventilov"],
+        ["Napajanje", "Varno in dostopno vtičnico", "Čas ter ohranjene nastavitve", "Trajna uporaba neprimernega podaljška"],
+        ["Nastavitve", "Trdoto in navodila modela", "Trdoto na izhodu", "Privzete vrednosti brez meritve"],
+      ],
+    },
     sections: [
       {
         title: "Izberite primerno mesto",
@@ -330,7 +414,19 @@ export const guides: Guide[] = [
     excerpt: "Kaj spremljati med redno uporabo in kako pravočasno prepoznati odstopanja v delovanju.",
     readingTime: "8 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Pregled opravil vzdrževanja",
+      caption: "Pogostost prilagodite navodilom modela, porabi in kakovosti vhodne vode.",
+      columns: ["Opravilo", "Kaj opazujete", "Kdaj ukrepati", "Koristen zapis"],
+      rows: [
+        ["Nivo soli", "Količino in morebitno strjevanje", "Preden je posoda predolgo prazna", "Datum in dodana količina"],
+        ["Izhodna trdota", "Primerljiv rezultat testa", "Ob odstopanju od začetne meritve", "Rezultat, enota in metoda"],
+        ["Regeneracije", "Pogostost in morebitne kode", "Ob nenadni spremembi", "Datum in prikazana napaka"],
+        ["Tesnost", "Spoje, cevi in okolico naprave", "Takoj ob vlagi ali kapljanju", "Fotografija in mesto iztekanja"],
+        ["Servis", "Postopke iz navodil", "Po intervalu proizvajalca", "Datum in izvedena dela"],
+      ],
+    },
     sections: [
       {
         title: "Navodila modela imajo prednost",
@@ -375,7 +471,19 @@ export const guides: Guide[] = [
     excerpt: "Zakaj se sol uporablja, kaj preveriti na embalaži in kako spremljati porabo.",
     readingTime: "7 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Kako primerjati sol za mehčalec",
+      caption: "Združljivost z navodili naprave je pomembnejša od same velikosti pakiranja.",
+      columns: ["Merilo", "Kaj iskati", "Zakaj je pomembno", "Opozorilni znak"],
+      rows: [
+        ["Namen", "Jasno navedeno uporabo v mehčalcih", "Potrjuje primerno področje uporabe", "Splošna sol brez navedenega namena"],
+        ["Oblika", "Obliko, dovoljeno v navodilih", "Vpliva na raztapljanje in ravnanje", "Naključna mešanica različnih oblik"],
+        ["Čistost", "Čisto in enakomerno vsebino", "Zmanjšuje nečistoče v posodi", "Vidna umazanija ali močno drobljenje"],
+        ["Embalaža", "Suho in nepoškodovano vrečo", "Sol hitro veže vlago", "Raztrgana ali mokra embalaža"],
+        ["Cena", "Primerjavo cene na kilogram", "Omogoča primerjavo pakiranj", "Odločitev samo po skupni ceni vreče"],
+      ],
+    },
     sections: [
       {
         title: "Vloga soli pri regeneraciji",
@@ -420,7 +528,18 @@ export const guides: Guide[] = [
     excerpt: "Kako ločiti odstranjevanje trdote od rešitev, ki mineralov iz vode ne odstranijo.",
     readingTime: "9 min branja",
     status: "published",
-    updatedAt: "2026-09-20",
+    updatedAt: "2026-09-22",
+    comparison: {
+      title: "Primerjava pristopov proti vodnemu kamnu",
+      caption: "Izbira je odvisna od želenega učinka, območja zaščite in možnosti vzdrževanja.",
+      columns: ["Pristop", "Zmanjša izmerjeno trdoto", "Območje delovanja", "Redna obveznost"],
+      rows: [
+        ["Ionski mehčalec", "Da", "Celoten priključeni razvod", "Sol, spremljanje in servis po navodilih"],
+        ["Mehanski filter", "Ne", "Mesto za filtrom", "Čiščenje ali menjava vložka"],
+        ["Ciljna zaščita", "Odvisno od tehnologije", "Posamezen aparat ali odsek", "Postopek, ki ga določa izdelek"],
+        ["Čiščenje oblog", "Ne", "Samo očiščena površina", "Ponavljanje glede na nastajanje oblog"],
+      ],
+    },
     sections: [
       {
         title: "Najprej določite želeni učinek",

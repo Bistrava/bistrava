@@ -95,7 +95,9 @@ test("published guides contain complete practical articles", async ({ page }) =>
 
   await page.locator(".guide-list-card").first().click();
   await expect(page.getByRole("heading", { level: 1, name: "Kaj je trda voda in zakaj nastaja vodni kamen" })).toBeVisible();
-  await expect(page.locator(".article-body > section")).toHaveCount(5);
+  await expect(page.locator(".article-body > section:not(.guide-comparison)")).toHaveCount(5);
+  await expect(page.locator(".guide-comparison table")).toHaveCount(1);
+  await expect(page.locator(".guide-comparison tbody tr")).toHaveCount(4);
   await expect(page.getByText("Trdota je merljiva lastnost vode", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: "Oglejte si izdelke" })).toBeVisible();
 });

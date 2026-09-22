@@ -51,6 +51,28 @@ export default async function GuidePage({ params }: GuidePageProps) {
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </section>
           ))}
+          <section className="guide-comparison" aria-labelledby="guide-comparison-title">
+            <h2 id="guide-comparison-title">{guide.comparison.title}</h2>
+            <div className="guide-table-scroll" tabIndex={0}>
+              <table>
+                <caption>{guide.comparison.caption}</caption>
+                <thead>
+                  <tr>
+                    {guide.comparison.columns.map((column) => <th scope="col" key={column}>{column}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {guide.comparison.rows.map((row) => (
+                    <tr key={row.join("-")}>
+                      {row.map((cell, index) => index === 0
+                        ? <th scope="row" key={cell}>{cell}</th>
+                        : <td key={`${index}-${cell}`}>{cell}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
           <div className="article-checklist">
             <CheckCircle2 aria-hidden="true" />
             <div>

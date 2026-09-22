@@ -5256,6 +5256,58 @@ select {
   color: var(--text-muted);
 }
 
+.guide-table-scroll {
+  max-width: 100%;
+  margin-top: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  background: white;
+}
+
+.guide-table-scroll:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand-teal) 35%, transparent);
+  outline-offset: 3px;
+}
+
+.guide-table-scroll table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+
+.guide-table-scroll caption {
+  padding: 16px 18px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.guide-table-scroll th,
+.guide-table-scroll td {
+  padding: 15px 18px;
+  border-top: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.guide-table-scroll thead th {
+  background: var(--surface-muted);
+  color: var(--text-strong);
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.guide-table-scroll tbody th {
+  width: 23%;
+  color: var(--text-strong);
+}
+
+.guide-table-scroll tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--surface-muted) 55%, white);
+}
+
 .prose-card ol,
 .prose-card ul {
   display: grid;

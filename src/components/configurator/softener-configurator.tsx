@@ -1,12 +1,16 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw } from "lucide-react";
+import { AlertTriangle, ArrowLeft, ArrowRight, CheckCircle2, RotateCcw } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { QuickAddToCart } from "@/components/cart/add-to-cart";
+import { formatMoney } from "@/lib/commerce/money";
 import {
-  recommendSolutions,
+  recommendProducts,
   type ConfiguratorInput,
+  type ConfiguratorProduct,
   type RecommendationResult,
 } from "@/lib/configurator/recommendation-engine";
 
@@ -30,7 +34,7 @@ function track(name: string, data: Record<string, unknown> = {}) {
   win.dataLayer.push({ event: name, ...data });
 }
 
-export function SoftenerConfigurator() {
+export function SoftenerConfigurator({ products }: { products: ConfiguratorProduct[] }) {
   const [step, setStep] = useState(1);
   const [input, setInput] = useState<ConfiguratorInput>(initialInput);
   const [hardnessUnknown, setHardnessUnknown] = useState(true);
@@ -49,7 +53,7 @@ export function SoftenerConfigurator() {
   }
 
   function calculate() {
-    const calculated = recommendSolutions(input);
+    const calculated = recommendProducts(input, products);
     setResult(calculated);
     setStep(4);
     track("configurator_complete", {
@@ -177,7 +181,7 @@ export function SoftenerConfigurator() {
                 <option value="unsure">Še ni določeno</option><option value="yes">Strokovna namestitev</option><option value="no">Samostojna namestitev</option>
             </select>
           </div>
-          <p className="notice">Rezultat je profil rešitve, ne avtomatska potrditev konkretnega izdelka ali cene.</p>
+          <p className="notice">Primerjava uporablja tehnične podatke trenutno objavljenih izdelkov. Pred montažo vedno preverite dejanski pretok, tlak, mere in priključke.</p>
           <div className="configurator-actions"><button className="button button-secondary" type="button" onClick={() => setStep(2)}><ArrowLeft aria-hidden="true" size={18} /> Nazaj</button><button className="button button-primary" type="button" onClick={calculate}>Prikažite rezultat <ArrowRight aria-hidden="true" size={18} /></button></div>
         </fieldset>
       ) : null}
@@ -185,30 +189,67 @@ export function SoftenerConfigurator() {
       {step === 4 && result ? (
         <div className="configurator-results">
           <div className="configurator-result-heading">
-            <div><p className="section-kicker">Deterministični rezultat</p><h2>{result.needsAdvice ? "Najprej potrebujemo dodaten podatek" : "Priporočeni profili rešitve"}</h2><p>{result.reasonSl}</p></div>
+            <div><p className="section-kicker">Primerjava izdelkov</p><h2>{result.needsAdvice ? "Najprej potrebujemo dodaten podatek" : "Priporočeni izdelki"}</h2><p>{result.reasonSl}</p></div>
             <button className="button button-secondary" type="button" onClick={restart}><RotateCcw aria-hidden="true" size={18} /> Začnite znova</button>
           </div>
+          {result.assumptions ? (
+            <dl className="configurator-assumptions" aria-label="Uporabljene ocene">
+              <div><dt>Ocenjena mesečna poraba</dt><dd>{result.assumptions.estimatedMonthlyUsageM3} m³</dd></div>
+              <div><dt>Ciljni pretok</dt><dd>{result.assumptions.targetFlowLitersPerMinute} l/min</dd></div>
+              <div><dt>Ocenjeni razred smole</dt><dd>{result.assumptions.targetResinVolumeLiters} l</dd></div>
+            </dl>
+          ) : null}
           {result.recommendations.length > 0 ? (
             <div className="recommendation-grid">
               {result.recommendations.map((recommendation) => (
-                <article className="card" key={recommendation.id}>
-                  <CheckCircle2 aria-hidden="true" />
-                  <h3>{recommendation.nameSl}</h3>
-                  <p>{recommendation.whySl}</p>
-                  <dl>
-                    <div><dt>Ocenjena zmogljivost</dt><dd>{recommendation.estimatedCapacitySl}</dd></div>
-                    <div><dt>Montaža</dt><dd>{recommendation.installationSl}</dd></div>
-                    <div><dt>Vzdrževanje</dt><dd>{recommendation.maintenanceSl}</dd></div>
-                  </dl>
+                <article className="card configurator-product-card" key={recommendation.product.sku}>
+                  <Link className="configurator-product-media" href={`/izdelki/${recommendation.product.slug}`}>
+                    {recommendation.product.imageUrl ? (
+                      <Image
+                        src={recommendation.product.imageUrl}
+                        alt={recommendation.product.imageAltSl}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 33vw"
+                      />
+                    ) : null}
+                  </Link>
+                  <div className="configurator-product-content">
+                    <span className="eyebrow">{recommendation.matchLabelSl}</span>
+                    <p className="product-card-brand">{recommendation.product.brand}</p>
+                    <h3><Link href={`/izdelki/${recommendation.product.slug}`}>{recommendation.product.nameSl}</Link></h3>
+                    <p>{recommendation.product.shortDescriptionSl}</p>
+                    <ul className="configurator-match-reasons">
+                      {recommendation.reasonsSl.map((reason) => <li key={reason}><CheckCircle2 aria-hidden="true" size={18} /> {reason}</li>)}
+                    </ul>
+                    {recommendation.cautionsSl.length > 0 ? (
+                      <div className="configurator-cautions">
+                        <AlertTriangle aria-hidden="true" size={18} />
+                        <p>{recommendation.cautionsSl.join(" ")}</p>
+                      </div>
+                    ) : null}
+                    <strong className="product-card-price">{formatMoney(recommendation.product.unitPriceCents)}</strong>
+                    <div className="configurator-product-actions">
+                      <Link className="catalog-product-card-link" href={`/izdelki/${recommendation.product.slug}`}>Podrobnosti <ArrowRight aria-hidden="true" size={17} /></Link>
+                      <QuickAddToCart product={{
+                        sku: recommendation.product.sku,
+                        slug: recommendation.product.slug,
+                        nameSl: recommendation.product.nameSl,
+                        unitPriceCents: recommendation.product.unitPriceCents,
+                        imageUrl: recommendation.product.imageUrl,
+                        imageAltSl: recommendation.product.imageAltSl,
+                        stockQuantity: recommendation.product.stockQuantity,
+                      }} />
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
           ) : null}
-          <div className="configurator-actions">
+          {result.needsAdvice ? <div className="configurator-actions">
             <Link className="button button-primary" href="/mehcalci-vode#katalog">
-              Oglejte si izdelke <ArrowRight aria-hidden="true" size={18} />
+              Oglejte si vse izdelke <ArrowRight aria-hidden="true" size={18} />
             </Link>
-          </div>
+          </div> : null}
         </div>
       ) : null}
     </div>

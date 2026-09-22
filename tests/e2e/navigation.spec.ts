@@ -88,7 +88,7 @@ test("legacy product URL redirects to the Slovenian plural route", async ({ page
   await expect(page).toHaveURL(/\/izdelki\/mehcalec-vode-12-l$/);
 });
 
-test("selection guide returns a result without collecting contact details", async ({ page }) => {
+test("selection guide recommends real products without collecting contact details", async ({ page }) => {
   await page.goto("/izbira-mehcalca");
   await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
   await page.getByLabel("Trdote še ne poznam").uncheck();
@@ -96,10 +96,11 @@ test("selection guide returns a result without collecting contact details", asyn
   await page.getByRole("button", { name: "Naprej" }).click();
   await page.getByRole("button", { name: "Naprej" }).click();
   await page.getByRole("button", { name: "Prikažite rezultat" }).click();
-  await expect(page.getByRole("heading", { name: "Priporočeni profili rešitve" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Priporočeni izdelki" })).toBeVisible();
   await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /Oglejte si izdelke/ })).toBeVisible();
-  await expect(page.locator(".recommendation-grid article")).toHaveCount(2);
+  await expect(page.locator(".recommendation-grid article")).toHaveCount(3);
+  await expect(page.locator(".recommendation-grid article").first().getByRole("link", { name: "Podrobnosti" })).toBeVisible();
+  await expect(page.locator(".recommendation-grid article").first().getByRole("button", { name: "V košarico" })).toBeVisible();
 });
 
 test("published guides contain complete practical articles", async ({ page }) => {

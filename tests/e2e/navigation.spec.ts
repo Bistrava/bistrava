@@ -21,12 +21,14 @@ test("specialist catalog displays every curated product", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "24 izdelkov v štirih skupinah" })).toBeVisible();
   await expect(page.locator(".category-hero, .specialist-catalog-intro")).toHaveCount(0);
   await expect(page.locator(".catalog-product-card")).toHaveCount(24);
+  await expect(page.getByText("Na voljo", { exact: true })).toHaveCount(24);
   await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(24);
   await Promise.all([
     page.waitForURL(/\/izdelki\//),
     page.locator(".catalog-product-card h3 a").first().click(),
   ]);
-  await expect(page.getByText("Izdelek v katalogu", { exact: true }).first()).toBeVisible();
+  await expect(page.locator(".product-summary .eyebrow")).toHaveText("Na voljo");
+  await expect(page.locator(".demo-warning")).toHaveCount(0);
 });
 
 test("a catalog product can be added to the persistent cart", async ({ page }) => {
@@ -121,7 +123,7 @@ test("mobile menu exposes the required navigation", async ({ page }, testInfo) =
   await page.getByLabel("Odpri meni").click();
   const navigation = page.getByRole("navigation", { name: "Mobilna navigacija" });
   await expect(navigation.getByRole("link", { name: "Trgovina", exact: true })).toBeVisible();
-  await expect(navigation.getByRole("link", { name: "Vodni kamen" })).toBeVisible();
+  await expect(navigation.getByRole("link", { name: "Vodni kamen" })).toHaveCount(0);
   await expect(navigation.getByRole("link", { name: "Vodnik za izbiro" })).toBeVisible();
   await expect(navigation.getByRole("link", { name: "Vodniki", exact: true })).toBeVisible();
 });
@@ -138,7 +140,6 @@ test("critical routes have content, no error overlay and no horizontal overflow"
     "/",
     "/mehcalci-vode",
     "/mehcalne-naprave",
-    "/vodni-kamen",
     "/trda-voda",
     "/mehcalec-vode-za-hiso",
     "/mehcalec-vode-za-stanovanje",
@@ -188,7 +189,7 @@ test("privacy choice can be changed from the footer", async ({ page }) => {
 });
 
 test("legacy service and contact pages redirect into the shop", async ({ page }) => {
-  for (const route of ["/kontakt", "/montaza-mehcalca-vode", "/montaza-in-vzdrzevanje"]) {
+  for (const route of ["/kontakt", "/montaza-mehcalca-vode", "/montaza-in-vzdrzevanje", "/vodni-kamen"]) {
     await page.goto(route);
     await expect(page).toHaveURL(/\/mehcalci-vode$/);
   }

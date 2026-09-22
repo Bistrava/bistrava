@@ -14,7 +14,6 @@ const solutionLinks = [
 const supportLinks = [
   ["Vodnik za izbiro", "/izbira-mehcalca"],
   ["Trda voda", "/trda-voda"],
-  ["Vodni kamen", "/vodni-kamen"],
   ["Test trdote", "/test-trdote-vode"],
   ["Vodniki", "/vodici"],
   ["Pogosta vprašanja", "/pogosta-vprasanja"],

@@ -8,7 +8,6 @@ const marketingRoutes = [
   "",
   "/mehcalci-vode",
   "/mehcalne-naprave",
-  "/vodni-kamen",
   "/trda-voda",
   "/mehcalec-vode-za-hiso",
   "/mehcalec-vode-za-stanovanje",

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 export type SpecialistPageKey =
   | "mehcalne-naprave"
-  | "vodni-kamen"
   | "trda-voda"
   | "mehcalec-vode-za-hiso"
   | "mehcalec-vode-za-stanovanje"
@@ -70,46 +69,6 @@ export const specialistPages: Record<
       { label: "Mehčalci vode", href: "/mehcalci-vode" },
     ],
   },
-  "vodni-kamen": {
-    path: "/vodni-kamen",
-    kicker: "Praktične posledice trde vode",
-    title: "Vodni kamen v domu: vzroki, posledice in rešitve",
-    description:
-      "Zakaj nastaja vodni kamen, kje se najpogosteje odlaga in kako izbrati sorazmeren pristop.",
-    intro:
-      "Vodni kamen je predvsem praktična in vzdrževalna težava: vidne obloge na armaturah, grelnih površinah, grelnikih vode in drugih delih, kjer se voda segreva ali izhlapeva.",
-    leadTitle: "Zakaj se obloge pojavijo?",
-    lead:
-      "Trda voda vsebuje več raztopljenega kalcija in magnezija. Pri segrevanju in izhlapevanju se del mineralov izloči v trdne obloge. Količina oblog je odvisna od trdote, temperature, porabe in načina uporabe.",
-    points: [
-      {
-        title: "Kopalnica in kuhinja",
-        text: "Obloge so vidne na armaturah, steklu, ploščicah in grelnih elementih naprav.",
-      },
-      {
-        title: "Grelniki in napeljave",
-        text: "Pri izbiri zaščite so pomembni temperatura, pretok, material napeljave in servisni dostop.",
-      },
-      {
-        title: "Sorazmerna rešitev",
-        text: "Za celoten dom je pristop drugačen kot za posamezen aparat ali eno mesto uporabe.",
-      },
-    ],
-    stepsTitle: "Kako se lotiti težave",
-    steps: [
-      "Potrdite trdoto vode z meritvijo ali podatkom dobavitelja.",
-      "Opišite, kje so obloge najizrazitejše in koliko vode se tam porabi.",
-      "Odločite se, ali želite obravnavati ves dom ali samo določen porabnik.",
-      "Preverite način delovanja, omejitve, montažo in vzdrževanje izbrane rešitve.",
-    ],
-    note:
-      "Trde vode ne predstavljamo kot nevarne. Bistrava se osredotoča na merljive lastnosti, obloge, udobje in vzdrževanje.",
-    related: [
-      { label: "Kaj je trda voda", href: "/trda-voda" },
-      { label: "Test trdote vode", href: "/test-trdote-vode" },
-      { label: "Izbira mehčalca", href: "/izbira-mehcalca" },
-    ],
-  },
   "trda-voda": {
     path: "/trda-voda",
     kicker: "Najprej meritev",
@@ -146,7 +105,7 @@ export const specialistPages: Record<
       "Konfigurator sprejme vrednost v °dH. Če trdote ne poznate, vas usmeri v meritev ali svetovanje in ne ugiba modela.",
     related: [
       { label: "Test trdote vode", href: "/test-trdote-vode" },
-      { label: "Vodni kamen", href: "/vodni-kamen" },
+      { label: "Mehčalci vode", href: "/mehcalci-vode" },
       { label: "Odprite konfigurator", href: "/izbira-mehcalca" },
     ],
   },

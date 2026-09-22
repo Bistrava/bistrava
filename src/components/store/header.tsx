@@ -6,7 +6,6 @@ import { MobileMenu } from "@/components/store/mobile-menu";
 
 export const mainNavigation = [
   { href: "/mehcalci-vode", label: "Trgovina" },
-  { href: "/vodni-kamen", label: "Vodni kamen" },
   { href: "/izbira-mehcalca", label: "Vodnik za izbiro" },
   { href: "/vodici", label: "Vodniki" },
   { href: "/pogosta-vprasanja", label: "Pogosta vprašanja" },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Check, FileText, Info, PackageCheck, ShieldCheck, Wrench } from "lucide-react";
+import { Check, FileText, PackageCheck, ShieldCheck, Wrench } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -123,22 +123,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <CatalogProductVisual categorySlug={product.categorySlug} productName={product.nameSl} />
           )}
           <div className="product-summary">
-            <span className="eyebrow">
-              {product.status === "active" ? "Na voljo za nakup" : "Izdelek v katalogu"}
-            </span>
+            <span className="eyebrow">Na voljo</span>
             <p className="product-brand">{product.brand}</p>
             <h1>{product.nameSl}</h1>
             <p className="product-short-description">{product.shortDescriptionSl}</p>
-            {product.status !== "active" ? (
-              <div className="demo-warning">
-                <Info aria-hidden="true" size={20} />
-                <p>
-                  Fotografije, tehnične podatke in informativno ceno smo povzeli iz
-                  navedenega vira. Spletni nakup tega izdelka bo omogočen po potrditvi
-                  prodajne cene, zaloge in garancijskih pogojev Bistrava.
-                </p>
-              </div>
-            ) : null}
             <div className="product-price-block">
               <span>{product.status === "active" ? "Cena" : "Javno objavljena cena pri viru"}</span>
               <strong>

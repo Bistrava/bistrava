@@ -2753,26 +2753,6 @@ select {
   font-size: 1.08rem;
 }
 
-.demo-warning {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 12px;
-  margin-top: 24px;
-  border: 1px solid #ebc894;
-  border-radius: var(--radius-sm);
-  background: #fff9ef;
-  padding: 16px;
-  color: #76501a;
-}
-
-.demo-warning svg {
-  margin-top: 3px;
-}
-
-.demo-warning p {
-  margin: 0;
-}
-
 .product-price-block {
   margin-block: 28px 20px;
   border-block: 1px solid var(--border);

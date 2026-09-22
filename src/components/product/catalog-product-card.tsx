@@ -34,11 +34,7 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
       )}
       <div className="catalog-product-card-content">
         <div className="catalog-product-card-topline">
-          <span className="eyebrow">
-            {product.status === "active" && product.stockStatus === "in_stock"
-                ? "Aktivna ponudba"
-                : "Izdelek v katalogu"}
-          </span>
+          <span className="eyebrow">Na voljo</span>
           <span>{product.sku}</span>
         </div>
         <p className="product-card-brand">{product.brand}</p>

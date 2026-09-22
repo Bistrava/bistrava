@@ -57,7 +57,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/kategorije/resitve-proti-vodnemu-kamnu",
-        destination: "/vodni-kamen",
+        destination: "/mehcalci-vode",
+        permanent: true,
+      },
+      {
+        source: "/vodni-kamen",
+        destination: "/mehcalci-vode",
         permanent: true,
       },
       {

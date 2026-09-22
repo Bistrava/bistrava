@@ -59,7 +59,20 @@ test("draft product has a canonical URL and no Product or Offer schema", async (
   ).toBeVisible();
   await expect(page.getByText("719,80 €")).toBeVisible();
   await expect(page.getByText(/ne predstavlja nabavne ali prodajne cene Bistrava/)).toBeVisible();
-  await expect(page.locator(".product-gallery .product-media")).toHaveCount(4);
+  await expect(page.locator(".product-carousel-thumbnails button")).toHaveCount(4);
+  const secondThumbnail = page.getByRole("button", { name: "Prikaži sliko 2 od 4" });
+  const secondImageSource = await secondThumbnail.locator("img").getAttribute("src");
+  await secondThumbnail.click();
+  await expect(page.locator(".product-carousel-open img")).toHaveAttribute("src", secondImageSource!);
+
+  await page.getByRole("button", { name: /Odpri sliko 2 .* čez cel zaslon/ }).click();
+  const lightbox = page.getByRole("dialog", { name: /Povečana galerija izdelka/ });
+  await expect(lightbox).toBeVisible();
+  await expect(lightbox.getByText(/^2 \/ 4/)).toBeVisible();
+  await page.keyboard.press("ArrowRight");
+  await expect(lightbox.getByText(/^3 \/ 4/)).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(lightbox).toHaveCount(0);
   await expect(page.getByRole("heading", { name: "Tehnične karakteristike" })).toBeVisible();
   await expect(page.getByText("Največji pretok", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: /Preverite trenutno ceno pri GGV/ })).toHaveAttribute(

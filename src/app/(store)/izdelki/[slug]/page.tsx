@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Check, FileText, Info, PackageCheck, ShieldCheck, Wrench } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { AddToCart } from "@/components/cart/add-to-cart";
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
 import { CatalogProductVisual } from "@/components/product/catalog-product-visual";
+import { ProductGallery } from "@/components/product/product-gallery";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import {
   catalogProducts,
@@ -114,31 +114,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="product-detail-top">
         <div className="container product-detail-grid">
           {product.images.length > 0 ? (
-            <div className="product-gallery" aria-label={`Galerija izdelka ${product.nameSl}`}>
-              {product.images.slice(0, 4).map((image, index) => (
-                <figure
-                  className={`product-media card${index === 0 ? " product-media-primary" : ""}`}
-                  key={image.url}
-                >
-                  <div className="product-media-frame">
-                    <Image
-                      src={image.url}
-                      alt={image.altSl}
-                      fill
-                      sizes={index === 0
-                        ? "(max-width: 900px) 100vw, 50vw"
-                        : "(max-width: 640px) 50vw, 25vw"}
-                      preload={index === 0}
-                    />
-                  </div>
-                  <figcaption>
-                    {image.kind === "information"
-                      ? "Informativni prikaz Bistrava"
-                      : `Fotografija vira: ${image.sourceName ?? product.supplierPriceSourceName ?? "dobavitelj"}`}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+            <ProductGallery
+              images={product.images.slice(0, 4)}
+              productName={product.nameSl}
+              sourceFallback={product.supplierPriceSourceName ?? "dobavitelj"}
+            />
           ) : (
             <CatalogProductVisual categorySlug={product.categorySlug} productName={product.nameSl} />
           )}

@@ -188,6 +188,10 @@ test("store policies explain ordering, delivery, returns and privacy", async ({ 
   await page.goto("/zasebnost");
   await expect(page.getByRole("heading", { level: 1, name: "Politika zasebnosti" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "7. Vaše pravice" })).toBeVisible();
+
+  await page.goto("/kontakt");
+  await expect(page).toHaveURL(/\/kontakt$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Kako vam lahko pomagamo?" })).toBeVisible();
 });
 
 test("robots, sitemap and Merchant feed are reachable", async ({ request }) => {

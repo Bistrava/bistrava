@@ -1,83 +1,68 @@
-import {
-  BadgeCheck,
-  CalendarCheck2,
-  Eye,
-  Gift,
-  MessageCircleReply,
-  PackageCheck,
-  PenLine,
-  Scale,
-  ShieldCheck,
-  Tag,
-} from "lucide-react";
+import { Info, Quote, Star } from "lucide-react";
 
-const reviewStandards = [
+const sampleReviews = [
   {
-    icon: PackageCheck,
-    title: "Preverjen nakup",
-    text: "Mnenje povežemo z resničnim naročilom, kadar je to mogoče.",
+    profile: "Za družinski dom",
+    text: "Ponudba je pregledna in hitro sem razumel, kateri podatki so pomembni pri izbiri naprave za našo hišo.",
   },
   {
-    icon: BadgeCheck,
-    title: "Resnična izkušnja",
-    text: "Objavimo samo izkušnjo, ki jo lahko smiselno preverimo.",
+    profile: "Izbira filtra za pitno vodo",
+    text: "Primerjava izdelkov mi je prihranila veliko časa. Tehnične razlike so razložene jasno in brez zapletenih izrazov.",
   },
   {
-    icon: Tag,
-    title: "Točen izdelek",
-    text: "Jasno navedemo izdelek in različico, na katera se mnenje nanaša.",
+    profile: "Prvi nakup mehčalne naprave",
+    text: "Končno sem na enem mestu našel razlago trdote vode, pretoka in vzdrževanja ter lažje izbral primerno rešitev.",
   },
   {
-    icon: CalendarCheck2,
-    title: "Datum izkušnje",
-    text: "Bralec vidi, kdaj je bil izdelek kupljen ali preizkušen.",
+    profile: "Zaščita gospodinjskih naprav",
+    text: "Všeč mi je, da so priključki, mere in namen uporabe prikazani pregledno. Pri izbiri ni bilo nepotrebnega ugibanja.",
   },
   {
-    icon: Scale,
-    title: "Tudi kritična mnenja",
-    text: "Utemeljene kritike imajo enako mesto kot pohvale.",
+    profile: "Nakup testnega kompleta",
+    text: "Navodila so razumljiva, pot do pravega izdelka pa kratka. Točno takšno pomoč sem potreboval pred nakupom.",
   },
   {
-    icon: PenLine,
-    title: "Brez prepisovanja",
-    text: "Besedila ne povzemamo iz drugih trgovin ali katalogov.",
+    profile: "Redno vzdrževanje sistema",
+    text: "Sol, vložke in pripomočke za vzdrževanje lahko poiščem na enem mestu, brez dolgega iskanja po različnih trgovinah.",
   },
   {
-    icon: Gift,
-    title: "Označene spodbude",
-    text: "Morebitno darilo ali ugodnost ob oddaji mnenja jasno razkrijemo.",
+    profile: "Prenova družinske hiše",
+    text: "Fotografije in tehnični podatki so mi pomagali preveriti prostor ter priključke, še preden sem izdelek dodal v košarico.",
   },
   {
-    icon: MessageCircleReply,
-    title: "Odgovor Bistrave",
-    text: "Na vprašanje ali težavo odgovorimo vsebinsko in javno, kadar je primerno.",
+    profile: "Rešitev za stanovanje",
+    text: "Cenim miren in strokoven pristop. Stran jasno pokaže, katere rešitve so smiselne za stanovanje in katere za hišo.",
   },
   {
-    icon: ShieldCheck,
-    title: "Varovana zasebnost",
-    text: "Brez dovoljenja ne objavimo polnega imena ali osebnih podatkov.",
+    profile: "Nakup dodatne opreme",
+    text: "Kategorije so logične, košarica je preprosta, informacije o dostavi in vračilu pa so hitro dostopne.",
   },
   {
-    icon: Eye,
-    title: "Jasna moderacija",
-    text: "Mnenje odstranimo le ob zlorabi, lažni vsebini ali kršitvi pravic.",
+    profile: "Raziskovanje pred nakupom",
+    text: "Vodniki odgovorijo na konkretna vprašanja in pomagajo primerjati možnosti. Bistravo bi z veseljem priporočil naprej.",
   },
 ] as const;
 
-function ReviewStandardsTrack({ duplicate = false }: { duplicate?: boolean }) {
+function SampleReviewTrack({ duplicate = false }: { duplicate?: boolean }) {
   return (
     <div
       aria-hidden={duplicate || undefined}
       className="review-standards-track"
       data-review-track={duplicate ? "duplicate" : "primary"}
     >
-      {reviewStandards.map(({ icon: Icon, title, text }) => (
-        <article className="review-standard-card" key={title}>
-          <span className="review-standard-icon"><Icon aria-hidden="true" size={21} /></span>
-          <div>
-            <strong>{title}</strong>
-            <p>{text}</p>
-          </div>
+      {sampleReviews.map(({ profile, text }) => (
+        <article className="review-standard-card" key={profile}>
+          <header>
+            <span className="review-stars" aria-label="5 od 5 zvezdic">
+              {Array.from({ length: 5 }, (_, index) => <Star aria-hidden="true" fill="currentColor" key={index} size={17} />)}
+            </span>
+            <span className="review-standard-icon"><Quote aria-hidden="true" size={21} /></span>
+          </header>
+          <blockquote>“{text}”</blockquote>
+          <footer>
+            <strong>{profile}</strong>
+            <span>Vzorčno mnenje</span>
+          </footer>
         </article>
       ))}
     </div>
@@ -89,24 +74,23 @@ export function ReviewStandardsSection() {
     <section className="section review-standards-section" aria-labelledby="review-standards-title">
       <div className="container review-standards-heading">
         <div>
-          <p className="section-kicker">Mnenja strank</p>
-          <h2 id="review-standards-title">Zaupanje se začne z resničnimi izkušnjami.</h2>
+          <p className="section-kicker">Mnenja kupcev</p>
+          <h2 id="review-standards-title">Izkušnje, ki jih želimo ustvarjati.</h2>
         </div>
         <p>
-          Bistrava bo objavljala le preverljiva mnenja resničnih kupcev. Do prvih
-          zaključenih naročil prikazujemo deset pravil, po katerih bomo zbirali,
-          preverjali in predstavljali ocene.
+          Kratka, jasna in uporabna nakupna izkušnja od prve primerjave do izbire
+          pravega izdelka za obdelavo vode.
         </p>
       </div>
-      <div className="review-standards-marquee" role="region" aria-label="Pravila za objavo mnenj strank" tabIndex={0}>
+      <div className="review-standards-marquee" role="region" aria-label="Predstavitveni primeri mnenj" tabIndex={0}>
         <div className="review-standards-motion">
-          <ReviewStandardsTrack />
-          <ReviewStandardsTrack duplicate />
+          <SampleReviewTrack />
+          <SampleReviewTrack duplicate />
         </div>
       </div>
       <div className="container review-standards-note">
-        <BadgeCheck aria-hidden="true" size={19} />
-        <p>Prva preverjena mnenja bodo objavljena skupaj z načinom preverjanja.</p>
+        <Info aria-hidden="true" size={19} />
+        <p>Predstavitveni primeri za prikaz strani; ne gre za izjave dejanskih kupcev.</p>
       </div>
     </section>
   );

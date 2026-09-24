@@ -10,8 +10,11 @@ test("homepage presents the specialist shop and product journeys", async ({ page
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Nakupujte izdelke/ })).toBeVisible();
   await expect(page.locator(".catalog-product-card")).toHaveCount(6);
-  await expect(page.getByRole("heading", { name: "Zaupanje se začne z resničnimi izkušnjami." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Izkušnje, ki jih želimo ustvarjati." })).toBeVisible();
   await expect(page.locator('[data-review-track="primary"] .review-standard-card')).toHaveCount(10);
+  await expect(page.locator('[data-review-track="primary"] .review-standard-card footer span')).toHaveText(
+    Array(10).fill("Vzorčno mnenje"),
+  );
   const structuredData = await page
     .locator('script[type="application/ld+json"]')
     .allTextContents();

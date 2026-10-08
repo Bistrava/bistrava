@@ -1,0 +1,580 @@
+[
+  {
+    "id": "BIS-008",
+    "name": "Kapljice za merjenje trdote vode °frH",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/",
+        "priceCents": 1987,
+        "includesVat": true,
+        "matchNotes": "Exact source product: French-degree titration kit with 5 ml sample vessel and instructions. Live HTTP 200 HTML and JSON-LD price 19.87 on 2026-10-08; displayed pre-tax price 16.29 EUR.",
+        "discovery": "Existing exact product URL, web search and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Google Shopping Slovenia request (https://www.google.com/search?tbm=shop&hl=sl&gl=si&q=Cintropur+NW25) was inaccessible via web tool. This is a single exact-model Slovenian retail benchmark, not a Google Shopping average. Other found titration kits used °dH instead of °frH and were excluded. August promotional price 14.90 EUR is no longer present on the live exact page.",
+    "observedAt": "2026-10-08",
+    "priceCents": 1987,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-016",
+    "name": "Cintropur NW25 – vodni filter za celo hišo",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-cintropur-nw25/",
+        "priceCents": 10980,
+        "includesVat": true,
+        "matchNotes": "Exact NW25 mechanical filter, 3/4 or 1 inch connection, 5.5 m3/h, 10 bar. Live HTTP 200 HTML and JSON-LD price 109.80 on 2026-10-08; pre-tax price 90.00 EUR.",
+        "discovery": "Existing exact product URL, web search and direct live merchant HTTP verification"
+      },
+      {
+        "merchant": "Vodni-filtri.si",
+        "url": "https://vodni-filtri.si/izdelek/cintropur-filter-nw25-10-25mcr-5-kos-filtrirna-vrecka/",
+        "priceCents": 14200,
+        "includesVat": true,
+        "matchNotes": "NW25 complete filter, 1 inch, 25 micron standard sleeve, 5.5 m3/h, 10 bar. Product title and description identify complete filter despite old URL mentioning sleeve pack. Merchant category page fetched live HTTP 200 on 2026-10-08 confirms 142.00 EUR z DDV; product page confirms model/specification.",
+        "discovery": "Web search followed by primary product page and live merchant category-page verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of these two independent Slovenian VAT-inclusive offers is 125.90 EUR. Google Shopping itself inaccessible. Bistra Voda also displayed 143.35 EUR for NW25, but was excluded from the calculation because VAT treatment was not confirmed. Foreign merchants, spare sleeves, NW25 DUO and NW25 TE were excluded.",
+    "observedAt": "2026-10-08",
+    "priceCents": 12590,
+    "basis": "matched_model_mean",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-020",
+    "name": "Sedimentni filtrirni vložek 10″ – 5 mikronov",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/nadomestni-filter-vlozki/filter-vlozek-predfilter-5-mikron-pp/",
+        "priceCents": 1699,
+        "includesVat": true,
+        "matchNotes": "Exact source SKU PE-209200: 10 inch polypropylene sediment prefilter, 5 micron. Primary page displays 16.99 EUR including 22% VAT. Web page snapshot crawled four days before research; direct live HTTP request timed out.",
+        "discovery": "Existing exact primary merchant product page opened with web tool"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single exact-SKU offer, not a multi-merchant or Google Shopping average. Other generic sediment cartridges were not mixed with PE-209200 because exact model equivalence could not be established.",
+    "observedAt": "2026-10-08",
+    "priceCents": 1699,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-029",
+    "name": "Prašek za dezinfekcijo ionske smole 30 g",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/prasek-za-dezinfekcijo-ionske-smole-mehcalne-naprave/",
+        "priceCents": 1399,
+        "includesVat": true,
+        "matchNotes": "Exact granular ion-exchange resin cleaning product, 30 g pouch, dose 1 g per litre resin. Live HTTP 200 HTML and JSON-LD price 13.99 on 2026-10-08; pre-tax price 11.47 EUR.",
+        "discovery": "Existing exact URL, web search primary merchant result, direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single exact-product Slovenian offer found. Do not claim Google Shopping or market-wide average. Excluded other liquid resin cleaners, other package sizes and old promotion 9.99 EUR.",
+    "observedAt": "2026-10-08",
+    "priceCents": 1399,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-030",
+    "name": "Tabletirana sol za mehčalne naprave 25 kg",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/tabletirana-sol-25-kg/",
+        "priceCents": 1499,
+        "includesVat": true,
+        "matchNotes": "Exact source commodity: 25 kg tablet salt for ion-exchange regeneration, EN 973 Type A. Live HTTP 200 on 2026-10-08 shows sale price 14.99 EUR and crossed regular price 19.99 EUR, pre-tax selling price 12.29 EUR. Collection only. The stale web product snapshot showing 19.99 is superseded by live HTML.",
+        "discovery": "Existing exact URL and direct live merchant HTTP verification"
+      },
+      {
+        "merchant": "Euronova",
+        "url": "https://www.euronova.si/izdelek/9001880973645/tabletirana-sol-za-mehcanje-vode-25kg",
+        "priceCents": 1431,
+        "includesVat": true,
+        "matchNotes": "Same specified unbranded commodity and package: 25 kg tablet salt for ion exchange, EN 973 Type A, suitable for drinking-water softening. Exact manufacturer/GTIN equivalence to GGV is not established. Live HTTP 200 JSON-LD and visible price on 2026-10-08: 14.31 EUR incl VAT, 11.73 excl VAT.",
+        "discovery": "Web search and direct live primary merchant HTTP verification"
+      },
+      {
+        "merchant": "MESEC d.o.o.",
+        "url": "https://e-trgovina.mesec.si/pribor-za-mehcalne-naprave/1380-tabletirana-sol-za-regeneracijo-ionskih-izmenjevalcev-25-kg-9001880901440.html",
+        "priceCents": 1654,
+        "includesVat": true,
+        "matchNotes": "Same specified unbranded commodity and package: 25 kg bag tablet salt, EN 973 Type A, 99.9% NaCl; collection only. Manufacturer/GTIN identity to GGV not established. Primary product page displays 16.54 EUR Z DDV; web snapshot crawled two weeks before research. Live HTTP returned 403.",
+        "discovery": "Web search followed by primary merchant product page"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of three same-specification 25 kg EN 973 Type A commodity offers is 15.28 EUR. This is a Slovenian comparable-product benchmark, not a verified identical-GTIN or Google Shopping average. Bistrava source catalog does not specify a salt brand. If identical-GTIN matching is required, retain only exact GGV 14.99 EUR. No shipping, bulk prices, former prices or membership coupons included.",
+    "observedAt": "2026-10-08",
+    "priceCents": 1528,
+    "basis": "comparable_specification_mean",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-038",
+    "name": "Gevor – samočistilni filter z regulatorjem tlaka",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+        "priceCents": 34160,
+        "includesVat": true,
+        "matchNotes": "Exact Gevor manual self-cleaning model with pressure regulator. Live HTTP 200 HTML and JSON-LD price 341.60 EUR on 2026-10-08; pre-tax 280.00 EUR. Distinct from automatic and basic no-regulator products.",
+        "discovery": "Existing exact URL, web search and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent Slovenian merchant found for exact Gevor model. Aggregator entries point to GGV and are not independent observations. Not a Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 34160,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-040",
+    "name": "Avtomatski Gevor samočistilni filter z regulatorjem tlaka",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/avtomatski-filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+        "priceCents": 47580,
+        "includesVat": true,
+        "matchNotes": "Exact automatic Gevor filter with pressure regulator, 40 micron SS316L, programmable flushing, dual gauge, up to 8 m3/h. Live HTTP 200 HTML and JSON-LD 475.80 EUR on 2026-10-08; pre-tax 390.00 EUR. Published identical price for listed connection variants.",
+        "discovery": "Existing exact URL, web primary page and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single independent Slovenian exact-model offer found. Ceneje.si lists the same GGV offer at 475.80 EUR and was not counted twice. Not a Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 47580,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-041",
+    "name": "Gevor – samočistilni filter 40 µm",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-gevor/",
+        "priceCents": 18300,
+        "includesVat": true,
+        "matchNotes": "Exact basic Gevor filter, 40 micron SS316L, up to 3 m3/h, 3/4 or 1 inch. Live HTTP 200 HTML and JSON-LD 183.00 EUR on 2026-10-08; pre-tax 150.00 EUR. Published same price for listed connection variants.",
+        "discovery": "Existing exact URL, web primary page and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single independent Slovenian exact-model offer found. Excluded other brands and regulator-equipped Gevor variants. Not a Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 18300,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-054",
+    "name": "Polifosfatni filter za pralni ali pomivalni stroj",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-pralni-stroj-s-fosfati/",
+        "priceCents": 1830,
+        "includesVat": true,
+        "matchNotes": "Exact catalogue source: 3/4 inch, 160 g crystals, 130 mm height. Visible live purchase price 18.30 EUR; 15 EUR is the pre-VAT price, not a second offer.",
+        "discovery": "Web search and direct HTTPS merchant page",
+        "liveVerified": true
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Google Shopping Slovenia URL (gl=si, hl=sl, tbm=shop) could not be opened by the web tool. Only one independently verified exact offer; no market average can be established. Atlas DOSAL and other generic polyphosphate filters were excluded because the GGV product does not identify a matching manufacturer SKU. Live merchant request on 2026-10-08.",
+    "observedAt": "2026-10-08",
+    "priceCents": 1830,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-060",
+    "name": "Aquaphor AQ800",
+    "observations": [
+      {
+        "merchant": "Konik d.o.o.",
+        "url": "https://konik.si/izdelek/mehcalna-naprava/",
+        "priceCents": 84200,
+        "includesVat": true,
+        "matchNotes": "Exact AQ800 catalogue source. Live public product price 842 EUR. VAT included per merchant terms at https://konik.si/pogoji-poslovanja/.",
+        "discovery": "Web search and direct HTTPS merchant page",
+        "liveVerified": true
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian offer found. Google Shopping results were inaccessible. Aquaphor City 800 ml bottles are unrelated products and were excluded. Live merchant request on 2026-10-08.",
+    "observedAt": "2026-10-08",
+    "priceCents": 84200,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-061",
+    "name": "Tehnofan / Ecosoft Core 110 Compact",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/",
+        "priceCents": 79398,
+        "includesVat": true,
+        "matchNotes": "Exact catalogue model, ES-FU1013CABDVCR, identified by merchant as Ecosoft CORE 110, 11 L, 1.2 m3/h, 467 x 270 x 430 mm. Cached merchant page states 22% VAT included.",
+        "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification",
+        "liveVerified": false
+      },
+      {
+        "merchant": "Nanoten d.o.o. / Pipna",
+        "url": "https://www.pipna.si/produkt/mehcalna-naprava-ecosoft-core-110/",
+        "priceCents": 82200,
+        "includesVat": true,
+        "matchNotes": "Same manufacturer and exact CORE 110 model; 11 L, 1.2 m3/h, 467 x 270 x 430 mm, 3/4 inch. Public product variant 5170, Brez montaze (without installation), price 822 EUR incl VAT confirmed from live HTML. SKU is not exposed. Installation variant 934.88 EUR excluded.",
+        "discovery": "Web search and direct HTTPS public product variation data",
+        "liveVerified": true
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of these two model-matched offers is 807.99 EUR incl VAT. Pipna model match is based on manufacturer, model and specifications; no public SKU is provided. Tehnofan price is indexed/cached and could not be rechecked live because of Bot Verification. This is not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 80799,
+    "basis": "matched_model_mean",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-064",
+    "name": "Tehnofan VD18",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd18/",
+        "priceCents": 101504,
+        "includesVat": true,
+        "matchNotes": "Exact PE-960451 model, 18 L, 1 inch connection. Public merchant page shows 1015.04 EUR with 22% VAT included.",
+        "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification",
+        "liveVerified": false
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Mimovrste offer https://www.mimovrste.com/mehcalci-vode/tehnofan-doo-mehcalna-naprava-tehnofan-vd18-100166152815 is sold by Tehnofan - Filtri za vodo and also shows 1015.04 EUR. Excluded as duplicate merchant. Ceneje repeats those listings. Only one independent exact seller; cached price, not a verified market average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 101504,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-066",
+    "name": "ELBA 12",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba12/",
+        "priceCents": 71980,
+        "includesVat": true,
+        "matchNotes": "Exact ELBA 12 standalone unit. Live purchase price 719.80 EUR; pre-VAT price 590 EUR.",
+        "discovery": "Web search and direct HTTPS merchant page",
+        "liveVerified": true
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian merchant. Turnkey ELBA 12 installation bundles include additional goods and labour and are excluded. Google Shopping inaccessible. Live merchant request on 2026-10-08.",
+    "observedAt": "2026-10-08",
+    "priceCents": 71980,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-067",
+    "name": "Pentair Optimo CS Mini 12 L",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/",
+        "priceCents": 90612,
+        "includesVat": true,
+        "matchNotes": "Exact PA-4035739 Pentair Optimo CS Mini 12 L. Merchant page shows 906.12 EUR with 22% VAT included.",
+        "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification",
+        "liveVerified": false
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian seller found. Ceneje listing repeats Tehnofan and is not a separate observation. Other capacities excluded. Cached merchant price, not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 90612,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-069",
+    "name": "Tehnofan VD12",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd12/",
+        "priceCents": 93940,
+        "includesVat": true,
+        "matchNotes": "Exact VD12, 12 L, 1 inch. Merchant related-product offer on its Core 110 page explicitly shows 939.40 EUR with 22% VAT. Corroborated by same merchant selling exact model on Mimovrste.",
+        "discovery": "Web-tool primary merchant related-product listing and exact Mimovrste partner listing; direct HTTPS returned reCAPTCHA Bot Verification",
+        "liveVerified": false
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Source evidence also at https://www.mimovrste.com/predprazniki/tehnofan-doo-mehcalna-naprava-tehnofan-vd12-100166152776 and Tehnofan Core110 URL. Mimovrste seller is Tehnofan - Filtri za vodo, so only one merchant observation. Direct VD12 page inaccessible to web tool; primary related-product display and marketplace offer are cached. Not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 93940,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-071",
+    "name": "Tehnofan Core 250 CI",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/",
+        "priceCents": 89768,
+        "includesVat": true,
+        "matchNotes": "Exact ES-FU1024CABCIMVCR, 24 L, Clack CI head. Public merchant page shows 897.68 EUR with 22% VAT included.",
+        "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification",
+        "liveVerified": false
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Ekopomurje CORE 250 has DV head rather than CI and is excluded. Pipna CORE250 page does not confirm CI variant or SKU and is excluded. Only one confirmed exact Slovenian seller. Cached merchant price, not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 89768,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-074",
+    "name": "Wireless Water Guard – sistem proti izlitju vode",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/",
+        "priceCents": 20000,
+        "includesVat": true,
+        "matchNotes": "Exact 3/4-inch version, SKU 010555, valve plus one sensor. Live WooCommerce variation data: display_price 200, current in-stock purchasable offer. Regular crossed-out 250 EUR excluded.",
+        "discovery": "Web search followed by direct live HTTPS HTML WooCommerce variation data on 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Google Shopping gl=si hl=sl tbm=shop failed with Internal Error on google.com and google.si. Only one Slovenian merchant found. This is a single-offer reference, not a Google Shopping market average. Catalog currently says 3/4 or 1 inch: use 200 EUR only if the sellable item is explicitly the 3/4-inch version. Live 1-inch version SKU 010555-1 costs 208 EUR and also contains one sensor; do not average differently sized variants. Ceneje's 48.98 EUR listing concerns the sensor, not this kit.",
+    "observedAt": "2026-10-08",
+    "priceCents": 20000,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true,
+    "selectedConnection": "3/4″"
+  },
+  {
+    "id": "BIS-076",
+    "name": "Midnight 12 – pametna mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/",
+        "priceCents": 99900,
+        "includesVat": true,
+        "matchNotes": "Exact Midnight 12 standalone softener, SKU 010625. Live Product/Offer JSON-LD price 999.00 EUR, valueAddedTaxIncluded true, InStock. Installation packages excluded.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "One independent Slovenian merchant found. Ceneje repeats GGV, so it is not counted again. Single-offer reference, not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 99900,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-077",
+    "name": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba-30/",
+        "priceCents": 89090,
+        "includesVat": true,
+        "matchNotes": "Exact ELBA 30 standalone softener, SKU 010003. Live Product/Offer JSON-LD price 890.90 EUR, VAT included, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Shoppster https://www.shoppster.si/p/2968048 lists PRIMA Elba 30 at 923.90 EUR but explicitly cannot currently be purchased; excluded from available-offer average. Ceneje repeats GGV. Only one currently purchasable merchant verified; no Google Shopping average verified.",
+    "observedAt": "2026-10-08",
+    "priceCents": 89090,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-078",
+    "name": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/",
+        "priceCents": 119900,
+        "includesVat": true,
+        "matchNotes": "Exact Midnight 30 standalone softener, SKU 010515. Live Product/Offer JSON-LD price 1199.00 EUR, VAT included, InStock. Installation bundle excluded.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "One independent Slovenian merchant verified. Ceneje repeats GGV's 1199 EUR offer, not a second merchant. Single-offer reference; Google Shopping not accessible.",
+    "observedAt": "2026-10-08",
+    "priceCents": 119900,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-082",
+    "name": "Adriatica 15 L – ionska mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "Konik d.o.o.",
+        "url": "https://konik.si/izdelek/mehcalna-naprava-adriatica-15l/",
+        "priceCents": 87840,
+        "includesVat": true,
+        "matchNotes": "Exact Adriatica 15 L, SKU 874, standalone unit. Live Product/Offer JSON-LD price 878.40 EUR, valueAddedTaxIncluded true, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Mimovrste also displays the same 15 L model at 841.80 EUR (https://www.mimovrste.com/vrci-za-filtriranje-vode-filtri/konik-doo-mehcalna-naprava-adriatica-15l-100075503076), seller KONIK D.O.O. This is a different sales channel of the same merchant, not independent evidence, and is excluded from merchant averaging. Primary merchant's live price retained. Only one independent seller found; Google Shopping not verified.",
+    "observedAt": "2026-10-08",
+    "priceCents": 87840,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-083",
+    "name": "AntraciteAzure 250 Clack Compact – mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-antraciteazure-250-clack-compact/",
+        "priceCents": 118584,
+        "includesVat": true,
+        "matchNotes": "Exact AntraciteAzure 250 Clack Compact with 25 L resin, 1-inch connection, bypass, SKU ES-FU1035CABGDV. Primary merchant web page says 1185.84 EUR including 22% VAT. Direct HTTPS request returned no readable product/price data, so no live-fetch confirmation.",
+        "discovery": "Web-open primary merchant page and Google-style web search; indexed result corroborated by Tehnofan's own Mimovrste partner offer."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": false,
+    "notes": "Mimovrste https://www.mimovrste.com/mehcalci-vode/tehnofan-doo-ionska-mehcalna-naprava-100166172643 displays 1185.84 EUR, sold by Tehnofan - Filtri za vodo; same seller, not an independent observation. Ceneje and Pametno duplicate it. Single-merchant reference with indexed-page timing limitation; Google Shopping not verified.",
+    "observedAt": "2026-10-08",
+    "priceCents": 118584,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-084",
+    "name": "Dodatni senzor Wireless Water Guard za izlitje vode",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/senzor-sistem-proti-izlitju-wireless-water-guard/",
+        "priceCents": 4898,
+        "includesVat": true,
+        "matchNotes": "Exact additional wireless sensor, SKU 010554, not complete valve kit. Live Product/Offer JSON-LD price 48.98 EUR, VAT included, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Only one independent Slovenian merchant found. Ceneje's ambiguously titled Wireless Water Guard 48.98 EUR listing is this sensor and must not be used for BIS-074. Single-offer reference, not Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 4898,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  },
+  {
+    "id": "BIS-086",
+    "name": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/kategorija-izdelka/ohisja-pipe-drugo/drugo/",
+        "priceCents": 8418,
+        "includesVat": true,
+        "matchNotes": "Exact membrane pressure reducer 3/4 inch, 800 micron, PN25. Merchant category displays 84.18 EUR including 22% VAT. Indexed product page identifies SKU RB-29090500 and same price. Direct HTTPS product page returned a challenge rather than product data.",
+        "discovery": "Web search indexed primary merchant product and web-open primary merchant category. Ceneje corroborates same seller's 84.18 EUR offer."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": false,
+    "notes": "Canonical product URL: https://filtri-za-vodo.si/trgovina/ohisja-pipe-drugo/drugo/reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr/ . No second matching merchant found. Primary indexed pages confirm price but direct live fetch blocked; not a verified Google Shopping average.",
+    "observedAt": "2026-10-08",
+    "priceCents": 8418,
+    "basis": "single_merchant_reference",
+    "currency": "EUR",
+    "includesVat": true,
+    "excludesShippingAndInstallation": true
+  }
+]

@@ -6,10 +6,16 @@ import {
   catalogProducts,
   getCatalogCategory,
   getProductsByCategory,
+  getMerchantEligibleProducts,
   specialistProducts,
 } from "@/lib/catalog/catalog";
 
 describe("SEO catalog import", () => {
+  it("does not advertise zero stock to Google even if the stock label is stale", () => {
+    const product = { ...specialistProducts[0]!, status: "active" as const, salesMode: "buy_now" as const, priceCents: 1987, stockStatus: "in_stock" as const, stockQuantity: 0 };
+    expect(getMerchantEligibleProducts([product])).toHaveLength(0);
+    expect(getMerchantEligibleProducts([{ ...product, stockQuantity: 15 }])).toHaveLength(1);
+  });
   it("keeps only products that have an image and a verified price", () => {
     expect(catalogProducts).toHaveLength(24);
     expect(new Set(catalogProducts.map((product) => product.id)).size).toBe(24);

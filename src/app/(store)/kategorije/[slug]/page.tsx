@@ -9,8 +9,8 @@ import {
   allCategories,
   getCatalogCategory,
   getCategoryDetails,
-  getProductsByCategory,
 } from "@/lib/catalog/catalog";
+import { getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 
 type CategoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -41,7 +41,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   if (!category) notFound();
 
-  const products = getProductsByCategory(category.slug);
+  const products = (await getStorefrontCatalogProducts()).filter(
+    (product) => product.categorySlug === category.slug,
+  );
   const details = getCategoryDetails(category.slug);
 
   return (
@@ -91,7 +93,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               </h2>
             </div>
             <p>
-              Primerjajte fotografije, opise, tehnične lastnosti in informativne cene.
+              Primerjajte izdelke, cene z DDV in trenutno zalogo.
             </p>
           </div>
 

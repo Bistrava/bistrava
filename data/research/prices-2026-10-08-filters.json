@@ -1,0 +1,154 @@
+[
+  {
+    "id": "BIS-008",
+    "name": "Kapljice za merjenje trdote vode °frH",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/kapljice-za-merjenje-trdote-vode-dh-fh/",
+        "priceCents": 1987,
+        "includesVat": true,
+        "matchNotes": "Exact source product: French-degree titration kit with 5 ml sample vessel and instructions. Live HTTP 200 HTML and JSON-LD price 19.87 on 2026-10-08; displayed pre-tax price 16.29 EUR.",
+        "discovery": "Existing exact product URL, web search and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Google Shopping Slovenia request (https://www.google.com/search?tbm=shop&hl=sl&gl=si&q=Cintropur+NW25) was inaccessible via web tool. This is a single exact-model Slovenian retail benchmark, not a Google Shopping average. Other found titration kits used °dH instead of °frH and were excluded. August promotional price 14.90 EUR is no longer present on the live exact page."
+  },
+  {
+    "id": "BIS-016",
+    "name": "Cintropur NW25 – vodni filter za celo hišo",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-cintropur-nw25/",
+        "priceCents": 10980,
+        "includesVat": true,
+        "matchNotes": "Exact NW25 mechanical filter, 3/4 or 1 inch connection, 5.5 m3/h, 10 bar. Live HTTP 200 HTML and JSON-LD price 109.80 on 2026-10-08; pre-tax price 90.00 EUR.",
+        "discovery": "Existing exact product URL, web search and direct live merchant HTTP verification"
+      },
+      {
+        "merchant": "Vodni-filtri.si",
+        "url": "https://vodni-filtri.si/izdelek/cintropur-filter-nw25-10-25mcr-5-kos-filtrirna-vrecka/",
+        "priceCents": 14200,
+        "includesVat": true,
+        "matchNotes": "NW25 complete filter, 1 inch, 25 micron standard sleeve, 5.5 m3/h, 10 bar. Product title and description identify complete filter despite old URL mentioning sleeve pack. Merchant category page fetched live HTTP 200 on 2026-10-08 confirms 142.00 EUR z DDV; product page confirms model/specification.",
+        "discovery": "Web search followed by primary product page and live merchant category-page verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of these two independent Slovenian VAT-inclusive offers is 125.90 EUR. Google Shopping itself inaccessible. Bistra Voda also displayed 143.35 EUR for NW25, but was excluded from the calculation because VAT treatment was not confirmed. Foreign merchants, spare sleeves, NW25 DUO and NW25 TE were excluded."
+  },
+  {
+    "id": "BIS-020",
+    "name": "Sedimentni filtrirni vložek 10″ – 5 mikronov",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/nadomestni-filter-vlozki/filter-vlozek-predfilter-5-mikron-pp/",
+        "priceCents": 1699,
+        "includesVat": true,
+        "matchNotes": "Exact source SKU PE-209200: 10 inch polypropylene sediment prefilter, 5 micron. Primary page displays 16.99 EUR including 22% VAT. Web page snapshot crawled four days before research; direct live HTTP request timed out.",
+        "discovery": "Existing exact primary merchant product page opened with web tool"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single exact-SKU offer, not a multi-merchant or Google Shopping average. Other generic sediment cartridges were not mixed with PE-209200 because exact model equivalence could not be established."
+  },
+  {
+    "id": "BIS-029",
+    "name": "Prašek za dezinfekcijo ionske smole 30 g",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/prasek-za-dezinfekcijo-ionske-smole-mehcalne-naprave/",
+        "priceCents": 1399,
+        "includesVat": true,
+        "matchNotes": "Exact granular ion-exchange resin cleaning product, 30 g pouch, dose 1 g per litre resin. Live HTTP 200 HTML and JSON-LD price 13.99 on 2026-10-08; pre-tax price 11.47 EUR.",
+        "discovery": "Existing exact URL, web search primary merchant result, direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single exact-product Slovenian offer found. Do not claim Google Shopping or market-wide average. Excluded other liquid resin cleaners, other package sizes and old promotion 9.99 EUR."
+  },
+  {
+    "id": "BIS-030",
+    "name": "Tabletirana sol za mehčalne naprave 25 kg",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/tabletirana-sol-25-kg/",
+        "priceCents": 1499,
+        "includesVat": true,
+        "matchNotes": "Exact source commodity: 25 kg tablet salt for ion-exchange regeneration, EN 973 Type A. Live HTTP 200 on 2026-10-08 shows sale price 14.99 EUR and crossed regular price 19.99 EUR, pre-tax selling price 12.29 EUR. Collection only. The stale web product snapshot showing 19.99 is superseded by live HTML.",
+        "discovery": "Existing exact URL and direct live merchant HTTP verification"
+      },
+      {
+        "merchant": "Euronova",
+        "url": "https://www.euronova.si/izdelek/9001880973645/tabletirana-sol-za-mehcanje-vode-25kg",
+        "priceCents": 1431,
+        "includesVat": true,
+        "matchNotes": "Same specified unbranded commodity and package: 25 kg tablet salt for ion exchange, EN 973 Type A, suitable for drinking-water softening. Exact manufacturer/GTIN equivalence to GGV is not established. Live HTTP 200 JSON-LD and visible price on 2026-10-08: 14.31 EUR incl VAT, 11.73 excl VAT.",
+        "discovery": "Web search and direct live primary merchant HTTP verification"
+      },
+      {
+        "merchant": "MESEC d.o.o.",
+        "url": "https://e-trgovina.mesec.si/pribor-za-mehcalne-naprave/1380-tabletirana-sol-za-regeneracijo-ionskih-izmenjevalcev-25-kg-9001880901440.html",
+        "priceCents": 1654,
+        "includesVat": true,
+        "matchNotes": "Same specified unbranded commodity and package: 25 kg bag tablet salt, EN 973 Type A, 99.9% NaCl; collection only. Manufacturer/GTIN identity to GGV not established. Primary product page displays 16.54 EUR Z DDV; web snapshot crawled two weeks before research. Live HTTP returned 403.",
+        "discovery": "Web search followed by primary merchant product page"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of three same-specification 25 kg EN 973 Type A commodity offers is 15.28 EUR. This is a Slovenian comparable-product benchmark, not a verified identical-GTIN or Google Shopping average. Bistrava source catalog does not specify a salt brand. If identical-GTIN matching is required, retain only exact GGV 14.99 EUR. No shipping, bulk prices, former prices or membership coupons included."
+  },
+  {
+    "id": "BIS-038",
+    "name": "Gevor – samočistilni filter z regulatorjem tlaka",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+        "priceCents": 34160,
+        "includesVat": true,
+        "matchNotes": "Exact Gevor manual self-cleaning model with pressure regulator. Live HTTP 200 HTML and JSON-LD price 341.60 EUR on 2026-10-08; pre-tax 280.00 EUR. Distinct from automatic and basic no-regulator products.",
+        "discovery": "Existing exact URL, web search and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent Slovenian merchant found for exact Gevor model. Aggregator entries point to GGV and are not independent observations. Not a Google Shopping average."
+  },
+  {
+    "id": "BIS-040",
+    "name": "Avtomatski Gevor samočistilni filter z regulatorjem tlaka",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/avtomatski-filter-za-vodo-z-regulatorjem-tlaka-gevor/",
+        "priceCents": 47580,
+        "includesVat": true,
+        "matchNotes": "Exact automatic Gevor filter with pressure regulator, 40 micron SS316L, programmable flushing, dual gauge, up to 8 m3/h. Live HTTP 200 HTML and JSON-LD 475.80 EUR on 2026-10-08; pre-tax 390.00 EUR. Published identical price for listed connection variants.",
+        "discovery": "Existing exact URL, web primary page and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single independent Slovenian exact-model offer found. Ceneje.si lists the same GGV offer at 475.80 EUR and was not counted twice. Not a Google Shopping average."
+  },
+  {
+    "id": "BIS-041",
+    "name": "Gevor – samočistilni filter 40 µm",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/filter-za-vodo-gevor/",
+        "priceCents": 18300,
+        "includesVat": true,
+        "matchNotes": "Exact basic Gevor filter, 40 micron SS316L, up to 3 m3/h, 3/4 or 1 inch. Live HTTP 200 HTML and JSON-LD 183.00 EUR on 2026-10-08; pre-tax 150.00 EUR. Published same price for listed connection variants.",
+        "discovery": "Existing exact URL, web primary page and direct live merchant HTTP verification"
+      }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Single independent Slovenian exact-model offer found. Excluded other brands and regulator-equipped Gevor variants. Not a Google Shopping average."
+  }
+]

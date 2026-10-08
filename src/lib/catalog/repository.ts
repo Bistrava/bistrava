@@ -2,7 +2,7 @@ import "server-only";
 
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
-import { activeProducts, specialistProducts } from "@/lib/catalog/catalog";
+import { activeProducts, catalogProducts, specialistProducts } from "@/lib/catalog/catalog";
 import { createClient } from "@/lib/supabase/server";
 import { getPublicSupabaseConfig } from "@/lib/validation/env";
 import type { CatalogProduct } from "@/types/catalog";
@@ -167,7 +167,7 @@ export async function getActiveCatalogProducts(): Promise<CatalogProduct[]> {
         warrantyMonths: row.warranty_months,
         certifications: stringArray(row.certifications),
         featured: row.featured,
-        canonical: row.canonical_url || `/izdelki/${row.slug}`,
+        canonical: `/izdelki/${row.slug}`,
         images: config
           ? [...row.product_images]
               .sort((a, b) => Number(b.is_primary) - Number(a.is_primary) || a.sort_order - b.sort_order)
@@ -190,6 +190,12 @@ export async function getActiveCatalogProducts(): Promise<CatalogProduct[]> {
 export async function getActiveCatalogProduct(slug: string) {
   const products = await getActiveCatalogProducts();
   return products.find((product) => product.slug === slug);
+}
+
+/** All storefront cards use the same live prices and inventory as product pages. */
+export async function getStorefrontCatalogProducts(): Promise<CatalogProduct[]> {
+  const products = await getActiveCatalogProducts();
+  return products.length > 0 ? products : catalogProducts;
 }
 
 export async function getIndexableProductSlugs(): Promise<string[]> {

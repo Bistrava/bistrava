@@ -4,14 +4,16 @@ import { CheckCircle2, LockKeyhole, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 import type { Route } from "next";
 import Link from "next/link";
-import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { type FormEvent, useActionState, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import {
   createCheckoutOrder,
   initialCheckoutState,
 } from "@/actions/checkout";
-import { useCart } from "@/components/cart/cart-provider";
+import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
+import { CartReviewNotice } from "@/components/cart/cart-page-client";
+import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import type { ShippingRate } from "@/lib/commerce/shipping";
 
@@ -22,16 +24,20 @@ function FieldError({ errors }: { errors?: string[] }) {
 export function CheckoutForm({
   rates,
   orderingEnabled,
+  catalog,
 }: {
   rates: ShippingRate[];
   orderingEnabled: boolean;
+  catalog: CartCatalogSnapshot;
 }) {
-  const { lines, subtotalCents, hydrated, clearCart } = useCart();
+  const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
+  const catalogCurrent = useCartCatalog(catalog);
   const [state, formAction, pending] = useActionState(createCheckoutOrder, initialCheckoutState);
   const [shippingRateId, setShippingRateId] = useState(rates[0]?.id ?? "");
   const idempotencyRef = useRef<HTMLInputElement>(null);
   const guestTokenRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const [refreshing, startRefresh] = useTransition();
 
   const shippingRate = useMemo(
     () => rates.find((rate) => rate.id === shippingRateId) ?? null,
@@ -39,7 +45,8 @@ export function CheckoutForm({
   );
   const totalCents = subtotalCents + (shippingRate?.priceCents ?? 0);
   const cartPayload = JSON.stringify(lines.map((line) => ({ sku: line.sku, quantity: line.quantity })));
-  const canSubmit = hydrated && lines.length > 0 && orderingEnabled && rates.length > 0 && !pending;
+  const canSubmit = catalogCurrent && changes.length === 0 && lines.length > 0 &&
+    orderingEnabled && rates.length > 0 && !pending;
 
   useEffect(() => {
     if (state.status !== "success" || !state.redirectUrl) return;
@@ -47,7 +54,11 @@ export function CheckoutForm({
     router.replace(state.redirectUrl as Route);
   }, [clearCart, router, state.redirectUrl, state.status]);
 
-  const prepareSubmission = () => {
+  const prepareSubmission = (event: FormEvent<HTMLFormElement>) => {
+    if (!canSubmit) {
+      event.preventDefault();
+      return;
+    }
     if (idempotencyRef.current && !idempotencyRef.current.value) {
       idempotencyRef.current.value = crypto.randomUUID();
     }
@@ -71,7 +82,7 @@ export function CheckoutForm({
     });
   };
 
-  if (!hydrated) {
+  if (!hydrated || (catalog.verified && !catalogCurrent)) {
     return <div className="checkout-loading card" aria-live="polite">Blagajna se nalaga …</div>;
   }
 
@@ -81,6 +92,7 @@ export function CheckoutForm({
         <ShoppingBag aria-hidden="true" size={38} />
         <h1>Za nadaljevanje potrebujete izdelek.</h1>
         <p>Košarica je prazna. Najprej izberite aktivni izdelek, ki je na voljo za spletni nakup.</p>
+        <CartReviewNotice changes={changes} />
         <Link className="button button-primary" href="/mehcalci-vode">Nazaj na izdelke</Link>
       </div>
     );
@@ -89,6 +101,20 @@ export function CheckoutForm({
   return (
     <form className="checkout-layout" action={formAction} onSubmit={prepareSubmission}>
       <div className="checkout-fields">
+        {!catalog.verified ? (
+          <div className="notice checkout-configuration-notice" role="alert">
+            <LockKeyhole aria-hidden="true" />
+            <div>
+              <strong>Cen in zaloge trenutno ni mogoče preveriti.</strong>
+              <p>Vaša košarica je shranjena. Za varno oddajo naročila ponovno preverite podatke.</p>
+              <button className="button button-secondary" type="button" disabled={refreshing}
+                onClick={() => startRefresh(() => router.refresh())}>
+                {refreshing ? "Preverjanje …" : "Ponovno preveri"}
+              </button>
+            </div>
+          </div>
+        ) : null}
+        <CartReviewNotice changes={changes} onAcknowledge={catalogCurrent ? acknowledgeChanges : undefined} />
         {!orderingEnabled ? (
           <div className="notice checkout-configuration-notice" role="status">
             <LockKeyhole aria-hidden="true" />

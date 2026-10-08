@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { SoftenerConfigurator } from "@/components/configurator/softener-configurator";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { specialistProducts } from "@/lib/catalog/catalog";
 import { getActiveCatalogProducts } from "@/lib/catalog/repository";
 import type { ConfiguratorProduct } from "@/lib/configurator/recommendation-engine";
 
@@ -14,15 +13,12 @@ export const metadata: Metadata = {
 };
 
 export default async function SoftenerChoicePage() {
-  const activeCatalogProducts = await getActiveCatalogProducts();
-  const catalogProducts = activeCatalogProducts.length > 0
-    ? activeCatalogProducts
-    : specialistProducts;
+  const catalogProducts = await getActiveCatalogProducts();
   const products: ConfiguratorProduct[] = catalogProducts
-    .filter((product) => product.categorySlug === "mehcalci-vode")
+    .filter((product) => product.categorySlug === "mehcalci-vode" && product.salesMode === "buy_now" && product.stockStatus === "in_stock" && product.stockQuantity > 0)
     .flatMap((product) => {
-      const unitPriceCents = product.priceCents ?? product.supplierPriceCents;
-      if (unitPriceCents === null) return [];
+      const unitPriceCents = product.priceCents;
+      if (unitPriceCents === null || unitPriceCents <= 0) return [];
       return [{
         sku: product.sku,
         slug: product.slug,
@@ -32,7 +28,7 @@ export default async function SoftenerChoicePage() {
         unitPriceCents,
         imageUrl: product.images[0]?.url ?? null,
         imageAltSl: product.images[0]?.altSl ?? product.nameSl,
-        stockQuantity: Math.max(product.stockQuantity, 1),
+        stockQuantity: product.stockQuantity,
         householdSizeMin: product.householdSizeMin,
         householdSizeMax: product.householdSizeMax,
         resinVolumeLiters: product.resinVolumeLiters,

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "BIS-054",
+    "name": "Polifosfatni filter za pralni ali pomivalni stroj",
+    "observations": [
+      { "merchant": "GGV d.o.o.", "url": "https://ggv.si/izdelek/filter-za-pralni-stroj-s-fosfati/", "priceCents": 1830, "includesVat": true, "matchNotes": "Exact catalogue source: 3/4 inch, 160 g crystals, 130 mm height. Visible live purchase price 18.30 EUR; 15 EUR is the pre-VAT price, not a second offer.", "discovery": "Web search and direct HTTPS merchant page", "liveVerified": true }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Google Shopping Slovenia URL (gl=si, hl=sl, tbm=shop) could not be opened by the web tool. Only one independently verified exact offer; no market average can be established. Atlas DOSAL and other generic polyphosphate filters were excluded because the GGV product does not identify a matching manufacturer SKU. Live merchant request on 2026-10-08."
+  },
+  {
+    "id": "BIS-060",
+    "name": "Aquaphor AQ800",
+    "observations": [
+      { "merchant": "Konik d.o.o.", "url": "https://konik.si/izdelek/mehcalna-naprava/", "priceCents": 84200, "includesVat": true, "matchNotes": "Exact AQ800 catalogue source. Live public product price 842 EUR. VAT included per merchant terms at https://konik.si/pogoji-poslovanja/.", "discovery": "Web search and direct HTTPS merchant page", "liveVerified": true }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian offer found. Google Shopping results were inaccessible. Aquaphor City 800 ml bottles are unrelated products and were excluded. Live merchant request on 2026-10-08."
+  },
+  {
+    "id": "BIS-061",
+    "name": "Tehnofan / Ecosoft Core 110 Compact",
+    "observations": [
+      { "merchant": "Tehnofan d.o.o.", "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-110-compact/", "priceCents": 79398, "includesVat": true, "matchNotes": "Exact catalogue model, ES-FU1013CABDVCR, identified by merchant as Ecosoft CORE 110, 11 L, 1.2 m3/h, 467 x 270 x 430 mm. Cached merchant page states 22% VAT included.", "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification", "liveVerified": false },
+      { "merchant": "Nanoten d.o.o. / Pipna", "url": "https://www.pipna.si/produkt/mehcalna-naprava-ecosoft-core-110/", "priceCents": 82200, "includesVat": true, "matchNotes": "Same manufacturer and exact CORE 110 model; 11 L, 1.2 m3/h, 467 x 270 x 430 mm, 3/4 inch. Public product variant 5170, Brez montaze (without installation), price 822 EUR incl VAT confirmed from live HTML. SKU is not exposed. Installation variant 934.88 EUR excluded.", "discovery": "Web search and direct HTTPS public product variation data", "liveVerified": true }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Arithmetic mean of these two model-matched offers is 807.99 EUR incl VAT. Pipna model match is based on manufacturer, model and specifications; no public SKU is provided. Tehnofan price is indexed/cached and could not be rechecked live because of Bot Verification. This is not a verified Google Shopping average."
+  },
+  {
+    "id": "BIS-064",
+    "name": "Tehnofan VD18",
+    "observations": [
+      { "merchant": "Tehnofan d.o.o.", "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd18/", "priceCents": 101504, "includesVat": true, "matchNotes": "Exact PE-960451 model, 18 L, 1 inch connection. Public merchant page shows 1015.04 EUR with 22% VAT included.", "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification", "liveVerified": false }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Mimovrste offer https://www.mimovrste.com/mehcalci-vode/tehnofan-doo-mehcalna-naprava-tehnofan-vd18-100166152815 is sold by Tehnofan - Filtri za vodo and also shows 1015.04 EUR. Excluded as duplicate merchant. Ceneje repeats those listings. Only one independent exact seller; cached price, not a verified market average."
+  },
+  {
+    "id": "BIS-066",
+    "name": "ELBA 12",
+    "observations": [
+      { "merchant": "GGV d.o.o.", "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba12/", "priceCents": 71980, "includesVat": true, "matchNotes": "Exact ELBA 12 standalone unit. Live purchase price 719.80 EUR; pre-VAT price 590 EUR.", "discovery": "Web search and direct HTTPS merchant page", "liveVerified": true }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian merchant. Turnkey ELBA 12 installation bundles include additional goods and labour and are excluded. Google Shopping inaccessible. Live merchant request on 2026-10-08."
+  },
+  {
+    "id": "BIS-067",
+    "name": "Pentair Optimo CS Mini 12 L",
+    "observations": [
+      { "merchant": "Tehnofan d.o.o.", "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-pentair-optimo-cs-mini-12l/", "priceCents": 90612, "includesVat": true, "matchNotes": "Exact PA-4035739 Pentair Optimo CS Mini 12 L. Merchant page shows 906.12 EUR with 22% VAT included.", "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification", "liveVerified": false }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Only one independent exact Slovenian seller found. Ceneje listing repeats Tehnofan and is not a separate observation. Other capacities excluded. Cached merchant price, not a verified Google Shopping average."
+  },
+  {
+    "id": "BIS-069",
+    "name": "Tehnofan VD12",
+    "observations": [
+      { "merchant": "Tehnofan d.o.o.", "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/mehcalna-naprava-tehnofan-vd12/", "priceCents": 93940, "includesVat": true, "matchNotes": "Exact VD12, 12 L, 1 inch. Merchant related-product offer on its Core 110 page explicitly shows 939.40 EUR with 22% VAT. Corroborated by same merchant selling exact model on Mimovrste.", "discovery": "Web-tool primary merchant related-product listing and exact Mimovrste partner listing; direct HTTPS returned reCAPTCHA Bot Verification", "liveVerified": false }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Source evidence also at https://www.mimovrste.com/predprazniki/tehnofan-doo-mehcalna-naprava-tehnofan-vd12-100166152776 and Tehnofan Core110 URL. Mimovrste seller is Tehnofan - Filtri za vodo, so only one merchant observation. Direct VD12 page inaccessible to web tool; primary related-product display and marketplace offer are cached. Not a verified Google Shopping average."
+  },
+  {
+    "id": "BIS-071",
+    "name": "Tehnofan Core 250 CI",
+    "observations": [
+      { "merchant": "Tehnofan d.o.o.", "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-core-250-ci/", "priceCents": 89768, "includesVat": true, "matchNotes": "Exact ES-FU1024CABCIMVCR, 24 L, Clack CI head. Public merchant page shows 897.68 EUR with 22% VAT included.", "discovery": "Web search and web-tool merchant page; direct HTTPS returned reCAPTCHA Bot Verification", "liveVerified": false }
+    ],
+    "googleShoppingVerified": false,
+    "notes": "Ekopomurje CORE 250 has DV head rather than CI and is excluded. Pipna CORE250 page does not confirm CI variant or SKU and is excluded. Only one confirmed exact Slovenian seller. Cached merchant price, not a verified Google Shopping average."
+  }
+]

@@ -381,6 +381,7 @@ export function getMerchantEligibleProducts(products = activeProducts) {
       product.salesMode === "buy_now" &&
       product.priceCents !== null &&
       product.stockStatus === "in_stock" &&
+      product.stockQuantity > 0 &&
       product.images.length > 0,
   );
 }

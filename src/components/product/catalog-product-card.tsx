@@ -8,7 +8,25 @@ import { formatMoney } from "@/lib/commerce/money";
 import type { CatalogProduct } from "@/types/catalog";
 
 export function CatalogProductCard({ product }: { product: CatalogProduct }) {
-  const cartPriceCents = product.priceCents ?? product.supplierPriceCents;
+  const hasStock = product.stockStatus === "in_stock" && product.stockQuantity > 0;
+  const cartPriceCents =
+    product.status === "active" &&
+    product.salesMode === "buy_now" &&
+    product.priceCents !== null &&
+    product.priceCents > 0 &&
+    hasStock
+      ? product.priceCents
+      : null;
+  const availabilityLabel =
+    product.status !== "active"
+      ? "Na voljo"
+      : hasStock
+        ? `Na zalogi · ${product.stockQuantity} kosov`
+        : product.stockStatus === "backorder"
+          ? "Po naročilu"
+          : product.stockStatus === "unverified"
+            ? "Preverite dobavljivost"
+            : "Ni na zalogi";
 
   return (
     <article className="catalog-product-card card">
@@ -34,7 +52,7 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
       )}
       <div className="catalog-product-card-content">
         <div className="catalog-product-card-topline">
-          <span className="eyebrow">Na voljo</span>
+          <span className="eyebrow">{availabilityLabel}</span>
           <span>{product.sku}</span>
         </div>
         <p className="product-card-brand">{product.brand}</p>
@@ -61,7 +79,7 @@ export function CatalogProductCard({ product }: { product: CatalogProduct }) {
                 unitPriceCents: cartPriceCents,
                 imageUrl: product.images[0]?.url ?? null,
                 imageAltSl: product.images[0]?.altSl ?? product.nameSl,
-                stockQuantity: Math.max(product.stockQuantity, 1),
+                stockQuantity: product.stockQuantity,
               }}
             />
           ) : null}

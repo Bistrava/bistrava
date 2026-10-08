@@ -1,0 +1,119 @@
+{
+  "observedAt": "2026-10-08",
+  "scope": "Ten sourced candidates missing from the current 24-product Bistrava storefront; not an exhaustive Slovenian market ranking.",
+  "methodology": "Compared current product-content.verified.json models against Slovenian primary merchant product pages. Merchant bestseller labels apply only to the named merchant and have no published sales counts or ranking period. Google Shopping was inaccessible during this research; no Google sales statistics were inferred.",
+  "candidates": [
+    {
+      "name": "Mehanski filter vložek pleten 25 mikronov FA 10″ BX",
+      "model": "RA5115211",
+      "family": "Replacement sediment cartridges",
+      "whyRelevant": "Adds a 25-micron BX-fit replacement cartridge; current BIS-020 is a different 5-micron sediment cartridge. Recurring maintenance purchase with an explicit compatibility distinction.",
+      "sourceURL": "https://vodni-filtri.si/izdelek/mehanski-filter-vlozek-25mcr-10-bx/",
+      "rankingSourceURL": "https://vodni-filtri.si/kategorija-izdelka/filtri-za-gospodinjstvo/nad_pultni_filter_za_vodo/",
+      "evidenceKind": "merchant_bestseller",
+      "evidenceNotes": "Listed in the merchant's Najbolj prodajani widget, confirmed by direct live HTTPS HTML on 2026-10-08. This is the merchant's undated bestseller claim, not independently measured national popularity. Primary product page specifies 10-inch BX, 25 microns, 250 x 61 x 30 mm.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm supplier purchase price and Bistrava stock.", "Select one-unit packaging; do not merge 1/2/3/4-unit offers.", "Obtain authorized product images and manufacturer identifier; preserve BX connection compatibility."]
+    },
+    {
+      "name": "Filter vložek oglje v granulatu LA 10 BX TS",
+      "model": "LA 10 BX TS / EAN 8021647022875",
+      "family": "Activated-carbon cartridges",
+      "whyRelevant": "Current 24 products contain no standalone activated-carbon cartridge. Adds replacement filtration for taste and chlorine use cases in compatible 10-inch BX housings.",
+      "sourceURL": "https://vodni-filtri.si/izdelek/filter-vlozek-aktivno-oglje-v-granulatu-v10-tip-bx/",
+      "rankingSourceURL": "https://vodni-filtri.si/kategorija-izdelka/filtri-za-gospodinjstvo/nad_pultni_filter_za_vodo/",
+      "evidenceKind": "merchant_bestseller",
+      "evidenceNotes": "Listed in Najbolj prodajani, confirmed by direct live HTTPS HTML on 2026-10-08. Ranking period and sales quantities not disclosed. Product page lists 252 x 70 x 25 mm and EAN; claimed performance must be checked against manufacturer documentation.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm purchasing terms, stock and final price.", "Obtain authorized images and manufacturer brand information.", "Keep BX compatibility explicit; do not substitute SX cartridges."]
+    },
+    {
+      "name": "Reverzna osmoza RO NOKKA 800 PLUS",
+      "model": "RO NOKKA 800 PLUS / 800 GPD",
+      "family": "Under-sink reverse osmosis",
+      "whyRelevant": "Adds a drinking-water RO system, absent from the current softener-heavy assortment. Merchant specifies direct flow up to 2 L/min and a smart faucet.",
+      "sourceURL": "https://ggv.si/izdelek/reverzna-osmoza-ro-nokka-800-plus/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Exact primary merchant product page with technical specifications and EUR retail offer. No bestseller claim or sales ranking verified.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm model/version, GTIN or MPN, supply agreement and Bistrava stock.", "Verify electrical, pressure and drain requirements using manufacturer documentation.", "Obtain authorized images and replacement cartridge availability.", "Set Bistrava selling price separately from merchant retail reference."]
+    },
+    {
+      "name": "REVERZNA OSMOZA EKO–BLUE–RO 80M1",
+      "model": "EKO–BLUE–RO 80M1 / merchant code 3830017082716",
+      "family": "Multi-stage under-sink reverse osmosis",
+      "whyRelevant": "Provides a second supplier option for RO drinking-water systems and identifies replacement stages; currently no RO offering among the 24 products.",
+      "sourceURL": "https://ekom.si/filtri-za-gospodinjstvo/reverzna-povratna-osmoza-eko-blue-ro-80m1/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary EKOM catalog describes six stages and replacement codes. No public price or bestseller ranking verified. Page has a mismatched subheading about a rainwater filter; manufacturer confirmation is needed before relying on the code or specifications.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Request exact quotation, availability, package contents and model identifier.", "Resolve inconsistent source-page heading/code with supplier.", "Obtain technical documentation and authorized photos.", "Do not repeat microbial-removal claims without model-specific evidence."]
+    },
+    {
+      "name": "BIO-UV HOME 3",
+      "model": "BIO-UV-UVH004273",
+      "family": "UV water disinfection",
+      "whyRelevant": "Adds a UV category for private-water and rainwater treatment applications. Current products do not include a UV unit.",
+      "sourceURL": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/uv-sterilizatorji-lastna-zajetja-filtri-za-celo-hiso/uv-sterilizatorji-uv-sterilizatorji-lastna-zajetja-filtri-za-celo-hiso/uv-sterilizator-home-3/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Tehnofan lists 55 W, 3.2 m3/h at 40 mJ/cm2 and 3/4-inch connections. Primary merchant product with price and specification, not a verified bestseller.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Obtain supplier terms, actual stock and manufacturer documentation.", "State UV-transmittance, flow and pretreatment conditions rather than unconditional safe-water promises.", "Source compatible replacement lamp and quartz sleeve.", "Obtain authorized images and identifier."]
+    },
+    {
+      "name": "Everpure 4C under-sink kit: head plus cartridge",
+      "model": "Everpure 4C; distinguish 4C2 variant",
+      "family": "Under-sink drinking-water filtration",
+      "whyRelevant": "Adds a compact drinking-water filter and future cartridge replenishment pathway without another whole-house softener.",
+      "sourceURL": "https://ggv.si/izdelek/podpultni-filtrirni-sistem-everpure-glava-kartusa/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary GGV page lists a head-and-cartridge kit with 4C and 4C2 choices and a price range. This is not a single exact priced variant and not a bestseller ranking.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Select 4C or 4C2 explicitly, with exact part numbers and contents.", "Exclude merchant installation service from Bistrava's product-only offer.", "Obtain supply terms, authorized images and compatible replacement cartridge.", "Verify model-specific filtration claims; do not copy broad virus-removal claims from marketing text."]
+    },
+    {
+      "name": "BRITA Marella white 2.4 L + 3 MAXTRA PRO All-in-1 cartridges",
+      "model": "BRITA 1051931 / EAN 4006387126810",
+      "family": "Filter jugs",
+      "whyRelevant": "Adds a countertop, installation-free entry product; filter jugs are entirely absent from the current 24.",
+      "sourceURL": "https://vodni-filtri.si/izdelek/brita-marella-vrc-za-filtriranje-vode/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary merchant page identifies exact jug and three-cartridge bundle. Observed page says out of stock. No Slovenian bestseller ranking verified.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Find an available supplier; do not inherit the requested 15 units for this new candidate.", "Preserve white color, 2.4 L jug and three-cartridge package in price comparison.", "Confirm brand distribution terms, authorized images and GTIN."]
+    },
+    {
+      "name": "BRITA MAXTRA PRO limescale-reduction replacement cartridge package",
+      "model": "Merchant-listed EAN 4006387122201; package count requires confirmation",
+      "family": "Jug replacement cartridges",
+      "whyRelevant": "Adds consumables to accompany a BRITA jug and serves existing compatible jug owners.",
+      "sourceURL": "https://vodni-filtri.si/izdelek/kartuse-za-filtrini-vrc-brita/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary page gives EAN and MAXTRA PRO limescale-reduction positioning, but visible extracted text does not establish the pack count. No bestseller ranking verified.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm exact cartridge variant and pack count from packaging/GTIN.", "Compare prices only for that identical pack.", "Obtain supplier availability and authorized images."]
+    },
+    {
+      "name": "GGV shower filter with KDF 55 and GAC, 1/2-inch",
+      "model": "Filter za tuš (prho); choose white or chrome variant",
+      "family": "Shower filtration",
+      "whyRelevant": "Adds a targeted bathroom product distinct from the existing washing-machine phosphate filter.",
+      "sourceURL": "https://ggv.si/izdelek/filter-za-tus-prho/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary page specifies 1/2-inch connections, white/chrome choices, KDF 55 and GAC, plus a replacement cartridge. No bestseller ranking verified.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm manufacturer model/MPN, color variant and supplier terms.", "Source replacement cartridge and authorized product images.", "Use supported filtration claims; do not describe a carbon/KDF filter as equivalent to an ion-exchange softener."]
+    },
+    {
+      "name": "ATLAS Hydra TRIO DP RLH 1″ complete filter set",
+      "model": "Merchant SKU RA6095163 - 1",
+      "family": "Multi-stage whole-house filtration",
+      "whyRelevant": "Adds a complete mechanical-plus-carbon system; the current Cintropur NW25 and Gevor products cover different mechanical filtration configurations.",
+      "sourceURL": "https://vodni-filtri.si/izdelek/trojni-hisni-filter-atlas-hydra-trio-dp-rlh-1-bx-sx/",
+      "evidenceKind": "merchant_catalog",
+      "evidenceNotes": "Primary page identifies a 1-inch Hydra Trio kit containing 90-micron washable, 25-micron wound and 5-micron carbon stages, with mounting accessories. Not a verified bestseller.",
+      "presentIn24": false,
+      "constraintsBeforeImport": ["Confirm complete kit composition, 1-inch version, supplier price and stock.", "Obtain manufacturer installation requirements, identifier and authorized images.", "Map each compatible replacement cartridge before publishing the kit."]
+    }
+  ]
+}

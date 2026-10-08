@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { specialistProducts } from "@/lib/catalog/catalog";
 import { productSchema } from "@/lib/seo/structured-data";
+import { siteConfig } from "@/lib/seo/site";
 
 const sourceProduct = specialistProducts[0]!;
 
@@ -29,6 +30,8 @@ describe("productSchema", () => {
       priceCurrency: "EUR",
       price: "1299.00",
       availability: "https://schema.org/InStock",
+      url: new URL(sourceProduct.canonical, siteConfig.url).href,
     });
+    expect(schema.url).toBe(new URL(sourceProduct.canonical, siteConfig.url).href);
   });
 });

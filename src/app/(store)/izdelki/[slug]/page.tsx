@@ -13,9 +13,8 @@ import {
   getCatalogProduct,
   getCatalogCategory,
   getCategoryDetails,
-  getProductsByCategory,
 } from "@/lib/catalog/catalog";
-import { getActiveCatalogProduct } from "@/lib/catalog/repository";
+import { getActiveCatalogProduct, getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 import { JsonLd } from "@/components/seo/json-ld";
 import { productSchema } from "@/lib/seo/structured-data";
 
@@ -87,15 +86,18 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = (await getActiveCatalogProduct(slug)) ?? getCatalogProduct(slug);
+  const storefrontProducts = await getStorefrontCatalogProducts();
+  const product = storefrontProducts.find((candidate) => candidate.slug === slug);
   if (!product) notFound();
 
   const category = getCatalogCategory(product.categorySlug);
   if (!category) notFound();
   const details = getCategoryDetails(product.categorySlug);
-  const cartPriceCents = product.priceCents ?? product.supplierPriceCents;
-  const relatedProducts = getProductsByCategory(product.categorySlug)
-    .filter((candidate) => candidate.slug !== product.slug)
+  const cartPriceCents = product.priceCents;
+  const canAddToCart = product.status === "active" && cartPriceCents !== null && cartPriceCents > 0 &&
+    product.salesMode === "buy_now" && product.stockStatus === "in_stock" && product.stockQuantity > 0;
+  const relatedProducts = storefrontProducts
+    .filter((candidate) => candidate.categorySlug === product.categorySlug && candidate.slug !== product.slug)
     .slice(0, 3);
 
   return (
@@ -123,7 +125,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <CatalogProductVisual categorySlug={product.categorySlug} productName={product.nameSl} />
           )}
           <div className="product-summary">
-            <span className="eyebrow">Na voljo</span>
+            <span className="eyebrow">{product.status === "active" ? stockLabels[product.stockStatus] : "Na voljo"}</span>
             <p className="product-brand">{product.brand}</p>
             <h1>{product.nameSl}</h1>
             <p className="product-short-description">{product.shortDescriptionSl}</p>
@@ -161,7 +163,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </a>
               ) : null}
             </div>
-            {cartPriceCents !== null ? (
+            {canAddToCart && cartPriceCents !== null ? (
               <AddToCart
                 product={{
                   sku: product.sku,
@@ -170,7 +172,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   unitPriceCents: cartPriceCents,
                   imageUrl: product.images[0]?.url ?? null,
                   imageAltSl: product.images[0]?.altSl ?? product.nameSl,
-                  stockQuantity: Math.max(product.stockQuantity, 1),
+                  stockQuantity: product.stockQuantity,
                 }}
               />
             ) : (
@@ -181,7 +183,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <dl className="product-quick-facts">
               <div><dt>SKU</dt><dd>{product.sku}</dd></div>
               <div><dt>Kategorija</dt><dd>{category.name}</dd></div>
-              <div><dt>Javna zaloga</dt><dd>{stockLabels[product.stockStatus]}</dd></div>
+              <div><dt>Zaloga</dt><dd>{stockLabels[product.stockStatus]}{product.stockStatus === "in_stock" ? ` · ${product.stockQuantity} kosov` : ""}</dd></div>
             </dl>
           </div>
         </div>

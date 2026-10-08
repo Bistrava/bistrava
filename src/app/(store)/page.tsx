@@ -14,16 +14,18 @@ import Link from "next/link";
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ReviewStandardsSection } from "@/components/store/review-standards-section";
-import { allCategories, catalogProducts } from "@/lib/catalog/catalog";
+import { allCategories } from "@/lib/catalog/catalog";
+import { getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 import { frequentlyAskedQuestions } from "@/lib/content/faq";
 import { featuredGuides } from "@/lib/content/guides";
 import { faqSchema } from "@/lib/seo/structured-data";
 
 const homeFaq = frequentlyAskedQuestions.slice(0, 5);
-const featuredProducts = catalogProducts.slice(0, 6);
 const categoryIcons = [Droplets, ShieldCheck, FlaskConical, PackageCheck] as const;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const catalogProducts = await getStorefrontCatalogProducts();
+  const featuredProducts = catalogProducts.slice(0, 6);
   return (
     <>
       <JsonLd data={faqSchema([...homeFaq])} />

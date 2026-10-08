@@ -77,7 +77,7 @@ export function productSchema(product: CatalogProduct): Record<string, unknown> 
     name: product.nameSl,
     description: product.shortDescriptionSl,
     sku: product.sku,
-    url: product.canonical,
+    url: absoluteUrl(product.canonical),
     brand: { "@type": "Brand", name: product.brand },
   };
 
@@ -97,7 +97,7 @@ export function productSchema(product: CatalogProduct): Record<string, unknown> 
     }[product.stockStatus];
     schema.offers = {
       "@type": "Offer",
-      url: product.canonical,
+      url: absoluteUrl(product.canonical),
       priceCurrency: product.currency,
       price: (product.priceCents / 100).toFixed(2),
       availability,

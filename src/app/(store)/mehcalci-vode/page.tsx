@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
-import {
-  allCategories,
-  catalogProducts,
-  getProductsByCategory,
-} from "@/lib/catalog/catalog";
+import { allCategories } from "@/lib/catalog/catalog";
+import { getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 
 export const metadata: Metadata = {
   title: "Mehčalci vode za hišo in stanovanje",
@@ -14,7 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/mehcalci-vode" },
 };
 
-export default function WaterSoftenersPage() {
+export default async function WaterSoftenersPage() {
+  const catalogProducts = await getStorefrontCatalogProducts();
   return (
     <section className="section category-products" id="katalog">
       <div className="container">
@@ -24,12 +22,12 @@ export default function WaterSoftenersPage() {
             <h1>{catalogProducts.length} izdelkov v štirih skupinah</h1>
           </div>
           <p>
-            Vsak izdelek ima fotografije, opis, tehnične podatke in sledljiv vir
-            informativne cene. Razpoložljivost je označena na produktni kartici.
+            Primerjajte izdelke, preverite cene z DDV in izberite rešitev za svoj dom.
+            Trenutna zaloga je prikazana pri vsakem izdelku.
           </p>
         </div>
         {allCategories.map((category) => {
-          const products = getProductsByCategory(category.slug);
+          const products = catalogProducts.filter((product) => product.categorySlug === category.slug);
           if (products.length === 0) return null;
           return (
             <section className="draft-product-group" id={category.slug} key={category.slug}>

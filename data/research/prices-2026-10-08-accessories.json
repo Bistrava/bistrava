@@ -1,0 +1,138 @@
+[
+  {
+    "id": "BIS-074",
+    "name": "Wireless Water Guard – sistem proti izlitju vode",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/sistem-proti-izlitju-wireless-water-guard/",
+        "priceCents": 20000,
+        "includesVat": true,
+        "matchNotes": "Exact 3/4-inch version, SKU 010555, valve plus one sensor. Live WooCommerce variation data: display_price 200, current in-stock purchasable offer. Regular crossed-out 250 EUR excluded.",
+        "discovery": "Web search followed by direct live HTTPS HTML WooCommerce variation data on 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Google Shopping gl=si hl=sl tbm=shop failed with Internal Error on google.com and google.si. Only one Slovenian merchant found. This is a single-offer reference, not a Google Shopping market average. Catalog currently says 3/4 or 1 inch: use 200 EUR only if the sellable item is explicitly the 3/4-inch version. Live 1-inch version SKU 010555-1 costs 208 EUR and also contains one sensor; do not average differently sized variants. Ceneje's 48.98 EUR listing concerns the sensor, not this kit."
+  },
+  {
+    "id": "BIS-076",
+    "name": "Midnight 12 – pametna mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-12/",
+        "priceCents": 99900,
+        "includesVat": true,
+        "matchNotes": "Exact Midnight 12 standalone softener, SKU 010625. Live Product/Offer JSON-LD price 999.00 EUR, valueAddedTaxIncluded true, InStock. Installation packages excluded.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "One independent Slovenian merchant found. Ceneje repeats GGV, so it is not counted again. Single-offer reference, not a verified Google Shopping average."
+  },
+  {
+    "id": "BIS-077",
+    "name": "ELBA 30 – ionska mehčalna naprava velike zmogljivosti",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-elba-30/",
+        "priceCents": 89090,
+        "includesVat": true,
+        "matchNotes": "Exact ELBA 30 standalone softener, SKU 010003. Live Product/Offer JSON-LD price 890.90 EUR, VAT included, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Shoppster https://www.shoppster.si/p/2968048 lists PRIMA Elba 30 at 923.90 EUR but explicitly cannot currently be purchased; excluded from available-offer average. Ceneje repeats GGV. Only one currently purchasable merchant verified; no Google Shopping average verified."
+  },
+  {
+    "id": "BIS-078",
+    "name": "Midnight 30 – pametna mehčalna naprava velike zmogljivosti",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/ionska-mehcalna-naprava-midnight-30/",
+        "priceCents": 119900,
+        "includesVat": true,
+        "matchNotes": "Exact Midnight 30 standalone softener, SKU 010515. Live Product/Offer JSON-LD price 1199.00 EUR, VAT included, InStock. Installation bundle excluded.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "One independent Slovenian merchant verified. Ceneje repeats GGV's 1199 EUR offer, not a second merchant. Single-offer reference; Google Shopping not accessible."
+  },
+  {
+    "id": "BIS-082",
+    "name": "Adriatica 15 L – ionska mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "Konik d.o.o.",
+        "url": "https://konik.si/izdelek/mehcalna-naprava-adriatica-15l/",
+        "priceCents": 87840,
+        "includesVat": true,
+        "matchNotes": "Exact Adriatica 15 L, SKU 874, standalone unit. Live Product/Offer JSON-LD price 878.40 EUR, valueAddedTaxIncluded true, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Mimovrste also displays the same 15 L model at 841.80 EUR (https://www.mimovrste.com/vrci-za-filtriranje-vode-filtri/konik-doo-mehcalna-naprava-adriatica-15l-100075503076), seller KONIK D.O.O. This is a different sales channel of the same merchant, not independent evidence, and is excluded from merchant averaging. Primary merchant's live price retained. Only one independent seller found; Google Shopping not verified."
+  },
+  {
+    "id": "BIS-083",
+    "name": "AntraciteAzure 250 Clack Compact – mehčalna naprava",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/trgovina/filtri-za-celo-hiso/vodni-kamen-filtri-za-celo-hiso/ionske-mehcalne-naprave-vodni-kamen-filtri-za-celo-hiso/ionska-mehcalna-naprava-tehnofan-antraciteazure-250-clack-compact/",
+        "priceCents": 118584,
+        "includesVat": true,
+        "matchNotes": "Exact AntraciteAzure 250 Clack Compact with 25 L resin, 1-inch connection, bypass, SKU ES-FU1035CABGDV. Primary merchant web page says 1185.84 EUR including 22% VAT. Direct HTTPS request returned no readable product/price data, so no live-fetch confirmation.",
+        "discovery": "Web-open primary merchant page and Google-style web search; indexed result corroborated by Tehnofan's own Mimovrste partner offer."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": false,
+    "notes": "Mimovrste https://www.mimovrste.com/mehcalci-vode/tehnofan-doo-ionska-mehcalna-naprava-100166172643 displays 1185.84 EUR, sold by Tehnofan - Filtri za vodo; same seller, not an independent observation. Ceneje and Pametno duplicate it. Single-merchant reference with indexed-page timing limitation; Google Shopping not verified."
+  },
+  {
+    "id": "BIS-084",
+    "name": "Dodatni senzor Wireless Water Guard za izlitje vode",
+    "observations": [
+      {
+        "merchant": "GGV d.o.o.",
+        "url": "https://ggv.si/izdelek/senzor-sistem-proti-izlitju-wireless-water-guard/",
+        "priceCents": 4898,
+        "includesVat": true,
+        "matchNotes": "Exact additional wireless sensor, SKU 010554, not complete valve kit. Live Product/Offer JSON-LD price 48.98 EUR, VAT included, InStock.",
+        "discovery": "Web search and primary merchant page; direct live HTTPS Product/Offer JSON-LD confirmed 2026-10-08."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": true,
+    "notes": "Only one independent Slovenian merchant found. Ceneje's ambiguously titled Wireless Water Guard 48.98 EUR listing is this sensor and must not be used for BIS-074. Single-offer reference, not Google Shopping average."
+  },
+  {
+    "id": "BIS-086",
+    "name": "Tehnofan RB-29090500 – regulator tlaka 3/4″ s filtrom",
+    "observations": [
+      {
+        "merchant": "Tehnofan d.o.o.",
+        "url": "https://filtri-za-vodo.si/kategorija-izdelka/ohisja-pipe-drugo/drugo/",
+        "priceCents": 8418,
+        "includesVat": true,
+        "matchNotes": "Exact membrane pressure reducer 3/4 inch, 800 micron, PN25. Merchant category displays 84.18 EUR including 22% VAT. Indexed product page identifies SKU RB-29090500 and same price. Direct HTTPS product page returned a challenge rather than product data.",
+        "discovery": "Web search indexed primary merchant product and web-open primary merchant category. Ceneje corroborates same seller's 84.18 EUR offer."
+      }
+    ],
+    "googleShoppingVerified": false,
+    "livePriceVerified": false,
+    "notes": "Canonical product URL: https://filtri-za-vodo.si/trgovina/ohisja-pipe-drugo/drugo/reducirni-ventil-membranski-z-merilno-regulacijo-in-filtrom-800mcr/ . No second matching merchant found. Primary indexed pages confirm price but direct live fetch blocked; not a verified Google Shopping average."
+  }
+]

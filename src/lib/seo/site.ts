@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Bistrava",
   tagline: "Mehka voda. Pametna izbira.",
   positioning: "Bistrava - strokovnjak za mehko vodo brez vodnega kamna",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava-six.vercel.app",
   locale: "sl-SI",
   currency: "EUR",
 } as const;

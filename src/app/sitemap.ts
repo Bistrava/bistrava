@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 
-import { getIndexableProductSlugs } from "@/lib/catalog/repository";
+import { getActiveCatalogProducts } from "@/lib/catalog/repository";
 import { guides } from "@/lib/content/guides";
 import { absoluteUrl } from "@/lib/seo/site";
+
+export const dynamic = "force-dynamic";
 
 const marketingRoutes = [
   "",
@@ -21,7 +23,7 @@ const marketingRoutes = [
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const productSlugs = await getIndexableProductSlugs();
+  const products = await getActiveCatalogProducts();
   const updated = new Date("2026-08-23T00:00:00.000Z");
   return [
     ...marketingRoutes.map((path) => ({
@@ -38,9 +40,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly" as const,
         priority: 0.65,
       })),
-    ...productSlugs.map((slug) => ({
-      url: absoluteUrl(`/izdelki/${slug}`),
-      lastModified: updated,
+    ...products.map((product) => ({
+      url: absoluteUrl(`/izdelki/${product.slug}`),
+      lastModified: new Date(product.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),

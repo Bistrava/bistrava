@@ -1,4 +1,5 @@
 import "server-only";
+import { z } from "zod";
 
 import {
   previewCustomerProfiles,
@@ -14,6 +15,8 @@ import { getAdminAccess } from "@/lib/auth/admin";
 import type { AdminShippingData } from "@/lib/admin/order-management";
 
 type UnknownRecord = Record<string, unknown>;
+
+const adminOrderSelect = "id,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)";
 
 function record(value: unknown): UnknownRecord {
   return value && typeof value === "object" && !Array.isArray(value)
@@ -135,7 +138,7 @@ function mapProfile(row: UnknownRecord): AdminCustomerProfile {
   };
 }
 
-export async function getAdminCommerceData(): Promise<AdminCommerceData> {
+export async function getAdminCommerceData(orderId?: string): Promise<AdminCommerceData> {
   const access = await getAdminAccess();
   if (access.status !== "authorized" && !(access.status === "not_configured" && process.env.NODE_ENV === "development")) {
     return { source: "unavailable", orders: [], profiles: [] };
@@ -152,7 +155,7 @@ export async function getAdminCommerceData(): Promise<AdminCommerceData> {
   const [ordersResult, profilesResult, staffResult] = await Promise.all([
     supabase
       .from("orders")
-      .select("id,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)")
+      .select(adminOrderSelect)
       .order("created_at", { ascending: false }),
     supabase
       .from("profiles")
@@ -164,9 +167,21 @@ export async function getAdminCommerceData(): Promise<AdminCommerceData> {
   if (ordersResult.error || !ordersResult.data || profilesResult.error || staffResult.error) {
     return { source: "unavailable", orders: [], profiles: [] };
   }
+
+  const orderRows = ordersResult.data as UnknownRecord[];
+  const requestedOrder = z.uuid().safeParse(orderId);
+  // A notification may target an older order beyond PostgREST's row limit.
+  // Fetch only that explicit ID with the same authenticated client and fields.
+  if (requestedOrder.success && !orderRows.some((row) => row.id === requestedOrder.data)) {
+    const target = await supabase.from("orders").select(adminOrderSelect)
+      .eq("id", requestedOrder.data).maybeSingle();
+    if (target.error) return { source: "unavailable", orders: [], profiles: [] };
+    if (target.data) orderRows.unshift(target.data as UnknownRecord);
+  }
+
   return {
     source: "live",
-    orders: (ordersResult.data as UnknownRecord[]).map(mapOrder),
+    orders: orderRows.map(mapOrder),
     profiles: !profilesResult.data
       ? []
       : (profilesResult.data as UnknownRecord[])

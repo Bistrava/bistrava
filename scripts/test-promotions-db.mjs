@@ -35,7 +35,8 @@ try {
     alter table storage.objects enable row level security;
     create function storage.extension(text) returns text language sql as $$select regexp_replace($1,'^.*[.]','')$$;
     grant usage on schema public,auth to anon,authenticated,service_role;
-    alter default privileges in schema public grant all on tables to anon,authenticated,service_role;`);
+    alter default privileges in schema public grant all on tables to anon,authenticated,service_role;
+    create publication supabase_realtime;`);
   const migrations = (await readdir(new URL("../supabase/migrations/", import.meta.url))).filter((filename) => filename.endsWith(".sql")).sort();
   for (const filename of migrations) {
     stage = filename;
@@ -187,6 +188,10 @@ try {
   stage = "shipping threshold rollback suite";
   await db.exec(await readFile(new URL("../supabase/tests/shipping_thresholds.sql", import.meta.url), "utf8")); checks++;
   check(await scalar("select count(*)::int from public.products"), 2);
+  stage = "notification isolation rollback suite";
+  await db.exec(await readFile(new URL("../supabase/tests/admin_notifications.sql", import.meta.url), "utf8")); checks++;
+  check(await scalar("select count(*)::int from public.admin_notification_reads"), 0);
+  check((await db.query("select tablename from pg_publication_tables where pubname='supabase_realtime' order by tablename")).rows.map((row) => row.tablename), ["admin_notification_reads", "email_events", "orders", "quote_requests"]);
   console.log(JSON.stringify({ status: "passed", checks, migrations: migrations.length, database: "ephemeral PGlite; no Supabase writes" }));
 } catch (error) {
   console.error(JSON.stringify({ status: "failed", stage, checks, message: error.message, detail: error.detail, where: error.where }));

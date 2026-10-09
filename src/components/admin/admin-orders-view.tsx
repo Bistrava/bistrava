@@ -22,6 +22,7 @@ import {
 import { useDeferredValue, useMemo, useState } from "react";
 
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
+import { AdminNotificationsSeen } from "./admin-notifications";
 import { OrderManagementForm } from "@/components/admin/order-management-form";
 import "@/components/admin/order-admin.css";
 import type {
@@ -348,9 +349,22 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const labels = copy[locale];
   const [view, setView] = useState<View>(initialView);
   const [query, setQuery] = useState("");
-  const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase(locale));
+  const deferredQueryValue = useDeferredValue(query.trim().toLocaleLowerCase(locale));
+  const deferredQuery = query.trim() ? deferredQueryValue : "";
   const [status, setStatus] = useState<"all" | AdminOrderStatus>("all");
   const [selectedOrderId, setSelectedOrderId] = useState(initialOrderId || data.orders[0]?.id || "");
+  const [linkedOrderId, setLinkedOrderId] = useState(initialOrderId);
+  // A notification can navigate to another order without remounting this page.
+  // Apply that explicit navigation before committing an unrelated order detail.
+  if (linkedOrderId !== initialOrderId) {
+    setLinkedOrderId(initialOrderId);
+    if (initialOrderId) {
+      setSelectedOrderId(initialOrderId);
+      setView("orders");
+      setQuery("");
+      setStatus("all");
+    }
+  }
   const customers = useMemo(
     () => createCustomers(data.orders, data.profiles),
     [data.orders, data.profiles],
@@ -458,7 +472,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
             ))}
             {filteredOrders.length === 0 ? <p className="admin-operational-empty">{labels.noOrders}</p> : null}
           </section>
-          {selectedOrder ? <OrderDetail canManage={canManage && data.source === "live"} formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
+          {selectedOrder ? <OrderDetail canManage={canManage && data.source === "live"} trackNotifications={data.source === "live"} formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
         </div>
       ) : (
         <div className="admin-order-workspace" role="tabpanel">
@@ -483,7 +497,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
 
 type Labels = typeof copy.sl | typeof copy.fr;
 
-function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paymentStatusLabel, shipmentStatusLabel, providerLabel, canManage }: { order: AdminOrder; labels: Labels; formatDate: (value: string | null) => string; formatMoney: (value: number) => string; statusLabel: (value: AdminOrderStatus) => string; paymentStatusLabel: (value: string | null | undefined) => string; shipmentStatusLabel: (value: string | null | undefined) => string; providerLabel: (value: string | null | undefined) => string; canManage: boolean }) {
+function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paymentStatusLabel, shipmentStatusLabel, providerLabel, canManage, trackNotifications }: { order: AdminOrder; labels: Labels; formatDate: (value: string | null) => string; formatMoney: (value: number) => string; statusLabel: (value: AdminOrderStatus) => string; paymentStatusLabel: (value: string | null | undefined) => string; shipmentStatusLabel: (value: string | null | undefined) => string; providerLabel: (value: string | null | undefined) => string; canManage: boolean; trackNotifications: boolean }) {
   const timeline = [
     { label: labels.created, date: order.createdAt },
     { label: labels.paid, date: order.payment?.paidAt ?? null },
@@ -494,7 +508,8 @@ function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paym
   ].flatMap((event) => event.date ? [{ label: event.label, date: event.date }] : []);
 
   return (
-    <aside className="admin-order-detail card" aria-label={labels.orderDetail}>
+    <aside id={`order-${order.id}`} className="admin-order-detail card" aria-label={labels.orderDetail}>
+      {trackNotifications ? <AdminNotificationsSeen category="orders" entityIds={[order.id]} /> : null}
       <header><div><p className="section-kicker">{labels.orderDetail}</p><h2>{order.reference}</h2><span>{labels.placed}: {formatDate(order.placedAt || order.createdAt)} · {labels.updated}: {formatDate(order.updatedAt)}</span></div><span className={`admin-order-status is-${statusTone[order.status]}`}>{statusLabel(order.status)}</span></header>
       <div className="admin-order-detail-grid">
         <section><h3><UserRound size={17} />{labels.contact}</h3><p><strong>{customerName(order)}</strong>{order.shippingAddress.company ? <span>{order.shippingAddress.company}</span> : null}<span><Mail size={14} />{order.email}</span>{order.phone ? <span><Phone size={14} />{order.phone}</span> : null}<small>{order.profileId ? labels.registeredAccount : labels.guest}</small></p></section>

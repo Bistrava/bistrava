@@ -26,7 +26,7 @@ export default async function AdminOrdersPage({ searchParams }: { searchParams: 
     );
   }
 
-  const data = await getAdminCommerceData();
+  const data = await getAdminCommerceData(order);
 
   return (
     <AdminWorkspace access={access} active="orders">

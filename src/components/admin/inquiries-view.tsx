@@ -4,13 +4,14 @@ import { useActionState, useCallback, useState } from "react";
 import { saveAdminInquiry } from "@/actions/admin-inquiries";
 import { useAdminLanguage } from "./admin-i18n";
 import { AdminLiveUpdates, type AdminLiveTable } from "./live-updates";
+import { AdminNotificationsSeen } from "./admin-notifications";
 import "./operations.css";
 
 export type AdminInquiry = { id: string; name: string; email: string; phone: string | null; message: string; status: string; internal_note: string | null; product_slug: string | null; created_at: string; updated_at: string };
 const statuses = { new: { fr: "Nouveau", sl: "Novo" }, in_review: { fr: "En cours", sl: "V obravnavi" }, responded: { fr: "Répondu", sl: "Odgovorjeno" }, closed: { fr: "Clôturé", sl: "Zaključeno" } };
 const liveTables: readonly AdminLiveTable[] = ["quote_requests"];
 
-export function InquiriesView({ items, canManage, liveEnabled = true }: { items: AdminInquiry[] | null; canManage: boolean; liveEnabled?: boolean }) {
+export function InquiriesView({ items, canManage, liveEnabled = true, initialInquiryId }: { items: AdminInquiry[] | null; canManage: boolean; liveEnabled?: boolean; initialInquiryId?: string }) {
   const { locale } = useAdminLanguage();
   const fr = locale === "fr";
   const [filter, setFilter] = useState("");
@@ -29,13 +30,14 @@ export function InquiriesView({ items, canManage, liveEnabled = true }: { items:
   const displayed = [...(items ?? [])];
   const presentIds = new Set(displayed.map(item => item.id));
   for (const item of draftItems.values()) if (!presentIds.has(item.id)) displayed.push(item);
-  const visible = displayed.filter(item => draftItems.has(item.id) || !filter || item.status === filter);
+  const visible = displayed.filter(item => item.id === initialInquiryId || draftItems.has(item.id) || !filter || item.status === filter);
   const paused = draftItems.size > 0;
 
   return (
     <>
       <header className="admin-page-heading"><div><p className="section-kicker">Bistrava</p><h1>{fr ? "Messages clients" : "Sporočila kupcev"}</h1><p>{fr ? "Consultez les demandes et suivez leur traitement. Les réponses s’envoient depuis votre messagerie." : "Preberite sporočila in spremljajte obravnavo. Odgovore pošljete iz svoje e-pošte."}</p></div></header>
       <AdminLiveUpdates tables={liveTables} paused={paused} disabled={!liveEnabled} />
+      {liveEnabled ? <AdminNotificationsSeen category="inquiries" entityIds={visible.map(item => item.id)} /> : null}
       <div className="ops-form">
         <label>{fr ? "Statut" : "Stanje"}<select value={filter} onChange={event => setFilter(event.target.value)} disabled={paused}>
           <option value="">{fr ? "Tous" : "Vsa"}</option>
@@ -44,7 +46,7 @@ export function InquiriesView({ items, canManage, liveEnabled = true }: { items:
       </div>
       <div className="ops-cards" style={{ marginTop: 20 }}>
         {visible.map(item => (
-          <article key={item.id} className="admin-dashboard-panel card">
+          <article key={item.id} id={`demande-${item.id}`} className="admin-dashboard-panel card">
             <h2>{item.name}</h2>
             <p><a href={`mailto:${item.email}`}>{item.email}</a>{item.phone ? ` · ${item.phone}` : ""}</p>
             <p className="ops-meta">{new Date(item.created_at).toLocaleDateString(fr ? "fr-FR" : "sl-SI")} · {item.product_slug ?? "Bistrava"}</p>

@@ -43,4 +43,6 @@ No email integration is attached to the Bistrava Vercel project, and production 
 
 Before implementing receiving and replies, confirm the actual Bistrava email address, its current provider, and an owned sending domain. Resend was discovered in Vercel Marketplace as `resend/resend-email`; provisioning requires the real domain. Preserve existing mailbox MX records; use a verified receiving subdomain or mailbox forwarding where appropriate.
 
+The owner has confirmed purchasing `bistrava.com` from LWS and reports waiting for DNS propagation. No DNS or mailbox configuration was changed during the admin notification work. The actual mailbox address and whether email hosting is provisioned at LWS remain to be confirmed.
+
 The later implementation must persist incoming and outgoing messages, verify signed webhooks using the raw request body, deduplicate provider events, enforce staff authorization, and send replies with stable idempotency keys. Keep RFC message IDs separate from provider UUIDs for threading. Display escaped text, and test deliveries only to an explicitly approved recipient.

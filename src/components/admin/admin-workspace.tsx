@@ -27,6 +27,7 @@ import {
   useAdminLanguage,
 } from "@/components/admin/admin-i18n";
 import type { AdminPageAccess } from "@/lib/auth/admin-page";
+import { AdminNotificationsProvider, AdminNotificationsBell, AdminNotificationNavBadge, AdminNotificationsSummary } from "./admin-notifications";
 
 type WorkspaceAccess = Exclude<AdminPageAccess, { mode: "not_configured" }>;
 
@@ -78,6 +79,7 @@ export function AdminWorkspace({
   const { locale, t, toggleLanguage } = useAdminLanguage();
 
   return (
+    <AdminNotificationsProvider key={access.mode} disabled={access.mode !== "authenticated"}>
     <div className="admin-workspace">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-title">
@@ -95,6 +97,7 @@ export function AdminWorkspace({
               >
                 <Icon aria-hidden="true" size={19} />
                 <span>{t(labelKey)}</span>
+                {id === "orders" || id === "inquiries" || id === "email" ? <AdminNotificationNavBadge category={id} /> : null}
               </Link>
             ) : (
               <span aria-disabled="true" className="is-disabled" key={id}>
@@ -121,6 +124,7 @@ export function AdminWorkspace({
             </span>
           </div>
           <div className="admin-toolbar-actions">
+            <AdminNotificationsBell />
             {access.mode === "authenticated" ? (
               <form action={signOutAdmin}>
                 <button className="admin-signout" type="submit">
@@ -146,8 +150,9 @@ export function AdminWorkspace({
             </button>
           </div>
         </div>
-        <div className="admin-workspace-content">{children}</div>
+        <div className="admin-workspace-content">{active === "dashboard" ? <AdminNotificationsSummary /> : null}{children}</div>
       </div>
     </div>
+    </AdminNotificationsProvider>
   );
 }

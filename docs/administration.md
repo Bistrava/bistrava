@@ -44,6 +44,16 @@ La migration `202610090018` publie uniquement `quote_requests` et `email_events`
 
 Au 9 octobre 2026, aucun service d’envoi ni boîte e-mail n’est configuré en production. L’actualisation du journal ne crée pas d’événement d’envoi : le raccordement des notifications au journal, la réception des e-mails et les réponses intégrées nécessitent encore l’adresse Bistrava à utiliser, son fournisseur et la configuration décrite dans [Email and DNS](email-and-dns.md).
 
+## Notifications personnelles
+
+La cloche du bandeau affiche les douze dernières nouveautés non lues et leur nombre total. Des badges figurent sur Commandes, Messages et E-mails ; le tableau de bord reprend les trois compteurs. Un clic sur une notification ouvre la fiche concernée, y compris si elle est plus ancienne que la liste habituellement chargée.
+
+Ouvrir la cloche ne marque rien comme lu. Une commande est lue lorsque son détail sélectionné apparaît à l’écran. Un message ou événement e-mail est lu lorsque sa carte ou sa ligne apparaît à l’écran, dans un onglet visible. Les autres nouveautés restent signalées. Les lectures sont propres au compte connecté, persistent après déconnexion et se synchronisent entre ses onglets et appareils. Elles ne modifient pas les statuts commerciaux des commandes et messages.
+
+La migration `202610090019` ajoute `admin_notification_reads` et les fonctions de comptage et de lecture. Chaque lot de lecture contient uniquement les identifiants déjà affichés : une arrivée ultérieure ne peut pas être effacée par cette opération. Les administrateurs et éditeurs actifs peuvent gérer leurs propres lectures ; les visiteurs et clients n’ont pas accès aux notifications.
+
+Les compteurs se mettent à jour via Realtime, avec contrôle périodique de secours. Ils ne rechargent pas les formulaires en cours de saisie. Le badge E-mails concerne les événements effectivement enregistrés dans le journal ; il ne constitue pas encore une boîte de réception.
+
 ## Traiter une commande
 
 Une commande peut passer de **En attente** à **Attente paiement**, puis à **Payée**, **En préparation**, **Expédiée** et **Terminée**. Les étapes incompatibles sont refusées. Une commande impayée peut être annulée : les réservations de stock et les usages de code promotionnel sont libérés une seule fois, dans la même transaction.

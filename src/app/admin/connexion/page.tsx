@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LockKeyhole } from "lucide-react";
 
 import { signInAdmin } from "@/actions/admin-auth";
+import { AdminPasswordUpdatedNotice, ForgotAdminPasswordLink } from "@/components/admin/password-forms";
 import { getPublicSupabaseConfig } from "@/lib/validation/env";
 
 export const metadata: Metadata = {
@@ -19,9 +20,9 @@ const errorMessages: Record<string, string> = {
 export default async function AdminLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; success?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, success } = await searchParams;
   const configured = Boolean(getPublicSupabaseConfig());
 
   return (
@@ -48,6 +49,8 @@ export default async function AdminLoginPage({
             {errorMessages[error]}
           </div>
         ) : null}
+
+        {success === "password-updated" ? <AdminPasswordUpdatedNotice /> : null}
 
         <form action={signInAdmin}>
           <div className="form-field">
@@ -77,6 +80,7 @@ export default async function AdminLoginPage({
             Prijava
           </button>
         </form>
+        <p style={{ marginTop: 16 }}><ForgotAdminPasswordLink /></p>
       </div>
     </section>
   );

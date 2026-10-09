@@ -6261,6 +6261,7 @@ select {
 }
 
 .legal-document {
+  min-width: 0;
   padding: clamp(28px, 5vw, 58px);
 }
 

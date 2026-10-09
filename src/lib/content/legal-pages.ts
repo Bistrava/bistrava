@@ -18,6 +18,7 @@ export type LegalSection = {
   items?: string[];
   callout?: string;
   table?: { caption: string; headings: string[]; rows: string[][] };
+  links?: Array<{ label: string; href: string }>;
 };
 
 export type LegalPageContent = {
@@ -26,6 +27,7 @@ export type LegalPageContent = {
   intro: string;
   updatedAt: string;
   requiresBusinessDetails?: boolean;
+  highlights?: Array<{ label: string; value: string; detail?: string; href?: string }>;
   sections: LegalSection[];
 };
 

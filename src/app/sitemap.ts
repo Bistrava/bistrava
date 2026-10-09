@@ -32,6 +32,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: path === "" ? ("weekly" as const) : ("monthly" as const),
       priority: path === "" ? 1 : 0.75,
     })),
+    {
+      url: absoluteUrl("/dostava"),
+      lastModified: new Date("2026-10-09T00:00:00.000Z"),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     ...guides
       .filter((guide) => guide.status === "published")
       .map((guide) => ({

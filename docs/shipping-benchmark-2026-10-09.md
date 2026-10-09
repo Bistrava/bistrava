@@ -59,7 +59,7 @@ Le prix de livraison est affiché avant la commande. Aucun supplément de poids,
 
 - `/dostava` lit les tarifs actifs de Slovénie via `getActiveShippingRates()` ; le tableau public suit les changements effectués ensuite dans l’administration. Le prix et le seuil ne sont pas dupliqués dans le texte statique.
 - Si les tarifs sont indisponibles, la page le signale sans inventer un forfait ou une gratuité.
-- **Transporteur et délais opérationnels à finaliser.** Les délais estimés des nouveaux tarifs restent `NULL`. Les délais existants des fiches produits continuent à s’appliquer ; les délais des concurrents ne deviennent pas ceux de Bistrava.
+- **Pošta Slovenije retenue comme transporteur prévu ; contrat et délais opérationnels à finaliser.** Voir la [recherche et la page Livraison](delivery-carrier-2026-10-09.md). Les délais estimés des nouveaux tarifs restent `NULL` et les fiches n'affichent pas encore de délai de réception. La page invite à demander la date prévisionnelle ; les délais des concurrents ne deviennent pas ceux de Bistrava.
 - Les coûts réels des colis lourds doivent être vérifiés dans le futur contrat transporteur avant l’ouverture des commandes. Les conditions publiques ne prévoient pas de majoration tardive pour compenser un coût imprévu.
 - **La prise de commande et le paiement restent désactivés** à cette étape (`CHECKOUT_ORDERING_ENABLED=false`). Configurer la livraison ne vaut pas activation des ventes ou d’un prestataire de paiement.
 - Les pages de retours, garanties et autres conditions juridiques ne sont pas modifiées par cette intervention.

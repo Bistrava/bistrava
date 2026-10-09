@@ -1,0 +1,217 @@
+.delivery-page .legal-hero {
+  padding-block: clamp(36px, 6vw, 72px);
+}
+
+.delivery-page .legal-hero .narrow-container {
+  width: min(1180px, calc(100% - 40px));
+}
+
+.delivery-page .delivery-highlights {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 32px 0 0;
+}
+
+.delivery-page .delivery-highlight {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--brand-teal);
+  border-radius: var(--radius-small);
+  background: white;
+  padding: 20px;
+}
+
+.delivery-page .delivery-highlight dt {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.delivery-page .delivery-highlight dd {
+  margin: 10px 0 0;
+}
+
+.delivery-page .delivery-highlight strong {
+  display: block;
+  color: var(--brand-navy);
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.delivery-page .delivery-highlight-detail {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.delivery-page .delivery-highlight a,
+.delivery-page .legal-section-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.delivery-page .delivery-highlight a svg,
+.delivery-page .legal-section-links a svg {
+  flex-shrink: 0;
+}
+
+.delivery-page .legal-section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 20px;
+}
+
+.delivery-page .legal-section-links a {
+  color: var(--brand-teal-dark);
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.delivery-page .legal-page-section {
+  padding-block: clamp(36px, 6vw, 72px);
+}
+
+.delivery-page .delivery-rate-table table {
+  min-width: 0;
+  table-layout: fixed;
+}
+
+.delivery-page .delivery-rate-table th,
+.delivery-page .delivery-rate-table td {
+  overflow-wrap: anywhere;
+}
+
+.delivery-page .delivery-rate-table tbody th {
+  width: auto;
+}
+
+.delivery-page .delivery-rate-table tbody td:last-child {
+  color: var(--brand-navy);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.delivery-page .delivery-rate-cards {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .delivery-page .delivery-highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .delivery-page .legal-toc {
+    padding: 18px 22px;
+  }
+
+  .delivery-page .legal-toc nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 20px;
+    margin-top: 10px;
+  }
+
+  .delivery-page .legal-toc nav a {
+    padding-block: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .delivery-page .legal-hero .narrow-container {
+    width: calc(100% - 28px);
+  }
+
+  .delivery-page .delivery-highlights {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .delivery-page .delivery-highlight {
+    padding: 16px 20px;
+  }
+
+  .delivery-page .delivery-highlight strong {
+    font-size: 1.4rem;
+  }
+
+  .delivery-page .legal-document {
+    padding: 24px 18px;
+  }
+
+  .delivery-page .legal-toc {
+    padding: 18px;
+  }
+
+  .delivery-page .legal-toc nav {
+    column-gap: 14px;
+  }
+
+  .delivery-page .legal-toc nav a {
+    min-height: 44px;
+    font-size: 0.8rem;
+  }
+
+  .delivery-page .delivery-rate-table {
+    display: none;
+  }
+
+  .delivery-page .delivery-rate-cards {
+    display: grid;
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .delivery-page .delivery-rate-caption {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  .delivery-page .delivery-rate-card {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+    background: white;
+  }
+
+  .delivery-page .delivery-rate-field {
+    padding: 14px 16px;
+  }
+
+  .delivery-page .delivery-rate-field + .delivery-rate-field {
+    border-top: 1px solid var(--border);
+  }
+
+  .delivery-page .delivery-rate-field dt {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .delivery-page .delivery-rate-field dd {
+    margin: 5px 0 0;
+    color: var(--brand-navy);
+    font-size: 1rem;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+  }
+
+  .delivery-page .delivery-rate-field:last-child {
+    background: var(--surface-muted);
+  }
+
+  .delivery-page .delivery-rate-field:last-child dd {
+    font-size: 1.5rem;
+  }
+}

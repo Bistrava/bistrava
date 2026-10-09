@@ -8,5 +8,6 @@ export default async function EmailPage() {
   if (access.mode === "not_configured") return <p>Supabase ni povezan.</p>;
   const client = await createClient();
   const result = client ? await client.from("email_events").select("id,email_type,status,occurred_at,error_code").order("occurred_at", { ascending: false }).limit(100) : null;
-  return <AdminWorkspace access={access} active="email"><EmailEventsView events={result?.error ? null : result?.data ?? null} configured={Boolean(process.env.RESEND_API_KEY)} /></AdminWorkspace>;
+  const configured = Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM && process.env.EMAIL_REPLY_TO);
+  return <AdminWorkspace access={access} active="email"><EmailEventsView events={result?.error ? null : result?.data ?? null} configured={configured} liveEnabled={access.mode === "authenticated"} /></AdminWorkspace>;
 }

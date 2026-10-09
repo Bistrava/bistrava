@@ -2,7 +2,9 @@
 
 Bistrava is a Slovenian specialist storefront for soft water and scale prevention. It uses Next.js App Router, TypeScript, Tailwind CSS, Supabase, Resend, React Email, Zod, Vitest, and Playwright.
 
-The public experience includes the specialist information architecture, a deterministic softener configurator, protected inquiry flows, ten editorial guide drafts, technical SEO, Consent Mode v2, and a catalog activation gate. The retained catalog contains 24 enriched specialist drafts with verified Slovenian copy, technical specifications, supplier-source provenance, prices, and four-image galleries. Source references without both an image and a price are excluded and removed from Supabase. No product is presented as purchasable until its commercial data is approved and its database status is explicitly changed to `active`.
+The storefront reads products, prices, stock and published guides from Supabase. The bilingual French/Slovenian administration at `/admin` manages the catalogue, media, inventory, orders, customer contacts, shipping rates, promotion codes and editorial guides. Server actions and database functions enforce administrator permissions and protect concurrent updates. See [the administration guide](docs/administration.md).
+
+Products require complete commercial data before activation. Checkout remains controlled separately by `CHECKOUT_ORDERING_ENABLED` and `CHECKOUT_MODE`; preparing the administration does not enable payments or order placement.
 
 ## Local development
 

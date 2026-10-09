@@ -33,8 +33,7 @@ export default async function AdminLoginPage({
         <p className="section-kicker">Bistrava administracija</p>
         <h1>Varna prijava</h1>
         <p>
-          Javno ustvarjanje skrbniških računov ni omogočeno. Prvi račun se
-          ustvari po ročnem postopku v dokumentaciji.
+          Prijavite se s skrbniškim računom za upravljanje izdelkov, naročil in dostave.
         </p>
 
         {!configured ? (

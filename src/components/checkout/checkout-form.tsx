@@ -9,13 +9,15 @@ import { useRouter } from "next/navigation";
 
 import {
   createCheckoutOrder,
-  initialCheckoutState,
+  quoteCheckout,
 } from "@/actions/checkout";
+import { initialCheckoutState } from "@/lib/forms/action-state";
 import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
 import { CartReviewNotice } from "@/components/cart/cart-page-client";
 import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import type { ShippingRate } from "@/lib/commerce/shipping";
+import type { CheckoutQuoteState } from "@/lib/validation/checkout";
 
 function FieldError({ errors }: { errors?: string[] }) {
   return errors?.[0] ? <span className="field-error">{errors[0]}</span> : null;
@@ -38,15 +40,24 @@ export function CheckoutForm({
   const guestTokenRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [refreshing, startRefresh] = useTransition();
+  const [discountCode, setDiscountCode] = useState("");
+  const [quoteState, setQuoteState] = useState<{ key: string; result: CheckoutQuoteState } | null>(null);
+  const [quoting, startQuote] = useTransition();
+  const [acknowledgedQuote, setAcknowledgedQuote] = useState("");
 
   const shippingRate = useMemo(
     () => rates.find((rate) => rate.id === shippingRateId) ?? null,
     [rates, shippingRateId],
   );
-  const totalCents = subtotalCents + (shippingRate?.priceCents ?? 0);
   const cartPayload = JSON.stringify(lines.map((line) => ({ sku: line.sku, quantity: line.quantity })));
+  const normalizedCode = discountCode.trim().toUpperCase();
+  const quoteKey = `${cartPayload}:${subtotalCents}:${shippingRateId}:${shippingRate?.priceCents ?? 0}:${normalizedCode}`;
+  const currentQuote = quoteState?.key === quoteKey ? quoteState.result : null;
+  const appliedQuote = currentQuote?.status === "success" && currentQuote.quote?.subtotalCents === subtotalCents && currentQuote.quote?.shippingCents === shippingRate?.priceCents ? currentQuote.quote : null;
+  const totalCents = appliedQuote?.totalCents ?? subtotalCents + (shippingRate?.priceCents ?? 0);
+  const promotionReady = !normalizedCode || (appliedQuote?.code === normalizedCode && acknowledgedQuote === quoteKey);
   const canSubmit = catalogCurrent && changes.length === 0 && lines.length > 0 &&
-    orderingEnabled && rates.length > 0 && !pending;
+    orderingEnabled && rates.length > 0 && !pending && !quoting && promotionReady;
 
   useEffect(() => {
     if (state.status !== "success" || !state.redirectUrl) return;
@@ -224,6 +235,9 @@ export function CheckoutForm({
             <input id="checkout-website" name="website" tabIndex={-1} autoComplete="off" />
           </div>
           <input type="hidden" name="cart" value={cartPayload} />
+          <input type="hidden" name="discountCode" value={appliedQuote?.code ?? ""} />
+          <input type="hidden" name="expectedTotalCents" value={totalCents} />
+          <input type="hidden" name="discountAcknowledged" value={appliedQuote && acknowledgedQuote === quoteKey ? "on" : ""} />
           <input ref={idempotencyRef} type="hidden" name="idempotencyKey" defaultValue="" />
           <input ref={guestTokenRef} type="hidden" name="guestToken" defaultValue="" />
           <p className={state.status === "error" ? "form-status form-status-error" : "form-status"} aria-live="polite">
@@ -254,11 +268,25 @@ export function CheckoutForm({
             </div>
           ))}
         </div>
+        <div className="form-field">
+          <label htmlFor="promotion-code">Promocijska koda <span>(neobvezno)</span></label>
+          <input id="promotion-code" maxLength={40} value={discountCode} onChange={(event) => { setDiscountCode(event.target.value.toUpperCase()); setAcknowledgedQuote(""); }} autoCapitalize="characters" autoComplete="off" />
+          <button className="button button-secondary" type="button" disabled={!normalizedCode || !shippingRate || !catalogCurrent || quoting || pending} onClick={() => startQuote(async () => {
+            const key = quoteKey;
+            try { setQuoteState({ key, result: await quoteCheckout({ cart: cartPayload, shippingRateId, discountCode: normalizedCode }) }); }
+            catch { setQuoteState({ key, result: { status: "error", message: "Preverjanje ni uspelo. Poskusite ponovno." } }); }
+            setAcknowledgedQuote("");
+          })}>{quoting ? "Preverjanje …" : "Uporabi kodo"}</button>
+          {normalizedCode ? <button className="button button-secondary" type="button" onClick={() => { setDiscountCode(""); setQuoteState(null); setAcknowledgedQuote(""); }}>Odstrani kodo</button> : null}
+          <p role="status" className={currentQuote?.status === "error" ? "form-status form-status-error" : "form-status"}>{currentQuote?.message ?? (normalizedCode ? "Za prikaz popusta preverite kodo." : "")}</p>
+        </div>
         <dl>
           <div><dt>Vmesni seštevek</dt><dd>{formatMoney(subtotalCents)}</dd></div>
           <div><dt>Dostava</dt><dd>{shippingRate ? formatMoney(shippingRate.priceCents) : "Ni nastavljena"}</dd></div>
+          {appliedQuote ? <div><dt>Popust ({appliedQuote.code})</dt><dd>−{formatMoney(appliedQuote.discountCents)}</dd></div> : null}
           <div className="checkout-total"><dt>Skupaj</dt><dd>{formatMoney(totalCents)}</dd></div>
         </dl>
+        {appliedQuote ? <label className="consent-field"><input type="checkbox" checked={acknowledgedQuote === quoteKey} onChange={(event) => setAcknowledgedQuote(event.target.checked ? quoteKey : "")} /><span>Potrjujem končni znesek {formatMoney(totalCents)} z upoštevanim popustom.</span></label> : null}
         <p><LockKeyhole aria-hidden="true" size={16} /> Cene, zaloga in dostava se preverijo na strežniku.</p>
       </aside>
     </form>

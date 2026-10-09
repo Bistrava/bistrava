@@ -8,19 +8,9 @@ import { getCheckoutConfig } from "@/lib/commerce/config";
 import { sendOrderConfirmation } from "@/lib/email/send";
 import { hashGuestOrderToken, orderCookieName } from "@/lib/orders/guest-orders";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { checkoutFormSchema } from "@/lib/validation/checkout";
+import { checkoutFormSchema, checkoutQuoteSchema, type CheckoutQuoteState } from "@/lib/validation/checkout";
 
-export type CheckoutActionState = {
-  status: "idle" | "success" | "error";
-  message: string;
-  redirectUrl?: string;
-  fieldErrors?: Record<string, string[]>;
-};
-
-export const initialCheckoutState: CheckoutActionState = {
-  status: "idle",
-  message: "",
-};
+import type { CheckoutActionState } from "@/lib/forms/action-state";
 
 type CheckoutRateEntry = { count: number; resetAt: number };
 const checkoutGlobal = globalThis as typeof globalThis & {
@@ -44,6 +34,35 @@ function isCheckoutRateLimited(key: string) {
 
 function checkoutError(message: string): CheckoutActionState {
   return { status: "error", message };
+}
+
+export async function quoteCheckout(input: unknown): Promise<CheckoutQuoteState> {
+  const parsed = checkoutQuoteSchema.safeParse(input);
+  if (!parsed.success) return { status: "error", message: "Preverite kodo, košarico in izbrano dostavo." };
+  const requestHeaders = await headers();
+  const clientKey = createHash("sha256").update(`quote:${process.env.RATE_LIMIT_SALT || "bistrava-local"}:${requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"}`).digest("hex");
+  if (isCheckoutRateLimited(clientKey)) return { status: "error", message: "Preveč poskusov kode. Poskusite ponovno nekoliko pozneje." };
+  const supabase = createAdminClient();
+  if (!supabase) return { status: "error", message: "Popusta trenutno ni mogoče preveriti." };
+  const { data, error } = await supabase.rpc("quote_guest_checkout", {
+    input_cart_lines: parsed.data.cart,
+    input_shipping_rate_id: parsed.data.shippingRateId,
+    input_discount_code: parsed.data.discountCode || null,
+  });
+  if (error || !data) return { status: "error", message: error?.message.includes("product_unavailable")
+    ? "Cena ali zaloga se je spremenila. Osvežite košarico."
+    : error?.message.includes("shipping_rate_unavailable") ? "Izbrana dostava ni več na voljo."
+    : "Kode za to naročilo ni mogoče uporabiti. Preverite veljavnost in pogoje promocije." };
+  const quote = data as Record<string, unknown>;
+  const amounts = [quote.subtotalCents, quote.shippingCents, quote.discountCents, quote.totalCents];
+  if (!amounts.every((amount) => typeof amount === "number" && Number.isSafeInteger(amount) && amount >= 0)) {
+    return { status: "error", message: "Popusta trenutno ni mogoče preveriti." };
+  }
+  return { status: "success", message: "Promocijska koda je upoštevana. Preglejte končni znesek.", quote: {
+    subtotalCents: Number(quote.subtotalCents), shippingCents: Number(quote.shippingCents),
+    discountCents: Number(quote.discountCents), totalCents: Number(quote.totalCents),
+    code: typeof quote.code === "string" ? quote.code : null,
+  } };
 }
 
 export async function createCheckoutOrder(
@@ -106,10 +125,14 @@ export async function createCheckoutOrder(
     input_customer_note: parsed.data.customerNote,
     input_guest_access_token_hash: hashGuestOrderToken(parsed.data.guestToken),
     input_idempotency_key: parsed.data.idempotencyKey,
+    input_discount_code: parsed.data.discountCode || null,
+    input_expected_total_cents: parsed.data.expectedTotalCents,
   });
 
   if (error || !Array.isArray(data) || !data[0]) {
     const detail = error?.message || "";
+    if (detail.includes("checkout_total_changed")) return checkoutError("Končni znesek se je spremenil. Osvežite košarico in ponovno potrdite znesek pred oddajo.");
+    if (detail.includes("discount_unavailable")) return checkoutError("Promocijska koda ni več veljavna za to naročilo. Odstranite jo ali ponovno preverite popust.");
     if (detail.includes("product_unavailable")) {
       return checkoutError("Cena ali zaloga enega od izdelkov se je spremenila. Osvežite košarico.");
     }

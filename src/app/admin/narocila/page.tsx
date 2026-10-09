@@ -9,8 +9,9 @@ import { getAdminPageAccess } from "@/lib/auth/admin-page";
 export const metadata: Metadata = { title: "Naročila · Administracija" };
 export const dynamic = "force-dynamic";
 
-export default async function AdminOrdersPage() {
+export default async function AdminOrdersPage({ searchParams }: { searchParams: Promise<{ order?: string }> }) {
   const access = await getAdminPageAccess();
+  const { order } = await searchParams;
 
   if (access.mode === "not_configured") {
     return (
@@ -29,7 +30,7 @@ export default async function AdminOrdersPage() {
 
   return (
     <AdminWorkspace access={access} active="orders">
-      <AdminOrdersView data={data} />
+      <AdminOrdersView canManage={access.mode === "authenticated" && access.role === "admin"} data={data} initialOrderId={order} />
     </AdminWorkspace>
   );
 }

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getActiveCatalogProducts } from "@/lib/catalog/repository";
-import { guides } from "@/lib/content/guides";
+import { getPublishedGuides } from "@/lib/content/guides-repository";
 import { absoluteUrl } from "@/lib/seo/site";
 
 export const dynamic = "force-dynamic";
@@ -23,7 +23,7 @@ const marketingRoutes = [
 ] as const;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = await getActiveCatalogProducts();
+  const [products, guides] = await Promise.all([getActiveCatalogProducts(), getPublishedGuides()]);
   const updated = new Date("2026-08-23T00:00:00.000Z");
   return [
     ...marketingRoutes.map((path) => ({

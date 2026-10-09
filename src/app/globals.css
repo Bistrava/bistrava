@@ -3343,6 +3343,16 @@ select {
   gap: 14px;
 }
 
+@media (max-width: 600px) {
+  .admin-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-block: 10px;
+  }
+  .admin-environment { width: 100%; min-width: 0; overflow-wrap: anywhere; }
+  .admin-toolbar-actions { width: 100%; justify-content: space-between; }
+}
+
 .admin-signout {
   display: inline-flex;
   align-items: center;

@@ -1,7 +1,9 @@
 import type { CatalogProduct } from "@/types/catalog";
+import { mapDatabaseProduct } from "@/lib/catalog/database-product";
 
 export type AdminProductEditorValues = {
   currentSlug: string;
+  categorySlug: string;
   nameSl: string;
   slug: string;
   brand: string;
@@ -50,12 +52,21 @@ export type AdminProductEditorData = {
   categoryName: string;
   image: { url: string; alt: string } | null;
   imageCount: number;
+  images?: Array<{ id: string; url: string; alt: string; isPrimary: boolean }>;
   documentCount: number;
   supplierPriceCents: number | null;
   supplierPriceSourceName: string | null;
   supplierPriceSourceUrl: string | null;
   updatedAt: string;
 };
+
+export function createEmptyAdminProduct(): AdminProductEditorData {
+  const product = mapDatabaseProduct({ id: "", slug: "", name: "", brand: "", sku: "", status: "draft", sales_mode: "buy_now", stock_quantity: 0, stock_status: "out_of_stock" }, "");
+  const editor = createAdminProductEditorData(product, "Meritve in dodatki");
+  editor.values.installationRequired = "false";
+  editor.values.seoTitle = "";
+  return editor;
+}
 
 function optionalNumber(value: number | null) {
   return value === null ? "" : String(value);
@@ -77,6 +88,7 @@ export function createAdminProductEditorData(
   return {
     values: {
       currentSlug: product.slug,
+      categorySlug: product.categorySlug,
       nameSl: product.nameSl,
       slug: product.slug,
       brand: product.brand,

@@ -22,7 +22,8 @@ const optionalInteger = z
     (value) => value === "" || /^\d+$/.test(value),
     "Vnesite celo število.",
   )
-  .transform((value) => (value === "" ? null : Number(value)));
+  .transform((value) => (value === "" ? null : Number(value)))
+  .refine((value) => value === null || (Number.isSafeInteger(value) && value <= 10000000), "Vrednost je previsoka.");
 
 const optionalMoney = z
   .string()
@@ -33,7 +34,7 @@ const optionalMoney = z
   )
   .transform((value) =>
     value === "" ? null : Math.round(Number(value.replace(",", ".")) * 100),
-  );
+  ).refine((value) => value === null || (Number.isSafeInteger(value) && value <= 2147483647), "Cena je previsoka.");
 
 const textList = (maximum: number) =>
   z
@@ -77,7 +78,8 @@ const optionalBoolean = z.enum(["", "true", "false"]).transform((value) =>
 
 export const adminProductFormSchema = z
   .object({
-    currentSlug: slugSchema,
+    currentSlug: z.union([z.literal(""), slugSchema]),
+    categorySlug: slugSchema.default("meritve-in-montaza"),
     nameSl: z.string().trim().min(2).max(180),
     slug: slugSchema,
     brand: z.string().trim().min(1).max(120),
@@ -86,11 +88,11 @@ export const adminProductFormSchema = z
     status: z.enum(["draft", "active", "archived"]),
     salesMode: z.enum(["buy_now", "quote", "installation_required"]),
     featured: z.enum(["false", "true"]).transform((value) => value === "true"),
-    shortDescriptionSl: z.string().trim().min(20).max(500),
-    descriptionSl: z.string().trim().min(80).max(12000),
+    shortDescriptionSl: z.string().trim().max(500),
+    descriptionSl: z.string().trim().max(12000),
     highlights: textList(20),
-    seoTitle: z.string().trim().min(10).max(70),
-    seoDescriptionSl: z.string().trim().min(50).max(180),
+    seoTitle: z.string().trim().max(70),
+    seoDescriptionSl: z.string().trim().max(180),
     primaryKeyword: z.string().trim().max(120),
     secondaryKeywords: textList(25),
     longTailKeywords: textList(25),
@@ -120,6 +122,13 @@ export const adminProductFormSchema = z
     certifications: textList(30),
   })
   .superRefine((product, context) => {
+    if (product.status === "active") {
+      for (const [key, min] of [["shortDescriptionSl", 20], ["descriptionSl", 80], ["seoTitle", 10], ["seoDescriptionSl", 50]] as const) {
+        if (product[key].length < min) context.addIssue({ code: "custom", path: [key], message: `Za objavo vnesite najmanj ${min} znakov.` });
+      }
+      if (!product.priceEuros || product.priceEuros <= 0) context.addIssue({ code: "custom", path: ["priceEuros"], message: "Vnesite pozitivno prodajno ceno." });
+    }
+    if (product.stockStatus === "in_stock" && !product.stockQuantity) context.addIssue({ code: "custom", path: ["stockQuantity"], message: "Izdelek na zalogi potrebuje pozitivno količino." });
     if (
       product.compareAtPriceEuros !== null &&
       (product.priceEuros === null || product.compareAtPriceEuros <= product.priceEuros)

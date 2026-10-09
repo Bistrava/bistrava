@@ -14,6 +14,9 @@ import {
   Settings,
   ShieldCheck,
   UsersRound,
+  Truck,
+  TicketPercent,
+  History,
 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -32,6 +35,10 @@ export type AdminSectionId =
   | "products"
   | "orders"
   | "inventory"
+  | "customers"
+  | "shipping"
+  | "promotions"
+  | "activity"
   | "inquiries"
   | "guides"
   | "email"
@@ -43,10 +50,15 @@ const navigation = [
   { id: "products", labelKey: "nav.products", href: "/admin/izdelki", icon: PackageSearch },
   { id: "orders", labelKey: "nav.orders", href: "/admin/narocila", icon: ClipboardList },
   { id: "inventory", labelKey: "nav.inventory", href: "/admin/zaloga", icon: Boxes },
+  { id: "customers", labelKey: "nav.customers", href: "/admin/stranke", icon: UsersRound },
+  { id: "shipping", labelKey: "nav.shipping", href: "/admin/dostava", icon: Truck },
+  { id: "promotions", labelKey: "nav.promotions", href: "/admin/promocije", icon: TicketPercent },
   { id: "inquiries", labelKey: "nav.inquiries", href: "/admin/povprasevanja", icon: UsersRound },
   { id: "guides", labelKey: "nav.guides", href: "/admin/vodici", icon: BookOpenText },
   { id: "email", labelKey: "nav.email", href: "/admin/e-posta", icon: Mail },
   { id: "analytics", labelKey: "nav.analytics", href: "/admin/analitika", icon: BarChart3 },
+  { id: "activity", labelKey: "nav.activity", href: "/admin/dnevnik", icon: History },
+  { id: "settings", labelKey: "nav.settings", href: "/admin/nastavitve", icon: Settings },
 ] as const satisfies ReadonlyArray<{
   id: string;
   labelKey: AdminTranslationKey;
@@ -97,14 +109,6 @@ export function AdminWorkspace({
           <Link href="/" target="_blank">
             <ExternalLink aria-hidden="true" size={18} />
             {t("nav.openStore")}
-          </Link>
-          <Link
-            aria-current={active === "settings" ? "page" : undefined}
-            className={active === "settings" ? "is-active" : undefined}
-            href="/admin/nastavitve"
-          >
-            <Settings aria-hidden="true" size={18} />
-            {t("nav.settings")}
           </Link>
         </div>
       </aside>

@@ -1,0 +1,30 @@
+@import "./order-admin.css";
+.admin-guide-filters { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 1rem; padding: 1.25rem; margin-bottom: 1.25rem; }
+.admin-guide-cms label { display: grid; gap: .45rem; font-size: .9rem; font-weight: 600; }
+.admin-guide-cms label > span { display: flex; align-items: center; gap: .4rem; }
+.admin-guide-cms input, .admin-guide-cms textarea, .admin-guide-cms select { min-height: 42px; width: 100%; border: 1px solid #bfd7e1; border-radius: 8px; background: white; padding: .65rem .75rem; color: #123348; font: inherit; }
+.admin-guide-cms textarea { resize: vertical; font-weight: 400; line-height: 1.7; }
+.admin-guide-cms input[readonly] { background: #f1f6f8; }
+.admin-guide-cms small { font-size: .8rem; color: #6c8390; font-weight: 400; }
+.admin-guide-list { display: grid; gap: 1rem; }
+.admin-guide-list article { padding: 1.25rem; display: flex; align-items: center; gap: 1rem; }
+.admin-guide-list article > div { flex: 1; }
+.admin-guide-list h2 { font-size: 1.15rem; margin: .3rem 0; }
+.admin-guide-list p { font-size: .9rem; line-height: 1.6; }
+.admin-guide-list .button { flex: 0 0 auto; }
+.admin-guide-editor fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 1.25rem; min-width: 0; }
+.admin-guide-editor section.card { padding: 1.5rem; display: grid; gap: 1rem; min-width: 0; }
+.admin-guide-editor h2 { font-size: 1.3rem; margin: 0; }
+.admin-guide-section-heading, .admin-guide-section-editor > header { display: flex; gap: 1rem; justify-content: space-between; align-items: center; }
+.admin-guide-section-editor { display: grid; gap: .9rem; padding: 1rem; border: 1px solid #d6e5eb; border-radius: 12px; background: #f8fbfc; }
+.admin-guide-remove { min-width: 40px; min-height: 40px; display: inline-flex; align-items: center; justify-content: center; background: #fff; color: #b43d30; border: 1px solid #edd1ca; border-radius: 8px; cursor: pointer; }
+.admin-guide-remove:disabled { opacity: .35; cursor: default; }
+.admin-guide-cms .admin-guide-checkbox { display: flex; align-items: center; gap: .7rem; }
+.admin-guide-checkbox input { height: 18px; min-height: 18px; width: 18px; }
+.admin-guide-table-scroll { overflow-x: auto; }
+.admin-guide-table-scroll table { width: 100%; border-collapse: separate; border-spacing: .5rem; }
+.admin-guide-table-scroll th, .admin-guide-table-scroll td { min-width: 160px; padding: 0; vertical-align: top; }
+.admin-guide-table-scroll th:last-child, .admin-guide-table-scroll td:last-child { min-width: 42px; width: 42px; }
+.admin-guide-table-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.admin-guide-save { justify-self: start; }
+@media(max-width: 700px) { .admin-guide-filters { grid-template-columns: 1fr; } .admin-guide-list article { flex-wrap: wrap; } .admin-guide-list article > div { min-width: calc(100% - 60px); } .admin-guide-editor section.card { padding: 1rem; } }

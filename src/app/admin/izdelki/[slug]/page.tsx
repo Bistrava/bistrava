@@ -45,7 +45,7 @@ export default async function AdminProductEditorPage({
 
   return (
     <AdminWorkspace access={access} active="products">
-      <AdminProductEditor accessMode={access.mode} product={editorData} />
+      <AdminProductEditor key={`${editorData.values.currentSlug}:${editorData.updatedAt}`} accessMode={access.mode} product={editorData} canEdit={access.mode === "authenticated" && access.role === "admin"} />
     </AdminWorkspace>
   );
 }

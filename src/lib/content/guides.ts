@@ -3,14 +3,14 @@ export type Guide = {
   title: string;
   excerpt: string;
   readingTime: string;
-  status: "draft" | "published";
+  status: "draft" | "published" | "archived";
   updatedAt: string;
   comparison: {
     title: string;
     caption: string;
     columns: string[];
     rows: string[][];
-  };
+  } | null;
   sections: Array<{ title: string; paragraphs: string[] }>;
 };
 

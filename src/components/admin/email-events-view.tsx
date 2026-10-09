@@ -1,0 +1,8 @@
+"use client";
+import { useAdminLanguage } from "./admin-i18n";
+import "./operations.css";
+export type AdminEmailEvent = { id: string; email_type: string; status: string; occurred_at: string; error_code: string | null };
+export function EmailEventsView({ events, configured }: { events: AdminEmailEvent[] | null; configured: boolean }) {
+  const { locale } = useAdminLanguage(); const fr = locale === "fr";
+  return <><header className="admin-page-heading"><div><p className="section-kicker">Bistrava</p><h1>{fr ? "E-mails transactionnels" : "Transakcijska e-pošta"}</h1><p>{fr ? "Historique réel des 100 derniers événements d’envoi." : "Zgodovina zadnjih 100 dogodkov pošiljanja."}</p></div></header><p className="ops-notice">{configured ? (fr ? "Service d’envoi configuré. Les états ci-dessous proviennent du journal d’envoi." : "Pošiljanje je nastavljeno. Spodnja stanja izvirajo iz dnevnika.") : (fr ? "Le service d’envoi doit encore être configuré." : "Storitev pošiljanja še ni nastavljena.")}</p><section className="admin-dashboard-panel card"><div className="ops-table-wrap"><table className="ops-table"><thead><tr><th>{fr ? "Date" : "Datum"}</th><th>{fr ? "Type" : "Vrsta"}</th><th>{fr ? "Statut" : "Stanje"}</th><th>{fr ? "Erreur" : "Napaka"}</th></tr></thead><tbody>{events?.map(event => <tr key={event.id}><td>{new Date(event.occurred_at).toLocaleString(fr ? "fr-FR" : "sl-SI", { timeZone: "Europe/Ljubljana" })}</td><td>{event.email_type}</td><td>{event.status}</td><td>{event.error_code ?? "—"}</td></tr>)}</tbody></table></div>{!events?.length ? <p className="ops-empty">{events === null ? (fr ? "Journal indisponible." : "Dnevnik ni na voljo.") : (fr ? "Aucun événement enregistré." : "Ni zabeleženih dogodkov.")}</p> : null}</section></>;
+}

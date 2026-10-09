@@ -22,6 +22,8 @@ import {
 import { useDeferredValue, useMemo, useState } from "react";
 
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
+import { OrderManagementForm } from "@/components/admin/order-management-form";
+import "@/components/admin/order-admin.css";
 import type {
   AdminAddress,
   AdminCommerceData,
@@ -341,14 +343,14 @@ function AddressBlock({ address }: { address: AdminAddress }) {
   return <address>{addressLines(address).map((line) => <span key={line}>{line}</span>)}</address>;
 }
 
-export function AdminOrdersView({ data }: { data: AdminCommerceData }) {
+export function AdminOrdersView({ data, canManage = false, initialView = "orders", initialOrderId = "" }: { data: AdminCommerceData; canManage?: boolean; initialView?: View; initialOrderId?: string }) {
   const { locale } = useAdminLanguage();
   const labels = copy[locale];
-  const [view, setView] = useState<View>("orders");
+  const [view, setView] = useState<View>(initialView);
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query.trim().toLocaleLowerCase(locale));
   const [status, setStatus] = useState<"all" | AdminOrderStatus>("all");
-  const [selectedOrderId, setSelectedOrderId] = useState(data.orders[0]?.id ?? "");
+  const [selectedOrderId, setSelectedOrderId] = useState(initialOrderId || data.orders[0]?.id || "");
   const customers = useMemo(
     () => createCustomers(data.orders, data.profiles),
     [data.orders, data.profiles],
@@ -415,7 +417,7 @@ export function AdminOrdersView({ data }: { data: AdminCommerceData }) {
       <header className="admin-page-heading admin-orders-heading">
         <div>
           <p className="section-kicker">{labels.kicker}</p>
-          <h1>{labels.title}</h1>
+          <h1>{initialView === "customers" ? labels.customers : labels.title}</h1>
           <p>{labels.intro}</p>
         </div>
         <span className="admin-section-hero-icon"><ClipboardList aria-hidden="true" size={28} /></span>
@@ -456,7 +458,7 @@ export function AdminOrdersView({ data }: { data: AdminCommerceData }) {
             ))}
             {filteredOrders.length === 0 ? <p className="admin-operational-empty">{labels.noOrders}</p> : null}
           </section>
-          {selectedOrder ? <OrderDetail formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
+          {selectedOrder ? <OrderDetail canManage={canManage && data.source === "live"} formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
         </div>
       ) : (
         <div className="admin-order-workspace" role="tabpanel">
@@ -481,7 +483,7 @@ export function AdminOrdersView({ data }: { data: AdminCommerceData }) {
 
 type Labels = typeof copy.sl | typeof copy.fr;
 
-function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paymentStatusLabel, shipmentStatusLabel, providerLabel }: { order: AdminOrder; labels: Labels; formatDate: (value: string | null) => string; formatMoney: (value: number) => string; statusLabel: (value: AdminOrderStatus) => string; paymentStatusLabel: (value: string | null | undefined) => string; shipmentStatusLabel: (value: string | null | undefined) => string; providerLabel: (value: string | null | undefined) => string }) {
+function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paymentStatusLabel, shipmentStatusLabel, providerLabel, canManage }: { order: AdminOrder; labels: Labels; formatDate: (value: string | null) => string; formatMoney: (value: number) => string; statusLabel: (value: AdminOrderStatus) => string; paymentStatusLabel: (value: string | null | undefined) => string; shipmentStatusLabel: (value: string | null | undefined) => string; providerLabel: (value: string | null | undefined) => string; canManage: boolean }) {
   const timeline = [
     { label: labels.created, date: order.createdAt },
     { label: labels.paid, date: order.payment?.paidAt ?? null },
@@ -509,6 +511,7 @@ function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paym
         <section><h3><ClipboardList size={17} />{labels.notes}</h3><div><strong>{labels.customerNote}</strong><p>{order.customerNote ?? labels.noNote}</p></div><div><strong>{labels.internalNote}</strong><p>{order.internalNote ?? labels.noNote}</p></div></section>
         <section><h3><CalendarDays size={17} />{labels.history}</h3><ol>{timeline.map((event) => <li key={`${event.label}-${event.date}`}><CheckCircle2 size={16} /><span><strong>{event.label}</strong><small>{formatDate(event.date)}</small></span></li>)}</ol></section>
       </div>
+      {canManage ? <OrderManagementForm key={order.id} order={order} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
     </aside>
   );
 }

@@ -17,15 +17,16 @@ import { ReviewStandardsSection } from "@/components/store/review-standards-sect
 import { allCategories } from "@/lib/catalog/catalog";
 import { getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 import { frequentlyAskedQuestions } from "@/lib/content/faq";
-import { featuredGuides } from "@/lib/content/guides";
+import { getPublishedGuides } from "@/lib/content/guides-repository";
 import { faqSchema } from "@/lib/seo/structured-data";
 
 const homeFaq = frequentlyAskedQuestions.slice(0, 5);
 const categoryIcons = [Droplets, ShieldCheck, FlaskConical, PackageCheck] as const;
 
 export default async function HomePage() {
-  const catalogProducts = await getStorefrontCatalogProducts();
-  const featuredProducts = catalogProducts.slice(0, 6);
+  const [catalogProducts, guides] = await Promise.all([getStorefrontCatalogProducts(), getPublishedGuides()]);
+  const featuredProducts = [...catalogProducts.filter(product => product.featured), ...catalogProducts.filter(product => !product.featured)].slice(0, 6);
+  const featuredGuides = guides.slice(0, 3);
   return (
     <>
       <JsonLd data={faqSchema([...homeFaq])} />
@@ -113,12 +114,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section guides-section">
+      {featuredGuides.length > 0 ? <section className="section guides-section">
         <div className="container">
           <div className="section-heading-row"><div><p className="section-kicker">Vodniki in nasveti</p><h2>Izberite samozavestno in vzdržujte pravilno.</h2></div><Link className="button button-secondary" href="/vodici">Vsi vodniki</Link></div>
           <div className="home-guide-grid">{featuredGuides.map((guide) => <Link className="featured-guide card" href={`/vodici/${guide.slug}`} key={guide.slug}><span className="eyebrow">Vodnik Bistrava</span><strong>{guide.title}</strong><span>{guide.excerpt}</span><span className="guide-meta">{guide.readingTime} <ArrowRight aria-hidden="true" size={17} /></span></Link>)}</div>
         </div>
-      </section>
+      </section> : null}
 
       <section className="section home-faq-section">
         <div className="container home-faq-grid">

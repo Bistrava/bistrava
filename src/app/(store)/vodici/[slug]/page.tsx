@@ -5,22 +5,20 @@ import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { getGuide, guides } from "@/lib/content/guides";
+import { getPublishedGuide } from "@/lib/content/guides-repository";
 import { articleSchema } from "@/lib/seo/structured-data";
 
 type GuidePageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return guides.map((guide) => ({ slug: guide.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: GuidePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const guide = getGuide(slug);
+  const guide = await getPublishedGuide(slug);
   if (!guide) return {};
   return {
-    title: guide.title,
-    description: guide.excerpt,
+    title: "seoTitle" in guide && guide.seoTitle ? guide.seoTitle : guide.title,
+    description: "seoDescription" in guide && guide.seoDescription ? guide.seoDescription : guide.excerpt,
     alternates: { canonical: `/vodici/${slug}` },
     robots: guide.status === "draft" ? { index: false, follow: true } : undefined,
   };
@@ -28,7 +26,7 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
 
 export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
-  const guide = getGuide(slug);
+  const guide = await getPublishedGuide(slug);
   if (!guide) notFound();
 
   return (
@@ -51,7 +49,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </section>
           ))}
-          <section className="guide-comparison" aria-labelledby="guide-comparison-title">
+          {guide.comparison ? <section className="guide-comparison" aria-labelledby="guide-comparison-title">
             <h2 id="guide-comparison-title">{guide.comparison.title}</h2>
             <div className="guide-table-scroll" tabIndex={0}>
               <table>
@@ -72,7 +70,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
                 </tbody>
               </table>
             </div>
-          </section>
+          </section> : null}
           <div className="article-checklist">
             <CheckCircle2 aria-hidden="true" />
             <div>

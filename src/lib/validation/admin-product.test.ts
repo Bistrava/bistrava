@@ -72,4 +72,12 @@ describe("admin product form", () => {
       expect(result.error.flatten().fieldErrors.householdSizeMax).toBeDefined();
     }
   });
+
+  it("allows a minimal new draft but blocks incomplete publication and invalid stock", () => {
+    const draft = { ...validProduct, currentSlug: "", status: "draft", shortDescriptionSl: "", descriptionSl: "", seoTitle: "", seoDescriptionSl: "", priceEuros: "", compareAtPriceEuros: "", stockQuantity: "0", stockStatus: "out_of_stock" };
+    expect(adminProductFormSchema.safeParse(draft).success).toBe(true);
+    expect(adminProductFormSchema.safeParse({ ...draft, status: "active" }).success).toBe(false);
+    expect(adminProductFormSchema.safeParse({ ...draft, stockStatus: "in_stock" }).success).toBe(false);
+    expect(adminProductFormSchema.safeParse({ ...validProduct, stockQuantity: "99999999999999999999" }).success).toBe(false);
+  });
 });

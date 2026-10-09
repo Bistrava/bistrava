@@ -7,16 +7,7 @@ import { sendInquiryNotifications } from "@/lib/email/send-inquiry";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { inquiryFormSchema } from "@/lib/validation/inquiry";
 
-export type InquiryActionState = {
-  status: "idle" | "success" | "error";
-  message: string;
-  fieldErrors?: Record<string, string[]>;
-};
-
-export const initialInquiryState: InquiryActionState = {
-  status: "idle",
-  message: "",
-};
+import type { InquiryActionState } from "@/lib/forms/action-state";
 
 type RateEntry = { count: number; resetAt: number };
 const globalRateStore = globalThis as typeof globalThis & {

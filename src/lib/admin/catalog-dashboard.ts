@@ -1,4 +1,4 @@
-import { allCategories, catalogProducts, specialistProducts } from "@/lib/catalog/catalog";
+import { allCategories, specialistProducts } from "@/lib/catalog/catalog";
 import type { CatalogProduct } from "@/types/catalog";
 
 export type ProductReadinessCheckId =
@@ -25,6 +25,7 @@ export type AdminProductSummary = {
   stockQuantity: number;
   priceCents: number | null;
   supplierPriceCents: number | null;
+  updatedAt?: string;
   image: { url: string; alt: string } | null;
   readiness: {
     completed: number;
@@ -97,6 +98,7 @@ export function getAdminCatalogProducts(
     stockQuantity: product.stockQuantity,
     priceCents: product.priceCents,
     supplierPriceCents: product.supplierPriceCents,
+    updatedAt: product.updatedAt,
     image: product.images[0]
       ? { url: product.images[0].url, alt: product.images[0].altSl }
       : null,
@@ -114,7 +116,7 @@ export function getAdminCatalogMetrics(products = getAdminCatalogProducts()) {
     total: products.length,
     active: products.filter((product) => product.status === "active").length,
     drafts: products.filter((product) => product.status === "draft").length,
-    archived: catalogProducts.filter((product) => product.status === "archived").length,
+    archived: products.filter((product) => product.status === "archived").length,
     withSupplierSource: products.filter(
       (product) => product.supplierPriceCents !== null,
     ).length,

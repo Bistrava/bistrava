@@ -3,9 +3,9 @@
 import { useActionState, useEffect, useRef } from "react";
 
 import {
-  initialInquiryState,
   submitInquiry,
 } from "@/actions/inquiry";
+import { initialInquiryState } from "@/lib/forms/action-state";
 import {
   inquiryFieldConstraints,
   inquiryTypes,

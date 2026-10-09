@@ -50,6 +50,7 @@ export default async function AdminProductsPage() {
         categories={categories}
         metrics={metrics}
         products={products}
+        canEdit={access.mode === "authenticated" && access.role === "admin"}
       />
     </AdminWorkspace>
   );

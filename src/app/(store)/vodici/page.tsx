@@ -3,7 +3,7 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import { guides } from "@/lib/content/guides";
+import { getPublishedGuides } from "@/lib/content/guides-repository";
 
 export const metadata: Metadata = {
   title: "Vodniki o trdi vodi in mehčalcih",
@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/vodici" },
 };
 
-export default function GuidesPage() {
+export default async function GuidesPage() {
+  const guides = await getPublishedGuides();
   return (
     <>
       <div className="container"><Breadcrumbs items={[{ label: "Vodniki", href: "/vodici" }]} /></div>
@@ -37,6 +38,7 @@ export default function GuidesPage() {
               <span>{guide.readingTime} <ArrowRight aria-hidden="true" size={18} /></span>
             </Link>
           ))}
+          {guides.length === 0 ? <p>Vodniki bodo kmalu na voljo.</p> : null}
         </div>
       </section>
     </>

@@ -29,9 +29,10 @@ import {
 } from "react";
 
 import {
-  initialAdminProductActionState,
   saveAdminProduct,
 } from "@/actions/admin-products";
+import { initialAdminProductActionState } from "@/lib/forms/action-state";
+import { ProductMediaManager } from "@/components/admin/product-media-manager";
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import type {
   AdminProductEditorData,
@@ -106,9 +107,9 @@ const copy = {
     supplierReference: "Referenčna dobaviteljska cena",
     source: "Vir",
     stockHeading: "Razpoložljivost",
-    stockHint: "Interna količina ni javna obljuba zaloge; javni status potrdite posebej.",
+    stockHint: "Količina in status se uporabljata v trgovini in košarici. Spremembe se zabeležijo v dnevnik zaloge.",
     stockStatus: "Javni status zaloge",
-    quantity: "Interna količina",
+    quantity: "Količina na zalogi",
     leadTime: "Dobavni rok (dni)",
     warranty: "Garancija (mesecev)",
     inStock: "Na zalogi",
@@ -140,7 +141,7 @@ const copy = {
     media: "Mediji in dokumenti",
     images: "slik",
     documents: "dokumentov",
-    mediaHint: "Upravljanje datotek bo povezano s Supabase Storage; trenutne datoteke so prikazane kot referenca.",
+    mediaHint: "Galerijo lahko urejate pod obrazcem izdelka.",
   },
   fr: {
     back: "Retour aux produits",
@@ -203,9 +204,9 @@ const copy = {
     supplierReference: "Prix fournisseur de référence",
     source: "Source",
     stockHeading: "Disponibilité",
-    stockHint: "La quantité interne n’est pas une promesse publique de stock ; le statut public doit être confirmé séparément.",
+    stockHint: "La quantité et le statut sont utilisés dans la boutique et le panier. Les changements sont consignés dans le journal du stock.",
     stockStatus: "Statut public du stock",
-    quantity: "Quantité interne",
+    quantity: "Quantité en stock",
     leadTime: "Délai de livraison (jours)",
     warranty: "Garantie (mois)",
     inStock: "En stock",
@@ -237,7 +238,7 @@ const copy = {
     media: "Médias et documents",
     images: "images",
     documents: "documents",
-    mediaHint: "La gestion des fichiers sera reliée à Supabase Storage ; les fichiers actuels sont affichés comme référence.",
+    mediaHint: "Gérez la galerie sous le formulaire du produit.",
   },
 } as const;
 
@@ -292,15 +293,20 @@ function Section({
 export function AdminProductEditor({
   product,
   accessMode,
+  canEdit = true,
 }: {
   product: AdminProductEditorData;
   accessMode: AccessMode;
+  canEdit?: boolean;
 }) {
   const { locale } = useAdminLanguage();
   const labels = copy[locale];
   const router = useRouter();
   const [tab, setTab] = useState<EditorTab>("content");
   const [values, setValues] = useState(product.values);
+  // The page keys this editor by the database version. Keep the version tied
+  // to the loaded fields; a background refresh must not authorize stale data.
+  const [expectedUpdatedAt] = useState(product.updatedAt);
   const [dirty, setDirty] = useState(false);
   const [localNotice, setLocalNotice] = useState<LocalNotice | null>(null);
   const [localErrors, setLocalErrors] = useState<Record<string, string[]>>({});
@@ -338,8 +344,20 @@ export function AdminProductEditor({
     if (actionState.status !== "success") return;
     const timer = window.setTimeout(() => setDirty(false), 0);
     if (actionState.redirectUrl) router.replace(actionState.redirectUrl);
+    else router.refresh();
     return () => window.clearTimeout(timer);
   }, [actionState, router]);
+
+  useEffect(() => {
+    if (actionState.status !== "error" || !actionState.fieldErrors) return;
+    const first = Object.keys(actionState.fieldErrors)[0];
+    const errorTab: EditorTab = ["seoTitle", "seoDescriptionSl", "primaryKeyword", "secondaryKeywords", "longTailKeywords", "tags"].includes(first) ? "seo"
+      : ["priceEuros", "compareAtPriceEuros", "vatRate"].includes(first) ? "commerce"
+      : ["stockStatus", "stockQuantity", "leadTimeDays", "warrantyMonths"].includes(first) ? "stock"
+      : ["householdSizeMin", "householdSizeMax", "resinVolumeLiters", "nominalFlowLitersPerMinute", "maxFlowLitersPerMinute", "technicalSpecifications"].includes(first) ? "technical" : "content";
+    const timer = window.setTimeout(() => setTab(errorTab), 0);
+    return () => window.clearTimeout(timer);
+  }, [actionState]);
 
   const errors = actionState.status === "error" && accessMode === "authenticated"
     ? actionState.fieldErrors ?? {}
@@ -414,12 +432,15 @@ export function AdminProductEditor({
   ];
 
   return (
+    <>
     <form
       action={accessMode === "authenticated" ? formAction : undefined}
       className="admin-product-editor"
       onSubmit={saveLocal}
     >
       <input name="adminLocale" type="hidden" value={locale} />
+      <input name="expectedUpdatedAt" type="hidden" value={expectedUpdatedAt} />
+      <fieldset disabled={!canEdit}>
       <input name="currentSlug" type="hidden" value={values.currentSlug} />
 
       <div className="admin-editor-heading">
@@ -429,7 +450,7 @@ export function AdminProductEditor({
             {labels.back}
           </Link>
           <p className="section-kicker">{labels.kicker}</p>
-          <h1>{values.nameSl}</h1>
+          <h1>{values.nameSl || (locale === "fr" ? "Nouveau produit" : "Nov izdelek")}</h1>
           <div className="admin-editor-meta">
             <span>{values.sku}</span>
             <span>{product.categoryName}</span>
@@ -438,7 +459,7 @@ export function AdminProductEditor({
             </span>
           </div>
         </div>
-        {product.values.status !== "archived" ? (
+        {product.values.status === "active" ? (
           <div className="admin-editor-heading-actions">
             <Link
               className="button button-secondary"
@@ -479,11 +500,16 @@ export function AdminProductEditor({
             icon={<PackageCheck size={21} />}
             title={labels.basics}
           >
+            <Field label={locale === "fr" ? "Catégorie" : "Kategorija"}>
+              <select name="categorySlug" value={values.categorySlug} onChange={(event) => update("categorySlug", event.target.value)}>
+                <option value="mehcalci-vode">Mehčalci vode</option><option value="ciljna-zascita">Zaščita naprav</option><option value="meritve-in-montaza">Meritve in dodatki</option><option value="sol-in-vzdrzevanje">Sol in vzdrževanje</option>
+              </select>
+            </Field>
             <Field error={errors.nameSl?.[0]} label={labels.name} wide>
               <input name="nameSl" onChange={(event) => update("nameSl", event.target.value)} value={values.nameSl} />
             </Field>
-            <Field error={errors.slug?.[0]} label={labels.slug}>
-              <input name="slug" onChange={(event) => update("slug", event.target.value)} value={values.slug} />
+            <Field error={errors.slug?.[0]} label={labels.slug} hint={values.currentSlug ? (locale === "fr" ? "L’URL reste stable pour préserver les liens et le référencement." : "URL ostane nespremenjen zaradi povezav in iskalnikov.") : undefined}>
+              <input name="slug" onChange={(event) => update("slug", event.target.value)} value={values.slug} readOnly={Boolean(values.currentSlug)} />
             </Field>
             <Field error={errors.brand?.[0]} label={labels.brand}>
               <input name="brand" onChange={(event) => update("brand", event.target.value)} value={values.brand} />
@@ -497,8 +523,8 @@ export function AdminProductEditor({
             <Field label={labels.status}>
               <select name="status" onChange={(event) => update("status", event.target.value as AdminProductEditorValues["status"])} value={values.status}>
                 <option value="draft">{labels.draft}</option>
-                <option value="active">{labels.active}</option>
-                <option value="archived">{labels.archived}</option>
+                <option value="active" disabled={!values.currentSlug}>{labels.active}</option>
+                <option value="archived" disabled={!values.currentSlug}>{labels.archived}</option>
               </select>
             </Field>
             <Field label={labels.salesMode}>
@@ -692,6 +718,9 @@ export function AdminProductEditor({
           </button>
         </div>
       </div>
+      </fieldset>
     </form>
+    <ProductMediaManager product={product} disabled={!canEdit || accessMode !== "authenticated" || dirty || isPending} />
+    </>
   );
 }

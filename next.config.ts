@@ -17,6 +17,7 @@ if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   typedRoutes: true,
+  experimental: { serverActions: { bodySizeLimit: "4mb" } },
   images: { remotePatterns: productMediaPatterns },
   async redirects() {
     return [

@@ -117,7 +117,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="container product-detail-grid">
           {product.images.length > 0 ? (
             <ProductGallery
-              images={product.images.slice(0, 4)}
+              images={product.images}
               productName={product.nameSl}
               sourceFallback={product.supplierPriceSourceName ?? "dobavitelj"}
             />

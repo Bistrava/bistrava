@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
 import type { CartCatalogSnapshot, CartChange } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
+import { getEligibleShippingRates, type ShippingRate } from "@/lib/commerce/shipping-rates";
 
 export function CartReviewNotice({
   changes,
@@ -44,12 +45,14 @@ export function CartReviewNotice({
   );
 }
 
-export function CartPageClient({ catalog }: { catalog: CartCatalogSnapshot }) {
+export function CartPageClient({ catalog, rates }: { catalog: CartCatalogSnapshot; rates: ShippingRate[] }) {
   const { lines, changes, itemCount, subtotalCents, hydrated, setQuantity, removeItem, clearCart } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
   const router = useRouter();
   const [refreshing, startRefresh] = useTransition();
   const tracked = useRef(false);
+  const shippingRate = catalogCurrent ? getEligibleShippingRates(rates, subtotalCents)[0] : undefined;
+  const totalCents = subtotalCents + (shippingRate?.priceCents ?? 0);
 
   useEffect(() => {
     if (!catalogCurrent || tracked.current) return;
@@ -160,9 +163,10 @@ export function CartPageClient({ catalog }: { catalog: CartCatalogSnapshot }) {
         <h2>Skupaj</h2>
         <dl>
           <div><dt>Vmesni seštevek</dt><dd>{formatMoney(subtotalCents)}</dd></div>
-          <div><dt>Dostava</dt><dd>Izračun na blagajni</dd></div>
-          <div className="cart-summary-total"><dt>Skupaj brez dostave</dt><dd>{formatMoney(subtotalCents)}</dd></div>
+          <div><dt>Dostava v Sloveniji</dt><dd>{shippingRate ? shippingRate.priceCents === 0 ? "Brezplačno" : formatMoney(shippingRate.priceCents) : "Trenutno ni na voljo"}</dd></div>
+          <div className="cart-summary-total"><dt>{shippingRate ? "Skupaj z dostavo" : "Skupaj brez dostave"}</dt><dd>{formatMoney(totalCents)}</dd></div>
         </dl>
+        <p className="cart-shipping-info"><Link href="/dostava">Tarife in pogoji dostave</Link><br /><small>Prag velja za vrednost izdelkov z DDV pred uporabo promocijske kode.</small></p>
         {catalogCurrent ? (
           <Link className="button button-primary" href="/blagajna" prefetch={false}>
             Nadaljujte na blagajno <ArrowRight aria-hidden="true" size={18} />

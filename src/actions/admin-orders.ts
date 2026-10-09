@@ -16,7 +16,7 @@ async function adminClient() {
 }
 
 function invalidateCommerce() {
-  for (const path of ["/admin", "/admin/narocila", "/admin/stranke", "/admin/dostava", "/admin/zaloga", "/admin/izdelki", "/kosarica", "/blagajna", "/mehcalci-vode", "/"]) revalidatePath(path);
+  for (const path of ["/admin", "/admin/narocila", "/admin/stranke", "/admin/dostava", "/admin/zaloga", "/admin/izdelki", "/kosarica", "/blagajna", "/dostava", "/splosni-pogoji-poslovanja", "/mehcalci-vode", "/"]) revalidatePath(path);
   revalidatePath("/izdelki/[slug]", "page");
 }
 
@@ -65,11 +65,12 @@ export async function saveAdminShippingRate(_previous: AdminOrderActionState, fo
   const supabase = await adminClient();
   if (!supabase) return result(form, "error", "Session administrateur requise.", "Potrebna je skrbniška seja.");
   const parsed = shippingRateSchema.safeParse({ ...Object.fromEntries(form), active: form.has("active") ? "on" : "off" });
-  if (!parsed.success) return result(form, "error", "Vérifiez la zone, le prix et les délais (de 1 à 90 jours).", "Preverite območje, ceno in rok (od 1 do 90 dni).");
+  if (!parsed.success) return result(form, "error", "Vérifiez la zone, le prix et les bornes du panier (minimum ≤ maximum). Renseignez les deux délais de 1 à 90 jours, ou laissez-les tous deux vides.", "Preverite območje, ceno in meji vrednosti košarice (najnižja ≤ najvišja). Vnesite oba roka od 1 do 90 dni ali pustite oba prazna.");
   const value = parsed.data;
   const { error } = await supabase.rpc("admin_save_shipping_rate", {
     input_id: value.id || null, input_zone_id: value.zoneId, input_name: value.name, input_price_cents: value.price,
     input_days_min: value.estimatedDaysMin, input_days_max: value.estimatedDaysMax, input_active: value.active === "on", input_expected_updated_at: value.expectedUpdatedAt || null,
+    input_min_order_cents: value.minOrder, input_max_order_cents: value.maxOrder,
   });
   if (error) return result(form, "error", error.message.includes("shipping_conflict") ? "Ce tarif a changé. Actualisez la page." : "Le tarif n’a pas pu être enregistré.", error.message.includes("shipping_conflict") ? "Tarifa se je spremenila. Osvežite stran." : "Tarife ni bilo mogoče shraniti.");
   invalidateCommerce();

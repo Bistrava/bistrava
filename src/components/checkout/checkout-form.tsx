@@ -4,7 +4,7 @@ import { CheckCircle2, LockKeyhole, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 import type { Route } from "next";
 import Link from "next/link";
-import { type FormEvent, useActionState, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { type FormEvent, useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -16,7 +16,7 @@ import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
 import { CartReviewNotice } from "@/components/cart/cart-page-client";
 import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
-import type { ShippingRate } from "@/lib/commerce/shipping";
+import { getEligibleShippingRates, type ShippingRate } from "@/lib/commerce/shipping-rates";
 import type { CheckoutQuoteState } from "@/lib/validation/checkout";
 
 function FieldError({ errors }: { errors?: string[] }) {
@@ -35,7 +35,7 @@ export function CheckoutForm({
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
   const [state, formAction, pending] = useActionState(createCheckoutOrder, initialCheckoutState);
-  const [shippingRateId, setShippingRateId] = useState(rates[0]?.id ?? "");
+  const [preferredShippingRateId, setShippingRateId] = useState("");
   const idempotencyRef = useRef<HTMLInputElement>(null);
   const guestTokenRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -45,10 +45,9 @@ export function CheckoutForm({
   const [quoting, startQuote] = useTransition();
   const [acknowledgedQuote, setAcknowledgedQuote] = useState("");
 
-  const shippingRate = useMemo(
-    () => rates.find((rate) => rate.id === shippingRateId) ?? null,
-    [rates, shippingRateId],
-  );
+  const eligibleRates = getEligibleShippingRates(rates, subtotalCents);
+  const shippingRate = eligibleRates.find((rate) => rate.id === preferredShippingRateId) ?? eligibleRates[0] ?? null;
+  const shippingRateId = shippingRate?.id ?? "";
   const cartPayload = JSON.stringify(lines.map((line) => ({ sku: line.sku, quantity: line.quantity })));
   const normalizedCode = discountCode.trim().toUpperCase();
   const quoteKey = `${cartPayload}:${subtotalCents}:${shippingRateId}:${shippingRate?.priceCents ?? 0}:${normalizedCode}`;
@@ -57,7 +56,7 @@ export function CheckoutForm({
   const totalCents = appliedQuote?.totalCents ?? subtotalCents + (shippingRate?.priceCents ?? 0);
   const promotionReady = !normalizedCode || (appliedQuote?.code === normalizedCode && acknowledgedQuote === quoteKey);
   const canSubmit = catalogCurrent && changes.length === 0 && lines.length > 0 &&
-    orderingEnabled && rates.length > 0 && !pending && !quoting && promotionReady;
+    orderingEnabled && Boolean(shippingRate) && !pending && !quoting && promotionReady;
 
   useEffect(() => {
     if (state.status !== "success" || !state.redirectUrl) return;
@@ -131,7 +130,7 @@ export function CheckoutForm({
             <LockKeyhole aria-hidden="true" />
             <div>
               <strong>Sprejem naročil še ni aktiviran</strong>
-              <p>Obrazec je pripravljen, vendar mora Bistrava pred vklopom potrditi način plačila in nastaviti dostavo.</p>
+              <p>Odpiranje spletnih naročil je v pripravi. Pred oddajo naročil mora Bistrava dokončno potrditi plačila in pogoje prodaje.</p>
             </div>
           </div>
         ) : null}
@@ -203,13 +202,15 @@ export function CheckoutForm({
               onChange={(event) => setShippingRateId(event.target.value)}
               required
             >
-              {rates.length === 0 ? <option value="">Dostava še ni nastavljena</option> : null}
-              {rates.map((rate) => (
+              {eligibleRates.length === 0 ? <option value="">Za to košarico dostava trenutno ni na voljo</option> : null}
+              {eligibleRates.map((rate) => (
                 <option value={rate.id} key={rate.id}>
                   {rate.name} – {formatMoney(rate.priceCents)}
                 </option>
               ))}
             </select>
+            <small>Dostava po Sloveniji. Prag se izračuna iz vrednosti izdelkov z DDV pred uporabo promocijske kode. <Link href="/dostava">Pogoji dostave</Link></small>
+            {shippingRate?.estimatedDaysMin && shippingRate.estimatedDaysMax ? <small>Predvidoma {shippingRate.estimatedDaysMin}–{shippingRate.estimatedDaysMax} delovnih dni.</small> : null}
             <FieldError errors={state.fieldErrors?.shippingRateId} />
           </div>
           <div className="form-field">

@@ -184,6 +184,9 @@ try {
   stage = "product agent rollback suite";
   await db.exec(await readFile(new URL("../supabase/tests/admin_products.sql", import.meta.url), "utf8")); checks++;
   check(await scalar("select count(*)::int from public.products"), 2);
+  stage = "shipping threshold rollback suite";
+  await db.exec(await readFile(new URL("../supabase/tests/shipping_thresholds.sql", import.meta.url), "utf8")); checks++;
+  check(await scalar("select count(*)::int from public.products"), 2);
   console.log(JSON.stringify({ status: "passed", checks, migrations: migrations.length, database: "ephemeral PGlite; no Supabase writes" }));
 } catch (error) {
   console.error(JSON.stringify({ status: "failed", stage, checks, message: error.message, detail: error.detail, where: error.where }));

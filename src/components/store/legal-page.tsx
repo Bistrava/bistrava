@@ -2,11 +2,11 @@ import { AlertTriangle, CalendarDays, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
-import type { LegalPageKey } from "@/lib/content/legal-pages";
+import type { LegalPageContent, LegalPageKey } from "@/lib/content/legal-pages";
 import { legalPages } from "@/lib/content/legal-pages";
 
-export function LegalPage({ pageKey }: { pageKey: LegalPageKey }) {
-  const page = legalPages[pageKey];
+export function LegalPage({ pageKey, content }: { pageKey: LegalPageKey; content?: LegalPageContent }) {
+  const page = content ?? legalPages[pageKey];
 
   return (
     <>
@@ -51,6 +51,15 @@ export function LegalPage({ pageKey }: { pageKey: LegalPageKey }) {
               <section id={section.id} key={section.id}>
                 <h2>{section.title}</h2>
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {section.table ? (
+                  <div className="guide-table-scroll" role="region" aria-label={section.table.caption} tabIndex={0}>
+                    <table>
+                      <caption>{section.table.caption}</caption>
+                      <thead><tr>{section.table.headings.map((heading) => <th key={heading} scope="col">{heading}</th>)}</tr></thead>
+                      <tbody>{section.table.rows.map((row, index) => <tr key={`${row[0]}:${index}`}>{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row">{cell}</th> : <td key={cellIndex}>{cell}</td>)}</tr>)}</tbody>
+                    </table>
+                  </div>
+                ) : null}
                 {section.items ? (
                   <ul>
                     {section.items.map((item) => (

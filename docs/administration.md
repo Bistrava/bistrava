@@ -16,7 +16,7 @@ Les administrateurs peuvent modifier les données. Les éditeurs consultent les 
 | Stock | Rechercher un produit, saisir la quantité totale et le motif, consulter les 50 derniers mouvements. Les alertes commencent à 5 unités. |
 | Commandes | Rechercher et filtrer, consulter articles, coordonnées, adresses, paiement, notes et livraison. |
 | Clients | Historique des commandes et adresses ; modifier le nom, téléphone et langue des comptes clients. Les achats invités sont inclus dans le suivi. Les comptes du personnel ne sont pas traités comme clients. |
-| Livraisons | Définir les zones en Slovénie, tarifs fixes et estimations de délai ; gérer transporteur, numéro et lien de suivi depuis la commande. |
+| Livraisons | Définir les zones en Slovénie, tarifs et bornes minimum/maximum inclusives du panier TTC avant code promotionnel, hors livraison. Une borne vide signifie aucune limite. Les deux estimations de délai sont facultatives : les laisser toutes deux vides ou renseigner une paire cohérente de 1 à 90 jours ouvrés. Gérer transporteur, numéro et lien de suivi depuis la commande. |
 | Promotions | Codes de réduction en pourcentage ou montant fixe, dates, minimum d’achat, quotas et archivage. Le total est recalculé côté serveur. |
 | Messages | Lire les messages reçus, ajouter des notes internes, suivre leur traitement. Les réponses sont envoyées depuis votre propre messagerie. |
 | Guides | Créer ou modifier les articles, sections, paragraphes, tableaux comparatifs et métadonnées SEO ; publier ou archiver. |
@@ -42,13 +42,15 @@ Le suivi de colis enregistre des informations et un lien HTTPS. Il ne génère p
 
 ## Ouverture des ventes
 
-La prise de commandes reste désactivée tant que les modalités de paiement et de livraison ne sont pas finalisées. Les tarifs créés sont inactifs par défaut. L’activation technique passe par l’environnement sécurisé du projet, et non par les formulaires de l’Admin.
+La grille de livraison pour la Slovénie est configurée : **4,50 € TTC jusqu’à 80,00 € de produits inclus**, puis **livraison gratuite dès 80,01 €**. Le montant de référence comprend la TVA, avant code promotionnel et hors livraison. Une promotion ne fait donc pas perdre la gratuité acquise avec ce montant. Les tarifs reposent sur le [comparatif des livraisons en Slovénie du 9 octobre 2026](shipping-benchmark-2026-10-09.md).
+
+La prise de commandes et le paiement restent désactivés. Le transporteur et ses délais doivent encore être finalisés ; aucune estimation de délai n’est renseignée dans les tarifs configurés. Les nouveaux tarifs créés dans l’Admin sont inactifs par défaut. L’activation technique des ventes passe par l’environnement sécurisé du projet, et non par les formulaires de l’Admin.
 
 Les codes promotionnels sont reliés au calcul de commande. Ils sont consommés avec la réservation du stock, et non lors de la simple saisie du code. Le client doit confirmer le total remisé avant de commander. L’annulation d’une commande impayée restitue l’utilisation ; un remboursement après paiement ne réactive pas automatiquement le code.
 
 ## Déploiement et vérifications
 
-Migrations `202610080012` à `202610080016` : fonctions transactionnelles, droits de lecture/écriture, promotions, indicateurs et import des dix guides existants. Les migrations de contenu conservent les articles déjà présents sur un même slug.
+Migrations `202610080012` à `202610080016` : fonctions transactionnelles, droits de lecture/écriture, promotions, indicateurs et import des dix guides existants. La migration `202610090017` ajoute la gestion des bornes de panier et des délais facultatifs aux tarifs de livraison. Les migrations de contenu conservent les articles déjà présents sur un même slug.
 
 ```powershell
 pnpm.cmd typecheck
@@ -64,6 +66,6 @@ npm.cmd install --prefix tmp/promotion-sql-test --no-save --package-lock=false -
 node scripts/test-promotions-db.mjs
 ```
 
-Le script applique les seize migrations à PostgreSQL en mémoire, contrôle les permissions, remises, stocks, annulations, clients, messages, guides et conflits concurrents. Il n’utilise aucun secret et n’écrit pas dans Supabase. La suite complémentaire `supabase/tests/admin_products.sql` s’exécute dans une transaction annulée.
+Le script applique les dix-sept migrations à PostgreSQL en mémoire, contrôle les permissions, remises, stocks, annulations, clients, messages, guides, bornes de livraison et conflits concurrents. Il n’utilise aucun secret et n’écrit pas dans Supabase. Les suites complémentaires `supabase/tests/admin_products.sql` et `supabase/tests/shipping_thresholds.sql` s’exécutent dans des transactions annulées.
 
 Le renouvellement des sessions se trouve dans `src/proxy.ts`, à côté de `src/app`, avec un périmètre limité à `/admin`. Les pages et chaque action conservent leurs propres contrôles d’autorisation.

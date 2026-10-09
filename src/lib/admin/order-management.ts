@@ -66,18 +66,25 @@ export const shippingZoneSchema = z.object({
   active: z.enum(["on", "off"]),
 }).refine((value) => !value.id || Boolean(value.expectedUpdatedAt));
 
+const euroAmount = z.string().trim().regex(/^\d{1,5}([.,]\d{1,2})?$/).transform((value) => Math.round(Number(value.replace(",", ".")) * 100));
+const optionalEuroAmount = z.union([z.literal(""), euroAmount]).optional().transform((value) => value === "" || value === undefined ? null : value);
+const optionalDeliveryDays = z.preprocess((value) => value === null || value === undefined || (typeof value === "string" && value.trim() === "") ? null : value, z.coerce.number().int().min(1).max(90).nullable());
+
 export const shippingRateSchema = z.object({
   id: optionalId,
   expectedUpdatedAt: optionalDate,
   zoneId: z.string().uuid(),
   name: shortText(120).min(2),
-  price: z.string().trim().regex(/^\d{1,5}([.,]\d{1,2})?$/).transform((value) => Math.round(Number(value.replace(",", ".")) * 100)),
-  estimatedDaysMin: z.coerce.number().int().min(1).max(90),
-  estimatedDaysMax: z.coerce.number().int().min(1).max(90),
+  price: euroAmount,
+  minOrder: optionalEuroAmount,
+  maxOrder: optionalEuroAmount,
+  estimatedDaysMin: optionalDeliveryDays,
+  estimatedDaysMax: optionalDeliveryDays,
   active: z.enum(["on", "off"]),
-}).refine((value) => value.estimatedDaysMax >= value.estimatedDaysMin)
+}).refine((value) => (value.estimatedDaysMin === null && value.estimatedDaysMax === null) || (value.estimatedDaysMin !== null && value.estimatedDaysMax !== null && value.estimatedDaysMax >= value.estimatedDaysMin), { path: ["estimatedDaysMax"], message: "Provide both delivery estimates in ascending order, or leave both empty." })
+  .refine((value) => value.minOrder === null || value.maxOrder === null || value.maxOrder >= value.minOrder, { path: ["maxOrder"], message: "The maximum basket amount must be at least the minimum." })
   .refine((value) => !value.id || Boolean(value.expectedUpdatedAt));
 
 export type AdminShippingZone = { id: string; name: string; active: boolean; updatedAt: string; countryCodes: string[] };
-export type AdminShippingRate = { id: string; zoneId: string; name: string; active: boolean; updatedAt: string; priceCents: number; estimatedDaysMin: number | null; estimatedDaysMax: number | null };
+export type AdminShippingRate = { id: string; zoneId: string; name: string; active: boolean; updatedAt: string; priceCents: number; minOrderCents: number | null; maxOrderCents: number | null; estimatedDaysMin: number | null; estimatedDaysMax: number | null };
 export type AdminShippingData = { source: "live" | "unavailable"; zones: AdminShippingZone[]; rates: AdminShippingRate[] };

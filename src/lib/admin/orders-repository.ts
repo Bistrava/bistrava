@@ -182,12 +182,12 @@ export async function getAdminShippingData(): Promise<AdminShippingData> {
   if (!supabase) return { source: "unavailable", zones: [], rates: [] };
   const [zones, rates] = await Promise.all([
     supabase.from("shipping_zones").select("id,name,active,country_codes,updated_at").order("name"),
-    supabase.from("shipping_rates").select("id,zone_id,name,active,price_cents,estimated_days_min,estimated_days_max,updated_at").order("price_cents"),
+    supabase.from("shipping_rates").select("id,zone_id,name,active,price_cents,min_order_cents,max_order_cents,estimated_days_min,estimated_days_max,updated_at").order("price_cents"),
   ]);
   if (zones.error || rates.error) return { source: "unavailable", zones: [], rates: [] };
   return {
     source: "live",
     zones: zones.data.map((row) => ({ id: row.id, name: row.name, active: row.active, countryCodes: row.country_codes, updatedAt: row.updated_at })),
-    rates: rates.data.map((row) => ({ id: row.id, zoneId: row.zone_id, name: row.name, active: row.active, priceCents: row.price_cents, estimatedDaysMin: row.estimated_days_min, estimatedDaysMax: row.estimated_days_max, updatedAt: row.updated_at })),
+    rates: rates.data.map((row) => ({ id: row.id, zoneId: row.zone_id, name: row.name, active: row.active, priceCents: row.price_cents, minOrderCents: row.min_order_cents, maxOrderCents: row.max_order_cents, estimatedDaysMin: row.estimated_days_min, estimatedDaysMax: row.estimated_days_max, updatedAt: row.updated_at })),
   };
 }

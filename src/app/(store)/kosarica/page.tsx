@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { CartPageClient } from "@/components/cart/cart-page-client";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { getCartCatalogSnapshot } from "@/lib/cart/server";
+import { getActiveShippingRates } from "@/lib/commerce/shipping";
 
 export const metadata: Metadata = {
   title: "Košarica",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
-  const catalog = await getCartCatalogSnapshot();
+  const [catalog, rates] = await Promise.all([getCartCatalogSnapshot(), getActiveShippingRates()]);
   return (
     <>
       <div className="container">
@@ -18,7 +19,7 @@ export default async function CartPage() {
       </div>
       <section className="section utility-page">
         <div className="container">
-          <CartPageClient catalog={catalog} />
+          <CartPageClient catalog={catalog} rates={rates} />
         </div>
       </section>
     </>

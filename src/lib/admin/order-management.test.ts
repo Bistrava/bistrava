@@ -51,4 +51,25 @@ describe("shipping tariffs", () => {
     expect(shippingRateSchema.safeParse({ ...rate, id: form.orderId }).success).toBe(false);
     expect(shippingZoneSchema.safeParse({ id: form.orderId, name: "Slovenija", active: "on", expectedUpdatedAt: "" }).success).toBe(false);
   });
+  it("accepts inclusive basket boundaries in cents and optional unbounded sides", () => {
+    expect(shippingRateSchema.parse({ ...rate, minOrder: "", maxOrder: "80,00" })).toMatchObject({ minOrder: null, maxOrder: 8000 });
+    expect(shippingRateSchema.parse({ ...rate, price: "0", minOrder: "80.01", maxOrder: "" })).toMatchObject({ price: 0, minOrder: 8001, maxOrder: null });
+    expect(shippingRateSchema.parse(rate)).toMatchObject({ minOrder: null, maxOrder: null });
+    expect(shippingRateSchema.parse({ ...rate, minOrder: "0", maxOrder: "0" })).toMatchObject({ minOrder: 0, maxOrder: 0 });
+  });
+  it("rejects reversed, negative and fractional-cent basket ranges", () => {
+    expect(shippingRateSchema.safeParse({ ...rate, minOrder: "80.01", maxOrder: "80.00" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, minOrder: "-1" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, maxOrder: "-0.01" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, minOrder: "80.001" }).success).toBe(false);
+  });
+  it("allows unknown delivery estimates only when both are empty", () => {
+    expect(shippingRateSchema.parse({ ...rate, estimatedDaysMin: "", estimatedDaysMax: "" })).toMatchObject({ estimatedDaysMin: null, estimatedDaysMax: null });
+    expect(shippingRateSchema.parse({ ...rate, estimatedDaysMin: null, estimatedDaysMax: null })).toMatchObject({ estimatedDaysMin: null, estimatedDaysMax: null });
+    expect(shippingRateSchema.safeParse({ ...rate, estimatedDaysMin: "", estimatedDaysMax: "3" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, estimatedDaysMin: "3", estimatedDaysMax: "" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, estimatedDaysMin: "0", estimatedDaysMax: "3" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, estimatedDaysMax: "91" }).success).toBe(false);
+    expect(shippingRateSchema.safeParse({ ...rate, estimatedDaysMin: "1.5" }).success).toBe(false);
+  });
 });

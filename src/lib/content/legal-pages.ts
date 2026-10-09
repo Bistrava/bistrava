@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { createDeliveryPageContent } from "@/lib/content/delivery";
 
 export type LegalPageKey =
   | "pravna-obvestila"
@@ -16,6 +17,7 @@ export type LegalSection = {
   paragraphs: string[];
   items?: string[];
   callout?: string;
+  table?: { caption: string; headings: string[]; rows: string[][] };
 };
 
 export type LegalPageContent = {
@@ -183,67 +185,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     ],
   },
 
-  dostava: {
-    title: "Dostava",
-    kicker: "Od naročila do vaših vrat",
-    intro:
-      "Pregled območja dostave, izračuna stroškov, rokov, sledenja in ravnanja ob poškodovani pošiljki.",
-    updatedAt: "22. september 2026",
-    sections: [
-      {
-        id: "obmocje",
-        title: "Območje dostave",
-        paragraphs: [
-          "Bistrava je namenjena kupcem v Sloveniji. Točna območja, omejitve za oddaljene kraje ter možnost dostave v druge države se prikažejo na blagajni oziroma potrdijo pred sprejemom naročila.",
-        ],
-      },
-      {
-        id: "strosek",
-        title: "Strošek dostave",
-        paragraphs: [
-          "Strošek se izračuna pred oddajo naročila glede na naslov, težo, mere, vrednost in izbrano storitev. Kupec pred plačilom vidi končni znesek. Brezplačna dostava velja samo, kadar je izrecno prikazana pri izdelku ali v košarici.",
-        ],
-      },
-      {
-        id: "rok",
-        title: "Dobavni rok",
-        paragraphs: [
-          "Ocenjeni rok je prikazan pri razpoložljivi dostavni možnosti. Začne teči po potrditvi naročila oziroma prejemu plačila, kadar je zahtevano predplačilo. Delovni dnevi ne vključujejo sobot, nedelj in praznikov.",
-          "Če rok ni posebej dogovorjen, bo blago dobavljeno brez nepotrebnega odlašanja in najpozneje v zakonskem roku. Ob zamudi kupec prejme obvestilo in lahko določi primeren dodatni rok; če tudi ta ni spoštovan, lahko uveljavlja pravice po veljavnih predpisih.",
-        ],
-      },
-      {
-        id: "vecji-izdelki",
-        title: "Večji in težji izdelki",
-        paragraphs: [
-          "Mehčalne naprave, večja filtrirna ohišja in druga težka oprema lahko zahtevajo paletno dostavo, pomoč pri razkladanju ali predhodni dogovor. Dostava praviloma pomeni dostavo do naslova oziroma mesta, ki ga omogočajo prevoznikovi pogoji, ne pa tudi vnosa, priklopa ali montaže, razen če je to izrecno vključeno v naročilo.",
-        ],
-      },
-      {
-        id: "prevzem",
-        title: "Prevzem in pregled pošiljke",
-        paragraphs: [
-          "Kupec naj ob prevzemu preveri število paketov in vidne poškodbe. Poškodovano embalažo naj fotografira ter poškodbo zabeleži pri prevozniku, če je mogoče. Manjkajočo vsebino, napačen izdelek ali skrito poškodbo naj čim prej sporoči Bistravi.",
-          "Zapis pri prevozniku olajša obravnavo, vendar ne izključuje zakonskih pravic potrošnika. Ne pošiljajte poškodovanega izdelka na lastno pobudo, dokler ne prejmete navodil za varen prevoz.",
-        ],
-      },
-      {
-        id: "tveganje",
-        title: "Tveganje med prevozom",
-        paragraphs: [
-          "Kadar prevoznika organizira Bistrava, tveganje poškodbe ali izgube praviloma preide na potrošnika, ko blago fizično prejme on ali pooblaščena tretja oseba. Za prevoznika, ki ga potrošnik naroči sam in ga Bistrava ni ponudila, veljajo zakonska pravila za tak primer.",
-        ],
-      },
-      {
-        id: "potrditev",
-        title: "Podatki, ki jih je treba še potrditi",
-        paragraphs: [
-          "Pred aktivacijo plačil bodo objavljeni ime pogodbenega prevoznika, dejanske tarife, prag morebitne brezplačne dostave, merila za paletno dostavo in kontakt za reklamacije prevoza.",
-        ],
-        callout: "Prevoznik, cenik in operativni roki Bistrava: [DOPOLNITI].",
-      },
-    ],
-  },
+  dostava: createDeliveryPageContent([]),
 
   placila: {
     title: "Plačila",

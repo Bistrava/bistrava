@@ -24,8 +24,8 @@ Before enabling checkout:
 1. Apply migration `202608240008_guest_checkout.sql` to Development first.
 2. Set approved Bistrava selling prices in `products.price_cents`; never copy supplier observations automatically.
 3. Mark only reviewed buy-now products `active`, `in_stock`, and published.
-4. Insert real active Slovenian `shipping_zones` and `shipping_rates` values.
-5. Validate VAT, delivery, returns, privacy and sales terms with the responsible business/legal owner.
+4. Slovenian shipping rates were configured on 2026-10-09: EUR 4.50 including VAT up to EUR 80.00 of products, free above EUR 80.00, before coupon discounts. See [the shipping benchmark](shipping-benchmark-2026-10-09.md). Confirm the carrier and operating delivery times before opening orders.
+5. Validate VAT, delivery, returns, privacy and sales terms with the responsible business/legal owner. In particular, the current order `tax_cents` calculation covers product VAT only: the VAT included in charged shipping must be allocated and included before invoices or paid orders go live. Gross shipping and checkout totals already include the customer-facing EUR 4.50 charge; no additional VAT is added to that charge.
 6. Configure Supabase and, optionally, verified Resend credentials.
 7. Set `CHECKOUT_MODE=manual_review` and `CHECKOUT_ORDERING_ENABLED=true` only after the above checks.
 8. Keep the payment status pending until a future signed provider webhook confirms payment.

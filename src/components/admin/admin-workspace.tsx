@@ -28,6 +28,7 @@ import {
 } from "@/components/admin/admin-i18n";
 import type { AdminPageAccess } from "@/lib/auth/admin-page";
 import { AdminNotificationsProvider, AdminNotificationsBell, AdminNotificationNavBadge, AdminNotificationsSummary } from "./admin-notifications";
+import { MailboxSync } from './mailbox-sync';
 
 type WorkspaceAccess = Exclude<AdminPageAccess, { mode: "not_configured" }>;
 
@@ -80,6 +81,7 @@ export function AdminWorkspace({
 
   return (
     <AdminNotificationsProvider key={access.mode} disabled={access.mode !== "authenticated"}>
+    <MailboxSync enabled={access.mode === 'authenticated'} />
     <div className="admin-workspace">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-title">

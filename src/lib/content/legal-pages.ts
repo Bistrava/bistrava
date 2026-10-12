@@ -210,9 +210,9 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
           "Veljaven je samo način, ki ga kupec lahko izbere na blagajni. Možni načini se lahko med izdelki razlikujejo zaradi vrednosti, dobavnega roka ali preverjanja naročila.",
         ],
         items: [
-          "plačilna kartica prek certificiranega ponudnika, ko bo omogočena,",
-          "bančno nakazilo po predračunu, ko bo omogočeno,",
-          "drug jasno označen način, prikazan pred oddajo naročila.",
+          "bančno nakazilo v EUR, kadar je omogočeno na blagajni,",
+          "podatki prejemnika in računa so prikazani pred oddajo ter v navodilih po oddaji naročila,",
+          "plačilo s kartico in plačilo po povzetju trenutno nista na voljo.",
         ],
       },
       {
@@ -224,9 +224,10 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
       },
       {
         id: "predracun",
-        title: "Predračun in rok plačila",
+        title: "Kako plačati z bančnim nakazilom",
         paragraphs: [
-          "Če je omogočeno plačilo po predračunu, potrdilo vsebuje znesek, sklic, račun in rok. Naročilo gre v obdelavo po evidentiranem plačilu. Če plačilo ni prejeto v navedenem roku, se naročilo lahko samodejno prekliče.",
+          "Po oddaji naročila so na potrditveni strani prikazani ime prejemnika, IBAN, banka, BIC/SWIFT, kadar je naveden, točen znesek in referenca naročila. Navodila pošljemo tudi na e-poštni naslov naročila. Nakazilo opravite v svoji banki; oddaja naročila sama ne izvede plačila.",
+          "V namen nakazila vpišite referenco naročila. Naročilo ostane v čakanju do potrjenega prejema celotnega zneska. Nato ga začnemo pripravljati za dostavo. Če ste že plačali, nakazila ne ponavljajte; pri preverjanju navedite referenco naročila.",
         ],
       },
       {
@@ -245,11 +246,11 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
       },
       {
         id: "ponudnik-placil",
-        title: "Ponudnik plačil",
+        title: "Pomoč pri nakazilu",
         paragraphs: [
-          "Pred vključitvijo spletnega plačevanja bodo tukaj navedeni ponudnik, sprejete kartice oziroma načini, pravila preverjanja in povezava do njegovega obvestila o zasebnosti.",
+          "Če navodil niste prejeli ali želite preveriti prejem plačila, pišite na kontakt@bistrava.com in navedite referenco naročila. Ne pošiljajte gesla ali dostopnih kod za spletno banko.",
         ],
-        callout: "Ponudnik plačil in aktivni načini: [DOPOLNITI].",
+        callout: "Naročilo se pripravi po potrjenem prejemu bančnega nakazila.",
       },
     ],
   },

@@ -18,6 +18,8 @@ import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import { getEligibleShippingRates, type ShippingRate } from "@/lib/commerce/shipping-rates";
 import type { CheckoutQuoteState } from "@/lib/validation/checkout";
+import type { BankTransferDetails } from '@/lib/payments/bank-transfer';
+import { BankTransferInstructions } from './bank-transfer-instructions';
 
 function FieldError({ errors }: { errors?: string[] }) {
   return errors?.[0] ? <span className="field-error">{errors[0]}</span> : null;
@@ -27,10 +29,12 @@ export function CheckoutForm({
   rates,
   orderingEnabled,
   catalog,
+  bankTransfer,
 }: {
   rates: ShippingRate[];
   orderingEnabled: boolean;
   catalog: CartCatalogSnapshot;
+  bankTransfer?: BankTransferDetails | null;
 }) {
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
@@ -219,8 +223,13 @@ export function CheckoutForm({
           </div>
         </section>
 
+        {bankTransfer ? <section className="checkout-section card" aria-labelledby="payment-heading">
+          <p className="section-kicker">3. Plačilo</p><h2 id="payment-heading">Bančno nakazilo</h2>
+          <p>Naročilo plačate z nakazilom iz svoje banke. Podatki za nakazilo bodo prikazani tudi po oddaji naročila in v potrditvenem e-sporočilu. Plačilo ni izvedeno samodejno.</p>
+          <BankTransferInstructions bank={bankTransfer}/>
+        </section>:null}
         <section className="checkout-section card" aria-labelledby="confirmation-heading">
-          <p className="section-kicker">3. Potrditev</p>
+          <p className="section-kicker">{bankTransfer?'4. Potrditev':'3. Potrditev'}</p>
           <h2 id="confirmation-heading">Pregled in soglasje</h2>
           <label className="consent-field">
             <input type="checkbox" name="termsAccepted" required />
@@ -246,9 +255,9 @@ export function CheckoutForm({
           </p>
           <button className="button button-primary checkout-submit" type="submit" disabled={!canSubmit}>
             <CheckCircle2 aria-hidden="true" size={20} />
-            {pending ? "Oddajanje …" : "Oddajte naročilo v pregled"}
+            {pending ? "Oddajanje …" : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
           </button>
-          <small>Naročilo ni plačano, dokler plačilo ni potrjeno po varnem strežniškem postopku.</small>
+          <small>{bankTransfer?'Po oddaji boste prejeli navodila za nakazilo. Naročilo ostane v čakanju do prejema plačila.':'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
         </section>
       </div>
 

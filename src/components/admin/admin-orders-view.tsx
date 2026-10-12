@@ -410,7 +410,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const shipmentStatusLabel = (value: string | null | undefined) => value
     ? shipmentStatusCopy[value]?.[locale] ?? value
     : labels.notAssigned;
-  const providerLabel = (value: string | null | undefined) => value === "manual_review"
+  const providerLabel = (value: string | null | undefined) => value === 'bank_transfer' ? (locale==='fr'?'Virement bancaire':'Bančno nakazilo') : value === "manual_review"
     ? locale === "fr" ? "Validation manuelle" : "Ročni pregled"
     : value || labels.notAssigned;
   const activeOrders = data.orders.filter((order) => !["completed", "cancelled", "refunded"].includes(order.status)).length;

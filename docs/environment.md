@@ -14,7 +14,12 @@ Copy `.env.example` to `.env.local`. Never commit `.env.local` or real credentia
 | `EMAIL_INTERNAL_TO` | Server only | Inquiry alerts | Internal recipient for new quote, installation, service, advice, and configurator requests. |
 | `RATE_LIMIT_SALT` | Server only | Inquiry protection | Long random value used when hashing request IPs. |
 | `CHECKOUT_ORDERING_ENABLED` | Server only | Order creation | Must remain `false` until selling prices, public stock, delivery rates and legal terms are approved. |
-| `CHECKOUT_MODE` | Server only | Order workflow | `manual_review` creates a pending, unpaid order. It never represents successful payment. |
+| `CHECKOUT_MODE` | Server only | Order workflow | `bank_transfer` creates an order awaiting a manual EUR transfer; `manual_review` creates a pending unpaid order. Neither confirms receipt of funds. |
+| `BANK_TRANSFER_BENEFICIARY` | Server; displayed at checkout | Bank transfer | Exact receiving account holder name. |
+| `BANK_TRANSFER_IBAN` | Server; displayed at checkout | Bank transfer | Real recipient IBAN; normalized and checksum validated. |
+| `BANK_TRANSFER_BANK_NAME` | Server; displayed at checkout | Bank transfer | Recipient bank name. |
+| `BANK_TRANSFER_BIC` | Server; displayed at checkout | Bank transfer | Optional BIC/SWIFT, 8 or 11 characters. |
+| `LWS_MAIL_PASSWORD` | Server secret only | Mailbox and bank order emails | Password for `kontakt@bistrava.com`; never browser exposed. |
 | `NEXT_PUBLIC_GTM_ID` | Browser | Measurement | Optional GTM container. Preferred production orchestration path. |
 | `NEXT_PUBLIC_GA4_ID` | Browser | Measurement | Optional direct GA4 property when GTM is not used. |
 | `NEXT_PUBLIC_GOOGLE_ADS_ID` | Browser | Measurement | Optional direct Google Ads tag when GTM is not used. |

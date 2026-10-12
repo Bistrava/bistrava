@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { bankTransferSchema } from '@/lib/payments/bank-transfer';
 
 export const emailRecipientSchema = z.string().trim().toLowerCase().email().max(254);
 
@@ -7,6 +8,7 @@ export const orderConfirmationEmailSchema = z.object({
   orderReference: z.string().trim().min(3).max(40),
   orderUrl: z.string().url(),
   totalCents: z.number().int().nonnegative(),
+  bankTransfer:bankTransferSchema.optional(),
   items: z
     .array(
       z.object({

@@ -115,7 +115,7 @@ export async function createCheckoutOrder(
     countryCode: parsed.data.countryCode,
   };
 
-  const { data, error } = await supabase.rpc("create_pending_guest_order", {
+  const { data, error } = await supabase.rpc(checkoutConfig.mode==='bank_transfer'?'create_bank_transfer_order':"create_pending_guest_order", {
     input_cart_lines: parsed.data.cart,
     input_email: parsed.data.email,
     input_phone: parsed.data.phone,
@@ -127,6 +127,7 @@ export async function createCheckoutOrder(
     input_idempotency_key: parsed.data.idempotencyKey,
     input_discount_code: parsed.data.discountCode || null,
     input_expected_total_cents: parsed.data.expectedTotalCents,
+    ...(checkoutConfig.mode==='bank_transfer'?{input_bank_details:checkoutConfig.bankTransfer}:{}),
   });
 
   if (error || !Array.isArray(data) || !data[0]) {
@@ -155,26 +156,28 @@ export async function createCheckoutOrder(
 
   const { data: order } = await supabase
     .from("orders")
-    .select("total_cents,order_items(product_name,quantity,line_total_cents)")
+    .select("email,shipping_address_snapshot,total_cents,bank_transfer_snapshot,order_items(product_name,quantity,line_total_cents)")
     .eq("id", orderId)
     .single();
   if (order && Array.isArray(order.order_items)) {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava.com";
+    // Email failure must never turn a successfully committed order into failure.
     await sendOrderConfirmation({
-      to: parsed.data.email,
+      to: String(order.email),
       idempotencyKey: `order-confirmation:${orderId}`,
       data: {
-        customerName: `${parsed.data.firstName} ${parsed.data.lastName}`,
+        customerName: [order.shipping_address_snapshot?.firstName, order.shipping_address_snapshot?.lastName].filter(Boolean).join(" ") || "stranka",
         orderReference: reference,
         orderUrl: new URL(`/narocilo/${reference}`, siteUrl).toString(),
         totalCents: Number(order.total_cents),
+        bankTransfer:order.bank_transfer_snapshot || undefined,
         items: order.order_items.map((item) => ({
           name: String(item.product_name),
           quantity: Number(item.quantity),
           lineTotalCents: Number(item.line_total_cents),
         })),
       },
-    });
+    }).catch(()=>({ok:false as const,reason:'provider_error' as const}));
   }
 
   return {

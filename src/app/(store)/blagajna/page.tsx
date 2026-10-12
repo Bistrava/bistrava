@@ -27,12 +27,12 @@ export default async function CheckoutPage() {
         <div className="container">
           <p className="section-kicker">Varna blagajna</p>
           <h1>Zaključite naročilo</h1>
-          <p>Vnesite kontaktne podatke in naslov. Končne vrednosti vedno preveri strežnik.</p>
+          <p>Vnesite kontaktne podatke in naslov, preverite naročilo ter izberite plačilo.</p>
         </div>
       </section>
       <section className="section checkout-page">
         <div className="container">
-          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} />
+          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={checkoutConfig.bankTransfer} />
         </div>
       </section>
     </>

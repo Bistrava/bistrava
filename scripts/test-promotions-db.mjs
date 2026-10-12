@@ -194,6 +194,8 @@ try {
   check((await db.query("select tablename from pg_publication_tables where pubname='supabase_realtime' order by tablename")).rows.map((row) => row.tablename), ["admin_notification_reads", "email_events", "orders", "quote_requests"]);
   stage = "mailbox privacy, deduplication and send isolation";
   await db.exec(await readFile(new URL("../supabase/tests/admin_mailbox.sql", import.meta.url), "utf8")); checks++;
+  stage = "bank transfer instructions, reservation and receipt confirmation";
+  await db.exec(await readFile(new URL("../supabase/tests/bank_transfer.sql", import.meta.url), "utf8")); checks++;
   console.log(JSON.stringify({ status: "passed", checks, migrations: migrations.length, database: "ephemeral PGlite; no Supabase writes" }));
 } catch (error) {
   console.error(JSON.stringify({ status: "failed", stage, checks, message: error.message, detail: error.detail, where: error.where }));

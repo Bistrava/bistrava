@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { formatMoney } from "@/lib/commerce/money";
 import { getGuestOrder } from "@/lib/orders/guest-orders";
+import { BankTransferInstructions } from '@/components/checkout/bank-transfer-instructions';
+import { paymentStatusCopy } from '@/lib/payments/bank-transfer';
 
 export const metadata: Metadata = {
   title: "Naročilo",
@@ -52,7 +54,7 @@ export default async function OrderPage({
       <section className="order-success-hero">
         <div className="narrow-container">
           <CheckCircle2 aria-hidden="true" size={48} />
-          <p className="section-kicker">Naročilo je sprejeto v pregled</p>
+          <p className="section-kicker">{paymentStatusCopy(order.status)}</p>
           <h1>Hvala za vaše naročilo.</h1>
           <p>Referenca: <strong>{order.reference}</strong></p>
         </div>
@@ -60,8 +62,11 @@ export default async function OrderPage({
       <section className="section order-detail-section">
         <div className="container order-detail-grid">
           <div className="order-detail-main card">
-            <div className="order-detail-heading"><PackageCheck aria-hidden="true" /><div><p className="section-kicker">Stanje</p><h2>V pregledu</h2></div></div>
-            <p>Naročilo smo shranili. Plačilo še ni potrjeno; Bistrava bo po preverbi dobavljivosti in načina plačila poslala nadaljnja navodila.</p>
+            <div className="order-detail-heading"><PackageCheck aria-hidden="true" /><div><p className="section-kicker">Stanje</p><h2>{paymentStatusCopy(order.status)}</h2></div></div>
+            {order.bankTransfer && order.status==='awaiting_payment'?<>
+              <p>Naročilo smo shranili. Za dokončanje plačila izvedite bančno nakazilo po spodnjih navodilih. Če ste nakazilo že izvedli, ga ne ponavljajte; počakajte na potrditev prejema.</p>
+              <BankTransferInstructions bank={order.bankTransfer} amountCents={order.totalCents} reference={order.reference}/>
+            </>:<p>{['paid','processing','shipped','completed'].includes(order.status)?'Plačilo je potrjeno. Hvala za vaše naročilo.':order.status==='cancelled'?'Naročilo je preklicano. Zanj ne izvajajte nakazila. Za pomoč se obrnite na kontakt@bistrava.com.':order.status==='refunded'||order.status==='partially_refunded'?'Povračilo je zabeleženo. Za podrobnosti se obrnite na kontakt@bistrava.com.':'Naročilo smo shranili. Za naslednje korake se obrnite na kontakt@bistrava.com.'}</p>}
             <div className="order-items">
               {order.items.map((item) => (
                 <div key={item.sku}>
@@ -73,13 +78,14 @@ export default async function OrderPage({
             <dl className="order-totals">
               <div><dt>Izdelki</dt><dd>{formatMoney(order.subtotalCents)}</dd></div>
               <div><dt>Dostava</dt><dd>{formatMoney(order.shippingCents)}</dd></div>
+              {order.discountCents>0?<div><dt>Popust</dt><dd>−{formatMoney(order.discountCents)}</dd></div>:null}
               <div><dt>Skupaj</dt><dd>{formatMoney(order.totalCents)}</dd></div>
             </dl>
           </div>
           <aside className="order-contact-card card">
             <Mail aria-hidden="true" />
             <h2>Potrditev in dostava</h2>
-            <p>Obvestilo je namenjeno naslovu <strong>{order.email}</strong>, če je e-poštna storitev konfigurirana.</p>
+            <p>E-poštni naslov za obvestila: <strong>{order.email}</strong>. Če potrditve ne prejmete, preverite neželeno pošto ali pišite na <a href="mailto:kontakt@bistrava.com">kontakt@bistrava.com</a>.</p>
             <address>{addressLines.map((line) => <span key={line}>{line}</span>)}</address>
             <p className="order-security-note"><LockKeyhole aria-hidden="true" size={16} /> Dostop je zaščiten z zasebnim žetonom v brskalniku.</p>
           </aside>

@@ -24,7 +24,7 @@ function imapClient() {
   client.on('error', () => {});
   return client;
 }
-function smtpTransport() {
+export function smtpTransport() {
   return nodemailer.createTransport({
     host, port: 465, secure: true, auth: auth(),
     tls: { minVersion: 'TLSv1.2', rejectUnauthorized: true },

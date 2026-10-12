@@ -13,7 +13,7 @@ export function availableOrderStatuses(order: AdminOrder): AdminOrderStatus[] {
     shipped: ["completed"],
   };
   const statuses = next[order.status] ?? [];
-  if (["pending", "awaiting_payment"].includes(order.status) && order.payment?.provider === "manual_review" && ["pending", "requires_action"].includes(order.payment.status)) {
+  if (["pending", "awaiting_payment"].includes(order.status) && order.payment && ['manual_review','bank_transfer'].includes(order.payment.provider) && ["pending", "requires_action"].includes(order.payment.status)) {
     return [order.status, "paid", ...statuses];
   }
   return [order.status, ...statuses];

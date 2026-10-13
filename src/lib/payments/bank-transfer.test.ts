@@ -1,7 +1,7 @@
 import { beforeEach,describe,expect,it,vi } from 'vitest';
 vi.mock('server-only',()=>({}));
 import { bankTransferSchema,validIban,formatIban,paymentStatusCopy } from './bank-transfer';
-import { getCheckoutConfig } from '@/lib/commerce/config';
+import { getEnvironmentCheckoutConfig as getCheckoutConfig } from '@/lib/commerce/config';
 const bank={beneficiary:'EXAMPLE TEST ONLY',iban:'GB82WEST12345698765432',bankName:'Example bank',bic:'DEUTDEFF',currency:'EUR'};
 beforeEach(()=>{vi.unstubAllEnvs();vi.stubEnv('CHECKOUT_MODE','bank_transfer');vi.stubEnv('CHECKOUT_ORDERING_ENABLED','true');for(const key of ['BANK_TRANSFER_BENEFICIARY','BANK_TRANSFER_IBAN','BANK_TRANSFER_BANK_NAME','BANK_TRANSFER_BIC'])vi.stubEnv(key,'');});
 describe('bank transfer configuration',()=>{

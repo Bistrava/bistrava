@@ -19,7 +19,7 @@ import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import type { AdminSectionId } from "@/components/admin/admin-workspace";
 
 type Localized = { sl: string; fr: string };
-type OperationalSectionId = Exclude<AdminSectionId, "dashboard" | "products" | "customers" | "shipping" | "promotions" | "activity">;
+type OperationalSectionId = Exclude<AdminSectionId, "dashboard" | "products" | "customers" | "shipping" | "promotions" | "activity" | "payments">;
 
 export type AdminSectionMetric = {
   value: string | number;

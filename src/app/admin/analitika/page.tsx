@@ -7,5 +7,5 @@ export const dynamic = "force-dynamic";
 export default async function AnalyticsPage() {
   const access = await getAdminPageAccess();
   if (access.mode === "not_configured") return <p>Supabase ni povezan.</p>;
-  return <AdminWorkspace access={access} active="analytics"><AdminOverviewView data={await getAdminOverview()} checkoutEnabled={getCheckoutConfig().enabled} analytics /></AdminWorkspace>;
+  return <AdminWorkspace access={access} active="analytics"><AdminOverviewView data={await getAdminOverview()} checkoutEnabled={(await getCheckoutConfig()).enabled} analytics /></AdminWorkspace>;
 }

@@ -7,5 +7,5 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   const access = await getAdminPageAccess();
   if (access.mode === "not_configured") return <section className="admin-content"><h1>Supabase ni povezan.</h1></section>;
-  return <AdminWorkspace access={access} active="dashboard"><AdminOverviewView data={await getAdminOverview()} checkoutEnabled={getCheckoutConfig().enabled} /></AdminWorkspace>;
+  return <AdminWorkspace access={access} active="dashboard"><AdminOverviewView data={await getAdminOverview()} checkoutEnabled={(await getCheckoutConfig()).enabled} /></AdminWorkspace>;
 }

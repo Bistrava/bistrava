@@ -81,7 +81,10 @@ export async function createCheckoutOrder(
     return checkoutError("Naročila trenutno ni bilo mogoče oddati.");
   }
 
-  const checkoutConfig = getCheckoutConfig();
+  const checkoutConfig = await getCheckoutConfig();
+  if ((formData.get('paymentSettingsVersion') || 'env') !== checkoutConfig.version) {
+    return checkoutError('Podatki za plačilo so se spremenili. Osvežite stran in ponovno preverite naročilo.');
+  }
   if (!checkoutConfig.enabled) {
     return checkoutError(
       "Sprejem spletnih naročil še ni omogočen. Bistrava mora najprej potrditi način plačila in dostave.",
@@ -132,6 +135,7 @@ export async function createCheckoutOrder(
 
   if (error || !Array.isArray(data) || !data[0]) {
     const detail = error?.message || "";
+    if (detail.includes('payment_settings_changed')) return checkoutError('Podatki za plačilo so se spremenili. Osvežite stran in ponovno preverite naročilo.');
     if (detail.includes("checkout_total_changed")) return checkoutError("Končni znesek se je spremenil. Osvežite košarico in ponovno potrdite znesek pred oddajo.");
     if (detail.includes("discount_unavailable")) return checkoutError("Promocijska koda ni več veljavna za to naročilo. Odstranite jo ali ponovno preverite popust.");
     if (detail.includes("product_unavailable")) {

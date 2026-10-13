@@ -18,6 +18,12 @@ With `LWS_MAIL_PASSWORD` configured, bank instructions use the existing authenti
 
 ## Configuration and activation
 
+Administrators can now manage the receiving account at `/admin/placila` (Payments in the sidebar). The form supports disabled drafts, a Slovenian customer preview, validated activation and optimistic concurrency. Editors cannot read or change these settings. Changes are audited with a masked IBAN; existing order snapshots remain immutable.
+
+Once settings are saved, `payment_settings` is the authoritative source. New checkout requests read it directly without a redeploy. A database failure closes checkout instead of reverting to old environment account details. Both the displayed revision and the database account are checked when placing an order, to reject obsolete instructions.
+
+The payment-method switch does not override the separate `CHECKOUT_ORDERING_ENABLED` store-opening gate. The admin page clearly reports when orders are still closed. Legacy environment account settings below are only a fallback before the first admin save.
+
 - Apply migration `202610120021_bank_transfer.sql` after the preceding migrations.
 - Set `BANK_TRANSFER_BENEFICIARY`, `BANK_TRANSFER_IBAN`, `BANK_TRANSFER_BANK_NAME` and optionally `BANK_TRANSFER_BIC` to the merchant's real receiving account. These are server configuration, intentionally displayed to customers as payment instructions. Never use example account data in production.
 - Set `CHECKOUT_MODE=bank_transfer`. Set `CHECKOUT_ORDERING_ENABLED=true` only when the receiving account and commercial setup are ready. Missing/invalid bank details disable order creation even when the flag is true. Redeploy after Vercel environment changes.

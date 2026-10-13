@@ -30,11 +30,13 @@ export function CheckoutForm({
   orderingEnabled,
   catalog,
   bankTransfer,
+  paymentSettingsVersion = 'env',
 }: {
   rates: ShippingRate[];
   orderingEnabled: boolean;
   catalog: CartCatalogSnapshot;
   bankTransfer?: BankTransferDetails | null;
+  paymentSettingsVersion?: string;
 }) {
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
@@ -245,6 +247,7 @@ export function CheckoutForm({
             <input id="checkout-website" name="website" tabIndex={-1} autoComplete="off" />
           </div>
           <input type="hidden" name="cart" value={cartPayload} />
+          <input type="hidden" name="paymentSettingsVersion" value={paymentSettingsVersion} />
           <input type="hidden" name="discountCode" value={appliedQuote?.code ?? ""} />
           <input type="hidden" name="expectedTotalCents" value={totalCents} />
           <input type="hidden" name="discountAcknowledged" value={appliedQuote && acknowledgedQuote === quoteKey ? "on" : ""} />

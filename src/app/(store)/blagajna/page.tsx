@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default async function CheckoutPage() {
   const [rates, checkoutConfig, catalog] = await Promise.all([
     getActiveShippingRates(),
-    Promise.resolve(getCheckoutConfig()),
+    getCheckoutConfig(),
     getCartCatalogSnapshot(),
   ]);
 
@@ -32,7 +32,7 @@ export default async function CheckoutPage() {
       </section>
       <section className="section checkout-page">
         <div className="container">
-          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={checkoutConfig.bankTransfer} />
+          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={checkoutConfig.bankTransfer} paymentSettingsVersion={checkoutConfig.version} />
         </div>
       </section>
     </>

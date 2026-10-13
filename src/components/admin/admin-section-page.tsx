@@ -12,7 +12,7 @@ import {
 } from "@/components/admin/admin-workspace";
 import { getAdminPageAccess } from "@/lib/auth/admin-page";
 
-type OperationalSectionId = Exclude<AdminSectionId, "dashboard" | "products" | "customers" | "shipping" | "promotions" | "activity">;
+type OperationalSectionId = Exclude<AdminSectionId, "dashboard" | "products" | "customers" | "shipping" | "promotions" | "activity" | "payments">;
 
 export async function AdminSectionPage({
   section,

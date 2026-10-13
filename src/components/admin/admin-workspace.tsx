@@ -17,6 +17,7 @@ import {
   Truck,
   TicketPercent,
   History,
+  Landmark,
 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -45,6 +46,7 @@ export type AdminSectionId =
   | "guides"
   | "email"
   | "analytics"
+  | "payments"
   | "settings";
 
 const navigation = [
@@ -53,6 +55,7 @@ const navigation = [
   { id: "orders", labelKey: "nav.orders", href: "/admin/narocila", icon: ClipboardList },
   { id: "inventory", labelKey: "nav.inventory", href: "/admin/zaloga", icon: Boxes },
   { id: "customers", labelKey: "nav.customers", href: "/admin/stranke", icon: UsersRound },
+  { id: "payments", labelKey: "nav.payments", href: "/admin/placila", icon: Landmark },
   { id: "shipping", labelKey: "nav.shipping", href: "/admin/dostava", icon: Truck },
   { id: "promotions", labelKey: "nav.promotions", href: "/admin/promocije", icon: TicketPercent },
   { id: "inquiries", labelKey: "nav.inquiries", href: "/admin/povprasevanja", icon: UsersRound },

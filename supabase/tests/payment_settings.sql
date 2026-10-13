@@ -1,0 +1,53 @@
+begin;
+do $$
+declare bank jsonb := '{"beneficiary":"EXAMPLE TEST ONLY","iban":"GB82WEST12345698765432","bankName":"Example bank","bic":"","currency":"EUR"}';
+  saved integer; rows_changed integer;
+begin
+  set local role anon;
+  begin perform * from public.payment_settings; raise exception 'anon_read_allowed'; exception when insufficient_privilege then null; end;
+  reset role;
+  perform set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000002',true);
+  set local role authenticated;
+  if (select count(*) from public.payment_settings)<>0 then raise exception 'editor_read_allowed'; end if;
+  update public.payment_settings set enabled=false where id='bank_transfer';
+  get diagnostics rows_changed = row_count;
+  if rows_changed<>0 then raise exception 'editor_write_allowed'; end if;
+  begin perform public.save_admin_payment_settings(0,false,bank); raise exception 'editor_rpc_allowed'; exception when raise_exception then if sqlerrm <> 'admin_required' then raise; end if; end;
+  reset role;
+  perform set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000001',true);
+  set local role authenticated;
+  begin perform public.save_admin_payment_settings(0,true,'{}'); raise exception 'invalid_account_enabled'; exception when check_violation then null; end;
+  saved := public.save_admin_payment_settings(0,true,bank);
+  if saved<>1 or not (select enabled and configured and bank_details=bank from public.payment_settings) then raise exception 'settings_save_failed'; end if;
+  if not exists(select 1 from public.audit_logs where action='payment_settings.update' and actor_id=auth.uid() and after_data->>'iban_last4'='5432') then raise exception 'audit_missing'; end if;
+  begin perform public.save_admin_payment_settings(0,false,bank); raise exception 'stale_write_allowed'; exception when raise_exception then if sqlerrm <> 'payment_settings_conflict' then raise; end if; end;
+  begin delete from public.payment_settings; raise exception 'delete_allowed'; exception when insufficient_privilege then null; end;
+  reset role;
+  set local role service_role;
+  begin
+    perform public.create_bank_transfer_order('[]','test@example.test','+38640000000','{}','{}',null,'',repeat('a',64),gen_random_uuid(),null,0,bank||'{"beneficiary":"OBSOLETE TEST ACCOUNT"}');
+    raise exception 'stale_bank_order_allowed';
+  exception when raise_exception then if sqlerrm <> 'payment_settings_changed' then raise; end if; end;
+  reset role;
+  set local role authenticated;
+  saved := public.save_admin_payment_settings(1,false,bank);
+  if saved<>2 then raise exception 'disable_failed'; end if;
+  reset role;
+  set local role service_role;
+  begin
+    perform public.create_bank_transfer_order('[]','test@example.test','+38640000000','{}','{}',null,'',repeat('a',64),gen_random_uuid(),null,0,bank);
+    raise exception 'disabled_bank_order_allowed';
+  exception when raise_exception then if sqlerrm <> 'payment_settings_changed' then raise; end if; end;
+  reset role;
+  insert into auth.users(id,email) values('10000000-0000-4000-8000-000000000099','deleted-admin@example.test');
+  insert into public.admin_roles(profile_id,role) values('10000000-0000-4000-8000-000000000099','admin');
+  perform set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000099',true);
+  set local role authenticated;
+  saved := public.save_admin_payment_settings(2,false,bank);
+  reset role;
+  perform set_config('request.jwt.claim.sub','',true);
+  delete from auth.users where id='10000000-0000-4000-8000-000000000099';
+  if not (select revision=3 and updated_by is null and bank_details=bank from public.payment_settings) then raise exception 'deleted_actor_changed_payment_settings'; end if;
+end;
+$$;
+rollback;

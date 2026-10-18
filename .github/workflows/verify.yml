@@ -1,0 +1,42 @@
+name: Verify Bistrava
+on:
+  pull_request:
+  push:
+    branches: ["codex/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - run: npm install --global pnpm@10.33.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Verify migrations in isolated PostgreSQL
+        run: |
+          npm install --prefix tmp/promotion-sql-test --no-save --package-lock=false --ignore-scripts @electric-sql/pglite@0.5.10
+          node scripts/test-promotions-db.mjs
+      - name: Build Linux standalone image without production secrets
+        run: docker build --tag bistrava:test --build-arg ROBOTS_INDEXING_ENABLED=false .
+      - name: Verify the running container
+        env:
+          BISTRAVA_EXPECT_NOINDEX: "true"
+        run: |
+          docker run --detach --name bistrava-ci --publish 127.0.0.1:3100:3000 bistrava:test
+          node scripts/smoke-hosting.mjs
+      - name: Container logs and cleanup
+        if: always()
+        run: |
+          docker logs bistrava-ci || true
+          docker rm --force bistrava-ci || true

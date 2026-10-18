@@ -15,7 +15,8 @@ if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
 }
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Vercel packages its adapter output; Render/Docker use the standalone server.
+  output: process.env.VERCEL === "1" ? undefined : "standalone",
   poweredByHeader: false,
   typedRoutes: true,
   experimental: { serverActions: { bodySizeLimit: "4mb" } },

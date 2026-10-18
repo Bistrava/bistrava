@@ -89,6 +89,13 @@ jobs:
         run: |
           supabase status -o env > "$RUNNER_TEMP/bistrava-supabase-local.env"
           node scripts/seed-checkout-local.mjs --status-file "$RUNNER_TEMP/bistrava-supabase-local.env" --run-tests
+      - name: Preserve the synthetic accounting view for review
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: admin-accounting-preview
+          path: test-results/connected/**/admin-accounting.png
+          if-no-files-found: error
+          retention-days: 3
       - name: Remove the disposable local stack
         if: always()
         run: supabase stop --no-backup

@@ -38,7 +38,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Podatki o spletnem mestu",
     intro:
       "Osnovne informacije o izdajatelju, gostovanju, vsebini in uporabi spletnega mesta Bistrava.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "ponudnik",
@@ -69,7 +69,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "izdajatelj",
         title: "Izdajatelj in tehnično gostovanje",
         paragraphs: [
-          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletna aplikacija gostuje na infrastrukturi Vercel, podatkovne storitve pa uporablja prek Supabase. Natančne pogodbene vloge in lokacije obdelave so opisane v Politiki zasebnosti.",
+          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletno aplikacijo gostita Render Services, Inc. (Render; izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja). Podatkovne storitve zagotavlja Supabase. Podrobnosti o obdelavi osebnih podatkov so opisane v Politiki zasebnosti.",
         ],
       },
       {
@@ -371,7 +371,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Vaši podatki pod vašim nadzorom",
     intro:
       "Pojasnjujemo, katere podatke Bistrava obdeluje, zakaj jih potrebuje, komu jih posreduje in kako lahko uveljavljate svoje pravice.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "upravljavec",
@@ -401,7 +401,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "nameni",
         title: "3. Nameni in pravne podlage",
         paragraphs: [
-          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Analitika in oglaševalsko merjenje se vključita le skladno z vašo izbiro zasebnosti.",
+          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Statistično merjenje se vključi samo, če je konfigurirano in izberete »Dovoli statistiko«. Oglaševalsko merjenje ni omogočeno.",
         ],
         items: [
           "pogodba: ko obdelava omogoča nakup, dostavo, podporo ali vračilo,",
@@ -414,7 +414,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prejemniki",
         title: "4. Prejemniki in obdelovalci",
         paragraphs: [
-          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnik gostovanja Vercel, podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
+          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnika spletnega gostovanja Render Services, Inc. (izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
           "Z obdelovalci se sklenejo ustrezni dogovori. Seznam se posodobi ob vsaki vključitvi novega ponudnika.",
         ],
       },
@@ -422,7 +422,11 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prenosi",
         title: "5. Prenosi zunaj EGP",
         paragraphs: [
-          "Nekateri tehnološki ponudniki imajo povezane družbe ali infrastrukturo zunaj Evropskega gospodarskega prostora. Kadar pride do prenosa, mora temeljiti na sklepu o ustreznosti ali drugih ustreznih zaščitnih ukrepih, na primer standardnih pogodbenih klavzulah. Natančna nastavitev regij in pogodbenih podlag bo navedena po dokončni konfiguraciji storitev.",
+          "Za aplikacijski strežnik Render in podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Render Services, Inc. je ameriški ponudnik. Njegov dodatek o obdelavi podatkov za prenose določa okvir EU–ZDA za varstvo zasebnosti, kadar se uporablja, oziroma standardne pogodbene klavzule. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage. Dodatne informacije so dostopne v Renderjevem dodatku o obdelavi podatkov in seznamu podobdelovalcev.",
+        ],
+        links: [
+          { label: "Render: dodatek o obdelavi podatkov", href: "https://render.com/dpa" },
+          { label: "Render: seznam podobdelovalcev", href: "https://render.com/security" },
         ],
       },
       {
@@ -463,7 +467,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Izbira pred merjenjem",
     intro:
       "Nujne funkcije delujejo brez oglaševalskega soglasja; neobvezno merjenje se vključi šele po vaši izbiri.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "nujni",
@@ -482,11 +486,24 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
       },
       {
         id: "seznam",
-        title: "Končni seznam tehnologij",
+        title: "Seznam piškotkov in lokalnega shranjevanja",
         paragraphs: [
-          "Pred vklopom merjenja bo tukaj objavljen seznam imen, ponudnikov, namenov in trajanja posameznih piškotkov oziroma podobnih tehnologij.",
+          "Spodaj je navedeno shranjevanje, ki ga uporablja aplikacija. Posamezen vnos nastane ob uporabi opisane funkcije; vsi vnosi se ne ustvarijo ob vsakem obisku. Lokalni pomnilnik ostane v vašem brskalniku in nima samodejnega roka poteka; odstranite ga lahko z izbrisom podatkov spletnega mesta v nastavitvah brskalnika.",
+          "Piškotek za naročilo nastane šele po uspešni oddaji naročila. Prijavni piškotki in administrativne nastavitve so namenjeni osebju. Rok prijavnega piškotka ni zagotovilo trajanja prijave; veljavnost seje preverja strežnik, ob odjavi pa se prijavni piškotki odstranijo.",
+          "Brez konfiguriranih identifikatorjev Google Analytics oziroma Google Tag Manager aplikacija teh zunanjih oznak ne naloži, tudi če izberete statistiko. Pred morebitnim vklopom merjenja se ta seznam dopolni z dejanskimi imeni in roki analitičnih piškotkov.",
         ],
-        callout: "Končni popis piškotkov po produkcijskem pregledu: [DOPOLNITI].",
+        table: {
+          caption: "Shranjevanje aplikacije Bistrava",
+          headings: ["Ime in vrsta", "Ponudnik", "Namen in uporaba", "Trajanje"],
+          rows: [
+            ["bistrava-cart-v1 (lokalni pomnilnik)", "Bistrava", "Izdelki in količine v košarici ter pregled sprememb cen ali zaloge.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
+            ["bistrava-consent-v2 (lokalni pomnilnik)", "Bistrava", "Shrani vašo izbiro zasebnosti po izbiri v obvestilu ali nastavitvah.", "Do spremembe izbire ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
+            ["bistrava-order-<referenca> (piškotek)", "Bistrava", "Zasebni dostop do potrditve posameznega naročila po uspešni oddaji; branje iz JavaScripta je onemogočeno.", "30 dni."],
+            ["sb-<projekt>-auth-token, lahko z deli .0, .1 itd. (piškotki)", "Bistrava / Supabase", "Prijava in varovanje administrativne seje.", "Do 400 dni od nastavitve ali osvežitve; odstranitev ob odjavi."],
+            ["bistrava-admin-language-v1 (lokalni pomnilnik)", "Bistrava", "Zapomni si jezik administracije, ko ga osebje spremeni.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
+            ["bistrava-admin-product-draft-v1:<izdelek> (lokalni pomnilnik)", "Bistrava", "Lokalni osnutek izdelka samo ob izrecnem shranjevanju v predoglednem načinu administracije.", "Do ponastavitve osnutka ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
+          ],
+        },
       },
     ],
   },

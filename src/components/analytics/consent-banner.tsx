@@ -3,62 +3,49 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type ConsentChoice = "granted" | "denied";
+import type { ConsentChoice } from "@/lib/analytics/consent";
 
-function updateGoogleConsent(choice: ConsentChoice) {
-  const win = window as typeof window & {
-    gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
-  };
-  win.dataLayer = win.dataLayer || [];
-  win.gtag = win.gtag || ((...args: unknown[]) => win.dataLayer?.push(args));
-  win.gtag("consent", "update", {
-    analytics_storage: choice,
-    ad_storage: choice,
-    ad_user_data: choice,
-    ad_personalization: choice,
-  });
-}
-
-export function ConsentBanner() {
-  const [visible, setVisible] = useState(false);
+export function ConsentBanner({ ready, choice, onChoose }: {
+  ready: boolean;
+  choice: ConsentChoice | null;
+  onChoose: (choice: ConsentChoice) => boolean;
+}) {
+  const [reopened, setReopened] = useState(false);
+  const [saveFailed, setSaveFailed] = useState(false);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("bistrava-consent-v1") as ConsentChoice | null;
-    if (saved === "granted" || saved === "denied") updateGoogleConsent(saved);
-    const timer =
-      saved === "granted" || saved === "denied"
-        ? undefined
-        : window.setTimeout(() => setVisible(true), 0);
-
-    const reopen = () => setVisible(true);
+    const reopen = () => setReopened(true);
     window.addEventListener("bistrava:open-consent", reopen);
     return () => {
-      if (timer !== undefined) window.clearTimeout(timer);
       window.removeEventListener("bistrava:open-consent", reopen);
     };
   }, []);
 
   function choose(choice: ConsentChoice) {
-    window.localStorage.setItem("bistrava-consent-v1", choice);
-    updateGoogleConsent(choice);
-    setVisible(false);
+    if (onChoose(choice)) {
+      setReopened(false);
+      setSaveFailed(false);
+    } else {
+      setSaveFailed(true);
+    }
   }
 
-  if (!visible) return null;
+  if (!ready || (!reopened && choice !== null)) return null;
 
   return (
     <aside className="consent-banner" aria-label="Nastavitve zasebnosti">
       <div>
         <strong>Nastavitve zasebnosti</strong>
         <p>
-          Bistvene funkcije delujejo brez trženjskih piškotkov. Z dovoljenjem
-          lahko vklopimo statistiko in oglaševalsko merjenje. <Link href="/piskotki">Več informacij</Link>
+          Bistvene funkcije delujejo brez statističnih piškotkov. Z izbiro
+          »Dovoli statistiko« omogočite samo statistiko obiska. Oglaševalsko
+          merjenje je izključeno. Izbiro lahko kadar koli spremenite v nogi strani. <Link href="/piskotki">Več informacij</Link>
         </p>
+        {saveFailed ? <p role="alert">Izbire ni bilo mogoče shraniti. Preverite nastavitve shranjevanja v brskalniku in poskusite znova.</p> : null}
       </div>
       <div className="consent-actions">
         <button className="button button-secondary" type="button" onClick={() => choose("denied")}>Samo bistveno</button>
-        <button className="button button-primary" type="button" onClick={() => choose("granted")}>Dovoli statistiko</button>
+        <button className="button button-primary" type="button" onClick={() => choose("statistics")}>Dovoli statistiko</button>
       </div>
     </aside>
   );

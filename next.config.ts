@@ -15,10 +15,19 @@ if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
 }
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   poweredByHeader: false,
   typedRoutes: true,
   experimental: { serverActions: { bodySizeLimit: "4mb" } },
   images: { remotePatterns: productMediaPatterns },
+  async headers() {
+    if (process.env.ROBOTS_INDEXING_ENABLED !== "false") return [];
+
+    return [{
+      source: "/:path*",
+      headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+    }];
+  },
   async redirects() {
     return [
       {

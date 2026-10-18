@@ -41,7 +41,25 @@ try {
   for (const filename of migrations) {
     stage = filename;
     const sql = (await readFile(new URL(`../supabase/migrations/${filename}`, import.meta.url), "utf8")).replace("create extension if not exists pgcrypto;", "");
+    // A real pre-migration row must remain distinguishable from a calculated
+    // zero-tax shipping charge, including when its idempotency key is replayed.
+    const shippingVatMigration = filename.endsWith("_shipping_vat_included.sql");
+    const legacyId = "90000000-0000-4000-8000-000000000001";
+    const legacyKey = "90000000-0000-4000-8000-000000000002";
+    if (shippingVatMigration) {
+      await db.query(`insert into public.orders(id,reference,email,subtotal_cents,shipping_cents,tax_cents,total_cents,
+        billing_address_snapshot,shipping_address_snapshot,guest_access_token_hash,checkout_idempotency_key)
+        values($1,'LOCAL-LEGACY-VAT','legacy@example.test',12200,450,2200,12650,'{}','{}',$2,$3)`, [legacyId, "d".repeat(64), legacyKey]);
+    }
     await db.exec(sql);
+    if (shippingVatMigration) {
+      check((await db.query("select shipping_tax_cents,shipping_tax_snapshot,tax_cents,total_cents from public.orders where id=$1", [legacyId])).rows[0],
+        { shipping_tax_cents: null, shipping_tax_snapshot: null, tax_cents: 2200, total_cents: 12650 });
+      check((await db.query(orderSql, [[], null, "d".repeat(64), legacyKey, null, 0])).rows[0].order_id, legacyId);
+      check((await db.query("select shipping_tax_cents,shipping_tax_snapshot,tax_cents,total_cents from public.orders where id=$1", [legacyId])).rows[0],
+        { shipping_tax_cents: null, shipping_tax_snapshot: null, tax_cents: 2200, total_cents: 12650 });
+      await db.query("delete from public.orders where id=$1", [legacyId]);
+    }
   }
   stage = "promotion, checkout, customer and guide scenarios";
   await db.query("insert into auth.users(id,email) values($1,'admin@example.test'),($2,'editor@example.test')", [admin, editor]);
@@ -79,7 +97,8 @@ try {
   check(await scalar("select count(*)::int from public.orders"), 1);
   check(await scalar("select used_count from public.discounts where id=$1", [campaign]), 1);
   check(await scalar("select min(stock_quantity) from public.products"), 14);
-  check((await db.query("select discount_cents,total_cents,tax_cents from public.orders where id=$1", [order.order_id])).rows[0], { discount_cents: 30, total_cents: 773, tax_cents: 49 });
+  check((await db.query("select discount_cents,total_cents,tax_cents,shipping_tax_cents from public.orders where id=$1", [order.order_id])).rows[0],
+    { discount_cents: 30, total_cents: 773, tax_cents: 139, shipping_tax_cents: 90 });
   check(await scalar("select sum((product_snapshot->>'discountCents')::int)::int from public.order_items"), 30);
   check(await scalar("select amount_cents from public.payments where order_id=$1", [order.order_id]), 773);
   const updatedAt = await scalar("select updated_at::text from public.discounts where id=$1", [campaign]);
@@ -187,6 +206,9 @@ try {
   check(await scalar("select count(*)::int from public.products"), 2);
   stage = "shipping threshold rollback suite";
   await db.exec(await readFile(new URL("../supabase/tests/shipping_thresholds.sql", import.meta.url), "utf8")); checks++;
+  check(await scalar("select count(*)::int from public.products"), 2);
+  stage = "shipping VAT allocation, immutable snapshots and unchanged gross totals";
+  await db.exec(await readFile(new URL("../supabase/tests/shipping_vat.sql", import.meta.url), "utf8")); checks++;
   check(await scalar("select count(*)::int from public.products"), 2);
   stage = "notification isolation rollback suite";
   await db.exec(await readFile(new URL("../supabase/tests/admin_notifications.sql", import.meta.url), "utf8")); checks++;

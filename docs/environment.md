@@ -20,9 +20,9 @@ Copy `.env.example` to `.env.local`. Never commit `.env.local` or real credentia
 | `BANK_TRANSFER_BANK_NAME` | Server; displayed at checkout | Bank transfer | Recipient bank name. |
 | `BANK_TRANSFER_BIC` | Server; displayed at checkout | Bank transfer | Optional BIC/SWIFT, 8 or 11 characters. |
 | `LWS_MAIL_PASSWORD` | Server secret only | Mailbox and bank order emails | Password for `kontakt@bistrava.com`; never browser exposed. |
-| `NEXT_PUBLIC_GTM_ID` | Browser | Measurement | Optional GTM container. Preferred production orchestration path. |
-| `NEXT_PUBLIC_GA4_ID` | Browser | Measurement | Optional direct GA4 property when GTM is not used. |
-| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Browser | Measurement | Optional direct Google Ads tag when GTM is not used. |
+| `NEXT_PUBLIC_GTM_ID` | Browser | Measurement | Optional container, loaded only after current statistics consent. Audit the container to include only approved statistics tags. |
+| `NEXT_PUBLIC_GA4_ID` | Browser | Measurement | Optional direct GA4 property when GTM is not used; loaded only after current statistics consent. |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Browser | Reserved | Direct advertising is disabled for launch. Statistics consent never grants advertising consent. |
 
 The app intentionally builds when these values are blank. Supabase client factories return `null`, no draft becomes active, inquiries return a clear configuration error instead of a false success, and the email sender returns `not_configured` without attempting delivery. The cart still works locally, but checkout submission remains disabled unless the server-side commerce gate and at least one real Slovenian shipping rate are configured.
 

@@ -31,7 +31,7 @@ try {
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport });
     await context.addInitScript(() => {
-      window.localStorage.setItem("bistrava-consent-v1", "denied");
+      window.localStorage.setItem("bistrava-consent-v2", "denied");
     });
     const page = await context.newPage();
     const errors = [];
@@ -54,7 +54,7 @@ try {
 
   const context = await browser.newContext({ viewport: viewports[2] });
   await context.addInitScript(() => {
-    window.localStorage.setItem("bistrava-consent-v1", "denied");
+    window.localStorage.setItem("bistrava-consent-v2", "denied");
   });
   const page = await context.newPage();
   for (const route of ["/mehcalci-vode", "/izbira-mehcalca", "/izdelki/mehcalec-vode-12-l"]) {
@@ -80,7 +80,7 @@ try {
 
   const mobileContext = await browser.newContext({ viewport: viewports[0] });
   await mobileContext.addInitScript((cart) => {
-    window.localStorage.setItem("bistrava-consent-v1", "denied");
+    window.localStorage.setItem("bistrava-consent-v2", "denied");
     window.localStorage.setItem("bistrava-cart-v1", JSON.stringify(cart));
   }, cartFixture);
   const mobilePage = await mobileContext.newPage();

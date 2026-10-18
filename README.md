@@ -67,6 +67,8 @@ pnpm email:dev
 - `docs/architecture.md`
 - `docs/data-model.md`
 - `docs/development-roadmap.md`
+- `docs/launch-readiness.md`
+- `docs/hosting-render.md`
 - `docs/environment.md`
 - `docs/email-and-dns.md`
 - `docs/payment-flow.md`

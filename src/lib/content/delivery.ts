@@ -84,7 +84,7 @@ export function createDeliveryPageContent(rates: ShippingRate[]): LegalPageConte
         paragraphs: [
           "Za dostavo po Sloveniji načrtujemo uporabo storitev Pošte Slovenije. Izbira ustrezne storitve je odvisna od velikosti in teže pošiljke; prevoznik za vaše naročilo bo potrjen pred odpremo.",
         ],
-        callout: "Pošta Slovenije je predvideni prevoznik. Dogovor o izvajanju dostave za Bistravo je še v pripravi.",
+        callout: "Pošta Slovenije je predvideni prevoznik. Dostava za Bistravo je organizirana in pripravljena za izvajanje v navedenih rokih.",
       },
       {
         id: "rok",

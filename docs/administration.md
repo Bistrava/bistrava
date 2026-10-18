@@ -20,7 +20,7 @@ Les administrateurs peuvent modifier les données. Les éditeurs consultent les 
 | Promotions | Codes de réduction en pourcentage ou montant fixe, dates, minimum d’achat, quotas et archivage. Le total est recalculé côté serveur. |
 | Messages | Voir les demandes du formulaire dès leur arrivée, ajouter des notes internes, suivre leur traitement. Les réponses sont encore envoyées depuis votre propre messagerie. |
 | Guides | Créer ou modifier les articles, sections, paragraphes, tableaux comparatifs et métadonnées SEO ; publier ou archiver. |
-| E-mails | Consulter les 100 derniers événements enregistrés, avec actualisation automatique. Cette rubrique est un journal ; la boîte de réception et la réponse intégrée restent à connecter. |
+| E-mails | Consulter la boîte LWS importée, répondre à un message importé et consulter les 100 derniers événements du journal, avec actualisation automatique. |
 | Analyses | Encaissements issus des paiements enregistrés, diminués des remboursements. Les commandes impayées ne sont pas comptées comme recettes. |
 | Journal | Les 100 dernières modifications auditées avec auteur et date. |
 
@@ -40,9 +40,9 @@ Chaque abonnement attend la session navigateur puis transmet son jeton à Realti
 
 L’actualisation de Messages se met en pause pendant la modification d’une note ou d’un statut. Enregistrer ou annuler reprend l’actualisation. Les brouillons sont conservés lors des revalidations de la liste ; une version devenue obsolète est refusée à l’enregistrement pour ne pas écraser le travail d’un autre administrateur. Les brouillons ne sont pas sauvegardés entre un rechargement complet ou la fermeture de la page.
 
-La migration `202610090018` publie uniquement `quote_requests` et `email_events`, avec les règles de lecture réservées au personnel actif. Le journal e-mail n’accepte plus d’insertion depuis le navigateur ; ses futures écritures proviendront du serveur et d’événements vérifiés.
+La migration `202610090018` publie uniquement `quote_requests` et `email_events`, avec les règles de lecture réservées au personnel actif. Le journal e-mail n’accepte pas d’insertion depuis le navigateur ; ses écritures proviennent du serveur et d’événements vérifiés.
 
-Au 9 octobre 2026, aucun service d’envoi ni boîte e-mail n’est configuré en production. L’actualisation du journal ne crée pas d’événement d’envoi : le raccordement des notifications au journal, la réception des e-mails et les réponses intégrées nécessitent encore l’adresse Bistrava à utiliser, son fournisseur et la configuration décrite dans [Email and DNS](email-and-dns.md).
+Au 18 octobre 2026, LWS est configuré sur Render, source `0e8188b` Live. Le mot de passe a été saisi directement par l’exploitant. Les authentifications SMTP/IMAP sans envoi et le bouton « Preveri SMTP » ont réussi. Un test de contact explicitement autorisé a confirmé la réception de l’accusé et de la notification interne ; aucune commande. L’actualisation du journal ne crée pas d’envoi. Commandes et virement restent désactivés.
 
 ## Notifications personnelles
 
@@ -52,7 +52,7 @@ Ouvrir la cloche ne marque rien comme lu. Une commande est lue lorsque son déta
 
 La migration `202610090019` ajoute `admin_notification_reads` et les fonctions de comptage et de lecture. Chaque lot de lecture contient uniquement les identifiants déjà affichés : une arrivée ultérieure ne peut pas être effacée par cette opération. Les administrateurs et éditeurs actifs peuvent gérer leurs propres lectures ; les visiteurs et clients n’ont pas accès aux notifications.
 
-Les compteurs se mettent à jour via Realtime, avec contrôle périodique de secours. Ils ne rechargent pas les formulaires en cours de saisie. Le badge E-mails concerne les événements effectivement enregistrés dans le journal ; il ne constitue pas encore une boîte de réception.
+Les compteurs se mettent à jour via Realtime, avec contrôle périodique de secours. Ils ne rechargent pas les formulaires en cours de saisie. Le badge E-mails repose sur les événements enregistrés ; la rubrique propose aussi la boîte LWS importée. Un statut `sent` indique l’acceptation SMTP, et ne prouve pas à lui seul la réception par le destinataire.
 
 ## Traiter une commande
 

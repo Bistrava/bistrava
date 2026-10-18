@@ -1,4 +1,4 @@
-import { expect, test, type BrowserContext, type Page } from "@playwright/test";
+import { expect, test, type BrowserContext, type Locator, type Page } from "@playwright/test";
 import {
   LOCAL_CHECKOUT_FIXTURE as fixture,
   createLocalCheckoutClients,
@@ -120,6 +120,42 @@ async function saveOrder(adminPage: Page, clients: LocalClients, order: OrderRow
   await expect.poll(async () => (await orderBy(clients, "id", order.id)).status).toBe(status);
 }
 
+async function assertAccountingDetails(adminPage: Page, clients: LocalClients, order: OrderRow) {
+  const saved = await oneRow(clients, "orders", "id", order.id);
+  const item = await oneRow(clients, "order_items", "order_id", order.id);
+  const product = item.product_snapshot as DatabaseRow;
+  const shipping = saved.shipping_tax_snapshot as DatabaseRow;
+  expect(product).toMatchObject({ vatRate: expect.any(Number), lineTotalCents: expect.any(Number), discountCents: expect.any(Number), discountedLineTotalCents: expect.any(Number) });
+  expect(shipping).toMatchObject({ version: 1, shippingGrossCents: saved.shipping_cents, shippingTaxCents: saved.shipping_tax_cents, shippingNetCents: expect.any(Number) });
+
+  const money = (value: unknown) => new Intl.NumberFormat("sl-SI", { style: "currency", currency: "EUR" }).format(Number(value) / 100);
+  const rate = `${new Intl.NumberFormat("sl-SI").format(Number(product.vatRate))} %`;
+  const accounting = adminPage.getByRole("region", { name: "Podatki za zunanjo pripravo računa", exact: true });
+  await expect(accounting).toBeVisible();
+  const itemCard = accounting.locator("section").filter({ has: adminPage.getByRole("heading", { name: String(item.product_name), exact: true }) });
+  const shippingCard = accounting.locator("section").filter({ has: adminPage.getByRole("heading", { name: "Dostava", exact: true }) });
+  const valueFor = (card: Locator, label: string) => card.locator("dl").first().locator("div").filter({ has: adminPage.getByText(label, { exact: true }) }).locator("dd");
+  await expect(valueFor(itemCard, "Stopnja DDV")).toHaveText(rate);
+  await expect(valueFor(itemCard, "Z DDV pred popustom")).toHaveText(money(product.lineTotalCents));
+  await expect(valueFor(itemCard, "Popust")).toHaveText(money(product.discountCents));
+  await expect(valueFor(itemCard, "Z DDV po popustu")).toHaveText(money(product.discountedLineTotalCents));
+  await expect(valueFor(itemCard, "Vključen DDV")).toHaveText(money(item.tax_cents));
+  await expect(valueFor(itemCard, "Znesek brez DDV")).toHaveText(money(Number(product.discountedLineTotalCents) - Number(item.tax_cents)));
+  await expect(valueFor(shippingCard, "Znesek z DDV")).toHaveText(money(shipping.shippingGrossCents));
+  await expect(valueFor(shippingCard, "Vključen DDV")).toHaveText(money(saved.shipping_tax_cents));
+  await expect(valueFor(shippingCard, "Znesek brez DDV")).toHaveText(money(shipping.shippingNetCents));
+
+  // The existing fixture is one VAT rate. Assert the rendered aggregate uses
+  // saved line and shipping amounts, including VAT exactly once.
+  const grouped = accounting.getByRole("region", { name: `Stopnja DDV ${rate}`, exact: true });
+  await expect(grouped).toBeVisible();
+  await expect(valueFor(grouped, "Znesek brez DDV")).toHaveText(money(Number(saved.total_cents) - Number(saved.tax_cents)));
+  await expect(valueFor(grouped, "Vključen DDV")).toHaveText(money(saved.tax_cents));
+  await expect(valueFor(grouped, "Znesek z DDV")).toHaveText(money(saved.total_cents));
+  await expect(accounting.getByText("Ni izračunano / shranjeni razrez ni na voljo", { exact: true })).toHaveCount(0);
+  return adminPage.locator(`#order-${order.id}`);
+}
+
 // Register nothing in the existing disconnected preview suite, which never creates orders.
 if (process.env.BISTRAVA_CONNECTED_TEST === "1") {
 test.describe("connected checkout on disposable local Supabase", () => {
@@ -206,6 +242,10 @@ test.describe("connected checkout on disposable local Supabase", () => {
       const emails = await clients.privileged.from("email_events").select("id", { count: "exact", head: true });
       expect(emails.error).toBeNull();
       expect(emails.count).toBe(0);
+      const accountingDetail = await assertAccountingDetails(adminPage, clients, second);
+      const accountingImage = testInfo.outputPath("admin-accounting.png");
+      await accountingDetail.screenshot({ path: accountingImage });
+      await testInfo.attach("admin-accounting", { path: accountingImage, contentType: "image/png" });
       expect(blocked).toEqual([]);
     } catch (error) {
       await adminPage.screenshot({ path: testInfo.outputPath("admin-failure.png"), fullPage: true }).catch(() => {});

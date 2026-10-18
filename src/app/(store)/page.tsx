@@ -13,7 +13,6 @@ import Link from "next/link";
 
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
 import { JsonLd } from "@/components/seo/json-ld";
-import { ReviewStandardsSection } from "@/components/store/review-standards-section";
 import { allCategories } from "@/lib/catalog/catalog";
 import { getStorefrontCatalogProducts } from "@/lib/catalog/repository";
 import { frequentlyAskedQuestions } from "@/lib/content/faq";
@@ -100,8 +99,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      <ReviewStandardsSection />
 
       <section className="section home-problem-section">
         <div className="container problem-grid">

@@ -3,6 +3,7 @@ import { MessagesSquare, PackageSearch, RotateCcw, ShieldCheck } from "lucide-re
 
 import { InquiryForm } from "@/components/forms/inquiry-form";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
+import { companyDetails, companyPostalAddress, companyReturnsAddress } from "@/lib/content/company";
 
 export const metadata: Metadata = {
   title: "Kontakt in pomoč kupcem",
@@ -50,7 +51,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               <li>ne pošiljajte gesel ali celotnih podatkov kartice.</li>
             </ul>
             <h2>Uradni kontaktni podatki</h2>
-            <p>Javni e-poštni naslov, telefon in poslovni naslov bodo objavljeni po potrditvi podatkov ponudnika. Do takrat uporabite varen obrazec.</p>
+            <p><strong>{companyDetails.fullName}</strong></p>
+            <p>Sedež: {companyPostalAddress}</p>
+            <p>E-pošta: <a href={`mailto:${companyDetails.email}`}>{companyDetails.email}</a><br />Telefon: <a href={companyDetails.phoneHref}>{companyDetails.phone}</a></p>
+            <p>Matična številka: {companyDetails.registrationNumber}<br />ID za DDV: {companyDetails.vatNumber} (zavezanec za DDV)</p>
+            <p>Naslov za vračila: {companyDetails.shortName}, {companyReturnsAddress}. Za pomoč uporabite kontakt zgoraj.</p>
           </div>
           <InquiryForm
             type={type}

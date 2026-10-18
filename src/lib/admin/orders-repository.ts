@@ -13,10 +13,11 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import { getAdminAccess } from "@/lib/auth/admin";
 import type { AdminShippingData } from "@/lib/admin/order-management";
+import { mapOrderItemTaxSnapshot, mapOrderShippingTax } from "@/lib/admin/order-tax";
 
 type UnknownRecord = Record<string, unknown>;
 
-const adminOrderSelect = "id,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)";
+const adminOrderSelect = "id,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,shipping_tax_cents,shipping_tax_snapshot,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents,product_snapshot),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)";
 
 function record(value: unknown): UnknownRecord {
   return value && typeof value === "object" && !Array.isArray(value)
@@ -70,6 +71,7 @@ function mapOrder(row: UnknownRecord): AdminOrder {
     subtotalCents: Number(row.subtotal_cents) || 0,
     discountCents: Number(row.discount_cents) || 0,
     shippingCents: Number(row.shipping_cents) || 0,
+    ...mapOrderShippingTax(row),
     taxCents: Number(row.tax_cents) || 0,
     totalCents: Number(row.total_cents) || 0,
     billingAddress: address(row.billing_address_snapshot),
@@ -93,6 +95,7 @@ function mapOrder(row: UnknownRecord): AdminOrder {
         unitPriceCents: Number(item.unit_price_cents) || 0,
         taxCents: Number(item.tax_cents) || 0,
         lineTotalCents: Number(item.line_total_cents) || 0,
+        taxSnapshot: mapOrderItemTaxSnapshot(item.product_snapshot),
       };
     }),
     payment: payment ? {

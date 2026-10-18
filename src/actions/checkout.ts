@@ -9,27 +9,19 @@ import { sendOrderConfirmation } from "@/lib/email/send";
 import { hashGuestOrderToken, orderCookieName } from "@/lib/orders/guest-orders";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { checkoutFormSchema, checkoutQuoteSchema, type CheckoutQuoteState } from "@/lib/validation/checkout";
+import { isMemoryRateLimited, type RateLimitEntry } from "@/lib/security/rate-limit";
 
 import type { CheckoutActionState } from "@/lib/forms/action-state";
 
-type CheckoutRateEntry = { count: number; resetAt: number };
 const checkoutGlobal = globalThis as typeof globalThis & {
-  bistravaCheckoutRateStore?: Map<string, CheckoutRateEntry>;
+  bistravaCheckoutRateStore?: Map<string, RateLimitEntry>;
 };
 const checkoutRateStore =
-  checkoutGlobal.bistravaCheckoutRateStore ?? new Map<string, CheckoutRateEntry>();
+  checkoutGlobal.bistravaCheckoutRateStore ?? new Map<string, RateLimitEntry>();
 checkoutGlobal.bistravaCheckoutRateStore = checkoutRateStore;
 
 function isCheckoutRateLimited(key: string) {
-  const now = Date.now();
-  const current = checkoutRateStore.get(key);
-  if (!current || current.resetAt <= now) {
-    checkoutRateStore.set(key, { count: 1, resetAt: now + 15 * 60 * 1000 });
-    return false;
-  }
-  if (current.count >= 5) return true;
-  current.count += 1;
-  return false;
+  return isMemoryRateLimited(checkoutRateStore, key, { limit: 5, windowMs: 15 * 60 * 1000 });
 }
 
 function checkoutError(message: string): CheckoutActionState {
@@ -143,6 +135,9 @@ export async function createCheckoutOrder(
     }
     if (detail.includes("shipping_rate_unavailable")) {
       return checkoutError("Izbrani način dostave ni več na voljo.");
+    }
+    if (detail.includes("shipping_tax_allocation_requires_accountant_review")) {
+      return checkoutError("Za ta v celoti znižani paket je potreben dodaten pregled dostave. Pišite na kontakt@bistrava.com; naročilo ni bilo ustvarjeno.");
     }
     return checkoutError("Naročila trenutno ni bilo mogoče varno shraniti. Poskusite znova.");
   }

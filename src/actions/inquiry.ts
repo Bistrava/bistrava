@@ -6,27 +6,19 @@ import { headers } from "next/headers";
 import { sendInquiryNotifications } from "@/lib/email/send-inquiry";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { inquiryFormSchema } from "@/lib/validation/inquiry";
+import { isMemoryRateLimited, type RateLimitEntry } from "@/lib/security/rate-limit";
 
 import type { InquiryActionState } from "@/lib/forms/action-state";
 
-type RateEntry = { count: number; resetAt: number };
 const globalRateStore = globalThis as typeof globalThis & {
-  bistravaInquiryRateStore?: Map<string, RateEntry>;
+  bistravaInquiryRateStore?: Map<string, RateLimitEntry>;
 };
 const rateStore =
-  globalRateStore.bistravaInquiryRateStore ?? new Map<string, RateEntry>();
+  globalRateStore.bistravaInquiryRateStore ?? new Map<string, RateLimitEntry>();
 globalRateStore.bistravaInquiryRateStore = rateStore;
 
 function isRateLimited(key: string) {
-  const now = Date.now();
-  const current = rateStore.get(key);
-  if (!current || current.resetAt <= now) {
-    rateStore.set(key, { count: 1, resetAt: now + 10 * 60 * 1000 });
-    return false;
-  }
-  if (current.count >= 5) return true;
-  current.count += 1;
-  return false;
+  return isMemoryRateLimited(rateStore, key, { limit: 5, windowMs: 10 * 60 * 1000 });
 }
 
 function parsePayload(value: string) {
@@ -113,6 +105,7 @@ export async function submitInquiry(
     };
   }
 
+  // The request is already committed. A mail outage must not invite a duplicate submission.
   await sendInquiryNotifications({
     requestId,
     type: result.data.type,
@@ -120,7 +113,7 @@ export async function submitInquiry(
     email: result.data.email,
     phone: result.data.phone,
     message: result.data.message,
-  });
+  }).catch(() => ({ ok: false as const, reason: "provider_error" as const }));
 
   return {
     status: "success",

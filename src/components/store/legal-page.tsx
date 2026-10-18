@@ -66,7 +66,7 @@ export function LegalPage({ pageKey, content }: { pageKey: LegalPageKey; content
                 <AlertTriangle aria-hidden="true" size={22} />
                 <div>
                   <strong>Pred začetkom prodaje je potrebna dopolnitev.</strong>
-                  <p>Identiteto ponudnika in označena polja mora potrditi upravljavec Bistrava.</p>
+                  <p>Upravljavec Bistrava mora dopolniti še označena polja v tem dokumentu.</p>
                 </div>
               </div>
             ) : null}

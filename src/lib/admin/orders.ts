@@ -1,3 +1,5 @@
+import type { AdminOrderItemTaxSnapshot, AdminOrderShippingTaxSnapshot } from "@/lib/admin/order-tax";
+
 export type AdminOrderStatus =
   | "pending"
   | "awaiting_payment"
@@ -47,6 +49,7 @@ export type AdminOrderItem = {
   unitPriceCents: number;
   taxCents: number;
   lineTotalCents: number;
+  taxSnapshot: AdminOrderItemTaxSnapshot | null;
 };
 
 export type AdminPaymentSummary = {
@@ -79,6 +82,8 @@ export type AdminOrder = {
   subtotalCents: number;
   discountCents: number;
   shippingCents: number;
+  shippingTaxCents: number | null;
+  shippingTaxSnapshot: AdminOrderShippingTaxSnapshot | null;
   taxCents: number;
   totalCents: number;
   billingAddress: AdminAddress;
@@ -133,6 +138,8 @@ export const previewOrders: AdminOrder[] = [
     subtotalCents: 124900,
     discountCents: 5000,
     shippingCents: 0,
+    shippingTaxCents: null,
+    shippingTaxSnapshot: null,
     taxCents: 21621,
     totalCents: 119900,
     billingAddress: address("Nina", "Kovač", "Dunajska cesta 100", "1000", "Ljubljana", "Domus Primer d.o.o."),
@@ -146,7 +153,7 @@ export const previewOrders: AdminOrder[] = [
     cancelledAt: null,
     completedAt: null,
     items: [
-      { id: "preview-item-1", productName: "Aquaphor S550 P1", variantName: "Standardna izvedba", sku: "BIS-016", quantity: 1, unitPriceCents: 119900, taxCents: 21621, lineTotalCents: 119900 },
+      { id: "preview-item-1", productName: "Aquaphor S550 P1", variantName: "Standardna izvedba", sku: "BIS-016", quantity: 1, unitPriceCents: 119900, taxCents: 21621, lineTotalCents: 119900, taxSnapshot: null },
     ],
     payment: { provider: "manual_review", providerReference: "DEMO-PAY-1042", status: "paid", amountCents: 119900, refundedCents: 0, paidAt: "2026-09-13T09:05:00.000Z" },
     shipment: { status: "ready", carrier: "Bistrava montaža", service: "Dostava z montažo", trackingNumber: null, trackingUrl: null, shippedAt: null, deliveredAt: null },
@@ -162,6 +169,8 @@ export const previewOrders: AdminOrder[] = [
     subtotalCents: 4480,
     discountCents: 0,
     shippingCents: 590,
+    shippingTaxCents: null,
+    shippingTaxSnapshot: null,
     taxCents: 830,
     totalCents: 5070,
     billingAddress: address("Marko", "Novak", "Tržaška cesta 22", "2000", "Maribor"),
@@ -175,7 +184,7 @@ export const previewOrders: AdminOrder[] = [
     cancelledAt: null,
     completedAt: null,
     items: [
-      { id: "preview-item-2", productName: "Tabletirana sol za mehčalne naprave 25 kg", variantName: "25 kg", sku: "BIS-030", quantity: 2, unitPriceCents: 2240, taxCents: 808, lineTotalCents: 4480 },
+      { id: "preview-item-2", productName: "Tabletirana sol za mehčalne naprave 25 kg", variantName: "25 kg", sku: "BIS-030", quantity: 2, unitPriceCents: 2240, taxCents: 808, lineTotalCents: 4480, taxSnapshot: null },
     ],
     payment: { provider: "manual_review", providerReference: null, status: "pending", amountCents: 5070, refundedCents: 0, paidAt: null },
     shipment: { status: "pending", carrier: null, service: "Standardna dostava", trackingNumber: null, trackingUrl: null, shippedAt: null, deliveredAt: null },
@@ -191,6 +200,8 @@ export const previewOrders: AdminOrder[] = [
     subtotalCents: 2990,
     discountCents: 0,
     shippingCents: 590,
+    shippingTaxCents: null,
+    shippingTaxSnapshot: null,
     taxCents: 646,
     totalCents: 3580,
     billingAddress: address("Nina", "Kovač", "Dunajska cesta 100", "1000", "Ljubljana", "Domus Primer d.o.o."),
@@ -204,7 +215,7 @@ export const previewOrders: AdminOrder[] = [
     cancelledAt: null,
     completedAt: "2026-08-29T15:12:00.000Z",
     items: [
-      { id: "preview-item-3", productName: "Kapljice za merjenje trdote vode °frH", variantName: "Standardni komplet", sku: "BIS-008", quantity: 1, unitPriceCents: 2990, taxCents: 539, lineTotalCents: 2990 },
+      { id: "preview-item-3", productName: "Kapljice za merjenje trdote vode °frH", variantName: "Standardni komplet", sku: "BIS-008", quantity: 1, unitPriceCents: 2990, taxCents: 539, lineTotalCents: 2990, taxSnapshot: null },
     ],
     payment: { provider: "manual_review", providerReference: "DEMO-PAY-1038", status: "paid", amountCents: 3580, refundedCents: 0, paidAt: "2026-08-27T11:03:00.000Z" },
     shipment: { status: "delivered", carrier: "Pošta Slovenije", service: "Paket", trackingNumber: "DEMO1038SI", trackingUrl: null, shippedAt: "2026-08-28T08:10:00.000Z", deliveredAt: "2026-08-29T13:44:00.000Z" },
@@ -220,6 +231,17 @@ export const previewOrders: AdminOrder[] = [
     subtotalCents: 1890,
     discountCents: 0,
     shippingCents: 590,
+    shippingTaxCents: 106,
+    shippingTaxSnapshot: {
+      version: 1,
+      method: "proportional_discounted_gross_by_vat_rate",
+      rounding: "half_up_cumulative_gross_then_half_up_tax_per_rate",
+      allocationBasis: "discounted_products_gross",
+      shippingGrossCents: 590,
+      shippingTaxCents: 106,
+      shippingNetCents: 484,
+      breakdown: [{ vatRate: 22, productsGrossCents: 1890, shippingGrossCents: 590, shippingTaxCents: 106, shippingNetCents: 484 }],
+    },
     taxCents: 447,
     totalCents: 2480,
     billingAddress: address("Tina", "Zupan", "Cankarjeva ulica 7", "6000", "Koper"),
@@ -233,7 +255,7 @@ export const previewOrders: AdminOrder[] = [
     cancelledAt: "2026-08-21T09:06:00.000Z",
     completedAt: null,
     items: [
-      { id: "preview-item-4", productName: "Testni lističi za trdoto vode", variantName: "Standardni komplet", sku: "BIS-086", quantity: 1, unitPriceCents: 1890, taxCents: 341, lineTotalCents: 1890 },
+      { id: "preview-item-4", productName: "Testni lističi za trdoto vode", variantName: "Standardni komplet", sku: "BIS-086", quantity: 1, unitPriceCents: 1890, taxCents: 341, lineTotalCents: 1890, taxSnapshot: { vatRate: 22, lineTotalCents: 1890, discountCents: 0, discountedLineTotalCents: 1890 } },
     ],
     payment: { provider: "manual_review", providerReference: null, status: "cancelled", amountCents: 2480, refundedCents: 0, paidAt: null },
     shipment: null,
@@ -260,3 +282,4 @@ export const previewCustomerProfiles: AdminCustomerProfile[] = [
     ],
   },
 ];
+

@@ -4,6 +4,7 @@
 /supabase/
 /scripts/
 /tests/
+/playwright.connected.config.ts
 /test-results/
 /playwright-report/
 /tmp/

@@ -15,10 +15,20 @@ if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
 }
 
 const nextConfig: NextConfig = {
+  // Vercel packages its adapter output; Render/Docker use the standalone server.
+  output: process.env.VERCEL === "1" ? undefined : "standalone",
   poweredByHeader: false,
   typedRoutes: true,
   experimental: { serverActions: { bodySizeLimit: "4mb" } },
   images: { remotePatterns: productMediaPatterns },
+  async headers() {
+    if (process.env.ROBOTS_INDEXING_ENABLED !== "false") return [];
+
+    return [{
+      source: "/:path*",
+      headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+    }];
+  },
   async redirects() {
     return [
       {

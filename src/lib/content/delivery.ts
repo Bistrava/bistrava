@@ -2,6 +2,16 @@ import type { ShippingRate } from "@/lib/commerce/shipping";
 import { formatMoney } from "@/lib/commerce/money";
 import type { LegalPageContent } from "@/lib/content/legal-pages";
 
+export const confirmedDeliveryTiming = {
+  preparationDaysMin: 1,
+  preparationDaysMax: 2,
+  shippingDaysMin: 1,
+  shippingDaysMax: 3,
+} as const;
+
+export const orderPreparationText = `Naročilo pripravimo v ${confirmedDeliveryTiming.preparationDaysMin}–${confirmedDeliveryTiming.preparationDaysMax} delovnih dneh po potrjenem prejemu celotnega bančnega nakazila.`;
+export const standardShippingText = `Po pripravi naročilo oddamo prevozniku. Standardni okvirni čas prevoza je dodatnih ${confirmedDeliveryTiming.shippingDaysMin}–${confirmedDeliveryTiming.shippingDaysMax} delovnih dni po odpremi, kadar pri izbranem načinu dostave ni naveden drugačen rok. Čas prevoza ne vključuje časa bančne obdelave ali priprave naročila.`;
+
 function orderRange(rate: ShippingRate) {
   const minimum = rate.minOrderCents ?? 0;
   const maximum = rate.maxOrderCents;
@@ -16,17 +26,19 @@ export function createDeliveryPageContent(rates: ShippingRate[]): LegalPageConte
   const orderedRates = [...rates].sort((a, b) => (a.minOrderCents ?? 0) - (b.minOrderCents ?? 0) || a.priceCents - b.priceCents);
   const paidRate = orderedRates.find((rate) => rate.priceCents > 0);
   const freeRate = orderedRates.find((rate) => rate.priceCents === 0);
-  const deliveryEstimates = orderedRates.flatMap((rate) => {
-    if (rate.estimatedDaysMin === null || rate.estimatedDaysMax === null) return [];
-    const days = rate.estimatedDaysMin === rate.estimatedDaysMax ? String(rate.estimatedDaysMin) : `${rate.estimatedDaysMin}–${rate.estimatedDaysMax}`;
-    return [`${rate.name}: ${days} delovnih dni.`];
+  const deliveryEstimates = orderedRates.map((rate) => {
+    const hasEstimate = rate.estimatedDaysMin !== null && rate.estimatedDaysMax !== null;
+    const minimum = hasEstimate ? rate.estimatedDaysMin : confirmedDeliveryTiming.shippingDaysMin;
+    const maximum = hasEstimate ? rate.estimatedDaysMax : confirmedDeliveryTiming.shippingDaysMax;
+    const days = minimum === maximum ? String(minimum) : `${minimum}–${maximum}`;
+    return `${rate.name}: predvidoma ${days} delovnih dni po odpremi (brez časa priprave naročila).`;
   });
 
   return {
     title: "Dostava po Sloveniji",
     kicker: "Jasni stroški, preprost nakup",
     intro: "Vse o stroških, rokih in prevzemu naročila na enem mestu. Preverite tudi, kako slediti pošiljki in kam se obrniti, če potrebujete pomoč.",
-    updatedAt: "9. oktober 2026",
+    updatedAt: "17. oktober 2026",
     highlights: [
       { label: "Območje dostave", value: "Slovenija", detail: "Dostava na naslove po vsej Sloveniji.", href: "#obmocje" },
       { label: "Predvideni prevoznik", value: "Pošta Slovenije", detail: "Načrtovani prevoznik za slovenski trg.", href: "#prevoznik" },
@@ -78,8 +90,9 @@ export function createDeliveryPageContent(rates: ShippingRate[]): LegalPageConte
         id: "rok",
         title: "Priprava naročila in dobavni rok",
         paragraphs: [
-          "Rok prejema je odvisen od razpoložljivosti izdelka, priprave pošiljke in prevoza. Za predvideni datum prejema izbranega izdelka se pred nakupom obrnite na nas. Naročilo pripravimo po sprejemu; pri plačilu po predračunu tudi po prejemu plačila.",
-          "Za običajne paketne pošiljke Pošta Slovenije navaja okviren prevoz od 1 do 3 delovnih dni po oddaji prevozniku. To je čas prevoza, ki ne vključuje priprave naročila pri Bistravi. Dan oddaje, sobote, nedelje in prazniki se v ta rok ne vštevajo; določena ura prihoda ni zagotovljena.",
+          orderPreparationText,
+          standardShippingText,
+          "Rok prejema je odvisen tudi od razpoložljivosti izdelka. Sobote, nedelje in prazniki se ne štejejo kot delovni dnevi; določena ura prihoda ni zagotovljena.",
           "Pri izdelkih z različnimi dobavnimi roki vam pred potrditvijo naročila pojasnimo predvideni rok prejema. O morebitni spremembi dobavljivosti vas obvestimo in z vami uskladimo nadaljnje ravnanje.",
         ],
         items: deliveryEstimates.length > 0 ? deliveryEstimates : undefined,

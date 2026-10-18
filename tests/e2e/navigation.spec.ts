@@ -10,24 +10,21 @@ test("homepage presents the specialist shop and product journeys", async ({ page
   ).toBeVisible();
   await expect(page.getByRole("link", { name: /Nakupujte izdelke/ })).toBeVisible();
   await expect(page.locator(".catalog-product-card")).toHaveCount(6);
-  await expect(page.getByRole("heading", { name: "Izkušnje, ki jih želimo ustvarjati." })).toBeVisible();
-  await expect(page.locator('[data-review-track="primary"] .review-standard-card')).toHaveCount(10);
-  await expect(page.locator('[data-review-track="primary"] .review-standard-card footer span')).toHaveText(
-    Array(10).fill("Vzorčno mnenje"),
-  );
+  await expect(page.locator(".review-standard-card")).toHaveCount(0);
+  await expect(page.getByText("Vzorčno mnenje", { exact: true })).toHaveCount(0);
   const structuredData = await page
     .locator('script[type="application/ld+json"]')
     .allTextContents();
   expect(structuredData.some((value) => value.includes('"@type":"FAQPage"'))).toBe(true);
 });
 
-test("specialist catalog displays every curated product", async ({ page }) => {
+test("local catalog displays every curated draft without enabling purchases", async ({ page }) => {
   await page.goto("/mehcalci-vode");
   await expect(page.getByRole("heading", { level: 1, name: "24 izdelkov v štirih skupinah" })).toBeVisible();
   await expect(page.locator(".category-hero, .specialist-catalog-intro")).toHaveCount(0);
   await expect(page.locator(".catalog-product-card")).toHaveCount(24);
   await expect(page.getByText("Na voljo", { exact: true })).toHaveCount(24);
-  await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(24);
+  await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(0);
   await Promise.all([
     page.waitForURL(/\/izdelki\//),
     page.locator(".catalog-product-card h3 a").first().click(),
@@ -36,19 +33,19 @@ test("specialist catalog displays every curated product", async ({ page }) => {
   await expect(page.locator(".demo-warning")).toHaveCount(0);
 });
 
-test("a catalog product can be added to the persistent cart", async ({ page }) => {
+test("draft product details preserve an empty cart", async ({ page }) => {
   await page.goto("/mehcalci-vode");
   const firstProduct = page.locator(".catalog-product-card").first();
   const productName = await firstProduct.locator("h3").innerText();
 
-  await firstProduct.getByRole("button", { name: "V košarico" }).click();
-  await expect(firstProduct.getByRole("button", { name: "Dodano" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Košarica, 1 izdelkov" })).toBeVisible();
+  await firstProduct.getByRole("link", { name: "Oglejte si izdelek", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1, name: productName })).toBeVisible();
+  await expect(page.getByRole("button", { name: "V košarico" })).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Košarica, 0 izdelkov" })).toBeVisible();
 
   await page.goto("/kosarica");
-  await expect(page.getByRole("heading", { level: 1, name: "Košarica" })).toBeVisible();
-  await expect(page.locator(".cart-line")).toHaveCount(1);
-  await expect(page.locator(".cart-line h2")).toHaveText(productName);
+  await expect(page.getByRole("heading", { level: 1, name: "Vaša košarica je prazna." })).toBeVisible();
+  await expect(page.locator(".cart-line")).toHaveCount(0);
 });
 
 test("draft product has a canonical URL and no Product or Offer schema", async ({ page }) => {
@@ -93,7 +90,7 @@ test("legacy product URL redirects to the Slovenian plural route", async ({ page
   await expect(page).toHaveURL(/\/izdelki\/mehcalec-vode-12-l$/);
 });
 
-test("selection guide recommends real products without collecting contact details", async ({ page }) => {
+test("selection guide does not recommend unapproved drafts or collect contact details", async ({ page }) => {
   await page.goto("/izbira-mehcalca");
   await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
   await page.getByLabel("Trdote še ne poznam").uncheck();
@@ -101,11 +98,11 @@ test("selection guide recommends real products without collecting contact detail
   await page.getByRole("button", { name: "Naprej" }).click();
   await page.getByRole("button", { name: "Naprej" }).click();
   await page.getByRole("button", { name: "Prikažite rezultat" }).click();
-  await expect(page.getByRole("heading", { name: "Priporočeni izdelki" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Najprej potrebujemo dodaten podatek" })).toBeVisible();
+  await expect(page.getByText("V trenutnem katalogu ni dovolj primernega izdelka za vnesene pogoje.")).toBeVisible();
   await expect(page.getByLabel("Ime in priimek")).toHaveCount(0);
-  await expect(page.locator(".recommendation-grid article")).toHaveCount(3);
-  await expect(page.locator(".recommendation-grid article").first().getByRole("link", { name: "Podrobnosti" })).toBeVisible();
-  await expect(page.locator(".recommendation-grid article").first().getByRole("button", { name: "V košarico" })).toBeVisible();
+  await expect(page.locator(".recommendation-grid article")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: "Oglejte si vse izdelke", exact: true })).toHaveAttribute("href", "/mehcalci-vode#katalog");
 });
 
 test("published guides contain complete practical articles", async ({ page }) => {
@@ -119,7 +116,7 @@ test("published guides contain complete practical articles", async ({ page }) =>
   await expect(page.locator(".article-body > section:not(.guide-comparison)")).toHaveCount(5);
   await expect(page.locator(".guide-comparison table")).toHaveCount(1);
   await expect(page.locator(".guide-comparison tbody tr")).toHaveCount(4);
-  await expect(page.getByText("Trdota je merljiva lastnost vode", { exact: true })).toBeVisible();
+  expect((await page.locator(".article-body").innerText()).length).toBeGreaterThan(1000);
   await expect(page.getByRole("link", { name: "Oglejte si izdelke" })).toBeVisible();
 });
 
@@ -232,6 +229,7 @@ test("legacy service pages redirect into the shop", async ({ page }) => {
 
 test("guest cart persists quantities and checkout stays commercially gated", async ({ page }) => {
   await page.addInitScript(() => {
+    if (window.localStorage.getItem("bistrava-cart-v1")) return;
     window.localStorage.setItem(
       "bistrava-cart-v1",
       JSON.stringify([
@@ -254,10 +252,13 @@ test("guest cart persists quantities and checkout stays commercially gated", asy
   await expect(page.getByText("29,98 €").first()).toBeVisible();
   await page.getByRole("button", { name: "Povečaj količino" }).click();
   await expect(page.getByText("44,97 €").first()).toBeVisible();
-  await Promise.all([
-    page.waitForURL(/\/blagajna$/, { timeout: 15_000 }),
-    page.getByRole("link", { name: /Nadaljujte na blagajno/ }).click(),
-  ]);
+  await page.reload();
+  await expect(page.getByText("44,97 €").first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Pred nadaljevanjem preverite cene in zalogo" })).toBeDisabled();
+  await expect(page.getByRole("link", { name: /Nadaljujte na blagajno/ })).toHaveCount(0);
+  // Direct navigation must not bypass the missing live price/stock verification.
+  await page.goto("/blagajna");
+  await expect(page.getByText("Cen in zaloge trenutno ni mogoče preveriti.")).toBeVisible();
   await expect(page.getByText("Sprejem naročil še ni aktiviran")).toBeVisible();
   await expect(page.getByRole("button", { name: "Oddajte naročilo v pregled" })).toBeDisabled();
 });

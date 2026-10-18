@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Route } from "next";
 
 import { PrivacySettingsButton } from "@/components/analytics/consent-banner";
+import { companyDetails, companyPostalAddress } from "@/lib/content/company";
 
 const solutionLinks = [
   ["Vsi izdelki", "/mehcalci-vode#katalog"],
@@ -44,6 +45,8 @@ export function Footer() {
           </Link>
           <p className="footer-tagline">Mehka voda. Pametna izbira.</p>
           <p>Bistrava - strokovnjak za mehko vodo brez vodnega kamna.</p>
+          <p>{companyDetails.shortName}<br />{companyPostalAddress}</p>
+          <p><a href={`mailto:${companyDetails.email}`}>{companyDetails.email}</a><br /><a href={companyDetails.phoneHref}>{companyDetails.phone}</a></p>
         </div>
         <FooterColumn title="Trgovina" links={solutionLinks} />
         <FooterColumn title="Nasveti" links={supportLinks} />

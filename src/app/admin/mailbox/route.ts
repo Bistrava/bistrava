@@ -10,6 +10,15 @@ const headers = { 'Cache-Control':'private, no-store', Vary:'Cookie', 'X-Robots-
 const json = (data:unknown, status=200) => Response.json(data,{status,headers});
 const fields = 'id,sender_name,sender_address,reply_address,subject,received_at,body_limited';
 
+function configuredSiteOrigin() {
+  try {
+    // Each preview/development deployment must set its own public site URL.
+    // Host and forwarded headers are request input, never this trust anchor.
+    const url = new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://bistrava.com');
+    return url.protocol === 'https:' || url.protocol === 'http:' ? url.origin : null;
+  } catch { return null; }
+}
+
 export async function GET(request:Request) {
   try {
     const access = await getAdminAccess();
@@ -39,8 +48,10 @@ export async function GET(request:Request) {
 
 export async function POST(request:Request) {
   try {
-    // This cookie-authenticated mutation is accepted only from its own origin.
-    if (request.headers.get('origin') !== new URL(request.url).origin) return json({error:'origin'},403);
+    // Node/Docker may expose an internal hostname in request.url. Compare only
+    // with the configured public application origin, preserving CSRF checks.
+    const siteOrigin = configuredSiteOrigin();
+    if (!siteOrigin || request.headers.get('origin') !== siteOrigin) return json({error:'origin'},403);
     const access = await getAdminAccess();
     if (access.status !== 'authorized') return json({error:'unauthorized'},access.status==='forbidden'?403:401);
     if (!request.headers.get('content-type')?.startsWith('application/json')) return json({error:'invalid'},400);

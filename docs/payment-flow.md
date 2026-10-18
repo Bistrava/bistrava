@@ -29,11 +29,60 @@ The payment-method switch does not override the separate `CHECKOUT_ORDERING_ENAB
 - Set `CHECKOUT_MODE=bank_transfer`. Set `CHECKOUT_ORDERING_ENABLED=true` only when the receiving account and commercial setup are ready. Missing/invalid bank details disable order creation even when the flag is true. Redeploy after Vercel environment changes.
 - The alternative `manual_review` mode creates an unpaid pending order without bank instructions.
 
-At implementation time, the owner has not supplied the receiving account and production ordering remains disabled. No real transfer or customer test email was sent.
+The owner has entered the beneficiary, IBAN, bank and BIC through the administration interface and saved a disabled draft. Only configuration/readiness booleans were verified; no bank account details are stored in this repository. Production ordering and bank transfer remain disabled. No real transfer, production order or bank-instruction email has been created. An explicitly authorized contact test confirmed receipt of the acknowledgement and internal notification; no order was created. This contact test does not verify an order-confirmation email.
 
-Before accepting paid orders, complete the existing commercial checks: approved selling prices/stock, delivery arrangements, company details and terms. The existing `tax_cents` calculation covers product VAT only; VAT included in charged shipping still needs allocation before invoicing/paid launch. The customer-facing gross delivery/checkout total already includes the shipping charge; no extra VAT should be added to it.
+The owner has confirmed the published selling prices/stock, company and return details, and that the carrier and return arrangements are ready. Preparation takes 1–2 business days after confirmed payment, followed by 1–3 business days of transport after dispatch. Erika Kozjan, the Director responsible for invoices, has approved the current 22% calculation, unchanged gross prices, rounding per product line and use of those recorded amounts in external invoices, including shipping VAT. The future allocation between multiple rates still needs separate approval; it does not block the current catalogue, whose eligible products are all at 22%. Migration/recovery checks and application of the shipping-VAT correction remain to be completed before invoicing/paid launch. The customer-facing delivery/checkout total already includes the shipping charge; no extra VAT is added to it.
+
+## VAT included in shipping
+
+Migration `20261017172838_shipping_vat_included.sql` is prepared locally and has not been applied to production. Targeted recovery and transactional rejection/atomic-rollback checks have passed locally; no production DDL has been executed. The migration must be applied before deploying the new Admin fiscal view, because its order selection reads `shipping_tax_cents` and `shipping_tax_snapshot`. The currently deployed Render source remains the mail-verified reference `0e8188b`. The migration retains the exact quoted gross total and payment amount:
+
+`total_cents = subtotal_cents - discount_cents + shipping_cents`
+
+For newly created orders, `shipping_tax_cents` records the VAT share already included in delivery. `orders.tax_cents` becomes product VAT plus shipping VAT. Product discounts and the established per-line product VAT rounding remain unchanged. Shipping eligibility thresholds remain based on the subtotal before discounts.
+
+### Approved current 22% calculation
+
+On 18 October 2026, the owner confirmed “Calcul validé par Erika”. Erika Kozjan's approval covers retaining gross prices, computing included VAT per product line as `round(discountedLineGrossCents * 22 / 122)` in cents, summing those rounded line amounts, and carrying the recorded figures into external invoices. Included shipping VAT at the current single rate uses the same `22 / 122` extraction from gross delivery.
+
+| Approved example | Included VAT |
+| --- | --- |
+| One product line at €40.00 gross | €7.21 |
+| Two product lines at €20.00 gross each | €3.61 per line, €7.22 total |
+| Delivery at €4.50 gross | €0.81 VAT, €3.69 net |
+
+The difference between the two €40.00 baskets is the approved per-line rounding effect; invoice preparation must preserve those recorded cents rather than round the combined product total again. This approval covers the current 22% catalogue and invoice transfer of these amounts. It does not approve the future proportional allocation between different VAT rates.
+
+### Stored allocation and future mixed rates
+
+The allocation uses each stored product snapshot's VAT rate and gross amount after its allocated discount. It groups those amounts by rate, then apportions gross shipping proportionally between the groups. Rates are ordered numerically ascending; cumulative half-up rounding assigns every gross shipping cent exactly once. VAT included in each group is `round(shippingGrossCents * rate / (100 + rate))`. The order stores a versioned immutable `shipping_tax_snapshot` with the method, rounding, allocation basis and each group's gross, net and VAT shipping amounts. Later catalogue, tax-rate or shipping-price edits do not change existing orders or idempotent replays. The multiple-rate allocation is implemented for testing but remains outside Erika's current single-rate approval.
+
+Free delivery has zero shipping VAT. When all products are fully discounted, a basket containing a single rate uses that rate for charged delivery. A fully discounted mixed-rate basket with charged delivery fails atomically with `shipping_tax_allocation_requires_accountant_review`; no order, stock reservation, payment or promotion use remains. This future mixed-rate case still needs an agreed accounting policy and is outside the current all-22% catalogue. A mixed-rate basket with fully discounted products and free delivery remains calculable at zero shipping VAT.
+
+Historical orders keep `shipping_tax_cents` and `shipping_tax_snapshot` as `NULL`, meaning not calculated, including when their original idempotency key is replayed. The migration does not backfill old orders, imply that their shipping VAT was zero or amend existing invoices. Any historical correction requires a separate accounting decision.
+
+The legal basis for including supplier-charged incidental transport in the taxable amount is [ZDDV-1, Article 36(5)(b)](https://pisrs.si/pregledPredpisa?id=ZAKO4701) and [Directive 2006/112/EC, Articles 78–79](https://eur-lex.europa.eu/eli/dir/2006/112/2025-04-14/eng). An ancillary supply shares the principal supply's tax treatment under [CJEU C-349/96, paragraph 30](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A61996CJ0349). These provisions support allocating incidental delivery to the underlying supplies; they do not prescribe this implementation's precise mixed-rate allocation or rounding formula. Erika Kozjan has approved the current 22% examples, rounding and invoice treatment described above. Future mixed-rate allocation still requires a separate decision before it is offered; it is not a blocker for the current all-22% catalogue. This domestic SI checkout calculation does not establish treatment for foreign sales, exemptions, advances or credit notes.
+
+## Pre-migration capture and recovery
+
+The targeted pre-migration capture records PostgreSQL 17.6 and 23 migration versions through `20261013001136`. At capture time, `orders`, `order_items` and `payments` each contain zero rows, and candidate migration `20261017172838` is not recorded. Its shipping-VAT columns, calculator, guard, trigger and constraint are absent.
+
+The artifact preserves the affected order schema and the original `create_pending_guest_order` definition, ownership, permissions and function settings for targeted recovery. It contains no customer or bank data. Targeted local rollback using this real capture has passed. The transactional wrapper also passed six rejection cases, with atomic rollback verified. No production DDL has been executed. This remains a targeted schema capture, not a full database backup; no complete backup or verified complete restore has been performed.
+
+## Read-only data for external invoicing
+
+The local seven-file fiscal change exposes saved item rates, allocated discounts, discounted gross, line net and VAT, the saved shipping allocation and reconciled totals by rate. It derives net only by subtracting recorded VAT from recorded discounted gross, includes shipping once and preserves missing historical values as unknown. It supports Erika Kozjan's external invoice preparation using the approved 22% per-line amounts; it does not issue, number or post an invoice. Future multiple-rate allocation remains a separate approval and does not block the current all-22% catalogue.
+
+Local validation passed 38 files/215 tests, TypeScript and targeted lint. The existing isolated A/B checkout scenario now includes DOM assertions for the fiscal view and a synthetic `admin-accounting.png` capture. The revised scenario, its CI artifact and the new Vercel Preview await publication and execution; the previous successful `0e8188b` CI is the historical mail/application reference, not proof of the new fiscal change. No future commit identifier is assigned here.
+
+The migration-before-deployment order is mandatory because the new repository query selects the added columns. The final grouped approval for migration, subsequent fiscal deployment and store opening is still to be requested. Production ordering and bank transfer remain disabled; the one authorized contact test did not create an order or send bank instructions.
+
+## Staff operation
+
+Staff should review unpaid bank-transfer orders daily because stock remains reserved without an automatic bank-transfer expiry. Check the actual receiving bank statement and match the full amount and order reference before using receipt confirmation in the order interface; the checkout page or a customer's claim of transfer does not establish receipt. Review failed/uncertain confirmation deliveries in the email-event queue and verify delivery status before manually contacting the customer or retrying, to avoid duplicate instructions. Existing order instructions stay available on the protected order page even if the email failed. The operator decides when to contact the customer or cancel an unpaid order; the system does not invent an automatic deadline.
 
 ## Verification
 
 - Unit tests cover bank normalization/checksum, fail-closed configuration, status wording, email contents, duplicate/uncertain delivery and SMTP failure.
 - `node scripts/test-promotions-db.mjs` runs migrations and SQL suites in an isolated PGlite database. The bank suite covers authorization, stock/idempotency, immutable account snapshots, explicit payment confirmation and cancellation/restocking.
+- The shipping-VAT suite covers standard/reduced/zero and mixed rates, promotions, free and one-cent delivery, fully discounted baskets, atomic mixed-rate rejection, immutable fiscal snapshots, idempotent replays, bank-transfer amounts and internal-function permissions. A pre-migration fixture verifies that historical amounts and unknown shipping VAT remain unchanged. For the existing discounted `303 - 30 + 500 = 773` fixture, the gross payment remains 773 cents while the recorded VAT changes from product-only 49 to 139 cents, including 90 cents of shipping VAT.

@@ -7,5 +7,5 @@ export const dynamic = "force-dynamic";
 export default async function SettingsPage() {
   const access = await getAdminPageAccess();
   if (access.mode === "not_configured") return <p>Supabase ni povezan.</p>;
-  return <AdminWorkspace access={access} active="settings"><SettingsView settings={{ database: access.mode === "authenticated", email: Boolean(process.env.RESEND_API_KEY), hosting: Boolean(process.env.VERCEL), checkout: (await getCheckoutConfig()).enabled, siteUrl: siteConfig.url, adminEmail: access.label, role: access.mode === "authenticated" ? access.role : "preview" }} /></AdminWorkspace>;
+  return <AdminWorkspace access={access} active="settings"><SettingsView settings={{ database: access.mode === "authenticated", email: Boolean(process.env.LWS_MAIL_PASSWORD || process.env.RESEND_API_KEY), checkout: (await getCheckoutConfig()).enabled, siteUrl: siteConfig.url, adminEmail: access.label, role: access.mode === "authenticated" ? access.role : "preview" }} /></AdminWorkspace>;
 }

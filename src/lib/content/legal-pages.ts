@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { createDeliveryPageContent } from "@/lib/content/delivery";
+import { createDeliveryPageContent, orderPreparationText, standardShippingText } from "@/lib/content/delivery";
+import { companyDetails, companyPostalAddress, companyReturnsAddress, irpsStatement } from "@/lib/content/company";
 
 export type LegalPageKey =
   | "pravna-obvestila"
@@ -37,33 +38,38 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Podatki o spletnem mestu",
     intro:
       "Osnovne informacije o izdajatelju, gostovanju, vsebini in uporabi spletnega mesta Bistrava.",
-    updatedAt: "22. september 2026",
-    requiresBusinessDetails: true,
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "ponudnik",
         title: "Podatki ponudnika",
         paragraphs: [
-          "Pred začetkom prodaje morajo biti na tem mestu objavljeni popolni in preverjeni podatki pravne osebe ali samostojnega podjetnika, ki upravlja trgovino Bistrava.",
+          `Spletno trgovino Bistrava upravlja ${companyDetails.fullName}`,
         ],
         items: [
-          "Firma in pravnoorganizacijska oblika: [DOPOLNITI]",
-          "Sedež in poslovni naslov: [DOPOLNITI]",
-          "Matična številka: [DOPOLNITI]",
-          "Davčna številka in status zavezanca za DDV: [DOPOLNITI]",
-          "Registrski organ in datum vpisa: [DOPOLNITI]",
-          "Zakoniti zastopnik: [DOPOLNITI]",
-          "Javni e-poštni naslov in telefonska številka: [DOPOLNITI]",
-          "Transakcijski račun in banka, kadar je zahtevano: [DOPOLNITI]",
+          `Firma: ${companyDetails.fullName}`,
+          `Skrajšana firma: ${companyDetails.shortName}`,
+          `Pravnoorganizacijska oblika: ${companyDetails.legalForm}`,
+          `Sedež in poslovni naslov: ${companyPostalAddress}`,
+          `Matična številka (MŠ): ${companyDetails.registrationNumber}`,
+          `Davčna številka (DŠ): ${companyDetails.taxNumber}`,
+          `Identifikacijska številka za DDV: ${companyDetails.vatNumber}; zavezanec za DDV`,
+          `Registrski organ: ${companyDetails.registrationAuthority}; datum vpisa: ${companyDetails.registrationDateSl}`,
+          `Zakoniti zastopnik: ${companyDetails.legalRepresentative}`,
+          `E-pošta: ${companyDetails.email}; telefon: ${companyDetails.phone}`,
+          "Podatki za bančno nakazilo so prikazani ob naročilu in v navodilih za plačilo.",
         ],
-        callout:
-          "Ti podatki so obvezni pred sprejemanjem plačanih naročil. Ne uporabljajte začasnih ali osebnih podatkov brez izrecne potrditve upravljavca.",
+      },
+      {
+        id: "irps",
+        title: "Izvensodno reševanje potrošniških sporov",
+        paragraphs: [irpsStatement],
       },
       {
         id: "izdajatelj",
         title: "Izdajatelj in tehnično gostovanje",
         paragraphs: [
-          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletna aplikacija gostuje na infrastrukturi Vercel, podatkovne storitve pa uporablja prek Supabase. Natančne pogodbene vloge in lokacije obdelave so opisane v Politiki zasebnosti.",
+          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletno aplikacijo gostita Render Services, Inc. (Render; izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja). Podatkovne storitve zagotavlja Supabase. Podrobnosti o obdelavi osebnih podatkov so opisane v Politiki zasebnosti.",
         ],
       },
       {
@@ -97,14 +103,13 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Pravila spletnega nakupa",
     intro:
       "Pogoji urejajo uporabo trgovine, oddajo naročila, plačilo, dostavo, potrošniške pravice in reševanje reklamacij.",
-    updatedAt: "22. september 2026",
-    requiresBusinessDetails: true,
+    updatedAt: "17. oktober 2026",
     sections: [
       {
         id: "veljavnost",
         title: "1. Ponudnik in veljavnost pogojev",
         paragraphs: [
-          "Spletno trgovino Bistrava upravlja ponudnik, katerega popolni registrski podatki bodo pred začetkom prodaje objavljeni v Pravnem obvestilu. Ti pogoji veljajo za nakupe potrošnikov na spletnem mestu Bistrava v Republiki Sloveniji.",
+          `Spletno trgovino Bistrava upravlja ${companyDetails.fullName}, ${companyPostalAddress}, matična številka ${companyDetails.registrationNumber}, ID za DDV ${companyDetails.vatNumber}. Podrobni podatki ponudnika so objavljeni v Pravnem obvestilu. Ti pogoji veljajo za nakupe potrošnikov na spletnem mestu Bistrava v Republiki Sloveniji.`,
           "Kupec mora imeti pred oddajo naročila možnost prebrati in shraniti veljavno različico pogojev. Potrditev naročila in pogojev se kupcu posreduje na trajnem nosilcu, praviloma po e-pošti.",
         ],
       },
@@ -165,16 +170,16 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "pritozbe",
         title: "9. Pritožbe in podpora",
         paragraphs: [
-          "Pritožbo lahko kupec pošlje prek kontaktnega obrazca. Bistrava potrdi prejem in jo obravnava brez nepotrebnega odlašanja. Odgovor vsebuje odločitev, obrazložitev ter nadaljnje možnosti, kadar zahtevku ni mogoče ugoditi.",
+          `Pritožbo lahko kupec pošlje prek kontaktnega obrazca ali na ${companyDetails.email}. Bistrava potrdi prejem in jo obravnava brez nepotrebnega odlašanja. Odgovor vsebuje odločitev, obrazložitev ter nadaljnje možnosti, kadar zahtevku ni mogoče ugoditi.`,
         ],
       },
       {
         id: "irps",
         title: "10. Izvensodno reševanje sporov",
         paragraphs: [
-          "Pred začetkom prodaje mora Bistrava objaviti, katerega registriranega izvajalca izvensodnega reševanja potrošniških sporov priznava kot pristojnega, ali jasno navesti, da nobenega izvajalca ne priznava. Evropska platforma ODR je bila 20. julija 2025 ukinjena in povezava nanjo se ne uporablja več.",
+          irpsStatement,
+          "Evropska platforma ODR je bila 20. julija 2025 ukinjena in povezava nanjo se ne uporablja več.",
         ],
-        callout: "Odločitev ponudnika glede izvajalca IRPS: [DOPOLNITI].",
       },
       {
         id: "pravo",
@@ -194,7 +199,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Jasno in varno plačilo",
     intro:
       "Na blagajni so prikazani samo dejansko omogočeni načini plačila, končni znesek in stanje naročila.",
-    updatedAt: "22. september 2026",
+    updatedAt: "17. oktober 2026",
     sections: [
       {
         id: "valuta",
@@ -219,7 +224,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "varnost",
         title: "Varnost plačila",
         paragraphs: [
-          "Bistrava po e-pošti ali telefonu ne zahteva celotne številke kartice, varnostne kode ali gesla za spletno banko. Kartični podatki se obdelujejo pri izbranem ponudniku plačil in se ne smejo zapisovati v običajna sporočila ali kontaktni obrazec.",
+          "Bančno nakazilo opravite v svoji banki. Bistrava po e-pošti ali telefonu ne zahteva gesla za spletno banko, enkratnih kod ali celotnih podatkov plačilne kartice. Teh podatkov ne vpisujte v sporočila ali kontaktni obrazec.",
         ],
       },
       {
@@ -227,7 +232,9 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "Kako plačati z bančnim nakazilom",
         paragraphs: [
           "Po oddaji naročila so na potrditveni strani prikazani ime prejemnika, IBAN, banka, BIC/SWIFT, kadar je naveden, točen znesek in referenca naročila. Navodila pošljemo tudi na e-poštni naslov naročila. Nakazilo opravite v svoji banki; oddaja naročila sama ne izvede plačila.",
-          "V namen nakazila vpišite referenco naročila. Naročilo ostane v čakanju do potrjenega prejema celotnega zneska. Nato ga začnemo pripravljati za dostavo. Če ste že plačali, nakazila ne ponavljajte; pri preverjanju navedite referenco naročila.",
+          "V namen nakazila vpišite referenco naročila. Naročilo ostane v čakanju do potrjenega prejema celotnega zneska. Če ste že plačali, nakazila ne ponavljajte; pri preverjanju navedite referenco naročila.",
+          orderPreparationText,
+          standardShippingText,
         ],
       },
       {
@@ -241,14 +248,14 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "vracilo",
         title: "Povračila",
         paragraphs: [
-          "Odobreno povračilo se praviloma izvede z enakim plačilnim sredstvom, kot je bilo uporabljeno pri nakupu, razen če se stranki izrecno dogovorita drugače in potrošnik zaradi tega nima stroškov. Čas knjiženja pri banki ali kartični shemi je lahko daljši od časa, v katerem Bistrava povračilo odredi.",
+          "Odobreno povračilo se praviloma izvede z enakim plačilnim sredstvom, kot je bilo uporabljeno pri nakupu, razen če se stranki izrecno dogovorita drugače in potrošnik zaradi tega nima stroškov. Čas knjiženja pri banki je lahko daljši od časa, v katerem Bistrava povračilo odredi.",
         ],
       },
       {
         id: "ponudnik-placil",
         title: "Pomoč pri nakazilu",
         paragraphs: [
-          "Če navodil niste prejeli ali želite preveriti prejem plačila, pišite na kontakt@bistrava.com in navedite referenco naročila. Ne pošiljajte gesla ali dostopnih kod za spletno banko.",
+          `Če navodil niste prejeli ali želite preveriti prejem plačila, pišite na ${companyDetails.email} in navedite referenco naročila. Ne pošiljajte gesla ali dostopnih kod za spletno banko.`,
         ],
         callout: "Naročilo se pripravi po potrjenem prejemu bančnega nakazila.",
       },
@@ -260,14 +267,14 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Odstop od spletnega nakupa",
     intro:
       "Jasen postopek za 14-dnevni odstop, vračilo blaga, povračilo plačila in ločeno uveljavljanje neskladnosti.",
-    updatedAt: "22. september 2026",
+    updatedAt: "17. oktober 2026",
     sections: [
       {
         id: "pravica",
         title: "14-dnevna pravica do odstopa",
         paragraphs: [
           "Potrošnik lahko pri pogodbi, sklenjeni na daljavo, praviloma v 14 dneh od dneva, ko on ali pooblaščena tretja oseba prejme blago, obvesti Bistravo, da odstopa od pogodbe, ne da bi navedel razlog. Pri več kosih iz istega naročila, dostavljenih ločeno, rok praviloma začne teči s prejemom zadnjega kosa.",
-          "Za pravočasen odstop zadošča, da potrošnik pred iztekom roka pošlje nedvoumno izjavo prek kontaktnega obrazca ali na uradni kontakt, ki bo objavljen pred začetkom prodaje.",
+          `Za pravočasen odstop zadošča, da potrošnik pred iztekom roka pošlje nedvoumno izjavo prek kontaktnega obrazca ali na ${companyDetails.email}.`,
         ],
       },
       {
@@ -321,9 +328,9 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "naslov",
         title: "Naslov za vračilo",
         paragraphs: [
-          "Blaga ne pošiljajte na naslov ponudnika gostovanja, skladišča dobavitelja ali na naslov, ki ni izrecno potrjen za vračila. Pred odpremo zahtevajte navodila in referenco vračila.",
+          `Izdelke vrnite na spodnji naslov. Za pomoč glede pakiranja ali prevoza pišite na ${companyDetails.email} in navedite številko naročila.`,
         ],
-        callout: "Uradni kontakt in naslov za vračila Bistrava: [DOPOLNITI].",
+        callout: `Naslov za vračila: ${companyDetails.shortName}, ${companyReturnsAddress}. Kontakt za vračila: ${companyDetails.email}, ${companyDetails.phone}.`,
       },
     ],
   },
@@ -364,16 +371,15 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Vaši podatki pod vašim nadzorom",
     intro:
       "Pojasnjujemo, katere podatke Bistrava obdeluje, zakaj jih potrebuje, komu jih posreduje in kako lahko uveljavljate svoje pravice.",
-    updatedAt: "22. september 2026",
-    requiresBusinessDetails: true,
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "upravljavec",
         title: "1. Upravljavec",
         paragraphs: [
-          "Upravljavec osebnih podatkov je ponudnik spletne trgovine Bistrava. Njegova firma, naslov in javni kontakt za vprašanja glede zasebnosti bodo objavljeni pred začetkom prodaje.",
+          `Upravljavec osebnih podatkov je ${companyDetails.fullName}, ${companyPostalAddress}, matična številka ${companyDetails.registrationNumber}. Za vprašanja glede zasebnosti in uveljavljanje pravic pišite na ${companyDetails.email} ali pokličite ${companyDetails.phone}.`,
         ],
-        callout: "Upravljavec in kontakt za varstvo podatkov: [DOPOLNITI].",
+        links: [{ label: companyDetails.email, href: `mailto:${companyDetails.email}` }],
       },
       {
         id: "podatki",
@@ -385,7 +391,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
           "kontaktni podatki: ime, e-pošta in telefonska številka,",
           "podatki za naročilo: naslov, poštna številka, kraj, država, izdelki in količine,",
           "podatki o vodi in prostoru, ki jih prostovoljno vnesete v obrazec ali konfigurator,",
-          "podatki o plačilu in statusu transakcije; celotne kartične številke Bistrava ne shranjuje,",
+          "podatki o bančnem nakazilu in statusu plačila; gesel in dostopnih kod za spletno banko Bistrava ne zbira,",
           "komunikacija, reklamacije, vračila in dokazila, ki jih pošljete,",
           "tehnični podatki: IP, naprava, dnevniški zapisi, varnostni dogodki in izbira piškotkov,",
           "marketinški podatki samo ob ustrezni pravni podlagi oziroma soglasju.",
@@ -395,7 +401,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "nameni",
         title: "3. Nameni in pravne podlage",
         paragraphs: [
-          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Analitika in oglaševalsko merjenje se vključita le skladno z vašo izbiro zasebnosti.",
+          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Statistično merjenje se vključi samo, če je konfigurirano in izberete »Dovoli statistiko«. Oglaševalsko merjenje ni omogočeno.",
         ],
         items: [
           "pogodba: ko obdelava omogoča nakup, dostavo, podporo ali vračilo,",
@@ -408,7 +414,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prejemniki",
         title: "4. Prejemniki in obdelovalci",
         paragraphs: [
-          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnik gostovanja Vercel, podatkovna platforma Supabase, ponudnik transakcijske e-pošte Resend, prihodnji ponudnik plačil, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
+          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnika spletnega gostovanja Render Services, Inc. (izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
           "Z obdelovalci se sklenejo ustrezni dogovori. Seznam se posodobi ob vsaki vključitvi novega ponudnika.",
         ],
       },
@@ -416,7 +422,11 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prenosi",
         title: "5. Prenosi zunaj EGP",
         paragraphs: [
-          "Nekateri tehnološki ponudniki imajo povezane družbe ali infrastrukturo zunaj Evropskega gospodarskega prostora. Kadar pride do prenosa, mora temeljiti na sklepu o ustreznosti ali drugih ustreznih zaščitnih ukrepih, na primer standardnih pogodbenih klavzulah. Natančna nastavitev regij in pogodbenih podlag bo navedena po dokončni konfiguraciji storitev.",
+          "Za aplikacijski strežnik Render in podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Render Services, Inc. je ameriški ponudnik. Njegov dodatek o obdelavi podatkov za prenose določa okvir EU–ZDA za varstvo zasebnosti, kadar se uporablja, oziroma standardne pogodbene klavzule. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage. Dodatne informacije so dostopne v Renderjevem dodatku o obdelavi podatkov in seznamu podobdelovalcev.",
+        ],
+        links: [
+          { label: "Render: dodatek o obdelavi podatkov", href: "https://render.com/dpa" },
+          { label: "Render: seznam podobdelovalcev", href: "https://render.com/security" },
         ],
       },
       {
@@ -457,7 +467,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Izbira pred merjenjem",
     intro:
       "Nujne funkcije delujejo brez oglaševalskega soglasja; neobvezno merjenje se vključi šele po vaši izbiri.",
-    updatedAt: "22. september 2026",
+    updatedAt: "18. oktober 2026",
     sections: [
       {
         id: "nujni",
@@ -470,16 +480,30 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "analitika",
         title: "Analitika in oglaševanje",
         paragraphs: [
-          "Če so Google Analytics, Google Ads ali druge merilne storitve konfigurirane, je neobvezno shranjevanje privzeto zavrnjeno. Vključi se po izrecni izbiri uporabnika. Izbiro lahko kadar koli spremenite z gumbom Nastavitve zasebnosti v nogi.",
+          "Google Analytics oziroma Google Tag Manager se naložita samo, če sta konfigurirana in izberete »Dovoli statistiko«. Pred izbiro in pri izbiri »Samo bistveno« se ti oznaki ne naložita. Dovoljenje velja samo za statistiko obiska; oglaševalsko shranjevanje, uporaba podatkov za oglase in prilagajanje oglasov ostanejo zavrnjeni.",
+          "Izbira je shranjena v lokalnem pomnilniku brskalnika pod imenom bistrava-consent-v2. Starejša izbira, ki je združevala statistiko in oglaševanje, ne velja kot dovoljenje za novo različico. Izbiro lahko kadar koli spremenite z gumbom Nastavitve zasebnosti v nogi. Če po vklopu statistike izberete »Samo bistveno«, shranimo zavrnitev in stran znova naložimo, da se že naložene oznake odstranijo. Košarica in druge bistvene funkcije ostanejo na voljo brez dovoljenja za statistiko.",
         ],
       },
       {
         id: "seznam",
-        title: "Končni seznam tehnologij",
+        title: "Seznam piškotkov in lokalnega shranjevanja",
         paragraphs: [
-          "Pred vklopom merjenja bo tukaj objavljen seznam imen, ponudnikov, namenov in trajanja posameznih piškotkov oziroma podobnih tehnologij.",
+          "Spodaj je navedeno shranjevanje, ki ga uporablja aplikacija. Posamezen vnos nastane ob uporabi opisane funkcije; vsi vnosi se ne ustvarijo ob vsakem obisku. Lokalni pomnilnik ostane v vašem brskalniku in nima samodejnega roka poteka; odstranite ga lahko z izbrisom podatkov spletnega mesta v nastavitvah brskalnika.",
+          "Piškotek za naročilo nastane šele po uspešni oddaji naročila. Prijavni piškotki in administrativne nastavitve so namenjeni osebju. Rok prijavnega piškotka ni zagotovilo trajanja prijave; veljavnost seje preverja strežnik, ob odjavi pa se prijavni piškotki odstranijo.",
+          "Brez konfiguriranih identifikatorjev Google Analytics oziroma Google Tag Manager aplikacija teh zunanjih oznak ne naloži, tudi če izberete statistiko. Pred morebitnim vklopom merjenja se ta seznam dopolni z dejanskimi imeni in roki analitičnih piškotkov.",
         ],
-        callout: "Končni popis piškotkov po produkcijskem pregledu: [DOPOLNITI].",
+        table: {
+          caption: "Shranjevanje aplikacije Bistrava",
+          headings: ["Ime in vrsta", "Ponudnik", "Namen in uporaba", "Trajanje"],
+          rows: [
+            ["bistrava-cart-v1 (lokalni pomnilnik)", "Bistrava", "Izdelki in količine v košarici ter pregled sprememb cen ali zaloge.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
+            ["bistrava-consent-v2 (lokalni pomnilnik)", "Bistrava", "Shrani vašo izbiro zasebnosti po izbiri v obvestilu ali nastavitvah.", "Do spremembe izbire ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
+            ["bistrava-order-<referenca> (piškotek)", "Bistrava", "Zasebni dostop do potrditve posameznega naročila po uspešni oddaji; branje iz JavaScripta je onemogočeno.", "30 dni."],
+            ["sb-<projekt>-auth-token, lahko z deli .0, .1 itd. (piškotki)", "Bistrava / Supabase", "Prijava in varovanje administrativne seje.", "Do 400 dni od nastavitve ali osvežitve; odstranitev ob odjavi."],
+            ["bistrava-admin-language-v1 (lokalni pomnilnik)", "Bistrava", "Zapomni si jezik administracije, ko ga osebje spremeni.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
+            ["bistrava-admin-product-draft-v1:<izdelek> (lokalni pomnilnik)", "Bistrava", "Lokalni osnutek izdelka samo ob izrecnem shranjevanju v predoglednem načinu administracije.", "Do ponastavitve osnutka ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
+          ],
+        },
       },
     ],
   },

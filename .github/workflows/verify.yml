@@ -1,0 +1,101 @@
+name: Verify Bistrava
+on:
+  pull_request:
+  push:
+    branches: ["codex/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: bistrava-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - run: npm install --global pnpm@10.33.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Verify migrations in isolated PostgreSQL
+        run: |
+          npm install --prefix tmp/promotion-sql-test --no-save --package-lock=false --ignore-scripts @electric-sql/pglite@0.5.10
+          node scripts/test-promotions-db.mjs
+      - name: Build Linux standalone image without production secrets
+        run: docker build --tag bistrava:test --build-arg ROBOTS_INDEXING_ENABLED=false .
+      - name: Verify the running container
+        env:
+          BISTRAVA_EXPECT_NOINDEX: "true"
+        run: |
+          docker run --detach --name bistrava-ci --publish 127.0.0.1:3100:3000 bistrava:test
+          node scripts/smoke-hosting.mjs
+      - name: Container logs and cleanup
+        if: always()
+        run: |
+          docker logs bistrava-ci || true
+          docker rm --force bistrava-ci || true
+  checkout-connected:
+    name: Checkout on disposable local Supabase
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      BISTRAVA_CONNECTED_TEST: "1"
+      CHECKOUT_ORDERING_ENABLED: "true"
+      NEXT_PUBLIC_SITE_URL: "http://127.0.0.1:3200"
+      SUPABASE_ACCESS_TOKEN: ""
+      LWS_MAIL_PASSWORD: ""
+      RESEND_API_KEY: ""
+      EMAIL_FROM: ""
+      EMAIL_REPLY_TO: ""
+      EMAIL_INTERNAL_TO: ""
+      NEXT_PUBLIC_GTM_ID: ""
+      NEXT_PUBLIC_GA4_ID: ""
+      NEXT_PUBLIC_GOOGLE_ADS_ID: ""
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: "24"
+          package-manager-cache: false
+      - run: npm install --global pnpm@10.33.0
+      - run: pnpm install --frozen-lockfile
+      - uses: supabase/setup-cli@v3.0.1
+        with:
+          version: "2.121.0"
+      - name: Verify pinned CLI commands before starting the local stack
+        run: |
+          supabase --version
+          supabase start --help
+          supabase db reset --help
+          supabase status --help
+      - name: Start and reset only disposable local Supabase
+        run: |
+          supabase start --exclude studio,postgres-meta,imgproxy,edge-runtime,logflare,vector,supavisor > "$RUNNER_TEMP/bistrava-supabase-start.log"
+          supabase db reset --local > "$RUNNER_TEMP/bistrava-supabase-reset.log"
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Seed synthetic data, verify REST permissions and exercise both order flows
+        run: |
+          supabase status -o env > "$RUNNER_TEMP/bistrava-supabase-local.env"
+          node scripts/seed-checkout-local.mjs --status-file "$RUNNER_TEMP/bistrava-supabase-local.env" --run-tests
+      - name: Preserve the synthetic accounting view for review
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: admin-accounting-preview
+          path: test-results/connected/**/admin-accounting.png
+          if-no-files-found: error
+          retention-days: 3
+      - name: Remove the disposable local stack
+        if: always()
+        run: supabase stop --no-backup

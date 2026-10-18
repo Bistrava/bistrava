@@ -24,6 +24,7 @@ import { useDeferredValue, useMemo, useState } from "react";
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import { AdminNotificationsSeen } from "./admin-notifications";
 import { OrderManagementForm } from "@/components/admin/order-management-form";
+import { orderItemNetCents, orderTaxGroups } from "@/lib/admin/order-tax";
 import "@/components/admin/order-admin.css";
 import type {
   AdminAddress,
@@ -96,6 +97,18 @@ const copy = {
     discount: "Popust",
     shipping: "Dostava",
     taxIncluded: "Vključen DDV",
+    accountingData: "Podatki za zunanjo pripravo računa",
+    accountingNote: "Shranjeni podatki ob oddaji naročila. DDV je že vključen v zneske z DDV in ne poveča skupnega zneska. Pri starejših naročilih posamezni podatki niso zabeleženi.",
+    vatRate: "Stopnja DDV",
+    grossBeforeDiscount: "Z DDV pred popustom",
+    grossAfterDiscount: "Z DDV po popustu",
+    grossAmount: "Znesek z DDV",
+    netAmount: "Znesek brez DDV",
+    notRecorded: "Ni zabeleženo",
+    shippingTaxMissing: "Ni izračunano / shranjeni razrez ni na voljo",
+    shippingTaxBreakdown: "Razrez dostave po stopnjah DDV",
+    taxTotalsByRate: "Skupaj po stopnjah DDV: izdelki in dostava",
+    taxTotalsIncomplete: "Razrez ni popoln. Za skupne zneske po stopnjah morajo biti shranjeni vsi podatki o izdelkih, popustih in dostavi ter usklajeni s skupnim zneskom naročila.",
     paymentDetail: "Podatki o plačilu",
     provider: "Ponudnik",
     transaction: "Referenca plačila",
@@ -183,6 +196,18 @@ const copy = {
     discount: "Remise",
     shipping: "Livraison",
     taxIncluded: "TVA incluse",
+    accountingData: "Données pour la facturation externe",
+    accountingNote: "Données enregistrées lors de la commande. La TVA est déjà comprise dans les montants TTC et ne s’ajoute pas au total. Certaines données des anciennes commandes ne sont pas enregistrées.",
+    vatRate: "Taux de TVA",
+    grossBeforeDiscount: "TTC avant remise",
+    grossAfterDiscount: "TTC après remise",
+    grossAmount: "Montant TTC",
+    netAmount: "Montant HT",
+    notRecorded: "Non enregistré",
+    shippingTaxMissing: "Non calculé / ventilation enregistrée indisponible",
+    shippingTaxBreakdown: "Ventilation de la livraison par taux de TVA",
+    taxTotalsByRate: "Totaux par taux de TVA : produits et livraison",
+    taxTotalsIncomplete: "Ventilation incomplète. Les totaux par taux nécessitent les données enregistrées de tous les produits, remises et frais de livraison, cohérentes avec le total de la commande.",
     paymentDetail: "Informations de paiement",
     provider: "Prestataire",
     transaction: "Référence du paiement",
@@ -522,12 +547,81 @@ function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paym
         <section><h3><CreditCard size={17} />{labels.paymentDetail}</h3><dl><div><dt>{labels.status}</dt><dd>{paymentStatusLabel(order.payment?.status)}</dd></div><div><dt>{labels.provider}</dt><dd>{providerLabel(order.payment?.provider)}</dd></div><div><dt>{labels.transaction}</dt><dd>{order.payment?.providerReference ?? labels.notAssigned}</dd></div><div><dt>{labels.paidAt}</dt><dd>{formatDate(order.payment?.paidAt ?? null)}</dd></div><div><dt>{labels.refunded}</dt><dd>{formatMoney(order.payment?.refundedCents ?? 0)}</dd></div></dl></section>
         <section><h3><Truck size={17} />{labels.shipmentDetail}</h3><dl><div><dt>{labels.status}</dt><dd>{shipmentStatusLabel(order.shipment?.status)}</dd></div><div><dt>{labels.carrier}</dt><dd>{order.shipment?.carrier ?? labels.notAssigned}</dd></div><div><dt>{labels.service}</dt><dd>{order.shipment?.service ?? labels.notAssigned}</dd></div><div><dt>{labels.tracking}</dt><dd>{order.shipment?.trackingNumber ?? labels.notAssigned}</dd></div></dl></section>
       </div>
+      <OrderTaxDetails order={order} labels={labels} formatMoney={formatMoney} />
       <div className="admin-order-bottom-grid">
         <section><h3><ClipboardList size={17} />{labels.notes}</h3><div><strong>{labels.customerNote}</strong><p>{order.customerNote ?? labels.noNote}</p></div><div><strong>{labels.internalNote}</strong><p>{order.internalNote ?? labels.noNote}</p></div></section>
         <section><h3><CalendarDays size={17} />{labels.history}</h3><ol>{timeline.map((event) => <li key={`${event.label}-${event.date}`}><CheckCircle2 size={16} /><span><strong>{event.label}</strong><small>{formatDate(event.date)}</small></span></li>)}</ol></section>
       </div>
       {canManage ? <OrderManagementForm key={order.id} order={order} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
     </aside>
+  );
+}
+
+function OrderTaxDetails({ order, labels, formatMoney }: { order: AdminOrder; labels: Labels; formatMoney: (value: number) => string }) {
+  const { locale } = useAdminLanguage();
+  const groups = orderTaxGroups(order);
+  const formatRate = (rate: number | null | undefined) => rate == null
+    ? labels.notRecorded
+    : `${new Intl.NumberFormat(locale === "fr" ? "fr-FR" : "sl-SI").format(rate)} %`;
+  const savedMoney = (value: number | null | undefined) => value == null ? labels.notRecorded : formatMoney(value);
+
+  return (
+    <section className="admin-shipping-section" aria-label={labels.accountingData}>
+      <h3><ClipboardList size={17} />{labels.accountingData}</h3>
+      <p className="admin-shipping-note">{labels.accountingNote}</p>
+      <div className="admin-order-finance-grid">
+        {order.items.map((item) => (
+          <section key={item.id}>
+            <h3>{item.productName}</h3>
+            <small>{item.sku}</small>
+            <dl>
+              <div><dt>{labels.vatRate}</dt><dd>{formatRate(item.taxSnapshot?.vatRate)}</dd></div>
+              <div><dt>{labels.grossBeforeDiscount}</dt><dd>{savedMoney(item.taxSnapshot?.lineTotalCents)}</dd></div>
+              <div><dt>{labels.discount}</dt><dd>{savedMoney(item.taxSnapshot?.discountCents)}</dd></div>
+              <div><dt>{labels.grossAfterDiscount}</dt><dd>{savedMoney(item.taxSnapshot?.discountedLineTotalCents)}</dd></div>
+              <div><dt>{labels.netAmount}</dt><dd>{savedMoney(orderItemNetCents(item))}</dd></div>
+              <div><dt>{labels.taxIncluded}</dt><dd>{formatMoney(item.taxCents)}</dd></div>
+            </dl>
+          </section>
+        ))}
+        <section>
+          <h3><Truck size={17} />{labels.shipping}</h3>
+          <dl>
+            <div><dt>{labels.grossAmount}</dt><dd>{formatMoney(order.shippingCents)}</dd></div>
+            <div><dt>{labels.taxIncluded}</dt><dd>{order.shippingTaxCents === null ? labels.shippingTaxMissing : formatMoney(order.shippingTaxCents)}</dd></div>
+            <div><dt>{labels.netAmount}</dt><dd>{savedMoney(order.shippingTaxSnapshot?.shippingNetCents)}</dd></div>
+          </dl>
+          {order.shippingTaxSnapshot ? (
+            <>
+              <h4>{labels.shippingTaxBreakdown}</h4>
+              {order.shippingTaxSnapshot.breakdown.map((part) => (
+                <dl key={part.vatRate}>
+                  <div><dt>{labels.vatRate}</dt><dd>{formatRate(part.vatRate)}</dd></div>
+                  <div><dt>{labels.grossAmount}</dt><dd>{formatMoney(part.shippingGrossCents)}</dd></div>
+                  <div><dt>{labels.taxIncluded}</dt><dd>{formatMoney(part.shippingTaxCents)}</dd></div>
+                  <div><dt>{labels.netAmount}</dt><dd>{formatMoney(part.shippingNetCents)}</dd></div>
+                </dl>
+              ))}
+            </>
+          ) : <p>{labels.shippingTaxMissing}</p>}
+        </section>
+      </div>
+      <h4>{labels.taxTotalsByRate}</h4>
+      {groups ? (
+        <div className="admin-order-finance-grid">
+          {groups.map((group) => (
+            <section key={group.vatRate} aria-label={`${labels.vatRate} ${formatRate(group.vatRate)}`}>
+              <h3>{formatRate(group.vatRate)}</h3>
+              <dl>
+                <div><dt>{labels.netAmount}</dt><dd>{formatMoney(group.netCents)}</dd></div>
+                <div><dt>{labels.taxIncluded}</dt><dd>{formatMoney(group.taxCents)}</dd></div>
+                <div><dt>{labels.grossAmount}</dt><dd>{formatMoney(group.grossCents)}</dd></div>
+              </dl>
+            </section>
+          ))}
+        </div>
+      ) : <p>{labels.taxTotalsIncomplete}</p>}
+    </section>
   );
 }
 

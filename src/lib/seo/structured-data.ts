@@ -1,6 +1,7 @@
 import { absoluteUrl, siteConfig } from "@/lib/seo/site";
 import type { Guide } from "@/lib/content/guides";
 import type { CatalogProduct } from "@/types/catalog";
+import { companyDetails } from "@/lib/content/company";
 
 export type JsonLdValue = Record<string, unknown> | Record<string, unknown>[];
 
@@ -9,6 +10,24 @@ export function organizationSchema(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteConfig.name,
+    legalName: companyDetails.fullName,
+    alternateName: companyDetails.shortName,
+    taxID: companyDetails.taxNumber,
+    vatID: companyDetails.vatNumber,
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "Matična številka",
+      value: companyDetails.registrationNumber,
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: companyDetails.registeredOffice.streetAddress,
+      postalCode: companyDetails.registeredOffice.postalCode,
+      addressLocality: companyDetails.registeredOffice.addressLocality,
+      addressCountry: companyDetails.registeredOffice.addressCountry,
+    },
+    email: companyDetails.email,
+    telephone: companyDetails.phone,
     url: siteConfig.url,
     logo: absoluteUrl("/brand/bistrava-logo-web.png"),
   };

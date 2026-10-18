@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("local administration preview exposes the catalog workflow", async ({ page }, testInfo) => {
+test("local administration exposes the catalog without inventing connected sales data", async ({ page }, testInfo) => {
   const browserErrors: string[] = [];
   page.on("console", (message) => {
     if (message.type() === "error") browserErrors.push(message.text());
@@ -8,9 +8,9 @@ test("local administration preview exposes the catalog workflow", async ({ page 
   page.on("pageerror", (error) => browserErrors.push(error.message));
 
   await page.goto("/admin");
-  await expect(page.getByRole("heading", { level: 1, name: "Nadzorna plošča" })).toBeVisible();
-  await expect(page.getByText("Lokalni predogled administracije")).toBeVisible();
-  await expect(page.getByText("24", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: "Podatkov nadzorne plošče ni mogoče naložiti" })).toBeVisible();
+  await expect(page.getByText("Lokalni predogled", { exact: true })).toBeVisible();
+  await expect(page.locator(".admin-stat-card")).toHaveCount(0);
   await expect(page.getByRole("complementary", { name: "Nastavitve zasebnosti" })).toHaveCount(0);
   await expect(page.locator("[data-nextjs-dialog]")).toHaveCount(0);
   expect(
@@ -18,13 +18,19 @@ test("local administration preview exposes the catalog workflow", async ({ page 
       () => document.documentElement.scrollWidth <= window.innerWidth + 1,
     ),
   ).toBe(true);
+  // Wait for client hydration through an observable interaction before taking
+  // the first screenshot and navigating a freshly compiled development route.
+  await page.getByRole("button", { name: "Preklopite skrbniško okolje v francoščino" }).click();
+  await expect(page.getByRole("button", { name: "Passer l’administration en slovène" })).toBeVisible();
+  await page.getByRole("button", { name: "Passer l’administration en slovène" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "Podatkov nadzorne plošče ni mogoče naložiti" })).toBeVisible();
   await page.screenshot({
     path: `test-results/admin-dashboard-${testInfo.project.name}.png`,
     fullPage: true,
   });
 
-  await page.getByRole("link", { name: "Odprite izdelke" }).click();
-  await expect(page).toHaveURL(/\/admin\/izdelki$/);
+  await page.getByRole("navigation", { name: "Skrbniška navigacija" }).getByRole("link", { name: "Izdelki", exact: true }).click();
+  await expect(page).toHaveURL(/\/admin\/izdelki$/, { timeout: 15_000 });
   await expect(page.getByRole("heading", { level: 1, name: "Izdelki" })).toBeVisible();
   await expect(page.locator(".admin-product-row")).toHaveCount(24);
   await expect(page.getByRole("complementary", { name: "Nastavitve zasebnosti" })).toHaveCount(0);
@@ -53,9 +59,9 @@ test("local administration preview exposes the catalog workflow", async ({ page 
   await expect(page.getByRole("link", { name: "Tableau de bord" })).toBeVisible();
 
   await page.getByRole("link", { name: "Tableau de bord" }).click();
-  await expect(page.getByRole("heading", { level: 1, name: "Tableau de bord" })).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: "Le tableau de bord ne peut pas charger les données" })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole("heading", { level: 1, name: "Tableau de bord" })).toBeVisible();
+  await expect(page.getByRole("alert").filter({ hasText: "Le tableau de bord ne peut pas charger les données" })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Passer l’administration en slovène" }),
   ).toBeVisible();
@@ -67,7 +73,7 @@ test("local administration preview exposes the catalog workflow", async ({ page 
   expect(browserErrors).toEqual([]);
 });
 
-test("every product opens in a complete local editor", async ({ page }, testInfo) => {
+test("the local product editor stays read-only without an administrator session", async ({ page }, testInfo) => {
   const browserErrors: string[] = [];
   page.on("console", (message) => {
     if (message.type() === "error") browserErrors.push(message.text());
@@ -78,34 +84,30 @@ test("every product opens in a complete local editor", async ({ page }, testInfo
   await expect(page.getByText("Urejanje izdelka", { exact: true })).toBeVisible();
   await expect(page.getByRole("tab")).toHaveCount(5);
 
-  await page.getByRole("tab", { name: "Prodaja" }).click();
-  await page.locator('input[name="priceEuros"]').fill("19,90");
-  await page.getByRole("tab", { name: "SEO" }).click();
-  await page.locator('textarea[name="tags"]').fill("meritev, trdota vode, test");
-  await page.getByRole("button", { name: "Shrani izdelek" }).click();
-  await expect(page.getByText("Lokalni osnutek je shranjen v tem brskalniku.")).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Prodaja" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Shrani izdelek" })).toBeDisabled();
+  await expect(page.locator("fieldset[disabled]")).toHaveCount(1);
 
   await page.reload();
-  await page.getByRole("tab", { name: "Prodaja" }).click();
-  await expect(page.locator('input[name="priceEuros"]')).toHaveValue("19,90");
+  await expect(page.getByRole("button", { name: "Shrani izdelek" })).toBeDisabled();
+  // Wait for hydration through an actual interaction before screenshot caret styling.
+  await page.getByRole("button", { name: "Preklopite skrbniško okolje v francoščino" }).click();
+  await expect(page.getByRole("button", { name: "Passer l’administration en slovène" })).toBeVisible();
   await page.screenshot({
     path: `test-results/admin-product-editor-${testInfo.project.name}.png`,
     fullPage: true,
   });
-  await page.getByRole("button", { name: "Ponastavi" }).click();
-  await expect(page.locator('input[name="priceEuros"]')).toHaveValue("");
 
   expect(browserErrors).toEqual([]);
 });
 
-test("all administration sections are active", async ({ page }) => {
+test("administration sections expose their local or disconnected state", async ({ page }) => {
   const sections = [
     ["/admin/narocila", "Naročila"],
-    ["/admin/zaloga", "Zaloga"],
-    ["/admin/povprasevanja", "Povpraševanja"],
-    ["/admin/vodici", "Vodiči"],
-    ["/admin/e-posta", "E-pošta"],
-    ["/admin/analitika", "Analitika"],
+    ["/admin/zaloga", "Zaloga in premiki"],
+    ["/admin/povprasevanja", "Sporočila kupcev"],
+    ["/admin/vodici", "Vodniki in nasveti"],
+    ["/admin/e-posta", "Prejeta pošta"],
     ["/admin/nastavitve", "Nastavitve"],
   ] as const;
 
@@ -115,6 +117,10 @@ test("all administration sections are active", async ({ page }) => {
     await expect(page.getByText("Kmalu", { exact: true })).toHaveCount(0);
     await expect(page.locator("[data-nextjs-dialog]")).toHaveCount(0);
   }
+
+  await page.goto("/admin/analitika");
+  await expect(page.getByRole("alert").filter({ hasText: "Podatkov nadzorne plošče ni mogoče naložiti" })).toBeVisible();
+  await expect(page.locator(".ops-chart")).toHaveCount(0);
 });
 
 test("orders expose complete order and customer records", async ({ page }, testInfo) => {

@@ -1,0 +1,34 @@
+# Review this paid service before applying the Blueprint. No service is created by this file.
+services:
+  - type: web
+    name: bistrava
+    runtime: docker
+    region: frankfurt
+    plan: 0.5c-512mb
+    numInstances: 1
+    autoDeployTrigger: "off"
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    maxShutdownDelaySeconds: 60
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: LWS_MAIL_PASSWORD
+        sync: false
+      - key: RATE_LIMIT_SALT
+        generateValue: true
+      - key: CHECKOUT_MODE
+        value: bank_transfer
+      - key: CHECKOUT_ORDERING_ENABLED
+        value: "false"
+      - key: ROBOTS_INDEXING_ENABLED
+        value: "false"

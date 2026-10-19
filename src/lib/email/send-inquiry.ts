@@ -1,10 +1,13 @@
 import "server-only";
 
 import { Resend } from "resend";
+import { render } from "react-email";
+import type { ReactElement } from "react";
 import { z } from "zod";
 import { createHash, randomUUID } from "node:crypto";
 
 import InquiryReceivedEmail from "@/emails/inquiry-received";
+import InquiryNotificationEmail from "@/emails/inquiry-notification";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { emailRecipientSchema } from "@/lib/validation/email";
 import { cleanMailHeader } from "./mailbox-types";
@@ -42,7 +45,7 @@ const inquiryNotificationSchema = z.object({
   phone: z.string().max(40).nullable(), message: z.string().trim().min(1).max(4000),
 });
 
-type MailNotice = { to: string; replyTo: string; subject: string; text: string; key: string; emailType: string };
+type MailNotice = { to: string; replyTo: string; subject: string; text: string; react: ReactElement; key: string; emailType: string };
 
 async function sendLwsNotice(db: NonNullable<ReturnType<typeof createAdminClient>>, notice: MailNotice) {
   const recipientHash = createHash("sha256").update(notice.to).digest("hex");
@@ -51,6 +54,7 @@ async function sendLwsNotice(db: NonNullable<ReturnType<typeof createAdminClient
   let transport: ReturnType<typeof smtpTransport> | undefined;
   let reserved = false;
   try {
+    const html = await render(notice.react);
     const reservation = await db.from("email_events").insert({
       id: eventId, email_type: notice.emailType, recipient_hash: recipientHash,
       idempotency_key: notice.key, status: "queued", provider_message_id: messageId,
@@ -70,7 +74,7 @@ async function sendLwsNotice(db: NonNullable<ReturnType<typeof createAdminClient
     transport = smtpTransport();
     const sent = await transport.sendMail({
       from: { name: "Bistrava", address: mailboxAddress }, to: notice.to, replyTo: notice.replyTo,
-      subject: notice.subject, text: notice.text, messageId,
+      subject: notice.subject, text: notice.text, html, messageId,
     });
     const accepted = sent.accepted.length > 0;
     const saved = await db.from("email_events").update({
@@ -103,6 +107,7 @@ async function sendLwsInquiryNotifications(input: InquiryNotification) {
     key: `inquiry-ack-${data.requestId}`, emailType: "inquiry_acknowledgement",
     to: data.email, replyTo: mailboxAddress,
     subject: `Bistrava - kopija povpraševanja ${data.requestId}`,
+    react: InquiryReceivedEmail({ name: data.name, requestId: data.requestId, message: data.message }),
     text: [
       `Pozdravljeni, ${data.name}.`, "", `Vaše povpraševanje ${data.requestId} je varno shranjeno.`,
       "", "Kopija vašega sporočila:", data.message, "", "Za pomoč odgovorite na to sporočilo.",
@@ -113,6 +118,7 @@ async function sendLwsInquiryNotifications(input: InquiryNotification) {
     key: `inquiry-internal-${data.requestId}`, emailType: "inquiry_internal",
     to: mailboxAddress, replyTo: data.email,
     subject: cleanMailHeader(`Novo povpraševanje Bistrava - ${data.type}`),
+    react: InquiryNotificationEmail(data),
     text: [
       `Referenca: ${data.requestId}`, `Vrsta: ${data.type}`, `Ime: ${data.name}`,
       `E-pošta: ${data.email}`, `Telefon: ${data.phone || "ni naveden"}`, "", data.message,
@@ -155,6 +161,7 @@ export async function sendInquiryNotifications(input: InquiryNotification) {
         to: [config.internalTo],
         replyTo: input.email,
         subject: `Novo povpraševanje Bistrava - ${input.type}`,
+        react: InquiryNotificationEmail(input),
         text: [
           `Referenca: ${input.requestId}`,
           `Vrsta: ${input.type}`,

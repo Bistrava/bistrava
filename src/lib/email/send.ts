@@ -1,6 +1,7 @@
 import "server-only";
 
 import { Resend } from "resend";
+import { render } from "react-email";
 import { z } from "zod";
 import { createHash, randomUUID } from 'node:crypto';
 import { mailboxAddress, mailboxConfigured, smtpTransport } from './mailbox';
@@ -40,6 +41,7 @@ export async function sendOrderConfirmation(input: {
   if (data.bankTransfer && mailboxConfigured()) {
     const db=createAdminClient();
     if (!db) return {ok:false as const,reason:'not_configured' as const};
+    const html = await render(OrderConfirmationEmail(data));
     const bank=data.bankTransfer;
     const eventId=randomUUID();
     const messageId=`<${eventId}@bistrava.com>`;
@@ -61,7 +63,7 @@ export async function sendOrderConfirmation(input: {
     const transport=smtpTransport();
     try {
       const sent=await transport.sendMail({from:{name:'Bistrava',address:mailboxAddress},to,replyTo:mailboxAddress,
-        subject:`Bistrava — navodila za plačilo ${data.orderReference}`,text,messageId});
+        subject:`Bistrava — navodila za plačilo ${data.orderReference}`,text,html,messageId});
       const ok=sent.accepted.length>0;
       await db.from('email_events').update({status:ok?'sent':'failed',error_code:ok?null:'smtp_rejected',occurred_at:new Date().toISOString()}).eq('id',eventId);
       return {ok,providerMessageId:messageId};

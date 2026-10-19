@@ -29,6 +29,6 @@ services:
       - key: CHECKOUT_MODE
         value: bank_transfer
       - key: CHECKOUT_ORDERING_ENABLED
-        value: "false"
+        value: "true"
       - key: ROBOTS_INDEXING_ENABLED
         value: "false"

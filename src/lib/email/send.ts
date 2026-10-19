@@ -55,7 +55,8 @@ export async function sendOrderConfirmation(input: {
       'NAVODILA ZA BANČNO NAKAZILO',`Prejemnik: ${bank.beneficiary}`,`IBAN: ${bank.iban}`,`Banka: ${bank.bankName}`,
       ...(bank.bic?[`BIC / SWIFT: ${bank.bic}`]:[]),'Valuta: EUR',`Namen / referenca: ${data.orderReference}`,'',
       'Nakazilo izvedite v svoji spletni ali mobilni banki. V namen plačila vpišite zgornjo referenco naročila.',
-      'Naročilo začnemo pripravljati po potrjenem prejemu plačila. Če ste že plačali, ne nakazujte ponovno.',
+      `Po opravljenem nakazilu odgovorite na to e-sporočilo ali pišite na ${mailboxAddress} ter priložite potrdilo o nakazilu in navedite referenco ${data.orderReference}, da pospešimo obdelavo naročila.`,
+      'Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu. Prejem sredstev preverimo ločeno. Če ste že plačali, ne nakazujte ponovno.',
       `Za pomoč odgovorite na to sporočilo ali pišite na ${mailboxAddress}.`].join('\n');
     const transport=smtpTransport();
     try {

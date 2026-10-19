@@ -54,6 +54,12 @@ describe("private accounting read model", () => {
       items: [{ taxSnapshot: { vatRate: 9.5, lineTotalCents: 1000, discountCents: null, discountedLineTotalCents: null } }] });
   });
 
+  it('maps proof receipt separately from payment and fulfillment status', async () => {
+    mocks.rows = [{ ...orderRow, status: 'awaiting_payment', transfer_proof_received_at: '2026-10-19T12:00:00Z', transfer_proof_reference: 'Email BIS-TEST-ACCOUNTING' }];
+    const { orders } = await getAdminCommerceData();
+    expect(orders[0]).toMatchObject({ status: 'awaiting_payment', transferProofReceivedAt: '2026-10-19T12:00:00Z', transferProofReference: 'Email BIS-TEST-ACCOUNTING', completedAt: null, payment: null });
+  });
+
   it.each(["unauthenticated", "forbidden"])("does not read accounting data when access is %s", async (status) => {
     mocks.access.mockResolvedValue({ status });
     expect(await getAdminCommerceData()).toEqual({ source: "unavailable", orders: [], profiles: [] });

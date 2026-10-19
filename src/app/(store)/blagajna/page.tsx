@@ -32,7 +32,7 @@ export default async function CheckoutPage() {
       </section>
       <section className="section checkout-page">
         <div className="container">
-          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={checkoutConfig.bankTransfer} paymentSettingsVersion={checkoutConfig.version} />
+          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={Boolean(checkoutConfig.bankTransfer)} paymentSettingsVersion={checkoutConfig.version} />
         </div>
       </section>
     </>

@@ -96,6 +96,8 @@ export type AdminOrder = {
   updatedAt: string;
   cancelledAt: string | null;
   completedAt: string | null;
+  transferProofReceivedAt: string | null;
+  transferProofReference: string | null;
   items: AdminOrderItem[];
   payment: AdminPaymentSummary | null;
   shipment: AdminShipmentSummary | null;
@@ -152,6 +154,8 @@ export const previewOrders: AdminOrder[] = [
     updatedAt: "2026-09-13T14:10:00.000Z",
     cancelledAt: null,
     completedAt: null,
+    transferProofReceivedAt: null,
+    transferProofReference: null,
     items: [
       { id: "preview-item-1", productName: "Aquaphor S550 P1", variantName: "Standardna izvedba", sku: "BIS-016", quantity: 1, unitPriceCents: 119900, taxCents: 21621, lineTotalCents: 119900, taxSnapshot: null },
     ],
@@ -183,6 +187,8 @@ export const previewOrders: AdminOrder[] = [
     updatedAt: "2026-09-12T16:18:00.000Z",
     cancelledAt: null,
     completedAt: null,
+    transferProofReceivedAt: null,
+    transferProofReference: null,
     items: [
       { id: "preview-item-2", productName: "Tabletirana sol za mehčalne naprave 25 kg", variantName: "25 kg", sku: "BIS-030", quantity: 2, unitPriceCents: 2240, taxCents: 808, lineTotalCents: 4480, taxSnapshot: null },
     ],
@@ -214,6 +220,8 @@ export const previewOrders: AdminOrder[] = [
     updatedAt: "2026-08-29T15:12:00.000Z",
     cancelledAt: null,
     completedAt: "2026-08-29T15:12:00.000Z",
+    transferProofReceivedAt: null,
+    transferProofReference: null,
     items: [
       { id: "preview-item-3", productName: "Kapljice za merjenje trdote vode °frH", variantName: "Standardni komplet", sku: "BIS-008", quantity: 1, unitPriceCents: 2990, taxCents: 539, lineTotalCents: 2990, taxSnapshot: null },
     ],
@@ -254,6 +262,8 @@ export const previewOrders: AdminOrder[] = [
     updatedAt: "2026-08-21T09:06:00.000Z",
     cancelledAt: "2026-08-21T09:06:00.000Z",
     completedAt: null,
+    transferProofReceivedAt: null,
+    transferProofReference: null,
     items: [
       { id: "preview-item-4", productName: "Testni lističi za trdoto vode", variantName: "Standardni komplet", sku: "BIS-086", quantity: 1, unitPriceCents: 1890, taxCents: 341, lineTotalCents: 1890, taxSnapshot: { vatRate: 22, lineTotalCents: 1890, discountCents: 0, discountedLineTotalCents: 1890 } },
     ],

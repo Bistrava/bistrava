@@ -18,8 +18,6 @@ import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
 import { getEligibleShippingRates, type ShippingRate } from "@/lib/commerce/shipping-rates";
 import type { CheckoutQuoteState } from "@/lib/validation/checkout";
-import type { BankTransferDetails } from '@/lib/payments/bank-transfer';
-import { BankTransferInstructions } from './bank-transfer-instructions';
 
 function FieldError({ errors }: { errors?: string[] }) {
   return errors?.[0] ? <span className="field-error">{errors[0]}</span> : null;
@@ -29,13 +27,13 @@ export function CheckoutForm({
   rates,
   orderingEnabled,
   catalog,
-  bankTransfer,
+  bankTransfer = false,
   paymentSettingsVersion = 'env',
 }: {
   rates: ShippingRate[];
   orderingEnabled: boolean;
   catalog: CartCatalogSnapshot;
-  bankTransfer?: BankTransferDetails | null;
+  bankTransfer?: boolean;
   paymentSettingsVersion?: string;
 }) {
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
@@ -131,15 +129,6 @@ export function CheckoutForm({
           </div>
         ) : null}
         <CartReviewNotice changes={changes} onAcknowledge={catalogCurrent ? acknowledgeChanges : undefined} />
-        {!orderingEnabled ? (
-          <div className="notice checkout-configuration-notice" role="status">
-            <LockKeyhole aria-hidden="true" />
-            <div>
-              <strong>Sprejem naročil še ni aktiviran</strong>
-              <p>Odpiranje spletnih naročil je v pripravi. Pred oddajo naročil mora Bistrava dokončno potrditi plačila in pogoje prodaje.</p>
-            </div>
-          </div>
-        ) : null}
 
         <section className="checkout-section card" aria-labelledby="contact-heading">
           <p className="section-kicker">1. Kontakt</p>
@@ -227,8 +216,8 @@ export function CheckoutForm({
 
         {bankTransfer ? <section className="checkout-section card" aria-labelledby="payment-heading">
           <p className="section-kicker">3. Plačilo</p><h2 id="payment-heading">Bančno nakazilo</h2>
-          <p>Naročilo plačate z nakazilom iz svoje banke. Podatki za nakazilo bodo prikazani tudi po oddaji naročila in v potrditvenem e-sporočilu. Plačilo ni izvedeno samodejno.</p>
-          <BankTransferInstructions bank={bankTransfer}/>
+          <p>Po potrditvi naročila boste samodejno prejeli e-sporočilo z bančnimi podatki, točnim zneskom in referenco za nakazilo.</p>
+          <p>Po opravljenem nakazilu odgovorite na to e-sporočilo in priložite potrdilo o nakazilu, da pospešimo obdelavo. Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu.</p>
         </section>:null}
         <section className="checkout-section card" aria-labelledby="confirmation-heading">
           <p className="section-kicker">{bankTransfer?'4. Potrditev':'3. Potrditev'}</p>
@@ -260,7 +249,7 @@ export function CheckoutForm({
             <CheckCircle2 aria-hidden="true" size={20} />
             {pending ? "Oddajanje …" : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
           </button>
-          <small>{bankTransfer?'Po oddaji boste prejeli navodila za nakazilo. Naročilo ostane v čakanju do prejema plačila.':'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
+          <small>{!orderingEnabled ? 'Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.' : bankTransfer ? 'Bančne podatke prejmete po e-pošti. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila o nakazilu.' : 'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
         </section>
       </div>
 

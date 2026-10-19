@@ -25,8 +25,8 @@ export default function OrderConfirmationEmail({
     >
       <Text style={styles.text}>Pozdravljeni, {customerName}.</Text>
       <Text style={styles.text}>
-        Naročilo <strong>{orderReference}</strong> smo prejeli. Ko bo plačilo
-        varno potrjeno in naročilo pripravljeno, boste prejeli novo sporočilo.
+        Naročilo <strong>{orderReference}</strong> smo prejeli.{" "}
+        {bankTransfer ? 'Spodaj so bančni podatki in navodila za dokončno potrditev naročila.' : 'Ko bo plačilo varno potrjeno in naročilo pripravljeno, boste prejeli novo sporočilo.'}
       </Text>
 
       <Section style={styles.orderBox}>
@@ -48,14 +48,14 @@ export default function OrderConfirmationEmail({
       {bankTransfer?<Section style={styles.orderBox}><Text style={styles.totalLabel}>Plačilo z bančnim nakazilom</Text>
         <Text style={styles.text}>Naročilo še ni plačano. V svoji banki nakažite {formatMoney(totalCents)} na naslednji račun:</Text>
         <Text style={styles.text}>Prejemnik: {bankTransfer.beneficiary}<br/>IBAN: {bankTransfer.iban}<br/>Banka: {bankTransfer.bankName}<br/>{bankTransfer.bic?<>BIC / SWIFT: {bankTransfer.bic}<br/></>:null}Valuta: EUR<br/>Namen / referenca: <strong>{orderReference}</strong></Text>
-        <Text style={styles.text}>V namen nakazila vpišite referenco naročila. Naročilo začnemo pripravljati po potrjenem prejemu plačila. Če ste že plačali, ne nakazujte ponovno.</Text>
+        <Text style={styles.text}>V namen nakazila vpišite referenco naročila. Po opravljenem nakazilu odgovorite na to e-sporočilo, priložite potrdilo o nakazilu in navedite referenco <strong>{orderReference}</strong>, da pospešimo obdelavo naročila.</Text>
+        <Text style={styles.text}>Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu. Prejem sredstev preverimo ločeno. Če ste že plačali, ne nakazujte ponovno.</Text>
       </Section>:null}
       {!bankTransfer?<Button href={orderUrl} style={styles.button}>
         Oglejte si naročilo
       </Button>:null}
       <Text style={styles.smallText}>
-        Če naročila niste oddali vi, odgovorite na to sporočilo. Ne pošiljajte
-        plačilnih podatkov po e-pošti.
+        Če naročila niste oddali vi, odgovorite na to sporočilo.
       </Text>
     </EmailLayout>
   );

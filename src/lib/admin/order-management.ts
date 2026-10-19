@@ -27,6 +27,13 @@ export function shipmentStatusesForOrder(status: AdminOrderStatus): string[] {
 }
 
 const shortText = (length: number) => z.string().trim().max(length);
+export const transferProofSchema = z.object({
+  orderId: z.string().uuid(),
+  expectedUpdatedAt: z.string().datetime({ offset: true }),
+  proofReference: shortText(200).min(3),
+  proofReceived: z.literal('on'),
+});
+
 export const orderManagementSchema = z.object({
   orderId: z.string().uuid(),
   expectedUpdatedAt: z.string().datetime({ offset: true }),

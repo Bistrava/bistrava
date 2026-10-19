@@ -58,6 +58,11 @@ async function placeOrder(page: Page, clients: LocalClients, suffix: string) {
   await page.goto("/blagajna");
   const form = page.locator("form.checkout-layout");
   await expect(form).toBeVisible();
+  await expect(page.getByText('Sprejem naročil še ni aktiviran')).toHaveCount(0);
+  await expect(page.getByRole('region', { name: 'Podatki za bančno nakazilo' })).toHaveCount(0);
+  expect(await page.content()).not.toContain(fixture.bank.iban);
+  expect(await page.content()).not.toContain(fixture.bank.beneficiary);
+  await expect(form.getByText(/Po potrditvi naročila boste samodejno prejeli e-sporočilo/)).toBeVisible();
   for (const [name, value] of Object.entries({
     firstName: "Local", lastName: `Test ${suffix}`, email: `checkout-${suffix.toLowerCase()}@example.test`,
     phone: "+38640000000", addressLine1: "Synthetic street 1", postalCode: "1000", city: "Ljubljana",
@@ -74,11 +79,9 @@ async function placeOrder(page: Page, clients: LocalClients, suffix: string) {
   await expect(page).toHaveURL(/\/narocilo\/BIS-[A-Z0-9-]+$/);
   const reference = new URL(page.url()).pathname.split("/").at(-1)!;
   const instructions = page.getByRole("region", { name: "Podatki za bančno nakazilo" });
-  await expect(instructions).toBeVisible();
-  await expect(instructions).toContainText(fixture.bank.beneficiary);
-  await expect(instructions).toContainText("GB82 WEST 1234 5698 7654 32");
-  await expect(instructions).toContainText("16,70");
-  await expect(instructions).toContainText(reference);
+  await expect(instructions).toHaveCount(0);
+  expect(await page.content()).not.toContain(fixture.bank.iban);
+  await expect(page.getByText(/Bančne podatke, točen znesek in referenco za nakazilo prejmete v samodejnem e-sporočilu/)).toBeVisible();
   const saved = await orderBy(clients, "reference", reference);
   expect(saved.status).toBe("awaiting_payment");
   expect(saved).toMatchObject({
@@ -211,6 +214,15 @@ test.describe("connected checkout on disposable local Supabase", () => {
       const second = await placeOrder(page, clients, "B");
       expect(second.id).not.toBe(first.id);
       expect(await stock(clients)).toBe(2);
+      await adminPage.goto(`/admin/narocila?order=${second.id}`);
+      const proofForm = adminPage.locator('form.admin-transfer-proof');
+      await proofForm.locator('input[name="proofReference"]').fill('E2E-LOCAL-PROOF-B');
+      await proofForm.locator('input[name="proofReceived"]').check();
+      await proofForm.getByRole('button', { name: 'Potrdi prejem in naročilo', exact: true }).click();
+      await expect.poll(async () => (await oneRow(clients, 'orders', 'id', second.id)).transfer_proof_reference).toBe('E2E-LOCAL-PROOF-B');
+      expect(await oneRow(clients, 'payments', 'order_id', second.id)).toMatchObject({ status: 'pending', paid_at: null });
+      await page.goto(`/narocilo/${second.reference}`);
+      await expect(page.locator('.order-success-hero .section-kicker')).toHaveText('Naročilo dokončno potrjeno');
       await saveOrder(adminPage, clients, second, "paid");
       const payment = await oneRow(clients, "payments", "order_id", second.id);
       expect(payment).toMatchObject({ provider: "bank_transfer", status: "paid", provider_reference: "E2E-LOCAL-RECEIPT-B", amount_cents: fixture.totalCents });

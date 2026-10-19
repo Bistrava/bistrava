@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getAdminAccess } from "@/lib/auth/admin";
 import { createClient } from "@/lib/supabase/server";
-import { orderManagementSchema, shippingRateSchema, shippingZoneSchema, type AdminOrderActionState } from "@/lib/admin/order-management";
+import { orderManagementSchema, shippingRateSchema, shippingZoneSchema, transferProofSchema, type AdminOrderActionState } from "@/lib/admin/order-management";
 
 function result(form: FormData, status: "success" | "error", fr: string, sl: string): AdminOrderActionState {
   return { status, message: form.get("adminLocale") === "fr" ? fr : sl };
@@ -46,6 +46,22 @@ export async function saveAdminOrder(_previous: AdminOrderActionState, form: For
   }
   invalidateCommerce();
   return result(form, "success", "Commande et historique enregistrés.", "Naročilo in zgodovina sta shranjena.");
+}
+
+export async function confirmTransferProof(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {
+  const supabase = await adminClient();
+  if (!supabase) return result(form, "error", "Cette action nécessite une session administrateur valide.", "Za to dejanje potrebujete veljavno skrbniško sejo.");
+  const parsed = transferProofSchema.safeParse(Object.fromEntries(form));
+  if (!parsed.success) return result(form, "error", "Confirmez la réception du justificatif et indiquez sa référence.", "Potrdite prejem potrdila o nakazilu in vnesite njegovo referenco.");
+  const { error } = await supabase.rpc('admin_confirm_transfer_proof', {
+    input_order_id: parsed.data.orderId,
+    input_expected_updated_at: parsed.data.expectedUpdatedAt,
+    input_proof_reference: parsed.data.proofReference,
+  });
+  if (error) return result(form, "error", error.message.includes('order_conflict') ? "La commande a changé. Actualisez la page puis recommencez." : "Impossible d’enregistrer la preuve de virement. Vérifiez la commande et la connexion.", error.message.includes('order_conflict') ? "Naročilo se je spremenilo. Osvežite stran in poskusite znova." : "Potrdila o nakazilu ni mogoče shraniti. Preverite naročilo in povezavo.");
+  invalidateCommerce();
+  revalidatePath('/narocilo/[reference]', 'page');
+  return result(form, "success", "Preuve de virement reçue : la commande est finalisée. L’encaissement reste à vérifier séparément.", "Potrdilo o nakazilu je prejeto: naročilo je dokončno potrjeno. Prejem sredstev se preveri ločeno.");
 }
 
 export async function saveAdminShippingZone(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {

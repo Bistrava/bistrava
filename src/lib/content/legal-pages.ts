@@ -57,7 +57,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
           `Registrski organ: ${companyDetails.registrationAuthority}; datum vpisa: ${companyDetails.registrationDateSl}`,
           `Zakoniti zastopnik: ${companyDetails.legalRepresentative}`,
           `E-pošta: ${companyDetails.email}; telefon: ${companyDetails.phone}`,
-          "Podatki za bančno nakazilo so prikazani ob naročilu in v navodilih za plačilo.",
+          "Podatke za bančno nakazilo prejmete po e-pošti po potrditvi naročila.",
         ],
       },
       {
@@ -216,7 +216,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         ],
         items: [
           "bančno nakazilo v EUR, kadar je omogočeno na blagajni,",
-          "podatki prejemnika in računa so prikazani pred oddajo ter v navodilih po oddaji naročila,",
+            "podatke prejemnika in računa samodejno pošljemo po e-pošti po potrditvi naročila,",
           "plačilo s kartico in plačilo po povzetju trenutno nista na voljo.",
         ],
       },
@@ -231,8 +231,8 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "predracun",
         title: "Kako plačati z bančnim nakazilom",
         paragraphs: [
-          "Po oddaji naročila so na potrditveni strani prikazani ime prejemnika, IBAN, banka, BIC/SWIFT, kadar je naveden, točen znesek in referenca naročila. Navodila pošljemo tudi na e-poštni naslov naročila. Nakazilo opravite v svoji banki; oddaja naročila sama ne izvede plačila.",
-          "V namen nakazila vpišite referenco naročila. Naročilo ostane v čakanju do potrjenega prejema celotnega zneska. Če ste že plačali, nakazila ne ponavljajte; pri preverjanju navedite referenco naročila.",
+            "Po potrditvi naročila na e-poštni naslov naročila samodejno pošljemo ime prejemnika, IBAN, banko, BIC/SWIFT, kadar je naveden, točen znesek in referenco naročila. Bančni podatki niso prikazani na blagajni ali potrditveni strani. Nakazilo opravite v svoji banki; oddaja naročila sama ne izvede plačila.",
+            "V namen nakazila vpišite referenco naročila. Po opravljenem nakazilu odgovorite na prejeto e-sporočilo in priložite potrdilo o nakazilu z referenco naročila, da pospešimo obdelavo. Naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu. Prejem sredstev preverimo ločeno. Če ste že plačali, nakazila ne ponavljajte.",
           orderPreparationText,
           standardShippingText,
         ],

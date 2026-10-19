@@ -259,7 +259,8 @@ test("guest cart persists quantities and checkout stays commercially gated", asy
   // Direct navigation must not bypass the missing live price/stock verification.
   await page.goto("/blagajna");
   await expect(page.getByText("Cen in zaloge trenutno ni mogoče preveriti.")).toBeVisible();
-  await expect(page.getByText("Sprejem naročil še ni aktiviran")).toBeVisible();
+  await expect(page.getByText("Sprejem naročil še ni aktiviran")).toHaveCount(0);
+  await expect(page.getByText(/Oddaja naročila trenutno ni na voljo/)).toBeVisible();
   await expect(page.getByRole("button", { name: "Oddajte naročilo v pregled" })).toBeDisabled();
 });
 

@@ -44,5 +44,7 @@ describe("public seller information", () => {
     expect(privacy).not.toContain("prihodnji ponudnik plačil");
     expect(payments).toContain("1–2 delovnih dneh po potrjenem prejemu celotnega bančnega nakazila");
     expect(payments).toContain("dodatnih 1–3 delovnih dni po odpremi");
+    expect(payments).toContain("Bančni podatki niso prikazani na blagajni ali potrditveni strani");
+    expect(payments).toContain("dokončno potrjeno ob prejemu potrdila o nakazilu");
   });
 });

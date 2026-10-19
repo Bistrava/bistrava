@@ -4,7 +4,6 @@ import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
 
 import { createAdminClient } from "@/lib/supabase/admin";
-import { bankTransferSchema,type BankTransferDetails } from '@/lib/payments/bank-transfer';
 
 export type GuestOrder = {
   reference: string;
@@ -12,7 +11,8 @@ export type GuestOrder = {
   email: string;
   subtotalCents: number;
   discountCents: number;
-  bankTransfer: BankTransferDetails|null;
+  bankTransfer: boolean;
+  transferProofReceivedAt: string | null;
   shippingCents: number;
   totalCents: number;
   createdAt: string;
@@ -44,7 +44,7 @@ export async function getGuestOrder(reference: string): Promise<GuestOrder | nul
   const { data, error } = await supabase
     .from("orders")
     .select(
-      "reference,status,email,subtotal_cents,discount_cents,bank_transfer_snapshot,shipping_cents,total_cents,shipping_address_snapshot,created_at,order_items(product_name,sku,quantity,unit_price_cents,line_total_cents)",
+      "reference,status,email,subtotal_cents,discount_cents,checkout_mode,transfer_proof_received_at,shipping_cents,total_cents,shipping_address_snapshot,created_at,order_items(product_name,sku,quantity,unit_price_cents,line_total_cents)",
     )
     .eq("reference", reference)
     .eq("guest_access_token_hash", hashGuestOrderToken(token))
@@ -52,14 +52,14 @@ export async function getGuestOrder(reference: string): Promise<GuestOrder | nul
 
   if (error || !data) return null;
   const address = data.shipping_address_snapshot;
-  const bank=bankTransferSchema.safeParse(data.bank_transfer_snapshot);
   return {
     reference: String(data.reference),
     status: String(data.status),
     email: String(data.email),
     subtotalCents: Number(data.subtotal_cents),
     discountCents:Number(data.discount_cents),
-    bankTransfer:bank.success?bank.data:null,
+    bankTransfer: data.checkout_mode === 'bank_transfer',
+    transferProofReceivedAt: data.transfer_proof_received_at ?? null,
     shippingCents: Number(data.shipping_cents),
     totalCents: Number(data.total_cents),
     createdAt: String(data.created_at),

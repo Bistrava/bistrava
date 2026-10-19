@@ -5,7 +5,7 @@ declare
   cart jsonb:='[{"sku":"TEST-01","quantity":1}]';
   rate uuid:='20000000-0000-4000-8000-000000000001';
   customer jsonb:='{"firstName":"Test","lastName":"Only"}'; address jsonb:='{"countryCode":"SI","postalCode":"1000","city":"Ljubljana","addressLine1":"Test only"}';
-  key uuid:=gen_random_uuid(); first_order record; duplicate record; other record; quote jsonb; before_stock integer; admin_id uuid; rejected boolean; version timestamptz;
+  key uuid:=gen_random_uuid(); first_order record; duplicate record; other record; quote jsonb; before_stock integer; admin_id uuid; editor_id uuid; rejected boolean; version timestamptz; proof_time timestamptz;
 begin
   select profile_id into admin_id from public.admin_roles where active and role='admin' limit 1;
   select stock_quantity into before_stock from public.products where sku='TEST-01';
@@ -39,6 +39,53 @@ begin
   begin perform public.admin_save_order(first_order.order_id,version,'paid','',null,null);
   exception when others then if sqlerrm='payment_confirmation_required' then rejected:=true; else raise; end if; end;
   if not rejected then raise exception 'TEST paid without receipt reference'; end if;
+  -- Proof finalizes the customer's order independently of receiving funds.
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(first_order.order_id,version,' ');
+  exception when others then if sqlerrm='invalid_transfer_proof' then rejected:=true; else raise; end if; end;
+  if not rejected then raise exception 'TEST missing proof reference accepted'; end if;
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(first_order.order_id,'2000-01-01','EMAIL-LOCAL-PROOF');
+  exception when others then if sqlerrm='order_conflict' then rejected:=true; else raise; end if; end;
+  if not rejected then raise exception 'TEST stale proof confirmation accepted'; end if;
+  execute 'reset role';
+  select profile_id into editor_id from public.admin_roles where active and role='editor' limit 1;
+  perform set_config('request.jwt.claim.sub',editor_id::text,true);
+  execute 'set local role authenticated';
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(first_order.order_id,version,'EMAIL-EDITOR');
+  exception when others then if sqlerrm='admin_required' then rejected:=true; else raise; end if; end;
+  if not rejected then raise exception 'TEST editor may confirm proof'; end if;
+  execute 'reset role';
+  perform set_config('request.jwt.claim.sub','',true);
+  execute 'set local role authenticated';
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(first_order.order_id,version,'EMAIL-NO-SESSION');
+  exception when others then if sqlerrm='admin_required' then rejected:=true; else raise; end if; end;
+  if not rejected then raise exception 'TEST missing session may confirm proof'; end if;
+  execute 'reset role';
+  execute 'set local role anon';
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(first_order.order_id,version,'EMAIL-ANON');
+  exception when insufficient_privilege then rejected:=true; end;
+  if not rejected then raise exception 'TEST anonymous may confirm proof'; end if;
+  execute 'reset role';
+  perform set_config('request.jwt.claim.sub',admin_id::text,true);
+  execute 'set local role authenticated';
+  perform public.admin_confirm_transfer_proof(first_order.order_id,version,'EMAIL-LOCAL-PROOF');
+  perform public.admin_confirm_transfer_proof(first_order.order_id,version,'REPLAY-MUST-NOT-REPLACE');
+  execute 'reset role';
+  select transfer_proof_received_at into proof_time from public.orders where id=first_order.order_id;
+  if proof_time is null or not exists(select 1 from public.orders where id=first_order.order_id
+    and transfer_proof_reference='EMAIL-LOCAL-PROOF' and status='awaiting_payment' and completed_at is null)
+    then raise exception 'TEST proof must finalize independently of fulfillment'; end if;
+  if not exists(select 1 from public.payments where order_id=first_order.order_id and status='pending' and paid_at is null)
+    then raise exception 'TEST proof incorrectly marked funds as received'; end if;
+  if (select stock_quantity from public.products where sku='TEST-01')<>before_stock-1 then raise exception 'TEST proof changed reserved stock'; end if;
+  if (select count(*) from public.audit_logs where entity_id=first_order.order_id and action='order.transfer_proof_received'
+    and actor_id=admin_id and after_data->>'reference'='EMAIL-LOCAL-PROOF')<>1 then raise exception 'TEST proof audit missing or duplicated'; end if;
+  select updated_at into version from public.orders where id=first_order.order_id;
+  execute 'set local role authenticated';
   perform public.admin_save_order(first_order.order_id,version,'paid','',null,'LOCAL TEST RECEIPT');
   execute 'reset role';
   if not exists(select 1 from public.payments where order_id=first_order.order_id and status='paid' and provider_reference='LOCAL TEST RECEIPT') then raise exception 'TEST bank receipt confirmation'; end if;
@@ -48,6 +95,13 @@ begin
   perform public.admin_save_order(other.order_id,version,'cancelled','test cancellation',null,null);
   execute 'reset role';
   if (select stock_quantity from public.products where sku='TEST-01')<>before_stock-1 then raise exception 'TEST cancelled bank order stock'; end if;
+  select updated_at into version from public.orders where id=other.order_id;
+  execute 'set local role authenticated';
+  rejected:=false;
+  begin perform public.admin_confirm_transfer_proof(other.order_id,version,'CANCELLED-PROOF');
+  exception when others then if sqlerrm='transfer_proof_not_allowed' then rejected:=true; else raise; end if; end;
+  if not rejected then raise exception 'TEST cancelled order may be finalized'; end if;
+  execute 'reset role';
 end;
 $$;
 rollback;

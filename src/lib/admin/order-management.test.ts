@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { availableOrderStatuses, orderManagementSchema, shippingRateSchema, shippingZoneSchema, shipmentStatusesForOrder } from "@/lib/admin/order-management";
+import { availableOrderStatuses, orderManagementSchema, shippingRateSchema, shippingZoneSchema, shipmentStatusesForOrder, transferProofSchema } from "@/lib/admin/order-management";
 import { previewOrders } from "@/lib/admin/orders";
 
 const pendingOrder = { ...previewOrders[1], status: "pending" as const };
@@ -10,6 +10,13 @@ const form = {
 };
 
 describe("order management safety", () => {
+  it('requires explicit receipt of a proof and an identifiable email or document reference', () => {
+    const proof = { orderId: form.orderId, expectedUpdatedAt: form.expectedUpdatedAt, proofReference: 'Email BIS-TEST-123', proofReceived: 'on' };
+    expect(transferProofSchema.safeParse(proof).success).toBe(true);
+    expect(transferProofSchema.safeParse({ ...proof, proofReceived: undefined }).success).toBe(false);
+    expect(transferProofSchema.safeParse({ ...proof, proofReference: '  ' }).success).toBe(false);
+    expect(transferProofSchema.safeParse({ ...proof, expectedUpdatedAt: '' }).success).toBe(false);
+  });
   it("offers only the next fulfillment step and keeps terminal orders closed", () => {
     expect(availableOrderStatuses({ ...pendingOrder, status: "paid" })).toEqual(["paid", "processing"]);
     expect(availableOrderStatuses({ ...pendingOrder, status: "processing" })).toEqual(["processing", "shipped"]);

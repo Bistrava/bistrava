@@ -12,6 +12,9 @@ vi.mock('@/lib/supabase/admin', () => ({ createAdminClient: () => ({ from: () =>
   select: () => ({ eq: () => ({ maybeSingle: mocks.previous }) }),
 }) }) }));
 import { sendOrderConfirmation } from './send';
+import { renderToStaticMarkup } from 'react-dom/server';
+import OrderConfirmationEmail from '@/emails/order-confirmation';
+import { orderConfirmationEmailSchema } from '@/lib/validation/email';
 
 const input = {
   to: 'customer@example.com', idempotencyKey: 'order-confirmation:test',
@@ -30,8 +33,16 @@ it('includes the saved account, exact total and reference without claiming payme
   const mail = mocks.send.mock.calls[0][0];
   expect(mail.to).toBe(input.to);
   for (const value of ['EXAMPLE TEST ONLY', 'GB82WEST12345698765432', 'Example Bank', 'DEUTDEFF', '14,50', 'BIS-TEST-123', 'Plačilo še ni prejeto']) expect(mail.text).toContain(value);
+  expect(mail.replyTo).toBe('kontakt@bistrava.com');
+  expect(mail.text).toContain('priložite potrdilo o nakazilu');
+  expect(mail.text).toContain('dokončno potrjeno ob prejemu potrdila o nakazilu');
+  expect(mail.text).toContain('Prejem sredstev preverimo ločeno');
   expect(mocks.update).toHaveBeenCalledWith(expect.objectContaining({ status: 'sent' }));
   expect(mocks.close).toHaveBeenCalledOnce();
+});
+it('includes the proof and final confirmation instructions in the HTML fallback too', () => {
+  const html = renderToStaticMarkup(OrderConfirmationEmail(orderConfirmationEmailSchema.parse(input.data)));
+  for (const value of ['GB82WEST12345698765432', 'BIS-TEST-123', 'priložite potrdilo o nakazilu', 'dokončno potrjeno ob prejemu potrdila o nakazilu']) expect(html).toContain(value);
 });
 it('does not duplicate or retry an ambiguous previous SMTP delivery', async () => {
   mocks.insert.mockResolvedValue({ error: { code: '23505' } });

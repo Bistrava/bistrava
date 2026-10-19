@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { Save, Truck } from "lucide-react";
-import { saveAdminOrder } from "@/actions/admin-orders";
+import { confirmTransferProof, saveAdminOrder } from "@/actions/admin-orders";
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import { availableOrderStatuses, initialOrderActionState, shipmentStatusesForOrder } from "@/lib/admin/order-management";
 import type { AdminOrder, AdminOrderStatus } from "@/lib/admin/orders";
@@ -27,7 +27,9 @@ export function OrderManagementForm({ order, statusLabel, shipmentStatusLabel }:
     if (!statuses.includes(shipmentStatus)) setShipmentStatus(statuses[0] ?? "pending");
   }
 
-  return <form action={action} className="admin-order-edit">
+  return <>
+    {order.checkoutMode === 'bank_transfer' ? <TransferProofForm order={order} /> : null}
+    <form action={action} className="admin-order-edit">
     <input name="adminLocale" type="hidden" value={locale} />
     <input name="orderId" type="hidden" value={order.id} />
     <input name="expectedUpdatedAt" type="hidden" value={order.updatedAt} />
@@ -59,5 +61,30 @@ export function OrderManagementForm({ order, statusLabel, shipmentStatusLabel }:
       <button className="button button-primary" disabled={pending} type="submit"><Save size={17} aria-hidden="true" />{pending ? fr ? "Enregistrement…" : "Shranjevanje…" : fr ? "Enregistrer la commande" : "Shrani naročilo"}</button>
     </fieldset>
     {state.message ? <p aria-live="polite" className={`admin-operation-message is-${state.status}`} role={state.status === "error" ? "alert" : "status"}>{state.message}</p> : null}
+  </form></>;
+}
+
+function TransferProofForm({ order }: { order: AdminOrder }) {
+  const { locale } = useAdminLanguage();
+  const fr = locale === 'fr';
+  const [state, action, pending] = useActionState(confirmTransferProof, initialOrderActionState);
+  if (order.transferProofReceivedAt) return <section className="admin-order-confirmation" aria-label={fr ? 'Preuve de virement' : 'Potrdilo o nakazilu'}>
+    <h3>{['cancelled', 'refunded', 'partially_refunded'].includes(order.status) ? (fr ? 'Preuve de virement enregistrée' : 'Potrdilo o nakazilu shranjeno') : (fr ? 'Commande finalisée — preuve de virement reçue' : 'Naročilo dokončno potrjeno — potrdilo o nakazilu prejeto')}</h3>
+    <p>{new Intl.DateTimeFormat(fr ? 'fr-FR' : 'sl-SI', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Ljubljana' }).format(new Date(order.transferProofReceivedAt))} — {order.transferProofReference}</p>
+    <p>{fr ? 'L’encaissement est suivi séparément dans le statut du paiement.' : 'Prejem sredstev se spremlja ločeno v statusu plačila.'}</p>
+  </section>;
+  if (['cancelled', 'refunded', 'partially_refunded'].includes(order.status)) return null;
+  return <form action={action} className="admin-transfer-proof admin-order-edit-proof">
+    <input name="adminLocale" type="hidden" value={locale} />
+    <input name="orderId" type="hidden" value={order.id} />
+    <input name="expectedUpdatedAt" type="hidden" value={order.updatedAt} />
+    <h3>{fr ? 'Finaliser à réception de la preuve de virement' : 'Dokončna potrditev ob prejemu potrdila o nakazilu'}</h3>
+    <p>{fr ? 'Après réception du justificatif par e-mail, enregistrez sa référence ici pour finaliser la commande.' : 'Po prejemu potrdila po e-pošti tukaj vnesite njegovo referenco za dokončno potrditev naročila.'}</p>
+    <fieldset disabled={pending}>
+      <label><span>{fr ? 'Référence du justificatif ou de l’e-mail reçu' : 'Referenca potrdila ali prejetega e-sporočila'}</span><input name="proofReference" minLength={3} maxLength={200} required /></label>
+      <label className="admin-order-check"><input name="proofReceived" type="checkbox" required /><span>{fr ? 'J’ai reçu la preuve de virement de ce client pour cette commande.' : 'Prejel/-a sem potrdilo te stranke o nakazilu za to naročilo.'}</span></label>
+      <button className="button button-primary" disabled={pending} type="submit">{pending ? fr ? 'Enregistrement…' : 'Shranjevanje…' : fr ? 'Confirmer la réception et finaliser' : 'Potrdi prejem in naročilo'}</button>
+    </fieldset>
+    {state.message ? <p aria-live="polite" className={`admin-operation-message is-${state.status}`} role={state.status === 'error' ? 'alert' : 'status'}>{state.message}</p> : null}
   </form>;
 }

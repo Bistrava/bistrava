@@ -1,9 +1,9 @@
-.admin-order-edit { margin-top: 1.5rem; padding: 1.25rem; border: 1px solid var(--border, #d0e2e8); border-radius: 14px; background: #f7fbfc; }
-.admin-order-edit h3 { margin-top: 0; }
+:is(.admin-order-edit, .admin-order-edit-proof) { margin-top: 1.5rem; padding: 1.25rem; border: 1px solid var(--border, #d0e2e8); border-radius: 14px; background: #f7fbfc; }
+:is(.admin-order-edit, .admin-order-edit-proof) h3 { margin-top: 0; }
 .admin-order-edit h4 { display: flex; align-items: center; gap: .5rem; margin: .5rem 0 0; }
-.admin-order-edit fieldset, .admin-shipping-editor fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 1rem; min-width: 0; }
-.admin-order-edit label, .admin-shipping-editor label { display: grid; gap: .4rem; font-size: .875rem; font-weight: 600; }
-.admin-order-edit input, .admin-order-edit textarea, .admin-order-edit select, .admin-shipping-editor input, .admin-shipping-editor select { width: 100%; min-height: 42px; padding: .65rem .75rem; border: 1px solid #bfd7e1; border-radius: 8px; background: #fff; color: #123348; font: inherit; }
+:is(.admin-order-edit, .admin-order-edit-proof) fieldset, .admin-shipping-editor fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 1rem; min-width: 0; }
+:is(.admin-order-edit, .admin-order-edit-proof) label, .admin-shipping-editor label { display: grid; gap: .4rem; font-size: .875rem; font-weight: 600; }
+:is(.admin-order-edit, .admin-order-edit-proof) input, .admin-order-edit textarea, .admin-order-edit select, .admin-shipping-editor input, .admin-shipping-editor select { width: 100%; min-height: 42px; padding: .65rem .75rem; border: 1px solid #bfd7e1; border-radius: 8px; background: #fff; color: #123348; font: inherit; }
 .admin-order-edit textarea { resize: vertical; }
 .admin-order-edit small, .admin-shipping-editor small { font-weight: 400; color: #637985; }
 .admin-order-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }

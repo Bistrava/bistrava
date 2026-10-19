@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { formatMoney } from "@/lib/commerce/money";
 import { getGuestOrder } from "@/lib/orders/guest-orders";
-import { BankTransferInstructions } from '@/components/checkout/bank-transfer-instructions';
 import { paymentStatusCopy } from '@/lib/payments/bank-transfer';
 
 export const metadata: Metadata = {
@@ -38,6 +37,7 @@ export default async function OrderPage({
   }
 
   const address = order.shippingAddress;
+  const statusCopy = paymentStatusCopy(order.status, Boolean(order.transferProofReceivedAt));
   const customerName = [address.firstName, address.lastName].filter(Boolean).join(" ");
   const addressLines = [
     customerName,
@@ -54,7 +54,7 @@ export default async function OrderPage({
       <section className="order-success-hero">
         <div className="narrow-container">
           <CheckCircle2 aria-hidden="true" size={48} />
-          <p className="section-kicker">{paymentStatusCopy(order.status)}</p>
+          <p className="section-kicker">{statusCopy}</p>
           <h1>Hvala za vaše naročilo.</h1>
           <p>Referenca: <strong>{order.reference}</strong></p>
         </div>
@@ -62,10 +62,12 @@ export default async function OrderPage({
       <section className="section order-detail-section">
         <div className="container order-detail-grid">
           <div className="order-detail-main card">
-            <div className="order-detail-heading"><PackageCheck aria-hidden="true" /><div><p className="section-kicker">Stanje</p><h2>{paymentStatusCopy(order.status)}</h2></div></div>
-            {order.bankTransfer && order.status==='awaiting_payment'?<>
-              <p>Naročilo smo shranili. Za dokončanje plačila izvedite bančno nakazilo po spodnjih navodilih. Če ste nakazilo že izvedli, ga ne ponavljajte; počakajte na potrditev prejema.</p>
-              <BankTransferInstructions bank={order.bankTransfer} amountCents={order.totalCents} reference={order.reference}/>
+            <div className="order-detail-heading"><PackageCheck aria-hidden="true" /><div><p className="section-kicker">Stanje</p><h2>{statusCopy}</h2></div></div>
+            {order.bankTransfer && ['pending', 'awaiting_payment'].includes(order.status)?<>
+              {order.transferProofReceivedAt ? <p>Prejeli smo vaše potrdilo o nakazilu. Naročilo je dokončno potrjeno. Prejem sredstev preverimo ločeno. Nakazila ne ponavljajte.</p> : <>
+                <p>Naročilo smo shranili. Bančne podatke, točen znesek in referenco za nakazilo prejmete v samodejnem e-sporočilu na <strong>{order.email}</strong>.</p>
+                <p>Po opravljenem nakazilu odgovorite na to e-sporočilo in priložite potrdilo o nakazilu, da pospešimo obdelavo. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila. Če ste nakazilo že izvedli, ga ne ponavljajte.</p>
+              </>}
             </>:<p>{['paid','processing','shipped','completed'].includes(order.status)?'Plačilo je potrjeno. Hvala za vaše naročilo.':order.status==='cancelled'?'Naročilo je preklicano. Zanj ne izvajajte nakazila. Za pomoč se obrnite na kontakt@bistrava.com.':order.status==='refunded'||order.status==='partially_refunded'?'Povračilo je zabeleženo. Za podrobnosti se obrnite na kontakt@bistrava.com.':'Naročilo smo shranili. Za naslednje korake se obrnite na kontakt@bistrava.com.'}</p>}
             <div className="order-items">
               {order.items.map((item) => (

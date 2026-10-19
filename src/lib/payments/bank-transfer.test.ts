@@ -22,7 +22,10 @@ describe('bank transfer configuration',()=>{
     vi.stubEnv('CHECKOUT_ORDERING_ENABLED','false');expect(getCheckoutConfig().enabled).toBe(false);
   });
   it('never represents awaiting or cancelled orders as paid',()=>{
-    expect(paymentStatusCopy('awaiting_payment')).toBe('Čaka na bančno nakazilo');
+    expect(paymentStatusCopy('awaiting_payment')).toBe('Čaka na potrdilo o nakazilu');
+    expect(paymentStatusCopy('awaiting_payment', true)).toBe('Naročilo dokončno potrjeno');
+    expect(paymentStatusCopy('pending', true)).toBe('Naročilo dokončno potrjeno');
+    expect(paymentStatusCopy('cancelled', true)).toBe('Preklicano');
     expect(paymentStatusCopy('cancelled')).toBe('Preklicano');
     expect(paymentStatusCopy('paid')).toBe('Plačilo prejeto');
   });

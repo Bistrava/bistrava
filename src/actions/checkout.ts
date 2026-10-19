@@ -79,7 +79,7 @@ export async function createCheckoutOrder(
   }
   if (!checkoutConfig.enabled) {
     return checkoutError(
-      "Sprejem spletnih naročil še ni omogočen. Bistrava mora najprej potrditi način plačila in dostave.",
+      "Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.",
     );
   }
 

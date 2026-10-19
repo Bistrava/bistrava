@@ -69,12 +69,35 @@ describe("inquiry notification transports", () => {
     expect(mocks.send).toHaveBeenNthCalledWith(2, expect.objectContaining({
       to: "kontakt@bistrava.com", replyTo: input.email, text: expect.stringContaining(input.requestId),
     }));
+    for (const [mail] of mocks.send.mock.calls) {
+      expect(mail.html).toContain('https://bistrava.com/brand/bistrava-logo-web.png');
+      expect(mail.html).toContain('alt="Bistrava"');
+      expect(mail.html).toContain('#10324A');
+      expect(mail.html).toContain('#20B8A6');
+      expect(mail.html).toContain(input.message);
+      expect(mail.html).toContain(input.requestId);
+      expect(mail.text).toContain(input.message);
+    }
     expect([...events.values()].map(row => [row.email_type, row.status, row.recipient_hash])).toEqual([
       ["inquiry_acknowledgement", "sent", hash(input.email)],
       ["inquiry_internal", "sent", hash("kontakt@bistrava.com")],
     ]);
     expect(mocks.from.mock.calls.every(([table]) => table === "email_events")).toBe(true);
     expect(mocks.close).toHaveBeenCalledTimes(2);
+  });
+
+  it('escapes submitted text in customer and internal HTML without changing reply routing', async () => {
+    const unsafe = { ...input, name: '<script>unsafe</script>', message: '<img src=x onerror=alert(1)>\nDruga vrstica.' };
+    expect((await sendInquiryNotifications(unsafe)).ok).toBe(true);
+    for (const [mail] of mocks.send.mock.calls) {
+      expect(mail.html).not.toContain('<script>');
+      expect(mail.html).not.toContain('<img src=x');
+      expect(mail.html).toContain('&lt;script&gt;');
+      expect(mail.html).toContain('&lt;img');
+      expect(mail.html).toContain('white-space:pre-wrap');
+    }
+    expect(mocks.send.mock.calls[0][0].replyTo).toBe('kontakt@bistrava.com');
+    expect(mocks.send.mock.calls[1][0].replyTo).toBe(input.email);
   });
 
   it("does not repeat either SMTP message for the same saved inquiry", async () => {

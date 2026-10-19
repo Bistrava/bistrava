@@ -15,6 +15,8 @@ import { sendOrderConfirmation } from './send';
 import { renderToStaticMarkup } from 'react-dom/server';
 import OrderConfirmationEmail from '@/emails/order-confirmation';
 import { orderConfirmationEmailSchema } from '@/lib/validation/email';
+import { createTransport } from 'nodemailer';
+import { simpleParser } from 'mailparser';
 
 const input = {
   to: 'customer@example.com', idempotencyKey: 'order-confirmation:test',
@@ -37,12 +39,40 @@ it('includes the saved account, exact total and reference without claiming payme
   expect(mail.text).toContain('priložite potrdilo o nakazilu');
   expect(mail.text).toContain('dokončno potrjeno ob prejemu potrdila o nakazilu');
   expect(mail.text).toContain('Prejem sredstev preverimo ločeno');
+  expect(mail.html).toContain('https://bistrava.com/brand/bistrava-logo-web.png');
+  expect(mail.html).toContain('alt="Bistrava"');
+  expect(mail.html).toContain('#10324A');
+  expect(mail.html).toContain('#20B8A6');
+  expect(mail.html).toContain('GB82 WEST 1234 5698 7654 32');
+  expect(mail.html).toContain('dokončno potrjeno ob prejemu potrdila o nakazilu');
+  expect(mail.html).toContain('mailto:kontakt@bistrava.com');
   expect(mocks.update).toHaveBeenCalledWith(expect.objectContaining({ status: 'sent' }));
   expect(mocks.close).toHaveBeenCalledOnce();
 });
 it('includes the proof and final confirmation instructions in the HTML fallback too', () => {
   const html = renderToStaticMarkup(OrderConfirmationEmail(orderConfirmationEmailSchema.parse(input.data)));
-  for (const value of ['GB82WEST12345698765432', 'BIS-TEST-123', 'priložite potrdilo o nakazilu', 'dokončno potrjeno ob prejemu potrdila o nakazilu']) expect(html).toContain(value);
+  for (const value of ['GB82 WEST 1234 5698 7654 32', 'BIS-TEST-123', 'priložite potrdilo o nakazilu', 'dokončno potrjeno ob prejemu potrdila o nakazilu']) expect(html).toContain(value);
+});
+it('escapes customer and product text in the branded HTML message', async () => {
+  await sendOrderConfirmation({ ...input, data: { ...input.data, customerName: '<script>alert(1)</script>', items: [{ name: '<img src=x onerror=alert(1)>', quantity: 1, lineTotalCents: 1450 }] } });
+  const { html } = mocks.send.mock.calls[0][0];
+  expect(html).not.toContain('<script>');
+  expect(html).not.toContain('<img src=x');
+  expect(html).toContain('&lt;script&gt;');
+  expect(html).toContain('&lt;img');
+});
+it('produces a multipart email with the branded HTML and readable text without using SMTP', async () => {
+  await sendOrderConfirmation(input);
+  const transport = createTransport({ streamTransport: true, buffer: true });
+  const message = await transport.sendMail(mocks.send.mock.calls[0][0]);
+  const parsed = await simpleParser(message.message);
+  expect(parsed.headers.get('content-type')).toMatchObject({ value: 'multipart/alternative' });
+  expect(parsed.html).toContain('https://bistrava.com/brand/bistrava-logo-web.png');
+  expect(parsed.html).toContain('GB82 WEST 1234 5698 7654 32');
+  expect(parsed.text).toContain('GB82WEST12345698765432');
+  expect(parsed.text).toContain('priložite potrdilo o nakazilu');
+  expect(parsed.replyTo?.text).toContain('kontakt@bistrava.com');
+  transport.close();
 });
 it('does not duplicate or retry an ambiguous previous SMTP delivery', async () => {
   mocks.insert.mockResolvedValue({ error: { code: '23505' } });

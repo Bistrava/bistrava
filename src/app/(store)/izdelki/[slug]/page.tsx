@@ -206,6 +206,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   </div>
                 </>
               ) : null}
+              <div>
+                <dt>Vračilo</dt>
+                <dd>
+                  14 dni za odstop od nakupa po prejemu izdelka.
+                  <br /><small>Strošek vračila nerabljenega izdelka krije Bistrava.</small>{" "}
+                  <Link className="product-delivery-link" href="/vracila">Pogoji vračila in povračila</Link>
+                </dd>
+              </div>
             </dl>
           </div>
         </div>

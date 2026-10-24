@@ -127,5 +127,6 @@ export function LegalPage({ pageKey, content }: { pageKey: LegalPageKey; content
     </>
   );
 
-  return isDelivery ? <div className="delivery-page">{contents}</div> : contents;
+  // Pages with summary cards share the delivery page layout (delivery-page.css, imported by those pages).
+  return isDelivery || page.highlights?.length ? <div className="delivery-page">{contents}</div> : contents;
 }

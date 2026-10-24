@@ -202,7 +202,7 @@ export function createDeliveryPageContent(rates: ShippingRate[]): LegalPageConte
         id: "vracila",
         title: "Vračila in odstop od nakupa",
         paragraphs: [
-          "Pogoje odstopa, vračila izdelkov in povračila kupnine najdete na ločeni strani Vračila in povračila. Pred pošiljanjem izdelka nazaj preverite navodila in pravilen naslov za vračilo. Strošek prvotne dostave in strošek vračila sta ločeni postavki; njuna obravnava je pojasnjena v pravilih vračil.",
+          "Pogoje odstopa, vračila izdelkov in povračila kupnine najdete na ločeni strani Vračila in povračila. Pred pošiljanjem izdelka nazaj preverite navodila in pravilen naslov za vračilo. Strošek prvotne dostave in strošek vračila sta ločeni postavki; strošek vračila nerabljenega in popolnega izdelka krije Bistrava, podrobnosti pa so pojasnjene v pravilih vračil.",
         ],
         links: [{ label: "Vračila in povračila", href: "/vracila" }],
       },

@@ -1,4 +1,5 @@
 import { LegalPage } from "@/components/store/legal-page";
+import "@/components/store/delivery-page.css";
 import { legalMetadata } from "@/lib/content/legal-pages";
 export const metadata = legalMetadata("vracila");
 export default function Page() { return <LegalPage pageKey="vracila" />; }

@@ -31,9 +31,14 @@ describe("Merchant identity", () => {
     expect(getMerchantIdentity(sellable("BIS-086", { gtin: "8019495399318" })).gtin).toBe("8019495399317");
   });
 
-  it("declares missing identifiers only for researched unbranded products", () => {
+  it("declares missing identifiers only for products researched as having none", () => {
     expect(getMerchantIdentity(sellable("BIS-030"))).toMatchObject({ brand: null, gtin: null, mpn: null, identifierExists: false });
-    expect(getMerchantIdentity(sellable("BIS-076"))).toMatchObject({ brand: "Midnight", identifierExists: null });
+    expect(getMerchantIdentity(sellable("BIS-076"))).toMatchObject({ brand: "Midnight", gtin: null, mpn: null, identifierExists: false });
+    expect(getMerchantIdentity(sellable("BIS-016"))).toMatchObject({ brand: "Cintropur", identifierExists: null });
+  });
+
+  it("lets an administration GTIN lift a researched missing-identifier flag", () => {
+    expect(getMerchantIdentity(sellable("BIS-076", { gtin: "5425024030034" }))).toMatchObject({ gtin: "5425024030034", identifierExists: true });
   });
 });
 

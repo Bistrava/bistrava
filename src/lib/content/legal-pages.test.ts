@@ -35,6 +35,17 @@ describe("public seller information", () => {
     expect(legalPages["pravna-obvestila"].sections.find((section) => section.id === "irps")?.paragraphs).toEqual(irps?.paragraphs.slice(0, 1));
   });
 
+  it("keeps the statutory 14-day withdrawal and the seller-paid return of unused goods", () => {
+    const returns = JSON.stringify(legalPages.vracila);
+    expect(legalPages.vracila.highlights?.map((highlight) => highlight.value)).toEqual(["14 dni", "Krije Bistrava", "V 14 dneh", "2 leti"]);
+    expect(returns).toContain("Bistrava krije neposredni strošek vračila, če je izdelek vrnjen nerabljen, popoln in v stanju, v katerem je bil dostavljen");
+    expect(returns).toContain("odstop od pogodbe ostane veljaven");
+    expect(returns).toContain("najpozneje v 14 dneh od prejema obvestila o odstopu");
+    expect(returns).toContain("se pokaže v dveh letih od dobave");
+    expect(returns).not.toMatch(/7 dni|7 dneh/);
+    expect(JSON.stringify(legalPages["splosni-pogoji-poslovanja"])).toContain("Neposredni strošek vračila nerabljenega in popolnega izdelka v stanju ob dobavi krije ponudnik.");
+  });
+
   it("names Hostinger as the only web host", () => {
     const content = JSON.stringify(legalPages);
     expect(JSON.stringify(legalPages["pravna-obvestila"])).toContain("Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaka, Ciper");

@@ -103,7 +103,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Pravila spletnega nakupa",
     intro:
       "Pogoji urejajo uporabo trgovine, oddajo naročila, plačilo, dostavo, potrošniške pravice in reševanje reklamacij.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "24. oktober 2026",
     sections: [
       {
         id: "veljavnost",
@@ -155,7 +155,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "odstop",
         title: "7. Odstop od pogodbe in vračila",
         paragraphs: [
-          "Potrošnik lahko pri pogodbi, sklenjeni na daljavo, praviloma v 14 dneh od prevzema blaga sporoči, da odstopa od pogodbe, ne da bi navedel razlog. Postopek, stroški vračila, povračilo in zakonske izjeme so podrobno opisani na strani Vračila in povračila.",
+          "Potrošnik lahko pri pogodbi, sklenjeni na daljavo, praviloma v 14 dneh od prevzema blaga sporoči, da odstopa od pogodbe, ne da bi navedel razlog. Neposredni strošek vračila nerabljenega in popolnega izdelka v stanju ob dobavi krije ponudnik. Postopek, stroški vračila, povračilo in zakonske izjeme so podrobno opisani na strani Vračila in povračila.",
         ],
       },
       {
@@ -267,7 +267,13 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Odstop od spletnega nakupa",
     intro:
       "Jasen postopek za 14-dnevni odstop, vračilo blaga, povračilo plačila in ločeno uveljavljanje neskladnosti.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "24. oktober 2026",
+    highlights: [
+      { label: "Rok za odstop", value: "14 dni", detail: "Od prejema izdelka, brez navedbe razloga.", href: "#pravica" },
+      { label: "Strošek vračila", value: "Krije Bistrava", detail: "Za nerabljen in popoln izdelek v stanju ob dobavi.", href: "#vrnitev" },
+      { label: "Povračilo kupnine", value: "V 14 dneh", detail: "Od obvestila o odstopu, ko prejmemo vrnjeni izdelek.", href: "#povracilo" },
+      { label: "Okvara ali napaka", value: "2 leti", detail: "Zakonska odgovornost za neskladnost; stroške nosi Bistrava.", href: "#neskladnost" },
+    ],
     sections: [
       {
         id: "pravica",
@@ -282,7 +288,8 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "Vrnitev izdelka",
         paragraphs: [
           "Po obvestilu o odstopu mora potrošnik blago poslati ali izročiti brez nepotrebnega odlašanja in najpozneje v 14 dneh, razen če Bistrava ponudi prevzem. Izdelek naj bo varno zapakiran z vsemi deli, dodatki, navodili in dokazilom o nakupu.",
-          "Neposredni strošek vračila praviloma nosi potrošnik, razen če Bistrava v konkretnem primeru prevzame strošek ali potrošnika pred nakupom o tem ni ustrezno obvestila. Za izdelke, ki jih zaradi narave ni mogoče vrniti po običajni pošti, bo pred nakupom objavljena ocena stroška vračila.",
+          `Bistrava krije neposredni strošek vračila, če je izdelek vrnjen nerabljen, popoln in v stanju, v katerem je bil dostavljen, z vsemi deli, dodatki in navodili. Pred pošiljanjem nas obvestite na ${companyDetails.email}: dogovorimo se za prevzem pri vas ali vam po prejemu izdelka povrnemo dokazan strošek standardne pošiljke.`,
+          "Če izdelek ni vrnjen v takem stanju, na primer ker je bil vgrajen, priklopljen na vodovod ali uporabljen, odstop od pogodbe ostane veljaven, vendar neposredni strošek vračila nosi potrošnik, Bistrava pa lahko od povračila odšteje zmanjšano vrednost po spodnjih pravilih.",
         ],
       },
       {
@@ -299,6 +306,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         paragraphs: [
           "Bistrava povrne prejeta plačila, vključno s stroškom najcenejše ponujene standardne dostave, brez nepotrebnega odlašanja in najpozneje v 14 dneh od prejema obvestila o odstopu. Dodatni strošek dražje dostave po izbiri kupca se ne vrača.",
           "Povračilo se lahko zadrži do prejema vrnjenega blaga ali dokler potrošnik ne predloži dokazila, da ga je poslal, kar nastopi prej. Uporabi se enako plačilno sredstvo, razen ob izrecnem drugačnem dogovoru brez dodatnega stroška za potrošnika.",
+          "V praksi povračilo odredimo, ko prejmemo vrnjeni izdelek ali dokazilo o pošiljanju, najpozneje pa v 14 dneh od prejema obvestila o odstopu. Če vrnjeni izdelek prispe po tem roku, povračilo odredimo brez odlašanja ob njegovem prejemu.",
         ],
       },
       {
@@ -313,7 +321,14 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "neskladnost",
         title: "Poškodba ali neskladnost ni običajno vračilo",
         paragraphs: [
-          "Če je izdelek poškodovan, napačen ali nima dogovorjenih lastnosti, naj kupec uveljavlja neskladnost blaga. Tak zahtevek se obravnava ločeno od odstopa brez razloga in potrošniku ne nalaga stroškov, ki jih mora po zakonu nositi prodajalec.",
+          "Če je izdelek poškodovan, napačen, okvarjen ali nima dogovorjenih lastnosti, naj kupec uveljavlja neskladnost blaga. Tak zahtevek se obravnava ločeno od odstopa brez razloga, ni omejen na 14 dni in potrošniku ne nalaga stroškov, ki jih mora po zakonu nositi prodajalec.",
+        ],
+        items: [
+          "Bistrava odgovarja za neskladnost, ki obstaja ob dobavi in se pokaže v dveh letih od dobave.",
+          "Neskladnost sporočite v dveh mesecih od dneva, ko ste jo ugotovili, z natančnim opisom, številko naročila in po možnosti fotografijami.",
+          "Če se neskladnost pokaže v 30 dneh od dobave, lahko odstopite od pogodbe in zahtevate vračilo kupnine, ne da bi prej zahtevali popravilo ali zamenjavo.",
+          "Sicer lahko zahtevate popravilo ali zamenjavo, pod zakonskimi pogoji pa tudi znižanje kupnine ali odstop od pogodbe.",
+          "Stroške pošiljanja, prevzema in vzpostavitve skladnosti nosi Bistrava.",
         ],
       },
       {
@@ -340,14 +355,16 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Pravice po nakupu",
     intro:
       "Zakonska skladnost blaga in morebitna komercialna garancija proizvajalca sta dve ločeni podlagi.",
-    updatedAt: "22. september 2026",
+    updatedAt: "24. oktober 2026",
     sections: [
       {
         id: "skladnost",
         title: "Neskladnost blaga",
         paragraphs: [
           "Blago mora ustrezati opisu, količini, kakovosti, funkcionalnosti, združljivosti in drugim dogovorjenim lastnostim ter običajnim pričakovanjem za takšno vrsto blaga. Če ni skladno, lahko potrošnik uveljavlja zakonske zahtevke pri prodajalcu.",
+          "Prodajalec odgovarja za neskladnost, ki obstaja ob dobavi in se pokaže v dveh letih od dobave. Potrošnik jo sporoči v dveh mesecih od dneva, ko jo je ugotovil. Pravice in stroški so podrobneje opisani na strani Vračila in povračila.",
         ],
+        links: [{ label: "Vračila in povračila", href: "/vracila#neskladnost" }],
       },
       {
         id: "postopek",

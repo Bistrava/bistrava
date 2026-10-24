@@ -37,15 +37,17 @@ export function ConsentBanner({ ready, choice, onChoose }: {
       <div>
         <strong>Nastavitve zasebnosti</strong>
         <p>
-          Bistvene funkcije delujejo brez statističnih piškotkov. Z izbiro
-          »Dovoli statistiko« omogočite samo statistiko obiska. Oglaševalsko
-          merjenje je izključeno. Izbiro lahko kadar koli spremenite v nogi strani. <Link href="/piskotki">Več informacij</Link>
+          Bistvene funkcije delujejo brez neobveznih piškotkov. Z izbiro
+          »Dovoli statistiko« omogočite samo statistiko obiska, z izbiro »Dovoli vse«
+          pa tudi oglaševalsko merjenje prek orodja Shown in povezanih oglaševalskih
+          omrežij. Izbiro lahko kadar koli spremenite v nogi strani. <Link href="/piskotki">Več informacij</Link>
         </p>
         {saveFailed ? <p role="alert">Izbire ni bilo mogoče shraniti. Preverite nastavitve shranjevanja v brskalniku in poskusite znova.</p> : null}
       </div>
       <div className="consent-actions">
         <button className="button button-secondary" type="button" onClick={() => choose("denied")}>Samo bistveno</button>
-        <button className="button button-primary" type="button" onClick={() => choose("statistics")}>Dovoli statistiko</button>
+        <button className="button button-secondary" type="button" onClick={() => choose("statistics")}>Dovoli statistiko</button>
+        <button className="button button-primary" type="button" onClick={() => choose("marketing")}>Dovoli vse</button>
       </div>
     </aside>
   );

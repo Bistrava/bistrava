@@ -1,8 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
 import {
+  allowsStatistics,
   CONSENT_STORAGE_KEY,
   googleConsentSettings,
+  isConsentWithdrawal,
   parseConsentChoice,
   readConsentChoice,
   saveConsentChoice,
@@ -11,6 +13,7 @@ import {
 
 describe("versioned statistics consent", () => {
   it("accepts only an explicit current statistics or essential-only choice", () => {
+    expect(parseConsentChoice("marketing")).toBe("marketing");
     expect(parseConsentChoice("statistics")).toBe("statistics");
     expect(parseConsentChoice("denied")).toBe("denied");
     for (const value of [null, undefined, "", "granted", "analytics", "true", { analytics: true }]) {
@@ -49,6 +52,31 @@ describe("versioned statistics consent", () => {
       functionality_storage: "granted",
       security_storage: "granted",
     });
+  });
+
+  it("grants statistics and advertising together only for the marketing choice", () => {
+    expect(googleConsentSettings("marketing")).toEqual({
+      analytics_storage: "granted",
+      ad_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted",
+      functionality_storage: "granted",
+      security_storage: "granted",
+    });
+    expect(allowsStatistics("marketing")).toBe(true);
+    expect(allowsStatistics("statistics")).toBe(true);
+    expect(allowsStatistics("denied")).toBe(false);
+    expect(allowsStatistics(null)).toBe(false);
+  });
+
+  it("treats any reduction of granted consent as a withdrawal", () => {
+    expect(isConsentWithdrawal("marketing", "statistics")).toBe(true);
+    expect(isConsentWithdrawal("marketing", "denied")).toBe(true);
+    expect(isConsentWithdrawal("statistics", "denied")).toBe(true);
+    expect(isConsentWithdrawal("statistics", null)).toBe(true);
+    expect(isConsentWithdrawal("statistics", "marketing")).toBe(false);
+    expect(isConsentWithdrawal("denied", "denied")).toBe(false);
+    expect(isConsentWithdrawal(null, "marketing")).toBe(false);
   });
 
   it("updates Google with denial when statistics consent is withdrawn", () => {

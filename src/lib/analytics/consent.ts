@@ -1,9 +1,21 @@
 export const CONSENT_STORAGE_KEY = "bistrava-consent-v2";
 
-export type ConsentChoice = "statistics" | "denied";
+/** "marketing" grants statistics and advertising measurement together. */
+export type ConsentChoice = "marketing" | "statistics" | "denied";
 
 export function parseConsentChoice(value: unknown): ConsentChoice | null {
-  return value === "statistics" || value === "denied" ? value : null;
+  return value === "marketing" || value === "statistics" || value === "denied" ? value : null;
+}
+
+const consentLevels: Record<ConsentChoice, number> = { denied: 0, statistics: 1, marketing: 2 };
+
+export function allowsStatistics(choice: ConsentChoice | null) {
+  return choice === "statistics" || choice === "marketing";
+}
+
+/** True when the new choice withdraws a permission the previous one had granted. */
+export function isConsentWithdrawal(previous: ConsentChoice | null, next: ConsentChoice | null) {
+  return previous !== null && consentLevels[previous] > (next === null ? 0 : consentLevels[next]);
 }
 
 export function readConsentChoice(storage: Pick<Storage, "getItem">): ConsentChoice | null {
@@ -25,10 +37,10 @@ export function saveConsentChoice(storage: Pick<Storage, "setItem">, choice: Con
 
 export function googleConsentSettings(choice: ConsentChoice | null) {
   return {
-    analytics_storage: choice === "statistics" ? "granted" : "denied",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
+    analytics_storage: allowsStatistics(choice) ? "granted" : "denied",
+    ad_storage: choice === "marketing" ? "granted" : "denied",
+    ad_user_data: choice === "marketing" ? "granted" : "denied",
+    ad_personalization: choice === "marketing" ? "granted" : "denied",
     functionality_storage: "granted",
     security_storage: "granted",
   } as const;

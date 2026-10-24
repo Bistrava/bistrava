@@ -20,7 +20,14 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   typedRoutes: true,
   experimental: { serverActions: { bodySizeLimit: "4mb" } },
-  images: { remotePatterns: productMediaPatterns },
+  images: {
+    remotePatterns: productMediaPatterns,
+    // Uploaded product media have content-hashed names, so optimized copies can be cached by browsers and
+    // Cloudflare for 31 days instead of being re-encoded on the small Render instance after each restart.
+    minimumCacheTTL: 2_678_400,
+    // Product photos are a few MB at most; refuse larger sources instead of buffering them in memory.
+    maximumResponseBody: 10_000_000,
+  },
   async headers() {
     if (process.env.ROBOTS_INDEXING_ENABLED !== "false") return [];
 

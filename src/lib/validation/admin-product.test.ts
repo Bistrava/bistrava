@@ -80,4 +80,12 @@ describe("admin product form", () => {
     expect(adminProductFormSchema.safeParse({ ...draft, stockStatus: "in_stock" }).success).toBe(false);
     expect(adminProductFormSchema.safeParse({ ...validProduct, stockQuantity: "99999999999999999999" }).success).toBe(false);
   });
+
+  it("accepts a manufacturer GTIN with a valid check digit and keeps empty identifiers null", () => {
+    expect(adminProductFormSchema.parse({ ...validProduct, gtin: "8019 495 399317", mpn: " 29090500 " })).toMatchObject({ gtin: "8019495399317", mpn: "29090500" });
+    expect(adminProductFormSchema.parse(validProduct)).toMatchObject({ gtin: null, mpn: null });
+    const wrong = adminProductFormSchema.safeParse({ ...validProduct, gtin: "8019495399318" });
+    expect(wrong.success).toBe(false);
+    if (!wrong.success) expect(wrong.error.flatten().fieldErrors.gtin).toBeDefined();
+  });
 });

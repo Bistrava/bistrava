@@ -17,6 +17,7 @@ function rpcFailure(message:string,fr:boolean):AdminProductActionState {
   if(message.includes("stale_product")) return fail(fr,"Ce produit a changé depuis son ouverture (commande ou autre modification). Rechargez avant de réessayer.","Izdelek se je medtem spremenil. Osvežite stran in poskusite znova.");
   if(message.includes("product_not_ready") || message.includes("create_draft_first")) return fail(fr,"Enregistrez d’abord un brouillon, ajoutez une image, puis complétez les champs nécessaires avant l’activation.","Najprej shranite osnutek, dodajte sliko in dopolnite obvezne podatke za objavo.");
   if(message.includes("last_active_image")) return fail(fr,"Ajoutez une autre image avant de retirer la dernière image d’un produit actif.","Pred odstranitvijo zadnje slike aktivnega izdelka dodajte drugo sliko.");
+  if(message.includes("duplicate_gtin")) return fail(fr,"Cet EAN/GTIN est déjà attribué à un autre produit.","Ta EAN/GTIN je že dodeljen drugemu izdelku.");
   if(message.includes("duplicate key")) return fail(fr,"Ce SKU ou cet identifiant URL est déjà utilisé.","Ta SKU ali URL oznaka že obstaja.");
   return fail(fr,"L’enregistrement a échoué. Vérifiez les champs puis réessayez.","Shranjevanje ni uspelo. Preverite podatke in poskusite znova.");
 }
@@ -39,6 +40,8 @@ export async function saveAdminProduct(_previousState:AdminProductActionState,fo
     slug: parsed.data.slug,
     brand: parsed.data.brand,
     sku: parsed.data.sku,
+    gtin: parsed.data.gtin,
+    mpn: parsed.data.mpn,
     technology: parsed.data.technology || null,
     status: parsed.data.status,
     sales_mode: parsed.data.salesMode,

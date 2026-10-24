@@ -14,7 +14,10 @@ import {
   getCatalogCategory,
   getCategoryDetails,
 } from "@/lib/catalog/catalog";
+import { getMerchantIdentity } from "@/lib/catalog/merchant";
 import { getActiveCatalogProduct, getStorefrontCatalogProducts } from "@/lib/catalog/repository";
+import { getActiveShippingRates } from "@/lib/commerce/shipping";
+import { productDeliveryEstimate, productDeliveryFacts } from "@/lib/content/delivery";
 import { JsonLd } from "@/components/seo/json-ld";
 import { productSchema } from "@/lib/seo/structured-data";
 
@@ -86,9 +89,12 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const storefrontProducts = await getStorefrontCatalogProducts();
+  const [storefrontProducts, shippingRates] = await Promise.all([getStorefrontCatalogProducts(), getActiveShippingRates()]);
   const product = storefrontProducts.find((candidate) => candidate.slug === slug);
   if (!product) notFound();
+  const delivery = productDeliveryEstimate(shippingRates, product.priceCents);
+  const deliveryFacts = productDeliveryFacts(delivery);
+  const identity = getMerchantIdentity(product);
 
   const category = getCatalogCategory(product.categorySlug);
   if (!category) notFound();
@@ -102,7 +108,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      {product.status === "active" ? <JsonLd data={productSchema(product)} /> : null}
+      {product.status === "active" ? <JsonLd data={productSchema(product, delivery)} /> : null}
       <div className="container">
         <Breadcrumbs
           items={[
@@ -182,8 +188,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
             )}
             <dl className="product-quick-facts">
               <div><dt>SKU</dt><dd>{product.sku}</dd></div>
+              {identity.gtin ? <div><dt>EAN</dt><dd>{identity.gtin}</dd></div> : null}
               <div><dt>Kategorija</dt><dd>{category.name}</dd></div>
               <div><dt>Zaloga</dt><dd>{stockLabels[product.stockStatus]}{product.stockStatus === "in_stock" ? ` · ${product.stockQuantity} kosov` : ""}</dd></div>
+              {canAddToCart ? (
+                <>
+                  <div>
+                    <dt>Dostava</dt>
+                    <dd>
+                      {deliveryFacts.cost}
+                      {deliveryFacts.freeShipping ? <><br /><small>{deliveryFacts.freeShipping}</small></> : null}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Dobavni rok</dt>
+                    <dd>{deliveryFacts.timing}. <Link className="product-delivery-link" href="/dostava">Pogoji dostave</Link></dd>
+                  </div>
+                </>
+              ) : null}
             </dl>
           </div>
         </div>

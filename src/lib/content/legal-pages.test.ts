@@ -35,6 +35,13 @@ describe("public seller information", () => {
     expect(legalPages["pravna-obvestila"].sections.find((section) => section.id === "irps")?.paragraphs).toEqual(irps?.paragraphs.slice(0, 1));
   });
 
+  it("names Hostinger as the only web host", () => {
+    const content = JSON.stringify(legalPages);
+    expect(JSON.stringify(legalPages["pravna-obvestila"])).toContain("Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaka, Ciper");
+    expect(JSON.stringify(legalPages.zasebnost)).toContain("Hostinger International Ltd.");
+    expect(content).not.toMatch(/Render|Vercel/);
+  });
+
   it("describes the bank transfer launch without claiming card processing or a future payment provider", () => {
     const payments = JSON.stringify(legalPages.placila);
     const privacy = JSON.stringify(legalPages.zasebnost);

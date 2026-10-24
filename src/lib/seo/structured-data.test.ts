@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { specialistProducts } from "@/lib/catalog/catalog";
+import { productDeliveryEstimate } from "@/lib/content/delivery";
 import { organizationSchema, productSchema } from "@/lib/seo/structured-data";
 import { siteConfig } from "@/lib/seo/site";
 
@@ -57,5 +58,21 @@ describe("productSchema", () => {
       url: new URL(sourceProduct.canonical, siteConfig.url).href,
     });
     expect(schema.url).toBe(new URL(sourceProduct.canonical, siteConfig.url).href);
+  });
+
+  it("adds manufacturer identifiers and Slovenian shipping details to the Offer", () => {
+    const product = { ...specialistProducts.find((candidate) => candidate.sku === "BIS-086")!, status: "active" as const, salesMode: "buy_now" as const, priceCents: 8418, stockStatus: "in_stock" as const };
+    const delivery = productDeliveryEstimate([
+      { id: "free", name: "Brezplačna dostava", priceCents: 0, minOrderCents: 8001, maxOrderCents: null, estimatedDaysMin: 1, estimatedDaysMax: 3 },
+    ], product.priceCents);
+    const schema = productSchema(product, delivery);
+    expect(schema).toMatchObject({ brand: { name: "RBM" }, gtin: "8019495399317", mpn: "29090500" });
+    expect(schema.offers).toMatchObject({
+      shippingDetails: {
+        shippingRate: { value: "0.00", currency: "EUR" },
+        shippingDestination: { addressCountry: "SI" },
+        deliveryTime: { handlingTime: { minValue: 1, maxValue: 2 }, transitTime: { minValue: 1, maxValue: 3 } },
+      },
+    });
   });
 });

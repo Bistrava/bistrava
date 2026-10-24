@@ -24,13 +24,17 @@ export function EmailLayout({ preview, title, children }: EmailLayoutProps) {
   return (
     <Html lang="sl">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="x-apple-disable-message-reformatting" />
+        <meta name="format-detection" content="telephone=no, address=no, email=no" />
         <meta name="color-scheme" content="light" />
+        {/* Inline styles are sized for phones because several mobile apps drop <style>; wide screens get extra room. */}
         <style>{`
-          @media only screen and (max-width: 480px) {
-            .email-body { padding: 16px 8px !important; }
-            .email-header, .email-content, .email-footer { padding-left: 20px !important; padding-right: 20px !important; }
-            .email-heading { font-size: 26px !important; line-height: 34px !important; }
-            .email-panel { padding: 16px !important; }
+          @media only screen and (min-width: 640px) {
+            .email-body { padding: 36px 12px !important; }
+            .email-header, .email-content, .email-footer { padding-left: 32px !important; padding-right: 32px !important; }
+            .email-heading { font-size: 28px !important; line-height: 38px !important; }
+            .email-panel { padding: 20px !important; }
           }
         `}</style>
       </Head>
@@ -39,7 +43,7 @@ export function EmailLayout({ preview, title, children }: EmailLayoutProps) {
         <Container style={styles.container}>
           <Section className="email-header" style={styles.brandBar}>
             <Link href="https://bistrava.com" aria-label="Bistrava — domov">
-              <Img src="https://bistrava.com/brand/bistrava-logo-web.png" alt="Bistrava" width={210} height={54} style={styles.logo} />
+              <Img src="https://bistrava.com/brand/bistrava-logo-web.png" alt="Bistrava" width={180} height={46} style={styles.logo} />
             </Link>
             <Text style={styles.tagline}>Mehka voda. Pametna izbira.</Text>
           </Section>
@@ -76,7 +80,8 @@ const styles = {
     color: "#263640",
     fontFamily: "Inter, Arial, sans-serif",
     margin: 0,
-    padding: "36px 12px",
+    padding: "12px 4px",
+    WebkitTextSizeAdjust: "100%",
   },
   container: {
     backgroundColor: "#FFFFFF",
@@ -84,15 +89,16 @@ const styles = {
     borderRadius: "12px",
     margin: "0 auto",
     maxWidth: "600px",
+    width: "100%",
     overflow: "hidden" as const,
   },
   brandBar: {
     backgroundColor: "#F8FCFC",
     borderTop: "6px solid #10324A",
     borderBottom: "3px solid #20B8A6",
-    padding: "28px 32px 22px",
+    padding: "22px 18px 18px",
   },
-  logo: { display: "block", width: "210px", maxWidth: "100%", height: "auto", border: 0 },
+  logo: { display: "block", width: "180px", maxWidth: "100%", height: "auto", border: 0 },
   tagline: {
     color: "#148F83",
     fontSize: "13px",
@@ -100,16 +106,16 @@ const styles = {
     fontWeight: 600,
     margin: "12px 0 0",
   },
-  content: { padding: "30px 32px 8px" },
+  content: { padding: "24px 18px 4px" },
   heading: {
     color: "#10324A",
     fontFamily: "Manrope, Arial, sans-serif",
-    fontSize: "28px",
-    lineHeight: "38px",
-    margin: "0 0 20px",
+    fontSize: "24px",
+    lineHeight: "32px",
+    margin: "0 0 16px",
   },
   hr: { borderColor: "#CFE2E5", margin: "16px 0 0" },
-  footer: { backgroundColor: "#F8FCFC", padding: "24px 32px" },
+  footer: { backgroundColor: "#F8FCFC", padding: "20px 18px" },
   footerTitle: { color: "#10324A", fontSize: "15px", fontWeight: 700, margin: "0 0 8px" },
   footerText: { color: "#647780", fontSize: "12px", lineHeight: "18px" },
   link: { color: "#148F83", fontSize: "13px", fontWeight: 700 },

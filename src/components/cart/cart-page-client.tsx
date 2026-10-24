@@ -176,6 +176,9 @@ export function CartPageClient({ catalog, rates }: { catalog: CartCatalogSnapsho
             Pred nadaljevanjem preverite cene in zalogo
           </button>
         )}
+        <Link className="button button-secondary" href="/mehcalci-vode#katalog">
+          Nadaljuj z nakupovanjem
+        </Link>
         <small>Cene in zaloga se ob oddaji naročila ponovno preverijo.</small>
       </aside>
     </div>

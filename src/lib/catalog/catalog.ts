@@ -225,6 +225,8 @@ function enrichProduct(source: SourceCatalogProduct): CatalogProduct {
     categorySlug,
     sourceCategorySlug: source.categorySlug,
     sku: source.id,
+    gtin: null,
+    mpn: null,
     status,
     technology: content?.technology ?? copy.technology,
     nameSl: content?.nameSl ?? source.name,

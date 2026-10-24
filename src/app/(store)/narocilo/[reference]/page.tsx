@@ -57,6 +57,10 @@ export default async function OrderPage({
           <p className="section-kicker">{statusCopy}</p>
           <h1>Hvala za vaše naročilo.</h1>
           <p>Referenca: <strong>{order.reference}</strong></p>
+          <div className="order-success-actions">
+            <Link className="button button-primary" href="/mehcalci-vode#katalog">Nadaljuj z nakupovanjem</Link>
+            <Link className="button button-secondary" href="/">Na domačo stran</Link>
+          </div>
         </div>
       </section>
       <section className="section order-detail-section">

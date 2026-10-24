@@ -4,17 +4,20 @@
 
 ## Customer and administrator flow
 
-1. Checkout displays the beneficiary, IBAN, bank and optional BIC from server configuration. The customer reviews the server-calculated products, discount, shipping and final total.
+1. Checkout explains payment by bank transfer without displaying or serializing the beneficiary, IBAN, bank or BIC. The customer reviews the server-calculated products, discount, shipping and final total.
 2. Submitting creates an `awaiting_payment` order through `create_bank_transfer_order`, with immutable item, address and bank snapshots. Stock is reserved atomically. Repeating the same request does not create another order or reserve stock twice.
-3. The protected order page and confirmation email show the exact EUR amount and order reference to include in the transfer. The customer makes the transfer through their own bank.
-4. An administrator checks their bank statement, then confirms receipt of the full amount in the order interface, supplying a payment reference. Only this audited action changes the order/payment to paid. Preparing and shipping follow the existing order workflow.
-5. An unpaid order can be cancelled by staff, restoring its reserved stock. Bank transfer reservations do not expire automatically; staff must review unpaid orders. No automatic payment deadline is promised.
+3. After confirmation, the automatic email supplies the saved bank details, exact EUR amount and order reference. The protected order page directs the customer to that email and never displays bank details. The customer makes the transfer through their own bank and replies with proof and their order reference to speed up processing.
+4. Receipt of that proof finalizes the customer's order. An administrator records the received email/document reference using the separate proof form in the order interface. `admin_confirm_transfer_proof` saves the timestamp and reference and creates one audit event; retries neither overwrite the first proof nor duplicate the event. The customer page then shows “Naročilo dokončno potrjeno”. Cancelled/refunded orders cannot be finalized.
+5. Proof receipt does not mark funds as received or complete delivery. An administrator separately checks their bank statement and confirms receipt of the full amount with its payment reference. Only that action changes order/payment to paid. Preparing and shipping follow the existing order workflow.
+6. An unpaid order can be cancelled by staff, restoring its reserved stock. Bank transfer reservations do not expire automatically; staff must review unpaid orders. No automatic payment deadline is promised.
 
 Changing bank configuration applies only to new orders. Stored instructions for existing orders cannot be edited. The order reference alone does not grant access to customer data; the guest cookie is still required.
 
 ## Email
 
-With `LWS_MAIL_PASSWORD` configured, bank instructions use the existing authenticated LWS SMTP transport as `kontakt@bistrava.com`. A database idempotency reservation prevents duplicate delivery. Failed or uncertain sends are recorded in `email_events` without automatic retries. Email failure does not invalidate a committed order, and the confirmation page retains the payment instructions. Resend remains an optional fallback when LWS is unconfigured.
+With `LWS_MAIL_PASSWORD` configured, bank instructions use the existing authenticated LWS SMTP transport as `kontakt@bistrava.com`, also the reply-to address for proof. SMTP and the Resend HTML fallback both request proof and explain that its receipt finalizes the order. A database idempotency reservation prevents duplicate SMTP delivery. Failed or uncertain sends are recorded in `email_events` without automatic retries. Email failure does not invalidate a committed order; the confirmation page advises checking spam or contacting the store. Resend remains an optional fallback when LWS is unconfigured. Proofs are received in the existing mailbox; an administrator records receipt after reviewing the customer's email. No automatic attachment classification is performed.
+
+Apply `20261019010016_bank_transfer_proof.sql` before deploying these application changes: guest and admin queries read its new proof columns. It keeps existing RLS, uses an invoker function with explicit admin authorization, row locking and a revision check, and does not change existing orders or payments. The Render Blueprint now enables the store ordering switch, in line with the owner's confirmation that sales are open; actual runtime settings must also have `CHECKOUT_ORDERING_ENABLED=true` and valid enabled bank details.
 
 ## Configuration and activation
 
@@ -79,7 +82,7 @@ The migration-before-deployment order is mandatory because the new repository qu
 
 ## Staff operation
 
-Staff should review unpaid bank-transfer orders daily because stock remains reserved without an automatic bank-transfer expiry. Check the actual receiving bank statement and match the full amount and order reference before using receipt confirmation in the order interface; the checkout page or a customer's claim of transfer does not establish receipt. Review failed/uncertain confirmation deliveries in the email-event queue and verify delivery status before manually contacting the customer or retrying, to avoid duplicate instructions. Existing order instructions stay available on the protected order page even if the email failed. The operator decides when to contact the customer or cancel an unpaid order; the system does not invent an automatic deadline.
+Staff should review unpaid bank-transfer orders daily because stock remains reserved without an automatic bank-transfer expiry. Record received proof using the dedicated proof form, then check the actual bank statement and match the full amount and order reference before confirming funds. Review failed/uncertain confirmation deliveries in the email-event queue and verify delivery status before manually contacting the customer or retrying, to avoid duplicate instructions. Bank instructions are supplied by email only. The operator decides when to contact the customer or cancel an unpaid order; the system does not invent an automatic deadline.
 
 ## Verification
 

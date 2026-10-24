@@ -2,6 +2,8 @@ import { absoluteUrl, siteConfig } from "@/lib/seo/site";
 import type { Guide } from "@/lib/content/guides";
 import type { CatalogProduct } from "@/types/catalog";
 import { companyDetails } from "@/lib/content/company";
+import type { ProductDeliveryEstimate } from "@/lib/content/delivery";
+import { getMerchantIdentity } from "@/lib/catalog/merchant";
 
 export type JsonLdValue = Record<string, unknown> | Record<string, unknown>[];
 
@@ -89,7 +91,8 @@ export function faqSchema(
   };
 }
 
-export function productSchema(product: CatalogProduct): Record<string, unknown> {
+export function productSchema(product: CatalogProduct, delivery?: ProductDeliveryEstimate): Record<string, unknown> {
+  const identity = getMerchantIdentity(product);
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -97,8 +100,10 @@ export function productSchema(product: CatalogProduct): Record<string, unknown> 
     description: product.shortDescriptionSl,
     sku: product.sku,
     url: absoluteUrl(product.canonical),
-    brand: { "@type": "Brand", name: product.brand },
   };
+  if (identity.brand) schema.brand = { "@type": "Brand", name: identity.brand };
+  if (identity.gtin) schema.gtin = identity.gtin;
+  if (identity.mpn) schema.mpn = identity.mpn;
 
   if (product.images.length > 0) {
     schema.image = product.images.map((image) => image.url);
@@ -121,6 +126,18 @@ export function productSchema(product: CatalogProduct): Record<string, unknown> 
       price: (product.priceCents / 100).toFixed(2),
       availability,
       itemCondition: "https://schema.org/NewCondition",
+      ...(delivery?.rate ? {
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          shippingRate: { "@type": "MonetaryAmount", value: (delivery.rate.priceCents / 100).toFixed(2), currency: product.currency },
+          shippingDestination: { "@type": "DefinedRegion", addressCountry: "SI" },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            handlingTime: { "@type": "QuantitativeValue", minValue: delivery.handlingDaysMin, maxValue: delivery.handlingDaysMax, unitCode: "DAY" },
+            transitTime: { "@type": "QuantitativeValue", minValue: delivery.transitDaysMin, maxValue: delivery.transitDaysMax, unitCode: "DAY" },
+          },
+        },
+      } : {}),
     };
   }
 

@@ -34,7 +34,11 @@ describe("Merchant identity", () => {
   it("declares missing identifiers only for products researched as having none", () => {
     expect(getMerchantIdentity(sellable("BIS-030"))).toMatchObject({ brand: null, gtin: null, mpn: null, identifierExists: false });
     expect(getMerchantIdentity(sellable("BIS-076"))).toMatchObject({ brand: "Midnight", gtin: null, mpn: null, identifierExists: false });
-    expect(getMerchantIdentity(sellable("BIS-016"))).toMatchObject({ brand: "Cintropur", identifierExists: null });
+    expect(getMerchantIdentity(sellable("BIS-076", { sku: "BIS-999" }))).toMatchObject({ gtin: null, mpn: null, identifierExists: null });
+  });
+
+  it("uses the 1 inch Cintropur NW25 identifiers confirmed by the operator", () => {
+    expect(getMerchantIdentity(sellable("BIS-016"))).toMatchObject({ brand: "Cintropur", gtin: "5425024030034", mpn: "FWCCNW250", identifierExists: true });
   });
 
   it("lets an administration GTIN lift a researched missing-identifier flag", () => {

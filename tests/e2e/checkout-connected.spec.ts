@@ -54,8 +54,11 @@ async function placeOrder(page: Page, clients: LocalClients, suffix: string) {
   await page.goto(`/izdelki/${fixture.slug}`);
   await expect(page.getByRole("heading", { level: 1, name: fixture.name })).toBeVisible();
   await page.getByRole("button", { name: "Dodaj v košarico", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Dodano v košarico", exact: true })).toBeVisible();
-  await page.goto("/blagajna");
+  await expect(page).toHaveURL(/\/kosarica$/);
+  await expect(page.getByRole("link", { name: fixture.name })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Nadaljuj z nakupovanjem" })).toHaveAttribute("href", "/mehcalci-vode#katalog");
+  await page.getByRole("link", { name: /Nadaljujte na blagajno/ }).click();
+  await expect(page).toHaveURL(/\/blagajna$/);
   const form = page.locator("form.checkout-layout");
   await expect(form).toBeVisible();
   await expect(page.getByText('Sprejem naročil še ni aktiviran')).toHaveCount(0);
@@ -77,6 +80,8 @@ async function placeOrder(page: Page, clients: LocalClients, suffix: string) {
   await expect(submit).toBeEnabled();
   await submit.click();
   await expect(page).toHaveURL(/\/narocilo\/BIS-[A-Z0-9-]+$/);
+  await expect(page.getByRole("link", { name: "Nadaljuj z nakupovanjem" })).toHaveAttribute("href", "/mehcalci-vode#katalog");
+  await expect(page.getByRole("link", { name: "Na domačo stran" })).toHaveAttribute("href", "/");
   const reference = new URL(page.url()).pathname.split("/").at(-1)!;
   const instructions = page.getByRole("region", { name: "Podatki za bančno nakazilo" });
   await expect(instructions).toHaveCount(0);

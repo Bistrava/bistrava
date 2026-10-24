@@ -55,6 +55,9 @@ export type TechnicalSpecification = {
 export type CatalogProduct = SourceCatalogProduct & {
   sourceCategorySlug: string;
   sku: string;
+  /** Manufacturer GTIN/EAN entered in the administration; verified research fills gaps for Merchant. */
+  gtin: string | null;
+  mpn: string | null;
   status: CatalogStatus;
   technology: string;
   nameSl: string;

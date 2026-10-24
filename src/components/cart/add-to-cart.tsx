@@ -1,6 +1,7 @@
 "use client";
 
-import { Check, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useCart } from "@/components/cart/cart-provider";
@@ -24,16 +25,24 @@ function trackAddToCart(product: CartProductSnapshot, quantity: number) {
   });
 }
 
-export function AddToCart({ product }: { product: CartProductSnapshot }) {
+// Adding leads straight to the cart, where the visitor continues shopping or checks out.
+// The button content stays unchanged so translated pages are not re-rendered under the browser.
+function useAddAndOpenCart() {
   const { addItem } = useCart();
-  const [quantity, setQuantity] = useState(1);
-  const [added, setAdded] = useState(false);
-
-  const handleAdd = () => {
+  const router = useRouter();
+  const [adding, setAdding] = useState(false);
+  const add = (product: CartProductSnapshot, quantity: number) => {
     addItem(product, quantity);
     trackAddToCart(product, quantity);
-    setAdded(true);
+    setAdding(true);
+    router.push("/kosarica");
   };
+  return { add, adding };
+}
+
+export function AddToCart({ product }: { product: CartProductSnapshot }) {
+  const { add, adding } = useAddAndOpenCart();
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="add-to-cart">
@@ -49,35 +58,30 @@ export function AddToCart({ product }: { product: CartProductSnapshot }) {
           onChange={(event) => {
             const next = Number(event.target.value);
             setQuantity(Number.isFinite(next) ? Math.max(1, Math.min(next, product.stockQuantity)) : 1);
-            setAdded(false);
           }}
         />
-        <button className="button button-primary" type="button" onClick={handleAdd}>
-          {added ? <Check aria-hidden="true" size={19} /> : <ShoppingBag aria-hidden="true" size={19} />}
-          {added ? "Dodano v košarico" : "Dodaj v košarico"}
+        <button className="button button-primary" type="button" disabled={adding} aria-busy={adding} onClick={() => add(product, quantity)}>
+          <ShoppingBag aria-hidden="true" size={19} />
+          Dodaj v košarico
         </button>
       </div>
-      <p aria-live="polite">{added ? `${quantity} × ${product.nameSl} je v košarici.` : ""}</p>
     </div>
   );
 }
 
 export function QuickAddToCart({ product }: { product: CartProductSnapshot }) {
-  const { addItem } = useCart();
-  const [added, setAdded] = useState(false);
+  const { add, adding } = useAddAndOpenCart();
 
   return (
     <button
       className="button button-secondary quick-add-to-cart"
       type="button"
-      onClick={() => {
-        addItem(product, 1);
-        trackAddToCart(product, 1);
-        setAdded(true);
-      }}
+      disabled={adding}
+      aria-busy={adding}
+      onClick={() => add(product, 1)}
     >
-      {added ? <Check aria-hidden="true" size={17} /> : <ShoppingBag aria-hidden="true" size={17} />}
-      {added ? "Dodano" : "V košarico"}
+      <ShoppingBag aria-hidden="true" size={17} />
+      V košarico
     </button>
   );
 }

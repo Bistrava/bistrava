@@ -69,7 +69,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "izdajatelj",
         title: "Izdajatelj in tehnično gostovanje",
         paragraphs: [
-          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletno aplikacijo gostita Render Services, Inc. (Render; izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja). Podatkovne storitve zagotavlja Supabase. Podrobnosti o obdelavi osebnih podatkov so opisane v Politiki zasebnosti.",
+          "Izdajatelj spletnega mesta je ponudnik, naveden v prejšnjem razdelku. Spletno mesto gosti Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaka, Ciper (Hostinger). Podatkovne storitve zagotavlja Supabase. Podrobnosti o obdelavi osebnih podatkov so opisane v Politiki zasebnosti.",
         ],
       },
       {
@@ -414,7 +414,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prejemniki",
         title: "4. Prejemniki in obdelovalci",
         paragraphs: [
-          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnika spletnega gostovanja Render Services, Inc. (izbrana regija Frankfurt, Nemčija) in Vercel (obstoječe gostovanje in predogledna okolja), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
+          "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnik spletnega gostovanja Hostinger International Ltd. (Ciper), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
           "Z obdelovalci se sklenejo ustrezni dogovori. Seznam se posodobi ob vsaki vključitvi novega ponudnika.",
         ],
       },
@@ -422,11 +422,10 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "prenosi",
         title: "5. Prenosi zunaj EGP",
         paragraphs: [
-          "Za aplikacijski strežnik Render in podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Render Services, Inc. je ameriški ponudnik. Njegov dodatek o obdelavi podatkov za prenose določa okvir EU–ZDA za varstvo zasebnosti, kadar se uporablja, oziroma standardne pogodbene klavzule. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage. Dodatne informacije so dostopne v Renderjevem dodatku o obdelavi podatkov in seznamu podobdelovalcev.",
+          "Spletno mesto gosti Hostinger International Ltd. s sedežem na Cipru v Evropski uniji. Za podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Hostingerjev dogovor o obdelavi podatkov za prenose v države brez ustrezne ravni varstva določa standardne pogodbene klavzule EU, seznam njegovih podobdelovalcev pa je del istega dogovora. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage.",
         ],
         links: [
-          { label: "Render: dodatek o obdelavi podatkov", href: "https://render.com/dpa" },
-          { label: "Render: seznam podobdelovalcev", href: "https://render.com/security" },
+          { label: "Hostinger: dogovor o obdelavi podatkov", href: "https://www.hostinger.com/legal/dpa" },
         ],
       },
       {

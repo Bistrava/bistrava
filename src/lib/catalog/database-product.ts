@@ -37,7 +37,7 @@ export function mapDatabaseProduct(row: DatabaseCatalogRow, baseUrl: string, loc
     searchIntent: local?.searchIntent ?? "nakup", slug: row.slug, h1: name,
     seoTitle: str("seo_title") || `${name} | Bistrava`, sourceMetaDescription: str("seo_description"),
     researchSourceUrl: local?.researchSourceUrl ?? "", researchNote: local?.researchNote ?? "", seoScore: local?.seoScore ?? 0, sourceRow: local?.sourceRow ?? 0,
-    sku: str("sku", row.id), status: row.status === "published" || row.status === "active" ? "active" : row.status === "archived" ? "archived" : "draft",
+    sku: str("sku", row.id), gtin: str("gtin") || null, mpn: str("mpn") || null, status: row.status === "published" || row.status === "active" ? "active" : row.status === "archived" ? "archived" : "draft",
     technology: str("technology"), nameSl: name,
     shortDescriptionSl: str("short_description_sl") || str("short_description"), descriptionSl: str("description_sl") || str("description"),
     seoDescriptionSl: str("seo_description"), highlightsSl: list("benefits"), technicalSpecifications: specs,

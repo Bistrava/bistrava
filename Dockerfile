@@ -24,10 +24,17 @@ RUN pnpm build
 
 FROM node:24-bookworm-slim AS runtime
 WORKDIR /app
+# glibc malloc fragments under sharp's image resizing and pushed the 512 MB instance over its limit;
+# Next.js and sharp recommend jemalloc on glibc-based Linux. The symlink keeps the path architecture-neutral.
+RUN apt-get update \
+  && apt-get install --yes --no-install-recommends libjemalloc2 \
+  && rm -rf /var/lib/apt/lists/* \
+  && ln -s "$(find /usr/lib -name libjemalloc.so.2 | head -n 1)" /usr/local/lib/libjemalloc.so.2
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
     HOSTNAME=0.0.0.0 \
-    PORT=3000
+    PORT=3000 \
+    LD_PRELOAD=/usr/local/lib/libjemalloc.so.2
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 COPY --from=builder --chown=node:node /app/public ./public

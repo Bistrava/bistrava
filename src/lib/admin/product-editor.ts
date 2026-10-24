@@ -8,6 +8,8 @@ export type AdminProductEditorValues = {
   slug: string;
   brand: string;
   sku: string;
+  gtin: string;
+  mpn: string;
   technology: string;
   status: CatalogProduct["status"];
   salesMode: CatalogProduct["salesMode"];
@@ -93,6 +95,8 @@ export function createAdminProductEditorData(
       slug: product.slug,
       brand: product.brand,
       sku: product.sku,
+      gtin: product.gtin ?? "",
+      mpn: product.mpn ?? "",
       technology: product.technology,
       status: product.status,
       salesMode: product.salesMode,

@@ -60,6 +60,28 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             });
           `}
         </Script>
+        {/* Browser translation (e.g. Chrome → French) wraps text in <font> elements; React then
+            removes or inserts around nodes that moved and crashes to the error page. Tolerate it. */}
+        <Script id="translation-dom-guard" strategy="beforeInteractive">
+          {`
+            (function () {
+              if (typeof Node !== 'function' || Node.prototype.__bistravaTranslationGuard) return;
+              var removeChild = Node.prototype.removeChild;
+              Node.prototype.removeChild = function (child) {
+                if (child && child.parentNode !== this) {
+                  return child.parentNode ? removeChild.call(child.parentNode, child) : child;
+                }
+                return removeChild.apply(this, arguments);
+              };
+              var insertBefore = Node.prototype.insertBefore;
+              Node.prototype.insertBefore = function (node, reference) {
+                if (reference && reference.parentNode !== this) return insertBefore.call(this, node, null);
+                return insertBefore.apply(this, arguments);
+              };
+              Node.prototype.__bistravaTranslationGuard = true;
+            })();
+          `}
+        </Script>
         <a className="skip-link" href="#glavna-vsebina">Preskoči na glavno vsebino</a>
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}

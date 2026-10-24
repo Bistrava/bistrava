@@ -37,6 +37,14 @@ begin
   if (select sum(quantity_delta) from public.product_inventory_movements where product_id=v_id)<>4 then raise exception 'TEST initial stock journal failed'; end if;
   if not exists(select 1 from public.audit_logs where entity_id=v_id and action='product.created') then raise exception 'TEST creation audit missing'; end if;
 
+  v_saved := public.save_admin_product(v_slug,v_payload || '{"gtin":"8019495399317","mpn":"29090500"}'::jsonb,v_category,(v_saved->>'updated_at')::timestamptz);
+  if (select gtin || '/' || mpn from public.products where id=v_id)<>'8019495399317/29090500' then raise exception 'TEST merchant identifiers not saved'; end if;
+  v_rejected:=false;
+  begin perform public.save_admin_product(v_slug,v_payload || '{"gtin":"8019495399318"}'::jsonb,v_category,(v_saved->>'updated_at')::timestamptz);
+  exception when others then v_rejected:=sqlerrm='invalid_product'; end;
+  if not v_rejected then raise exception 'TEST GTIN with a wrong check digit accepted'; end if;
+  v_saved := public.save_admin_product(v_slug,v_payload || '{"gtin":null,"mpn":null}'::jsonb,v_category,(v_saved->>'updated_at')::timestamptz);
+
   v_rejected:=false;
   begin perform public.save_admin_product(v_slug,v_payload || jsonb_build_object('slug',v_slug||'-renamed'),v_category,(v_saved->>'updated_at')::timestamptz);
   exception when others then if sqlerrm like '%product_slug_locked%' then v_rejected:=true; else raise; end if; end;

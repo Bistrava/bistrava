@@ -2897,6 +2897,19 @@ select {
   font-weight: 650;
 }
 
+.product-quick-facts dd small {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.product-delivery-link {
+  color: var(--brand-navy);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .product-benefits-section {
   background: var(--brand-navy);
 }
@@ -6829,8 +6842,27 @@ select {
   color: white;
 }
 
-.order-success-hero p:last-child {
+.order-success-hero p:last-child,
+.order-success-hero p:has(+ .order-success-actions) {
   margin: 18px 0 0;
+}
+
+.order-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.order-success-actions .button-secondary {
+  border-color: white;
+  color: white;
+}
+
+.order-success-actions .button-secondary:hover,
+.order-success-actions .button-secondary:focus-visible {
+  background: rgb(255 255 255 / 12%);
 }
 
 .order-detail-main,

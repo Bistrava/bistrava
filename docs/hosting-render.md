@@ -18,6 +18,12 @@ La notification Render confirme le démarrage de la facturation du service payan
 
 LWS est conservé pour le domaine et la messagerie, Supabase pour les données. Render Free bloque les ports SMTP, dont 465 utilisé par Bistrava ; une instance payante les autorise. Railway Hobby bloque aussi SMTP, avec Pro à 20 $ minimum pour conserver ce transport. [SMTP Render](https://render.com/changelog/free-web-services-will-no-longer-allow-outbound-traffic-to-smtp-ports), [SMTP Railway](https://docs.railway.com/networking/outbound-networking).
 
+## Mémoire de l'instance 512 Mo
+
+Le 24 octobre 2026, Render a signalé un dépassement de la limite mémoire suivi d'un redémarrage automatique, juste après quelques visites automatisées (fiche produit, catalogue, panier et caisse sur ordinateur et mobile). L'optimisation d'images de Next.js (sharp) fragmente la mémoire avec l'allocateur glibc de Debian ; l'image Docker précharge donc `libjemalloc2` (`LD_PRELOAD`), comme le recommandent Next.js et sharp. Les images optimisées sont mises en cache 31 jours (`images.minimumCacheTTL`) par les navigateurs et Cloudflare, et les sources de plus de 10 Mo sont refusées. Les médias produits ont des noms uniques ; pour remplacer une image de `public/`, changer son nom de fichier.
+
+Après déploiement, suivre la courbe **Metrics → Memory** du service. Si la mémoire au repos reste au-dessus d'environ 350 Mo ou continue de monter, passer à une instance de 1 Go ou plus.
+
 ## Fichiers de déploiement
 
 - `Dockerfile` : Node 24, pnpm 10.33.0, installation verrouillée, sortie Next standalone, utilisateur non privilégié, assets publics et images optimisées.

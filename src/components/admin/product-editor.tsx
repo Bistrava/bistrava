@@ -72,6 +72,9 @@ const copy = {
     slug: "URL oznaka",
     brand: "Znamka",
     sku: "SKU",
+    gtin: "EAN / GTIN",
+    gtinHint: "Črtna koda proizvajalca (8, 12, 13 ali 14 števk). Prazno: uporabi se preverjeni podatek kataloga.",
+    mpn: "Koda proizvajalca (MPN)",
     technology: "Tehnologija",
     status: "Status",
     salesMode: "Način prodaje",
@@ -169,6 +172,9 @@ const copy = {
     slug: "Identifiant URL",
     brand: "Marque",
     sku: "SKU",
+    gtin: "EAN / GTIN",
+    gtinHint: "Code-barres du fabricant (8, 12, 13 ou 14 chiffres). Vide : la donnée vérifiée du catalogue s’applique.",
+    mpn: "Référence fabricant (MPN)",
     technology: "Technologie",
     status: "Statut",
     salesMode: "Mode de vente",
@@ -516,6 +522,12 @@ export function AdminProductEditor({
             </Field>
             <Field error={errors.sku?.[0]} label={labels.sku}>
               <input name="sku" onChange={(event) => update("sku", event.target.value)} value={values.sku} />
+            </Field>
+            <Field error={errors.gtin?.[0]} label={labels.gtin} hint={labels.gtinHint}>
+              <input name="gtin" inputMode="numeric" onChange={(event) => update("gtin", event.target.value)} value={values.gtin} />
+            </Field>
+            <Field error={errors.mpn?.[0]} label={labels.mpn}>
+              <input name="mpn" onChange={(event) => update("mpn", event.target.value)} value={values.mpn} />
             </Field>
             <Field error={errors.technology?.[0]} label={labels.technology} wide>
               <input name="technology" onChange={(event) => update("technology", event.target.value)} value={values.technology} />

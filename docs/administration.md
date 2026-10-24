@@ -32,6 +32,12 @@ Les administrateurs peuvent modifier les données. Les éditeurs consultent les 
 
 L’URL d’une fiche existante reste stable afin de préserver les liens. L’archivage retire le produit de la boutique tout en préservant l’historique des commandes. Retirer une image de la galerie conserve son fichier dans Storage pour éviter une suppression irréversible involontaire.
 
+### EAN et flux Google Merchant
+
+Les champs **EAN / GTIN** et **Référence fabricant (MPN)** de la fiche servent au flux `/merchant-feed.xml` et aux données structurées. L’EAN est refusé si son chiffre de contrôle est faux ou s’il est déjà attribué à un autre produit. Un champ vide laisse s’appliquer les données vérifiées de `src/lib/catalog/merchant-identifiers.verified.json`, qui fixent aussi pour chaque SKU la marque du fabricant et la catégorie Google, avec leurs sources. Ces champs nécessitent la migration `20261024000100_product_merchant_identifiers.sql` ; avant son application, l’enregistrement les ignore sans erreur et le flux utilise les données vérifiées.
+
+Le flux envoie la description complète, les photos sans les panneaux d’information, le tarif de livraison en Slovénie calculé pour un exemplaire du produit, ainsi que les délais de préparation (1–2 jours ouvrés) et de transport. `identifier_exists=no` est réservé aux produits sans marque pour lesquels aucun identifiant fabricant n’existe.
+
 ## Messages et actualisation automatique
 
 Les rubriques Messages et E-mails écoutent les insertions et modifications autorisées par Supabase Realtime. « En direct » apparaît après confirmation de la connexion. Un contrôle toutes les 30 secondes, lorsque l’onglet est visible, et au retour dans l’onglet rattrape les événements manqués.

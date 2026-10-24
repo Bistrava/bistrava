@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { isValidGtin } from "@/lib/catalog/gtin";
 import { slugSchema, skuSchema } from "@/lib/validation/catalog";
 
 const optionalNumber = (minimum = 0) =>
@@ -84,6 +85,13 @@ export const adminProductFormSchema = z
     slug: slugSchema,
     brand: z.string().trim().min(1).max(120),
     sku: skuSchema,
+    gtin: z
+      .string()
+      .default("")
+      .transform((value) => value.replace(/[\s-]/g, ""))
+      .refine((value) => value === "" || isValidGtin(value), "Vnesite veljaven GTIN/EAN z 8, 12, 13 ali 14 števkami.")
+      .transform((value) => value || null),
+    mpn: z.string().trim().max(70).default("").transform((value) => value || null),
     technology: z.string().trim().max(240),
     status: z.enum(["draft", "active", "archived"]),
     salesMode: z.enum(["buy_now", "quote", "installation_required"]),

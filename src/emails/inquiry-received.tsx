@@ -18,8 +18,8 @@ export default function InquiryReceivedEmail({
       preview="Kopija vašega povpraševanja Bistrava"
       title="Vaše povpraševanje smo prejeli"
     >
-      <Text>Pozdravljeni, {name}.</Text>
-      <Text>
+      <Text style={styles.text}>Pozdravljeni, {name}.</Text>
+      <Text style={styles.text}>
         Spodaj je kopija podatkov, ki ste jih poslali Bistravi. To sporočilo ne
         pomeni potrditve cene, dobavljivosti ali termina.
       </Text>
@@ -33,7 +33,8 @@ export default function InquiryReceivedEmail({
 }
 
 const styles = {
-  messageBox: { backgroundColor: "#EAF5F6", borderRadius: "12px", padding: "20px", margin: "24px 0" },
+  text: { color: "#263640", fontSize: "16px", lineHeight: "25px", margin: "0 0 14px" },
+  messageBox: { backgroundColor: "#EAF5F6", borderRadius: "10px", padding: "14px", margin: "22px 0" },
   reference: { color: "#148F83", fontSize: "12px", lineHeight: "20px", overflowWrap: "anywhere" as const, margin: "0 0 14px" },
   label: { color: "#10324A", fontSize: "16px", fontWeight: 700, margin: "0 0 8px" },
   message: { color: "#263640", fontSize: "15px", lineHeight: "25px", whiteSpace: "pre-wrap" as const, overflowWrap: "anywhere" as const, margin: 0 },

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createDeliveryPageContent } from "@/lib/content/delivery";
+import { createDeliveryPageContent, productDeliveryEstimate, productDeliveryFacts } from "@/lib/content/delivery";
 import type { ShippingRate } from "@/lib/commerce/shipping";
 
 const rates: ShippingRate[] = [
@@ -40,6 +40,25 @@ describe("public delivery policy", () => {
     expect(timing.paragraphs[0]).toContain("1–2 delovnih dneh po potrjenem prejemu celotnega bančnega nakazila");
     expect(timing.paragraphs[1]).toContain("dodatnih 1–3 delovnih dni po odpremi");
     expect(timing.paragraphs[1]).toContain("ne vključuje časa bančne obdelave ali priprave naročila");
+  });
+
+  it("prices delivery of one product with the inclusive paid limit and the free threshold", () => {
+    const facts = (priceCents: number) => {
+      const result = productDeliveryFacts(productDeliveryEstimate(rates, priceCents));
+      return { ...result, cost: result.cost.replace(/ /g, " "), freeShipping: result.freeShipping?.replace(/ /g, " ") ?? null };
+    };
+    expect(facts(8000)).toEqual({
+      cost: "4,50 € z DDV po Sloveniji",
+      freeShipping: "Brezplačna dostava za naročila nad 80,00 €",
+      timing: "Priprava v 1–2 delovnih dneh po prejemu plačila, nato prevoz traja 1–3 delovne dni",
+    });
+    expect(facts(8001)).toMatchObject({ cost: "Brezplačna dostava po Sloveniji", freeShipping: null });
+  });
+
+  it("describes product delivery without a tariff when no rate is configured", () => {
+    const estimate = productDeliveryEstimate([], 1990);
+    expect(estimate).toMatchObject({ rate: null, freeShippingFromCents: null, handlingDaysMin: 1, handlingDaysMax: 2, transitDaysMin: 1, transitDaysMax: 3 });
+    expect(productDeliveryFacts(estimate)).toMatchObject({ cost: "Strošek prikažemo v košarici", freeShipping: null });
   });
 
   it("uses a complete configured shipping estimate instead of the default without mutating rates", () => {

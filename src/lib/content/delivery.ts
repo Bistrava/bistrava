@@ -1,4 +1,5 @@
 import type { ShippingRate } from "@/lib/commerce/shipping";
+import { getEligibleShippingRates } from "@/lib/commerce/shipping-rates";
 import { formatMoney } from "@/lib/commerce/money";
 import type { LegalPageContent } from "@/lib/content/legal-pages";
 
@@ -11,6 +12,57 @@ export const confirmedDeliveryTiming = {
 
 export const orderPreparationText = `Naročilo pripravimo v ${confirmedDeliveryTiming.preparationDaysMin}–${confirmedDeliveryTiming.preparationDaysMax} delovnih dneh po potrjenem prejemu celotnega bančnega nakazila.`;
 export const standardShippingText = `Po pripravi naročilo oddamo prevozniku. Standardni okvirni čas prevoza je dodatnih ${confirmedDeliveryTiming.shippingDaysMin}–${confirmedDeliveryTiming.shippingDaysMax} delovnih dni po odpremi, kadar pri izbranem načinu dostave ni naveden drugačen rok. Čas prevoza ne vključuje časa bančne obdelave ali priprave naročila.`;
+
+function rateTransitDays(rate: ShippingRate | null) {
+  const hasEstimate = rate !== null && rate.estimatedDaysMin !== null && rate.estimatedDaysMax !== null;
+  return hasEstimate
+    ? { min: rate.estimatedDaysMin!, max: rate.estimatedDaysMax! }
+    : { min: confirmedDeliveryTiming.shippingDaysMin, max: confirmedDeliveryTiming.shippingDaysMax };
+}
+
+function dayRange(min: number, max: number) {
+  return min === max ? String(min) : `${min}–${max}`;
+}
+
+export type ProductDeliveryEstimate = {
+  /** Cheapest active Slovenian rate for one unit of this product, or null when none applies. */
+  rate: ShippingRate | null;
+  freeShippingFromCents: number | null;
+  handlingDaysMin: number;
+  handlingDaysMax: number;
+  transitDaysMin: number;
+  transitDaysMax: number;
+};
+
+// One unit is the basket a shopping ad or product page describes; the cart applies the same thresholds.
+export function productDeliveryEstimate(rates: ShippingRate[], priceCents: number | null): ProductDeliveryEstimate {
+  const rate = priceCents === null ? null : getEligibleShippingRates(rates, priceCents)[0] ?? null;
+  const freeThresholds = rates.filter((candidate) => candidate.priceCents === 0).map((candidate) => candidate.minOrderCents ?? 0);
+  const transit = rateTransitDays(rate);
+  return {
+    rate,
+    freeShippingFromCents: freeThresholds.length > 0 ? Math.min(...freeThresholds) : null,
+    handlingDaysMin: confirmedDeliveryTiming.preparationDaysMin,
+    handlingDaysMax: confirmedDeliveryTiming.preparationDaysMax,
+    transitDaysMin: transit.min,
+    transitDaysMax: transit.max,
+  };
+}
+
+export function productDeliveryFacts(estimate: ProductDeliveryEstimate) {
+  const { rate, freeShippingFromCents } = estimate;
+  const cost = rate === null
+    ? "Strošek prikažemo v košarici"
+    : rate.priceCents === 0 ? "Brezplačna dostava po Sloveniji" : `${formatMoney(rate.priceCents)} z DDV po Sloveniji`;
+  const freeShipping = rate?.priceCents !== 0 && freeShippingFromCents !== null && freeShippingFromCents > 0
+    ? `Brezplačna dostava za naročila ${freeShippingFromCents % 100 === 1 ? `nad ${formatMoney(freeShippingFromCents - 1)}` : `od ${formatMoney(freeShippingFromCents)}`}`
+    : null;
+  return {
+    cost,
+    freeShipping,
+    timing: `Priprava v ${dayRange(estimate.handlingDaysMin, estimate.handlingDaysMax)} delovnih dneh po prejemu plačila, nato prevoz traja ${dayRange(estimate.transitDaysMin, estimate.transitDaysMax)} delovne dni`,
+  };
+}
 
 function orderRange(rate: ShippingRate) {
   const minimum = rate.minOrderCents ?? 0;
@@ -27,11 +79,8 @@ export function createDeliveryPageContent(rates: ShippingRate[]): LegalPageConte
   const paidRate = orderedRates.find((rate) => rate.priceCents > 0);
   const freeRate = orderedRates.find((rate) => rate.priceCents === 0);
   const deliveryEstimates = orderedRates.map((rate) => {
-    const hasEstimate = rate.estimatedDaysMin !== null && rate.estimatedDaysMax !== null;
-    const minimum = hasEstimate ? rate.estimatedDaysMin : confirmedDeliveryTiming.shippingDaysMin;
-    const maximum = hasEstimate ? rate.estimatedDaysMax : confirmedDeliveryTiming.shippingDaysMax;
-    const days = minimum === maximum ? String(minimum) : `${minimum}–${maximum}`;
-    return `${rate.name}: predvidoma ${days} delovnih dni po odpremi (brez časa priprave naročila).`;
+    const transit = rateTransitDays(rate);
+    return `${rate.name}: predvidoma ${dayRange(transit.min, transit.max)} delovnih dni po odpremi (brez časa priprave naročila).`;
   });
 
   return {

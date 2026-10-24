@@ -1550,6 +1550,20 @@ select {
     linear-gradient(135deg, var(--surface) 0 56%, var(--surface-muted) 56% 100%);
 }
 
+.home-hero-photo {
+  object-fit: cover;
+  object-position: 70% 60%;
+}
+
+/* Light veil over the photo: opaque behind the headline, clearer on the right. */
+.home-hero-specialist::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(248 252 252 / 94%) 0%, rgb(248 252 252 / 82%) 42%, rgb(248 252 252 / 30%) 100%);
+  content: "";
+}
+
 .home-hero::after {
   position: absolute;
   right: -220px;
@@ -2221,6 +2235,10 @@ select {
 @media (max-width: 760px) {
   .home-hero {
     background: var(--surface);
+  }
+
+  .home-hero-specialist::before {
+    background: rgb(248 252 252 / 88%);
   }
 
   .principle-row {

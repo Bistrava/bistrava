@@ -9,6 +9,7 @@ import {
   ShoppingBag,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { CatalogProductCard } from "@/components/product/catalog-product-card";
@@ -30,6 +31,7 @@ export default async function HomePage() {
     <>
       <JsonLd data={faqSchema([...homeFaq])} />
       <section className="home-hero home-hero-specialist">
+        <Image className="home-hero-photo" src="/media/bistrava-water-mineral-v1.png" alt="" fill sizes="100vw" fetchPriority="high" />
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="section-kicker">Specializirana spletna trgovina Bistrava</p>

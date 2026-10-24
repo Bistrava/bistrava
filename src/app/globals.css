@@ -2640,6 +2640,15 @@ select {
   min-width: 0;
 }
 
+/* Keeps the gallery in view beside the summary until the description section; short screens keep normal scrolling so thumbnails are never cut off. */
+@media (min-width: 981px) and (min-height: 780px) {
+  .product-detail-grid > .product-gallery,
+  .product-detail-grid > .catalog-product-visual {
+    position: sticky;
+    top: 140px;
+  }
+}
+
 .product-carousel {
   margin: 0;
   overflow: hidden;

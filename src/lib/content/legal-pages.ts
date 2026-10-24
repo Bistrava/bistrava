@@ -388,7 +388,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Vaši podatki pod vašim nadzorom",
     intro:
       "Pojasnjujemo, katere podatke Bistrava obdeluje, zakaj jih potrebuje, komu jih posreduje in kako lahko uveljavljate svoje pravice.",
-    updatedAt: "18. oktober 2026",
+    updatedAt: "24. oktober 2026",
     sections: [
       {
         id: "upravljavec",
@@ -418,7 +418,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "nameni",
         title: "3. Nameni in pravne podlage",
         paragraphs: [
-          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Statistično merjenje se vključi samo, če je konfigurirano in izberete »Dovoli statistiko«. Oglaševalsko merjenje ni omogočeno.",
+          "Podatke obdelujemo za izvedbo naročila in ukrepe pred sklenitvijo pogodbe, izpolnitev davčnih in potrošniških obveznosti, obravnavo zahtevkov, varovanje spletnega mesta in uveljavljanje pravnih zahtevkov. Statistično merjenje se vključi samo, če je konfigurirano in izberete »Dovoli statistiko« ali »Dovoli vse«. Oglaševalsko merjenje se vključi samo, če izberete »Dovoli vse«; z njim merimo učinkovitost naših oglasov in konverzije, kot sta oddano naročilo ali povpraševanje.",
         ],
         items: [
           "pogodba: ko obdelava omogoča nakup, dostavo, podporo ali vračilo,",
@@ -432,6 +432,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "4. Prejemniki in obdelovalci",
         paragraphs: [
           "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnik spletnega gostovanja Hostinger International Ltd. (Ciper), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
+          "Če izberete »Dovoli vse«, podatke o obisku in konverzijah prejme tudi Instaon SRL (Belgija), ki upravlja orodje za oglaševalsko merjenje Shown, ter oglaševalska omrežja, katerih oznake Shown naloži za naše kampanje, na primer Google, Microsoft, Meta, X, TikTok ali LinkedIn.",
           "Z obdelovalci se sklenejo ustrezni dogovori. Seznam se posodobi ob vsaki vključitvi novega ponudnika.",
         ],
       },
@@ -440,9 +441,11 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "5. Prenosi zunaj EGP",
         paragraphs: [
           "Spletno mesto gosti Hostinger International Ltd. s sedežem na Cipru v Evropski uniji. Za podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Hostingerjev dogovor o obdelavi podatkov za prenose v države brez ustrezne ravni varstva določa standardne pogodbene klavzule EU, seznam njegovih podobdelovalcev pa je del istega dogovora. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage.",
+          "Instaon SRL navaja, da prenose zunaj EU izvaja s standardnimi pogodbenimi klavzulami. Oglaševalska omrežja, ki se naložijo po izbiri »Dovoli vse«, lahko podatke obdelujejo tudi zunaj EGP, na primer v ZDA, po svojih pravilih.",
         ],
         links: [
           { label: "Hostinger: dogovor o obdelavi podatkov", href: "https://www.hostinger.com/legal/dpa" },
+          { label: "Shown: politika zasebnosti", href: "https://shown.io/en/privacy" },
         ],
       },
       {
@@ -483,7 +486,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Izbira pred merjenjem",
     intro:
       "Nujne funkcije delujejo brez oglaševalskega soglasja; neobvezno merjenje se vključi šele po vaši izbiri.",
-    updatedAt: "18. oktober 2026",
+    updatedAt: "24. oktober 2026",
     sections: [
       {
         id: "nujni",
@@ -496,8 +499,9 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         id: "analitika",
         title: "Analitika in oglaševanje",
         paragraphs: [
-          "Google Analytics oziroma Google Tag Manager se naložita samo, če sta konfigurirana in izberete »Dovoli statistiko«. Pred izbiro in pri izbiri »Samo bistveno« se ti oznaki ne naložita. Dovoljenje velja samo za statistiko obiska; oglaševalsko shranjevanje, uporaba podatkov za oglase in prilagajanje oglasov ostanejo zavrnjeni.",
-          "Izbira je shranjena v lokalnem pomnilniku brskalnika pod imenom bistrava-consent-v2. Starejša izbira, ki je združevala statistiko in oglaševanje, ne velja kot dovoljenje za novo različico. Izbiro lahko kadar koli spremenite z gumbom Nastavitve zasebnosti v nogi. Če po vklopu statistike izberete »Samo bistveno«, shranimo zavrnitev in stran znova naložimo, da se že naložene oznake odstranijo. Košarica in druge bistvene funkcije ostanejo na voljo brez dovoljenja za statistiko.",
+          "Google Analytics oziroma Google Tag Manager se naložita samo, če sta konfigurirana in izberete »Dovoli statistiko« ali »Dovoli vse«. Pred izbiro in pri izbiri »Samo bistveno« se ti oznaki ne naložita. »Dovoli statistiko« velja samo za statistiko obiska; oglaševalsko shranjevanje, uporaba podatkov za oglase in prilagajanje oglasov ostanejo zavrnjeni.",
+          "Z izbiro »Dovoli vse« dovolite tudi oglaševalsko merjenje. Takrat se naloži orodje Shown (Instaon SRL, Belgija), ki glede na naše oglaševalske kampanje naloži oznake oglaševalskih omrežij, na primer Google Ads, Microsoft, Meta, X, TikTok ali LinkedIn, in jim sporoča obiske ter konverzije, kot sta oddano naročilo ali povpraševanje. Ta omrežja lahko v vašem brskalniku shranijo svoje piškotke in identifikatorje.",
+          "Izbira je shranjena v lokalnem pomnilniku brskalnika pod imenom bistrava-consent-v2. Starejša izbira, ki je združevala statistiko in oglaševanje, ne velja kot dovoljenje za novo različico. Izbiro lahko kadar koli spremenite z gumbom Nastavitve zasebnosti v nogi. Če izberete manj, kot ste dovolili prej, shranimo novo izbiro in stran znova naložimo, da se že naložene oznake odstranijo. Košarica in druge bistvene funkcije ostanejo na voljo brez neobveznih dovoljenj.",
         ],
       },
       {
@@ -506,7 +510,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         paragraphs: [
           "Spodaj je navedeno shranjevanje, ki ga uporablja aplikacija. Posamezen vnos nastane ob uporabi opisane funkcije; vsi vnosi se ne ustvarijo ob vsakem obisku. Lokalni pomnilnik ostane v vašem brskalniku in nima samodejnega roka poteka; odstranite ga lahko z izbrisom podatkov spletnega mesta v nastavitvah brskalnika.",
           "Piškotek za naročilo nastane šele po uspešni oddaji naročila. Prijavni piškotki in administrativne nastavitve so namenjeni osebju. Rok prijavnega piškotka ni zagotovilo trajanja prijave; veljavnost seje preverja strežnik, ob odjavi pa se prijavni piškotki odstranijo.",
-          "Brez konfiguriranih identifikatorjev Google Analytics oziroma Google Tag Manager aplikacija teh zunanjih oznak ne naloži, tudi če izberete statistiko. Pred morebitnim vklopom merjenja se ta seznam dopolni z dejanskimi imeni in roki analitičnih piškotkov.",
+          "Brez konfiguriranih identifikatorjev Google Analytics oziroma Google Tag Manager aplikacija teh zunanjih oznak ne naloži, tudi če izberete statistiko. Imena in roke piškotkov oglaševalskih omrežij določajo ta omrežja in so odvisni od kampanj, povezanih v orodju Shown; opisani so v njihovih politikah piškotkov.",
         ],
         table: {
           caption: "Shranjevanje aplikacije Bistrava",
@@ -516,6 +520,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
             ["bistrava-consent-v2 (lokalni pomnilnik)", "Bistrava", "Shrani vašo izbiro zasebnosti po izbiri v obvestilu ali nastavitvah.", "Do spremembe izbire ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
             ["bistrava-order-<referenca> (piškotek)", "Bistrava", "Zasebni dostop do potrditve posameznega naročila po uspešni oddaji; branje iz JavaScripta je onemogočeno.", "30 dni."],
             ["sb-<projekt>-auth-token, lahko z deli .0, .1 itd. (piškotki)", "Bistrava / Supabase", "Prijava in varovanje administrativne seje.", "Do 400 dni od nastavitve ali osvežitve; odstranitev ob odjavi."],
+            ["Piškotki in identifikatorji orodja Shown ter povezanih oglaševalskih omrežij", "Instaon SRL (Shown) in oglaševalska omrežja", "Merjenje obiskov, konverzij in učinkovitosti oglasov; naložijo se samo po izbiri »Dovoli vse«.", "Po pravilih posameznega ponudnika; do preklica izbire in izbrisa podatkov spletnega mesta."],
             ["bistrava-admin-language-v1 (lokalni pomnilnik)", "Bistrava", "Zapomni si jezik administracije, ko ga osebje spremeni.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
             ["bistrava-admin-product-draft-v1:<izdelek> (lokalni pomnilnik)", "Bistrava", "Lokalni osnutek izdelka samo ob izrecnem shranjevanju v predoglednem načinu administracije.", "Do ponastavitve osnutka ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
           ],

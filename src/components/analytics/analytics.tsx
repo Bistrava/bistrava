@@ -6,12 +6,17 @@ import { useEffect, useRef, useState } from "react";
 
 import { ConsentBanner } from "@/components/analytics/consent-banner";
 import {
+  allowsStatistics,
   CONSENT_STORAGE_KEY,
+  isConsentWithdrawal,
   readConsentChoice,
   saveConsentChoice,
   updateGoogleConsent,
   type ConsentChoice,
 } from "@/lib/analytics/consent";
+
+// Shown (Instaon SRL) advertising tag manager; loaded only with advertising consent.
+const SHOWN_PIXEL_SRC = "https://shown.io/metrics/L73YrjA78M";
 
 export function Analytics() {
   const pathname = usePathname();
@@ -30,12 +35,13 @@ export function Analytics() {
       } catch {
         // Some browsers deny access to localStorage entirely. Optional tags stay off.
       }
-      const withdrawn = currentChoice.current === "statistics" && saved !== "statistics";
+      const previous = currentChoice.current;
+      const withdrawn = isConsentWithdrawal(previous, saved) && (hasTags || previous === "marketing");
       updateGoogleConsent(window, saved);
       currentChoice.current = saved;
       setChoice(saved);
       setReady(true);
-      if (withdrawn && hasTags) window.location.reload();
+      if (withdrawn) window.location.reload();
     }
 
     const timer = window.setTimeout(refreshConsent, 0);
@@ -58,11 +64,12 @@ export function Analytics() {
     }
     if (!saved) return false;
 
-    const withdrawn = currentChoice.current === "statistics" && next === "denied";
+    const previous = currentChoice.current;
+    const withdrawn = isConsentWithdrawal(previous, next) && (hasTags || previous === "marketing");
     updateGoogleConsent(window, next);
     currentChoice.current = next;
     setChoice(next);
-    if (withdrawn && hasTags) window.location.reload();
+    if (withdrawn) window.location.reload();
     return true;
   }
 
@@ -70,7 +77,7 @@ export function Analytics() {
 
   return (
     <>
-      {choice === "statistics" && gtmId ? (
+      {allowsStatistics(choice) && gtmId ? (
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -79,7 +86,7 @@ export function Analytics() {
           })(window,document,'script','dataLayer','${gtmId}');`}
         </Script>
       ) : null}
-      {choice === "statistics" && ga4Id && !gtmId ? (
+      {allowsStatistics(choice) && ga4Id && !gtmId ? (
         <>
           <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} strategy="afterInteractive" />
           <Script id="ga4-config" strategy="afterInteractive">
@@ -87,6 +94,7 @@ export function Analytics() {
           </Script>
         </>
       ) : null}
+      {choice === "marketing" ? <Script id="shown-pixel" src={SHOWN_PIXEL_SRC} strategy="afterInteractive" /> : null}
       <ConsentBanner ready={ready} choice={choice} onChoose={chooseConsent} />
     </>
   );

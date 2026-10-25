@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CheckCircle2, LockKeyhole, Mail, PackageCheck } from "lucide-react";
 import Link from "next/link";
 
+import { PurchaseConversion } from "@/components/analytics/purchase-conversion";
 import { ClearCartOnArrival } from "@/components/checkout/clear-cart-on-arrival";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { formatMoney } from "@/lib/commerce/money";
@@ -61,6 +62,20 @@ export default async function OrderPage({
   return (
     <>
       {cameFromCardPayment ? <ClearCartOnArrival /> : null}
+      <PurchaseConversion
+        order={{
+          reference: order.reference,
+          status: order.status,
+          subtotalCents: order.subtotalCents,
+          discountCents: order.discountCents,
+          items: order.items.map((item) => ({
+            sku: item.sku,
+            name: item.name,
+            quantity: item.quantity,
+            unitPriceCents: item.unitPriceCents,
+          })),
+        }}
+      />
       <div className="container"><Breadcrumbs items={[{ label: "Naročilo", href: `/narocilo/${reference}` }]} /></div>
       <section className="order-success-hero">
         <div className="narrow-container">

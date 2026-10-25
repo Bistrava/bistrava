@@ -22,7 +22,8 @@ Copy `.env.example` to `.env.local`. Never commit `.env.local` or real credentia
 | `LWS_MAIL_PASSWORD` | Server secret only | Mailbox and bank order emails | Password for `kontakt@bistrava.com`; never browser exposed. |
 | `NEXT_PUBLIC_GTM_ID` | Browser | Measurement | Optional container, loaded only after current statistics consent. Audit the container to include only approved statistics tags. |
 | `NEXT_PUBLIC_GA4_ID` | Browser | Measurement | Optional direct GA4 property when GTM is not used; loaded only after current statistics consent. |
-| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Browser | Reserved | Direct advertising is disabled for launch. Statistics consent never grants advertising consent. |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | Browser | Advertising measurement | Optional override; defaults to the Bistrava account tag `AW-18517768902`. Loaded only after "Dovoli vse"; statistics consent never grants advertising consent. |
+| `NEXT_PUBLIC_GOOGLE_ADS_PURCHASE_LABEL` | Browser | Advertising measurement | Optional override of the "Bistrava - Nakup" conversion label. The order page sends one purchase per reference (product value with VAT after discounts, without shipping, EUR; `transaction_id` = order reference). |
 
 The app intentionally builds when these values are blank. Supabase client factories return `null`, no draft becomes active, inquiries return a clear configuration error instead of a false success, and the email sender returns `not_configured` without attempting delivery. The cart still works locally, but checkout submission remains disabled unless the server-side commerce gate and at least one real Slovenian shipping rate are configured.
 

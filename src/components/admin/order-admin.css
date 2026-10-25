@@ -35,3 +35,6 @@
 .admin-order-overlay-bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; padding: .75rem clamp(16px, 3vw, 32px); border-bottom: 1px solid var(--border, #d0e2e8); background: rgb(248 252 252 / 96%); backdrop-filter: blur(10px); }
 .admin-order-overlay-bar .button { display: inline-flex; align-items: center; gap: .5rem; }
 .admin-order-overlay-body { width: min(1240px, calc(100% - 32px)); margin: 1.25rem auto 2.5rem; }
+.admin-payment-info { display: grid; gap: .75rem; justify-items: start; }
+.admin-payment-info h3, .admin-payment-info p { margin: 0; }
+.admin-payment-info .button { display: inline-flex; align-items: center; gap: .5rem; }

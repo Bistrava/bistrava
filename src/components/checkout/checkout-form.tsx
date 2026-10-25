@@ -45,7 +45,7 @@ export function CheckoutForm({
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
   const [actionState, formAction, actionPending] = useActionState(createCheckoutOrder, initialCheckoutState);
-  const [paymentMethod, setPaymentMethod] = useState<"standard" | "card">(standardCheckout || !cardPublishableKey ? "standard" : "card");
+  const [paymentMethod, setPaymentMethod] = useState<"standard" | "card">(cardPublishableKey ? "card" : "standard");
   const payByCard = paymentMethod === "card" && Boolean(cardPublishableKey);
   const cardApiRef = useRef<CardPaymentApi | null>(null);
   const [cardState, setCardState] = useState<CheckoutActionState>(initialCheckoutState);
@@ -284,15 +284,15 @@ export function CheckoutForm({
           {cardPublishableKey && standardCheckout ? <>
             <h2 id="payment-heading">Način plačila</h2>
             <div className="payment-methods" role="radiogroup" aria-labelledby="payment-heading">
-              <label className={!payByCard ? "payment-method is-selected" : "payment-method"}>
-                <input type="radio" name="paymentChoice" value="standard" checked={!payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("standard")} />
-                <Landmark aria-hidden="true" size={20} />
-                <span><strong>{bankTransfer ? "Bančno nakazilo" : "Naročilo v pregled"}</strong><small>{bankTransfer ? "Bančne podatke prejmete po e-pošti." : "Plačilo po potrditvi naročila."}</small></span>
-              </label>
               <label className={payByCard ? "payment-method is-selected" : "payment-method"}>
                 <input type="radio" name="paymentChoice" value="card" checked={payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("card")} />
                 <CreditCard aria-hidden="true" size={20} />
                 <span><strong>Plačilo s kartico</strong><small>Mastercard, Visa in druge plačilne kartice.</small></span>
+              </label>
+              <label className={!payByCard ? "payment-method is-selected" : "payment-method"}>
+                <input type="radio" name="paymentChoice" value="standard" checked={!payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("standard")} />
+                <Landmark aria-hidden="true" size={20} />
+                <span><strong>{bankTransfer ? "Bančno nakazilo" : "Naročilo v pregled"}</strong><small>{bankTransfer ? "Bančne podatke prejmete po e-pošti." : "Plačilo po potrditvi naročila."}</small></span>
               </label>
             </div>
           </> : <h2 id="payment-heading">{payByCard ? "Plačilo s kartico" : "Bančno nakazilo"}</h2>}

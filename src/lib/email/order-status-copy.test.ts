@@ -9,9 +9,9 @@ const base = {
 };
 
 describe("order status e-mails", () => {
-  it("notifies the customer only for statuses staff can set after the order", () => {
-    expect([...notifiedOrderStatuses]).toEqual(["paid", "processing", "shipped", "completed", "cancelled"]);
-    for (const status of ["pending", "awaiting_payment", "refunded"]) expect(isNotifiedOrderStatus(status)).toBe(false);
+  it("notifies the customer for payment details and every later status staff can set", () => {
+    expect([...notifiedOrderStatuses]).toEqual(["awaiting_payment", "paid", "processing", "shipped", "completed", "cancelled"]);
+    for (const status of ["pending", "refunded", "partially_refunded"]) expect(isNotifiedOrderStatus(status)).toBe(false);
   });
 
   it("gives every status its own subject, title and next step naming the order", () => {
@@ -34,5 +34,7 @@ describe("order status e-mails", () => {
     expect(orderStatusEmailSchema.safeParse({ ...shipped, shipment: { ...shipped.shipment, trackingUrl: "http://example.test" } }).success).toBe(false);
     expect(orderStatusEmailSchema.safeParse({ ...base, status: "processing", shipment: null }).success).toBe(true);
     expect(orderStatusEmailSchema.safeParse({ ...base, status: "refunded" }).success).toBe(false);
+    expect(orderStatusEmailSchema.safeParse({ ...base, status: "awaiting_payment", paymentUrl: "https://bistrava.com/placilo/BIS-TEST-0001?k=abc" }).success).toBe(true);
+    expect(orderStatusEmailSchema.safeParse({ ...base, status: "awaiting_payment", paymentUrl: "http://bistrava.com/placilo" }).success).toBe(false);
   });
 });

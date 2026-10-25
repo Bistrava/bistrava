@@ -85,6 +85,32 @@ export async function applyStripeIntentEvent(input: { eventId: string; eventType
   return result;
 }
 
+/**
+ * Payment-link page: reuses the order's PaymentIntent (so an earlier checkout attempt can never be paid twice)
+ * or creates the first one. Returns the client secret only while the payment can still be completed.
+ */
+export async function getCardPaymentSession(orderId: string): Promise<
+  { state: "payable"; clientSecret: string } | { state: "paid" } | { state: "processing" } | { state: "unavailable" }
+> {
+  const db = createAdminClient();
+  const stripe = getStripeClient();
+  if (!db || !stripe) return { state: "unavailable" };
+  const { data: payment } = await db.from("payments").select("status,provider_reference").eq("order_id", orderId).eq("provider", "stripe").maybeSingle();
+  if (!payment) return { state: "unavailable" };
+  if (payment.status === "paid") return { state: "paid" };
+  if (!payment.provider_reference) {
+    return { state: "payable", clientSecret: await createCardPaymentIntent(db, orderId) };
+  }
+  const intent = await stripe.paymentIntents.retrieve(String(payment.provider_reference));
+  if (intent.status === "succeeded") {
+    await applyStripeIntentEvent({ eventId: `sync:${intent.id}:succeeded`, eventType: "payment_intent.succeeded", intent });
+    return { state: "paid" };
+  }
+  if (intent.status === "processing") return { state: "processing" };
+  if (intent.status === "canceled" || !intent.client_secret) return { state: "unavailable" };
+  return { state: "payable", clientSecret: intent.client_secret };
+}
+
 /** Fallback for a delayed webhook: asks Stripe for the current PaymentIntent state. */
 export async function syncCardPayment(intentId: string) {
   const stripe = getStripeClient();

@@ -11,7 +11,14 @@ export type CardPaymentApi = { stripe: Stripe; elements: StripeElements };
 let stripePromise: ReturnType<typeof loadStripe> | null = null;
 let stripePromiseKey = "";
 
-function getStripePromise(publishableKey: string) {
+// Card fields only (no Link or wallets); Slovenia preselected for the billing country.
+export const paymentElementOptions = {
+  layout: "tabs",
+  wallets: { applePay: "never", googlePay: "never", link: "never" },
+  defaultValues: { billingDetails: { address: { country: "SI" } } },
+} as const;
+
+export function getStripePromise(publishableKey: string) {
   if (!stripePromise || stripePromiseKey !== publishableKey) {
     stripePromise = loadStripe(publishableKey, { locale: "sl" });
     stripePromiseKey = publishableKey;
@@ -35,7 +42,7 @@ function CardFields({ apiRef, onStateChange }: { apiRef: RefObject<CardPaymentAp
 
   return (
     <PaymentElement
-      options={{ layout: "tabs", wallets: { applePay: "never", googlePay: "never" } }}
+      options={paymentElementOptions}
       onReady={() => onStateChange("ready")}
       onLoadError={() => onStateChange("error")}
     />

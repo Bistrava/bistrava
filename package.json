@@ -20,6 +20,8 @@
     "catalog:media:upload": "node scripts/upload-product-media.mjs --upload"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "7.0.0",
+    "@stripe/stripe-js": "10.0.0",
     "@supabase/ssr": "^0.12.4",
     "@supabase/supabase-js": "^2.112.3",
     "imapflow": "^2.4.0",
@@ -32,6 +34,7 @@
     "react-email": "^6.9.2",
     "resend": "^6.22.0",
     "server-only": "^0.0.1",
+    "stripe": "23.0.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -51,5 +54,7 @@
     "vitest": "^4.1.11"
   },
   "packageManager": "pnpm@10.33.0",
-  "engines": { "node": "24.x" }
+  "engines": {
+    "node": "24.x"
+  }
 }

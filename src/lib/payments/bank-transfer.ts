@@ -21,7 +21,8 @@ export const bankTransferSchema=z.object({
 });
 export type BankTransferDetails=z.infer<typeof bankTransferSchema>;
 export const formatIban=(iban:string)=>iban.replace(/(.{4})(?=.)/g,'$1 ');
-export function paymentStatusCopy(status:string, transferProofReceived = false) {
+export function paymentStatusCopy(status:string, transferProofReceived = false, card = false) {
   if (['pending', 'awaiting_payment'].includes(status) && transferProofReceived) return 'Naročilo dokončno potrjeno';
+  if (card && ['pending', 'awaiting_payment'].includes(status)) return 'Čaka na plačilo s kartico';
   return ({pending:'V pregledu',awaiting_payment:'Čaka na potrdilo o nakazilu',paid:'Plačilo prejeto',processing:'V pripravi',shipped:'Odpremljeno',completed:'Zaključeno',cancelled:'Preklicano',refunded:'Povrnjeno',partially_refunded:'Delno povrnjeno'} as Record<string,string>)[status] || 'V obdelavi';
 }

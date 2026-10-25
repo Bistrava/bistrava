@@ -199,7 +199,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
     kicker: "Jasno in varno plačilo",
     intro:
       "Na blagajni so prikazani samo dejansko omogočeni načini plačila, končni znesek in stanje naročila.",
-    updatedAt: "17. oktober 2026",
+    updatedAt: "25. oktober 2026",
     sections: [
       {
         id: "valuta",
@@ -217,14 +217,23 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         items: [
           "bančno nakazilo v EUR, kadar je omogočeno na blagajni,",
             "podatke prejemnika in računa samodejno pošljemo po e-pošti po potrditvi naročila,",
-          "plačilo s kartico in plačilo po povzetju trenutno nista na voljo.",
+          "plačilo s kartico (Mastercard, Visa in druge plačilne kartice) prek plačilnega sistema Stripe, kadar je omogočeno na blagajni,",
+          "plačilo po povzetju trenutno ni na voljo.",
         ],
       },
       {
         id: "varnost",
         title: "Varnost plačila",
         paragraphs: [
-          "Bančno nakazilo opravite v svoji banki. Bistrava po e-pošti ali telefonu ne zahteva gesla za spletno banko, enkratnih kod ali celotnih podatkov plačilne kartice. Teh podatkov ne vpisujte v sporočila ali kontaktni obrazec.",
+          "Bančno nakazilo opravite v svoji banki. Podatke kartice vpišete samo v varen obrazec plačilnega sistema Stripe na blagajni. Bistrava po e-pošti ali telefonu ne zahteva gesla za spletno banko, enkratnih kod ali celotnih podatkov plačilne kartice. Teh podatkov ne vpisujte v sporočila ali kontaktni obrazec.",
+        ],
+      },
+      {
+        id: "kartica",
+        title: "Plačilo s kartico",
+        paragraphs: [
+          "Številko kartice, datum veljavnosti in varnostno kodo obdela Stripe Payments Europe, Limited (Irska). Ti podatki ne prehajajo prek strežnikov Bistrave in jih Bistrava ne hrani; v administraciji vidimo samo stanje plačila in znesek. Banka izdajateljica lahko zahteva dodatno potrditev, na primer v svoji mobilni aplikaciji (3-D Secure).",
+          "Kartica je bremenjena ob potrditvi plačila na blagajni. Naročilo je potrjeno, ko plačilni sistem potrdi uspešno plačilo; potrditev prejmete po e-pošti. Če plačilo ne uspe, kartica ni bremenjena, naročilo pa ostane shranjeno do ponovnega poskusa ali preklica. Morebitno povračilo izvedemo na isto kartico.",
         ],
       },
       {
@@ -432,6 +441,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "4. Prejemniki in obdelovalci",
         paragraphs: [
           "Podatke prejmejo samo osebe in izvajalci, ki jih potrebujejo za svoj del storitve: ponudnik spletnega gostovanja Hostinger International Ltd. (Ciper), podatkovna platforma Supabase, ponudnik e-pošte LWS, ponudnik transakcijske e-pošte Resend, kadar je ta storitev omogočena, banke pri izvedbi nakazila, izbrani prevoznik, računovodstvo ter pristojni organi, kadar to zahteva zakon.",
+          "Pri plačilu s kartico podatke kartice, znesek, e-poštni naslov in podatke za preprečevanje zlorab obdeluje ponudnik plačilnih storitev Stripe Payments Europe, Limited (Irska). Bistrava podatkov kartice ne prejme.",
           "Če izberete »Dovoli vse«, podatke o obisku in konverzijah prejme tudi Instaon SRL (Belgija), ki upravlja orodje za oglaševalsko merjenje Shown, ter oglaševalska omrežja, katerih oznake Shown naloži za naše kampanje, na primer Google, Microsoft, Meta, X, TikTok ali LinkedIn.",
           "Z obdelovalci se sklenejo ustrezni dogovori. Seznam se posodobi ob vsaki vključitvi novega ponudnika.",
         ],
@@ -441,11 +451,13 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         title: "5. Prenosi zunaj EGP",
         paragraphs: [
           "Spletno mesto gosti Hostinger International Ltd. s sedežem na Cipru v Evropski uniji. Za podatkovni projekt Supabase je izbrana regija Frankfurt v Nemčiji. Izbira regije ne pomeni, da vsa povezana obdelava ostane v Evropskem gospodarskem prostoru. Hostingerjev dogovor o obdelavi podatkov za prenose v države brez ustrezne ravni varstva določa standardne pogodbene klavzule EU, seznam njegovih podobdelovalcev pa je del istega dogovora. Pri drugih ponudnikih se upoštevajo njihove dejanske nastavitve in veljavne pogodbene podlage.",
+          "Stripe lahko podatke o plačilu obdeluje tudi v ZDA; za take prenose uporablja okvir EU-ZDA za zasebnost podatkov in standardne pogodbene klavzule.",
           "Instaon SRL navaja, da prenose zunaj EU izvaja s standardnimi pogodbenimi klavzulami. Oglaševalska omrežja, ki se naložijo po izbiri »Dovoli vse«, lahko podatke obdelujejo tudi zunaj EGP, na primer v ZDA, po svojih pravilih.",
         ],
         links: [
           { label: "Hostinger: dogovor o obdelavi podatkov", href: "https://www.hostinger.com/legal/dpa" },
           { label: "Shown: politika zasebnosti", href: "https://shown.io/en/privacy" },
+          { label: "Stripe: politika zasebnosti", href: "https://stripe.com/privacy" },
         ],
       },
       {
@@ -520,6 +532,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
             ["bistrava-consent-v2 (lokalni pomnilnik)", "Bistrava", "Shrani vašo izbiro zasebnosti po izbiri v obvestilu ali nastavitvah.", "Do spremembe izbire ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],
             ["bistrava-order-<referenca> (piškotek)", "Bistrava", "Zasebni dostop do potrditve posameznega naročila po uspešni oddaji; branje iz JavaScripta je onemogočeno.", "30 dni."],
             ["sb-<projekt>-auth-token, lahko z deli .0, .1 itd. (piškotki)", "Bistrava / Supabase", "Prijava in varovanje administrativne seje.", "Do 400 dni od nastavitve ali osvežitve; odstranitev ob odjavi."],
+            ["__stripe_mid, __stripe_sid (piškotka)", "Stripe", "Preprečevanje zlorab pri plačilu s kartico; nastaneta šele, ko se na blagajni naloži obrazec za kartico.", "__stripe_mid do 1 leta, __stripe_sid 30 minut."],
             ["Piškotki in identifikatorji orodja Shown ter povezanih oglaševalskih omrežij", "Instaon SRL (Shown) in oglaševalska omrežja", "Merjenje obiskov, konverzij in učinkovitosti oglasov; naložijo se samo po izbiri »Dovoli vse«.", "Po pravilih posameznega ponudnika; do preklica izbire in izbrisa podatkov spletnega mesta."],
             ["bistrava-admin-language-v1 (lokalni pomnilnik)", "Bistrava", "Zapomni si jezik administracije, ko ga osebje spremeni.", "Brez samodejnega poteka; do izbrisa podatkov spletnega mesta."],
             ["bistrava-admin-product-draft-v1:<izdelek> (lokalni pomnilnik)", "Bistrava", "Lokalni osnutek izdelka samo ob izrecnem shranjevanju v predoglednem načinu administracije.", "Do ponastavitve osnutka ali izbrisa podatkov spletnega mesta; brez samodejnega poteka."],

@@ -4,9 +4,10 @@ import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
 import { headers } from "next/headers";
 
-import { getCheckoutConfig } from "@/lib/commerce/config";
+import { getCardPaymentConfig, getCheckoutConfig } from "@/lib/commerce/config";
 import { sendOrderConfirmation } from "@/lib/email/send";
 import { hashGuestOrderToken, orderCookieName } from "@/lib/orders/guest-orders";
+import { createCardPaymentIntent } from "@/lib/payments/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { checkoutFormSchema, checkoutQuoteSchema, type CheckoutQuoteState } from "@/lib/validation/checkout";
 import { isMemoryRateLimited, type RateLimitEntry } from "@/lib/security/rate-limit";
@@ -73,14 +74,19 @@ export async function createCheckoutOrder(
     return checkoutError("Naročila trenutno ni bilo mogoče oddati.");
   }
 
+  const payByCard = formData.get("paymentMethod") === "card";
   const checkoutConfig = await getCheckoutConfig();
-  if ((formData.get('paymentSettingsVersion') || 'env') !== checkoutConfig.version) {
-    return checkoutError('Podatki za plačilo so se spremenili. Osvežite stran in ponovno preverite naročilo.');
-  }
-  if (!checkoutConfig.enabled) {
-    return checkoutError(
-      "Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.",
-    );
+  if (payByCard) {
+    if (!getCardPaymentConfig()) return checkoutError("Plačilo s kartico trenutno ni na voljo. Izberite drug način plačila.");
+  } else {
+    if ((formData.get('paymentSettingsVersion') || 'env') !== checkoutConfig.version) {
+      return checkoutError('Podatki za plačilo so se spremenili. Osvežite stran in ponovno preverite naročilo.');
+    }
+    if (!checkoutConfig.enabled) {
+      return checkoutError(
+        "Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.",
+      );
+    }
   }
 
   const requestHeaders = await headers();
@@ -110,7 +116,8 @@ export async function createCheckoutOrder(
     countryCode: parsed.data.countryCode,
   };
 
-  const { data, error } = await supabase.rpc(checkoutConfig.mode==='bank_transfer'?'create_bank_transfer_order':"create_pending_guest_order", {
+  const bankTransfer = !payByCard && checkoutConfig.mode === 'bank_transfer';
+  const { data, error } = await supabase.rpc(payByCard ? "create_card_order" : bankTransfer ? 'create_bank_transfer_order' : "create_pending_guest_order", {
     input_cart_lines: parsed.data.cart,
     input_email: parsed.data.email,
     input_phone: parsed.data.phone,
@@ -122,7 +129,7 @@ export async function createCheckoutOrder(
     input_idempotency_key: parsed.data.idempotencyKey,
     input_discount_code: parsed.data.discountCode || null,
     input_expected_total_cents: parsed.data.expectedTotalCents,
-    ...(checkoutConfig.mode==='bank_transfer'?{input_bank_details:checkoutConfig.bankTransfer}:{}),
+    ...(bankTransfer?{input_bank_details:checkoutConfig.bankTransfer}:{}),
   });
 
   if (error || !Array.isArray(data) || !data[0]) {
@@ -152,6 +159,16 @@ export async function createCheckoutOrder(
     path: `/narocilo/${reference}`,
     maxAge: 60 * 60 * 24 * 30,
   });
+
+  if (payByCard) {
+    // The order waits for Stripe; the confirmation e-mail is sent once the payment succeeds.
+    try {
+      const clientSecret = await createCardPaymentIntent(supabase, orderId);
+      return { status: "success", message: "Naročilo je ustvarjeno. Potrdite plačilo s kartico.", redirectUrl: `/narocilo/${reference}`, clientSecret };
+    } catch {
+      return checkoutError("Plačila s kartico ni bilo mogoče začeti. Poskusite znova ali pišite na kontakt@bistrava.com.");
+    }
+  }
 
   const { data: order } = await supabase
     .from("orders")

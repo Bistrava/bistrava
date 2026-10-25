@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import { getCartCatalogSnapshot } from "@/lib/cart/server";
-import { getCheckoutConfig } from "@/lib/commerce/config";
+import { getCardPaymentConfig, getCheckoutConfig } from "@/lib/commerce/config";
 import { getActiveShippingRates } from "@/lib/commerce/shipping";
 
 export const metadata: Metadata = {
@@ -17,6 +17,7 @@ export default async function CheckoutPage() {
     getCheckoutConfig(),
     getCartCatalogSnapshot(),
   ]);
+  const cardPayment = getCardPaymentConfig();
 
   return (
     <>
@@ -32,7 +33,15 @@ export default async function CheckoutPage() {
       </section>
       <section className="section checkout-page">
         <div className="container">
-          <CheckoutForm rates={rates} orderingEnabled={checkoutConfig.enabled} catalog={catalog} bankTransfer={Boolean(checkoutConfig.bankTransfer)} paymentSettingsVersion={checkoutConfig.version} />
+          <CheckoutForm
+            rates={rates}
+            orderingEnabled={checkoutConfig.enabled || Boolean(cardPayment)}
+            catalog={catalog}
+            bankTransfer={Boolean(checkoutConfig.bankTransfer)}
+            standardCheckout={checkoutConfig.enabled}
+            cardPublishableKey={cardPayment?.publishableKey ?? null}
+            paymentSettingsVersion={checkoutConfig.version}
+          />
         </div>
       </section>
     </>

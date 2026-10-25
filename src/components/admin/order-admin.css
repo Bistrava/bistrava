@@ -29,3 +29,9 @@
 .admin-shipment-list { display: grid; gap: .75rem; }
 @media (max-width: 900px) { .admin-shipping-layout { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .admin-order-form-grid { grid-template-columns: 1fr; } .admin-shipping-list > button, .admin-shipment-list > a { align-items: flex-start; flex-wrap: wrap; } }
+/* Full-screen order detail (native <dialog>). */
+.admin-order-overlay { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; background: var(--surface, #f8fcfc); color: inherit; overflow-y: auto; }
+.admin-order-overlay::backdrop { background: rgb(16 50 74 / 45%); }
+.admin-order-overlay-bar { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; padding: .75rem clamp(16px, 3vw, 32px); border-bottom: 1px solid var(--border, #d0e2e8); background: rgb(248 252 252 / 96%); backdrop-filter: blur(10px); }
+.admin-order-overlay-bar .button { display: inline-flex; align-items: center; gap: .5rem; }
+.admin-order-overlay-body { width: min(1240px, calc(100% - 32px)); margin: 1.25rem auto 2.5rem; }

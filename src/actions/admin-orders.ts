@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { getAdminAccess } from "@/lib/auth/admin";
 import { createClient } from "@/lib/supabase/server";
+import { sendOrderStatusEmail } from "@/lib/email/send";
+import { isNotifiedOrderStatus, orderStatusCopy } from "@/lib/email/order-status-copy";
 import { orderManagementSchema, shippingRateSchema, shippingZoneSchema, transferProofSchema, type AdminOrderActionState } from "@/lib/admin/order-management";
 
 function result(form: FormData, status: "success" | "error", fr: string, sl: string): AdminOrderActionState {
@@ -13,6 +15,39 @@ async function adminClient() {
   const access = await getAdminAccess();
   if (access.status !== "authorized" || access.role !== "admin") return null;
   return createClient();
+}
+
+type SessionClient = NonNullable<Awaited<ReturnType<typeof adminClient>>>;
+
+// Informs the customer of a new status; returns whether the e-mail was accepted for delivery.
+async function notifyOrderStatus(supabase: SessionClient, orderId: string, status: string) {
+  if (!isNotifiedOrderStatus(status)) return null;
+  const { data: order } = await supabase
+    .from("orders")
+    .select("reference,email,shipping_address_snapshot,total_cents,order_items(product_name,quantity,line_total_cents),shipments(carrier,tracking_number,tracking_url,created_at)")
+    .eq("id", orderId)
+    .single();
+  if (!order || !Array.isArray(order.order_items) || order.order_items.length === 0) return false;
+  const shipment = Array.isArray(order.shipments)
+    ? [...order.shipments].sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0]
+    : null;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava.com";
+  const sent = await sendOrderStatusEmail({
+    to: String(order.email),
+    idempotencyKey: `order-status:${orderId}:${status}`,
+    data: {
+      customerName: [order.shipping_address_snapshot?.firstName, order.shipping_address_snapshot?.lastName].filter(Boolean).join(" ") || "stranka",
+      orderReference: String(order.reference),
+      orderUrl: new URL(`/narocilo/${order.reference}`, siteUrl).toString(),
+      totalCents: Number(order.total_cents),
+      status,
+      shipment: shipment?.carrier && shipment.tracking_number
+        ? { carrier: String(shipment.carrier), trackingNumber: String(shipment.tracking_number), trackingUrl: shipment.tracking_url ? String(shipment.tracking_url) : null }
+        : null,
+      items: order.order_items.map((item) => ({ name: String(item.product_name), quantity: Number(item.quantity), lineTotalCents: Number(item.line_total_cents) })),
+    },
+  }).catch(() => ({ ok: false as const }));
+  return sent.ok;
 }
 
 function invalidateCommerce() {
@@ -26,6 +61,7 @@ export async function saveAdminOrder(_previous: AdminOrderActionState, form: For
   const parsed = orderManagementSchema.safeParse(Object.fromEntries(form));
   if (!parsed.success) return result(form, "error", "Vérifiez le statut, le transporteur, le numéro de suivi et les champs du formulaire.", "Preverite status, prevoznika, številko za sledenje in polja obrazca.");
   const value = parsed.data;
+  const { data: before } = await supabase.from("orders").select("status").eq("id", value.orderId).maybeSingle();
   const { error } = await supabase.rpc("admin_save_order", {
     input_order_id: value.orderId,
     input_expected_updated_at: value.expectedUpdatedAt,
@@ -45,7 +81,14 @@ export async function saveAdminOrder(_previous: AdminOrderActionState, form: For
     return result(form, "error", "Enregistrement impossible. Vérifiez le statut et la connexion à la base de données.", "Shranjevanje ni uspelo. Preverite status in povezavo s podatkovno bazo.");
   }
   invalidateCommerce();
-  return result(form, "success", "Commande et historique enregistrés.", "Naročilo in zgodovina sta shranjena.");
+  revalidatePath("/narocilo/[reference]", "page");
+  // The order is saved either way; an e-mail failure is reported to staff, never rolled back.
+  const emailed = before && before.status !== value.status ? await notifyOrderStatus(supabase, value.orderId, value.status) : null;
+  if (emailed === null) return result(form, "success", "Commande et historique enregistrés.", "Naročilo in zgodovina sta shranjena.");
+  const badge = isNotifiedOrderStatus(value.status) ? orderStatusCopy(value.status, "").badge : value.status;
+  return emailed
+    ? result(form, "success", `Commande et historique enregistrés. E-mail « ${badge} » envoyé au client.`, `Naročilo in zgodovina sta shranjena. E-sporočilo »${badge}« je poslano stranki.`)
+    : result(form, "success", "Commande et historique enregistrés. L’e-mail au client n’a pas pu être envoyé : contactez-le directement.", "Naročilo in zgodovina sta shranjena. E-sporočila stranki ni bilo mogoče poslati; obvestite jo neposredno.");
 }
 
 export async function confirmTransferProof(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  ArrowLeft,
   ArrowRight,
   Banknote,
   Boxes,
@@ -19,7 +20,7 @@ import {
   UserRound,
   UsersRound,
 } from "lucide-react";
-import { useDeferredValue, useMemo, useState } from "react";
+import { type ReactNode, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import { AdminNotificationsSeen } from "./admin-notifications";
@@ -83,6 +84,7 @@ const copy = {
     noOrders: "Ni naročil, ki bi ustrezala filtrom.",
     noCustomers: "Ni kupcev, ki bi ustrezali iskanju.",
     orderDetail: "Podrobnosti naročila",
+    backToOrders: "Nazaj na naročila",
     placed: "Oddano",
     updated: "Posodobljeno",
     contact: "Kontaktni podatki",
@@ -182,6 +184,7 @@ const copy = {
     noOrders: "Aucune commande ne correspond aux filtres.",
     noCustomers: "Aucun client ne correspond à la recherche.",
     orderDetail: "Détails de la commande",
+    backToOrders: "Retour aux commandes",
     placed: "Passée le",
     updated: "Mise à jour",
     contact: "Coordonnées",
@@ -379,12 +382,15 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const [status, setStatus] = useState<"all" | AdminOrderStatus>("all");
   const [selectedOrderId, setSelectedOrderId] = useState(initialOrderId || data.orders[0]?.id || "");
   const [linkedOrderId, setLinkedOrderId] = useState(initialOrderId);
+  // The detail opens full screen on click (or from a notification link) instead of below the list.
+  const [orderOpen, setOrderOpen] = useState(Boolean(initialOrderId));
   // A notification can navigate to another order without remounting this page.
   // Apply that explicit navigation before committing an unrelated order detail.
   if (linkedOrderId !== initialOrderId) {
     setLinkedOrderId(initialOrderId);
     if (initialOrderId) {
       setSelectedOrderId(initialOrderId);
+      setOrderOpen(true);
       setView("orders");
       setQuery("");
       setStatus("all");
@@ -435,7 +441,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const shipmentStatusLabel = (value: string | null | undefined) => value
     ? shipmentStatusCopy[value]?.[locale] ?? value
     : labels.notAssigned;
-  const providerLabel = (value: string | null | undefined) => value === 'bank_transfer' ? (locale==='fr'?'Virement bancaire':'Bančno nakazilo') : value === "manual_review"
+  const providerLabel = (value: string | null | undefined) => value === 'bank_transfer' ? (locale==='fr'?'Virement bancaire':'Bančno nakazilo') : value === 'stripe' ? (locale==='fr'?'Carte (Stripe)':'Kartica (Stripe)') : value === "manual_review"
     ? locale === "fr" ? "Validation manuelle" : "Ročni pregled"
     : value || labels.notAssigned;
   const activeOrders = data.orders.filter((order) => !["completed", "cancelled", "refunded"].includes(order.status)).length;
@@ -486,7 +492,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
           <section className="admin-order-list card">
             <div className="admin-order-list-head"><span>{labels.reference}</span><span>{labels.customer}</span><span>{labels.total}</span><span>{labels.payment}</span><span>{labels.status}</span></div>
             {filteredOrders.map((order) => (
-              <button className={selectedOrder?.id === order.id ? "is-selected" : undefined} key={order.id} onClick={() => setSelectedOrderId(order.id)} type="button">
+              <button className={selectedOrder?.id === order.id ? "is-selected" : undefined} key={order.id} onClick={() => { setSelectedOrderId(order.id); setOrderOpen(true); }} type="button">
                 <span><strong>{order.reference}</strong><small>{formatDate(order.placedAt || order.createdAt)}</small></span>
                 <span><strong>{customerName(order)}</strong><small>{order.email}</small></span>
                 <strong>{formatMoney(order.totalCents)}</strong>
@@ -497,7 +503,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
             ))}
             {filteredOrders.length === 0 ? <p className="admin-operational-empty">{labels.noOrders}</p> : null}
           </section>
-          {selectedOrder ? <OrderDetail canManage={canManage && data.source === "live"} trackNotifications={data.source === "live"} formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
+          {selectedOrder && orderOpen ? <OrderOverlay closeLabel={labels.backToOrders} onClose={() => setOrderOpen(false)}><OrderDetail canManage={canManage && data.source === "live"} trackNotifications={data.source === "live"} formatDate={formatDate} formatMoney={formatMoney} labels={labels} order={selectedOrder} paymentStatusLabel={paymentStatusLabel} providerLabel={providerLabel} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /></OrderOverlay> : null}
         </div>
       ) : (
         <div className="admin-order-workspace" role="tabpanel">
@@ -513,7 +519,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
             ))}
             {filteredCustomers.length === 0 ? <p className="admin-operational-empty">{labels.noCustomers}</p> : null}
           </section>
-          {selectedCustomer ? <CustomerDetail customer={selectedCustomer} formatDate={formatDate} formatMoney={formatMoney} labels={labels} onOpenOrder={(id) => { setSelectedOrderId(id); setView("orders"); setQuery(""); }} statusLabel={statusLabel} /> : null}
+          {selectedCustomer ? <CustomerDetail customer={selectedCustomer} formatDate={formatDate} formatMoney={formatMoney} labels={labels} onOpenOrder={(id) => { setSelectedOrderId(id); setOrderOpen(true); setView("orders"); setQuery(""); }} statusLabel={statusLabel} /> : null}
         </div>
       )}
     </div>
@@ -521,6 +527,25 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
 }
 
 type Labels = typeof copy.sl | typeof copy.fr;
+
+// Native modal dialog: traps focus, closes with Escape and keeps the list underneath unchanged.
+function OrderOverlay({ children, closeLabel, onClose }: { children: ReactNode; closeLabel: string; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  // No close() on cleanup: it would fire onClose during React's development re-mount,
+  // and unmounting an open dialog already removes it from the top layer.
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (dialog && !dialog.open) dialog.showModal();
+  }, []);
+  return (
+    <dialog className="admin-order-overlay" onClose={onClose} ref={dialogRef}>
+      <div className="admin-order-overlay-bar">
+        <button className="button button-secondary" onClick={() => dialogRef.current?.close()} type="button"><ArrowLeft aria-hidden="true" size={18} />{closeLabel}</button>
+      </div>
+      <div className="admin-order-overlay-body">{children}</div>
+    </dialog>
+  );
+}
 
 function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paymentStatusLabel, shipmentStatusLabel, providerLabel, canManage, trackNotifications }: { order: AdminOrder; labels: Labels; formatDate: (value: string | null) => string; formatMoney: (value: number) => string; statusLabel: (value: AdminOrderStatus) => string; paymentStatusLabel: (value: string | null | undefined) => string; shipmentStatusLabel: (value: string | null | undefined) => string; providerLabel: (value: string | null | undefined) => string; canManage: boolean; trackNotifications: boolean }) {
   const timeline = [

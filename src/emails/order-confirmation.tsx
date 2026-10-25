@@ -29,6 +29,7 @@ export default function OrderConfirmationEmail({
   totalCents,
   items,
   bankTransfer,
+  cardPaid,
 }: OrderConfirmationEmailData) {
   return (
     <EmailLayout
@@ -39,7 +40,7 @@ export default function OrderConfirmationEmail({
       <Text style={styles.text}>Pozdravljeni, {customerName}.</Text>
       <Text style={styles.text}>
         Naročilo <strong style={styles.nowrap}>{orderReference}</strong> smo prejeli.{" "}
-        {bankTransfer ? 'Spodaj so bančni podatki in navodila za dokončno potrditev naročila.' : 'Ko bo plačilo varno potrjeno in naročilo pripravljeno, boste prejeli novo sporočilo.'}
+        {bankTransfer ? 'Spodaj so bančni podatki in navodila za dokončno potrditev naročila.' : cardPaid ? 'Plačilo s kartico je uspešno potrjeno. Ko bo naročilo pripravljeno za odpremo, boste prejeli novo sporočilo.' : 'Ko bo plačilo varno potrjeno in naročilo pripravljeno, boste prejeli novo sporočilo.'}
       </Text>
 
       <Section className="email-panel" style={styles.orderBox}>
@@ -81,6 +82,12 @@ export default function OrderConfirmationEmail({
           <Text style={styles.boxTitle}>Naslednji korak: pošljite potrdilo o nakazilu</Text>
           <Text style={styles.text}>Po opravljenem nakazilu odgovorite na to e-sporočilo, priložite potrdilo o nakazilu in navedite referenco <strong style={styles.nowrap}>{orderReference}</strong>, da pospešimo obdelavo naročila.</Text>
           <Text style={styles.text}>Vaše naročilo bo <strong>dokončno potrjeno ob prejemu potrdila o nakazilu</strong>. Prejem sredstev preverimo ločeno. Če ste že plačali, ne nakazujte ponovno.</Text>
+        </Section>
+      ) : null}
+      {cardPaid ? (
+        <Section className="email-panel" style={styles.proofBox}>
+          <Text style={styles.boxTitle}>Plačilo s kartico: plačano</Text>
+          <Text style={styles.text}>Znesek <strong>{formatMoney(totalCents)}</strong> je bil plačan s kartico prek varnega plačilnega sistema Stripe. Podatkov kartice Bistrava ne prejme in ne hrani.</Text>
         </Section>
       ) : null}
       {!bankTransfer ? (

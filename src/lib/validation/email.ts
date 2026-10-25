@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { bankTransferSchema } from '@/lib/payments/bank-transfer';
+import { notifiedOrderStatuses } from "@/lib/email/order-status-copy";
 
 export const emailRecipientSchema = z.string().trim().toLowerCase().email().max(254);
 
@@ -25,3 +26,16 @@ export const orderConfirmationEmailSchema = z.object({
 export type OrderConfirmationEmailData = z.infer<
   typeof orderConfirmationEmailSchema
 >;
+
+export const orderStatusEmailSchema = orderConfirmationEmailSchema.pick({
+  customerName: true, orderReference: true, orderUrl: true, totalCents: true, items: true,
+}).extend({
+  status: z.enum(notifiedOrderStatuses),
+  shipment: z.object({
+    carrier: z.string().trim().min(1).max(120),
+    trackingNumber: z.string().trim().min(1).max(200),
+    trackingUrl: z.string().url().startsWith("https://").nullable(),
+  }).nullable().optional(),
+});
+
+export type OrderStatusEmailData = z.infer<typeof orderStatusEmailSchema>;

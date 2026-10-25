@@ -14,6 +14,7 @@ export default function OrderStatusUpdateEmail({
   items,
   status,
   shipment,
+  paymentUrl,
 }: OrderStatusEmailData) {
   const copy = orderStatusCopy(status, orderReference);
   return (
@@ -59,7 +60,11 @@ export default function OrderStatusUpdateEmail({
         </Row>
       </Section>
 
-      <Button href={orderUrl} style={styles.button}>Oglejte si naročilo</Button>
+      {paymentUrl ? (
+        <Button href={paymentUrl} style={styles.payButton}>Plačajte {formatMoney(totalCents)} s kartico</Button>
+      ) : (
+        <Button href={orderUrl} style={styles.button}>Oglejte si naročilo</Button>
+      )}
       <Text style={styles.smallText}>Če imate vprašanje o naročilu, odgovorite na to sporočilo in navedite referenco {orderReference}.</Text>
     </EmailLayout>
   );
@@ -95,6 +100,7 @@ const styles = {
   totalColumn: { textAlign: "right" as const, whiteSpace: "nowrap" as const },
   totalLabel: { color: "#10324A", fontSize: "16px", fontWeight: 700, margin: 0 },
   total: { color: "#10324A", fontSize: "20px", fontWeight: 800, margin: 0, textAlign: "right" as const },
+  payButton: { backgroundColor: "#148F83", borderRadius: "8px", color: "#FFFFFF", display: "inline-block", fontSize: "16px", fontWeight: 700, padding: "15px 22px" },
   button: { backgroundColor: "#10324A", borderRadius: "8px", color: "#FFFFFF", display: "inline-block", fontSize: "15px", fontWeight: 700, padding: "13px 20px" },
   smallText: { color: "#647780", fontSize: "12px", lineHeight: "19px", marginTop: "20px" },
 };

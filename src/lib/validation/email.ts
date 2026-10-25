@@ -31,6 +31,8 @@ export const orderStatusEmailSchema = orderConfirmationEmailSchema.pick({
   customerName: true, orderReference: true, orderUrl: true, totalCents: true, items: true,
 }).extend({
   status: z.enum(notifiedOrderStatuses),
+  /** Signed card payment link, sent with the "awaiting_payment" e-mail of card orders. */
+  paymentUrl: z.string().url().startsWith("https://").nullable().optional(),
   shipment: z.object({
     carrier: z.string().trim().min(1).max(120),
     trackingNumber: z.string().trim().min(1).max(200),

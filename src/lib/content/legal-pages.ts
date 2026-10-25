@@ -234,6 +234,7 @@ export const legalPages: Record<LegalPageKey, LegalPageContent> = {
         paragraphs: [
           "Številko kartice, datum veljavnosti in varnostno kodo obdela Stripe Payments Europe, Limited (Irska). Ti podatki ne prehajajo prek strežnikov Bistrave in jih Bistrava ne hrani; v administraciji vidimo samo stanje plačila in znesek. Banka izdajateljica lahko zahteva dodatno potrditev, na primer v svoji mobilni aplikaciji (3-D Secure).",
           "Kartica je bremenjena ob potrditvi plačila na blagajni. Naročilo je potrjeno, ko plačilni sistem potrdi uspešno plačilo; potrditev prejmete po e-pošti. Če plačilo ne uspe, kartica ni bremenjena, naročilo pa ostane shranjeno do ponovnega poskusa ali preklica. Morebitno povračilo izvedemo na isto kartico.",
+          "Naročilo, ki čaka na plačilo s kartico, lahko plačate tudi prek osebne povezave, ki jo prejmete po e-pošti. Povezava odpre varno plačilno stran za točno to naročilo in znesek; ne posredujte je drugim.",
         ],
       },
       {

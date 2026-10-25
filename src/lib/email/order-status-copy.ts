@@ -1,5 +1,6 @@
 // Customer-facing wording for each order status that triggers an automatic e-mail.
-export const notifiedOrderStatuses = ["paid", "processing", "shipped", "completed", "cancelled"] as const;
+// "awaiting_payment" sends the payment details: bank instructions or, for card orders, a payment link.
+export const notifiedOrderStatuses = ["awaiting_payment", "paid", "processing", "shipped", "completed", "cancelled"] as const;
 export type NotifiedOrderStatus = (typeof notifiedOrderStatuses)[number];
 
 export function isNotifiedOrderStatus(status: string): status is NotifiedOrderStatus {
@@ -8,6 +9,14 @@ export function isNotifiedOrderStatus(status: string): status is NotifiedOrderSt
 
 export function orderStatusCopy(status: NotifiedOrderStatus, reference: string) {
   switch (status) {
+    case "awaiting_payment":
+      return {
+        subject: `Bistrava — plačilo naročila ${reference}`,
+        title: "Naročilo čaka na plačilo.",
+        badge: "Čaka na plačilo",
+        intro: `Naročilo ${reference} čaka na plačilo. Plačate ga lahko varno s kartico prek spodnjega gumba.`,
+        next: "Povezava je namenjena samo vam, zato je ne posredujte drugim. Podatke kartice varno obdela Stripe. Po uspešnem plačilu prejmete potrditev.",
+      };
     case "paid":
       return {
         subject: `Bistrava — plačilo prejeto ${reference}`,

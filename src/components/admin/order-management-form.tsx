@@ -1,8 +1,8 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { Save, Truck } from "lucide-react";
-import { confirmTransferProof, saveAdminOrder } from "@/actions/admin-orders";
+import { Save, Send, Truck } from "lucide-react";
+import { confirmTransferProof, resendPaymentInformation, saveAdminOrder } from "@/actions/admin-orders";
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import { availableOrderStatuses, initialOrderActionState, shipmentStatusesForOrder } from "@/lib/admin/order-management";
 import type { AdminOrder, AdminOrderStatus } from "@/lib/admin/orders";
@@ -28,6 +28,7 @@ export function OrderManagementForm({ order, statusLabel, shipmentStatusLabel }:
   }
 
   return <>
+    {order.status === "awaiting_payment" && ["bank_transfer", "card"].includes(order.checkoutMode) ? <PaymentInformationForm order={order} /> : null}
     {order.checkoutMode === 'bank_transfer' ? <TransferProofForm order={order} /> : null}
     <form action={action} className="admin-order-edit">
     <input name="adminLocale" type="hidden" value={locale} />
@@ -62,6 +63,24 @@ export function OrderManagementForm({ order, statusLabel, shipmentStatusLabel }:
     </fieldset>
     {state.message ? <p aria-live="polite" className={`admin-operation-message is-${state.status}`} role={state.status === "error" ? "alert" : "status"}>{state.message}</p> : null}
   </form></>;
+}
+
+// Sends the bank instructions or the card payment link again, e.g. after a declined card.
+function PaymentInformationForm({ order }: { order: AdminOrder }) {
+  const { locale } = useAdminLanguage();
+  const fr = locale === "fr";
+  const [state, action, pending] = useActionState(resendPaymentInformation, initialOrderActionState);
+  const card = order.checkoutMode === "card";
+  return <form action={action} className="admin-order-edit-proof admin-payment-info">
+    <input name="adminLocale" type="hidden" value={locale} />
+    <input name="orderId" type="hidden" value={order.id} />
+    <h3>{fr ? "Informations de paiement" : "Podatki za plačilo"}</h3>
+    <p>{card
+      ? (fr ? "Envoie au client un e-mail avec un lien sécurisé pour payer cette commande par carte." : "Stranki pošlje e-sporočilo z varno povezavo za plačilo tega naročila s kartico.")
+      : (fr ? "Renvoie au client l’e-mail avec les coordonnées bancaires, le montant exact et la référence." : "Stranki ponovno pošlje e-sporočilo z bančnimi podatki, točnim zneskom in referenco.")}</p>
+    <button className="button button-secondary" disabled={pending} type="submit"><Send size={17} aria-hidden="true" />{pending ? (fr ? "Envoi…" : "Pošiljanje…") : (fr ? "Envoyer les informations de paiement" : "Pošlji podatke za plačilo")}</button>
+    {state.message ? <p aria-live="polite" className={`admin-operation-message is-${state.status}`} role={state.status === "error" ? "alert" : "status"}>{state.message}</p> : null}
+  </form>;
 }
 
 function TransferProofForm({ order }: { order: AdminOrder }) {

@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { getAdminAccess } from "@/lib/auth/admin";
 import { createClient } from "@/lib/supabase/server";
-import { sendOrderStatusEmail } from "@/lib/email/send";
+import { sendOrderConfirmation, sendOrderStatusEmail } from "@/lib/email/send";
+import { paymentLinkUrl } from "@/lib/payments/payment-link";
 import { isNotifiedOrderStatus, orderStatusCopy } from "@/lib/email/order-status-copy";
 import { orderManagementSchema, shippingRateSchema, shippingZoneSchema, transferProofSchema, type AdminOrderActionState } from "@/lib/admin/order-management";
 
@@ -19,32 +20,46 @@ async function adminClient() {
 
 type SessionClient = NonNullable<Awaited<ReturnType<typeof adminClient>>>;
 
-// Informs the customer of a new status; returns whether the e-mail was accepted for delivery.
-async function notifyOrderStatus(supabase: SessionClient, orderId: string, status: string) {
+// Informs the customer of a new status; returns whether the e-mail was accepted for delivery
+// (null when the status sends nothing). "awaiting_payment" sends the payment details.
+async function notifyOrderStatus(supabase: SessionClient, orderId: string, status: string, idempotencyKey = `order-status:${orderId}:${status}`) {
   if (!isNotifiedOrderStatus(status)) return null;
   const { data: order } = await supabase
     .from("orders")
-    .select("reference,email,shipping_address_snapshot,total_cents,order_items(product_name,quantity,line_total_cents),shipments(carrier,tracking_number,tracking_url,created_at)")
+    .select("reference,email,checkout_mode,bank_transfer_snapshot,shipping_address_snapshot,total_cents,order_items(product_name,quantity,line_total_cents),shipments(carrier,tracking_number,tracking_url,created_at)")
     .eq("id", orderId)
     .single();
   if (!order || !Array.isArray(order.order_items) || order.order_items.length === 0) return false;
+  if (status === "awaiting_payment" && order.checkout_mode !== "card" && !(order.checkout_mode === "bank_transfer" && order.bank_transfer_snapshot)) return null;
   const shipment = Array.isArray(order.shipments)
     ? [...order.shipments].sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))[0]
     : null;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava.com";
+  const common = {
+    customerName: [order.shipping_address_snapshot?.firstName, order.shipping_address_snapshot?.lastName].filter(Boolean).join(" ") || "stranka",
+    orderReference: String(order.reference),
+    orderUrl: new URL(`/narocilo/${order.reference}`, siteUrl).toString(),
+    totalCents: Number(order.total_cents),
+    items: order.order_items.map((item) => ({ name: String(item.product_name), quantity: Number(item.quantity), lineTotalCents: Number(item.line_total_cents) })),
+  };
+  if (status === "awaiting_payment" && order.checkout_mode === "bank_transfer") {
+    // Bank orders: the same branded bank-instructions e-mail as at checkout.
+    const sent = await sendOrderConfirmation({ to: String(order.email), idempotencyKey, data: { ...common, bankTransfer: order.bank_transfer_snapshot } })
+      .catch(() => ({ ok: false as const }));
+    return sent.ok;
+  }
+  const paymentUrl = status === "awaiting_payment" ? paymentLinkUrl(orderId, String(order.reference)) : null;
+  if (status === "awaiting_payment" && !paymentUrl) return false;
   const sent = await sendOrderStatusEmail({
     to: String(order.email),
-    idempotencyKey: `order-status:${orderId}:${status}`,
+    idempotencyKey,
     data: {
-      customerName: [order.shipping_address_snapshot?.firstName, order.shipping_address_snapshot?.lastName].filter(Boolean).join(" ") || "stranka",
-      orderReference: String(order.reference),
-      orderUrl: new URL(`/narocilo/${order.reference}`, siteUrl).toString(),
-      totalCents: Number(order.total_cents),
+      ...common,
       status,
+      paymentUrl,
       shipment: shipment?.carrier && shipment.tracking_number
         ? { carrier: String(shipment.carrier), trackingNumber: String(shipment.tracking_number), trackingUrl: shipment.tracking_url ? String(shipment.tracking_url) : null }
         : null,
-      items: order.order_items.map((item) => ({ name: String(item.product_name), quantity: Number(item.quantity), lineTotalCents: Number(item.line_total_cents) })),
     },
   }).catch(() => ({ ok: false as const }));
   return sent.ok;
@@ -89,6 +104,21 @@ export async function saveAdminOrder(_previous: AdminOrderActionState, form: For
   return emailed
     ? result(form, "success", `Commande et historique enregistrés. E-mail « ${badge} » envoyé au client.`, `Naročilo in zgodovina sta shranjena. E-sporočilo »${badge}« je poslano stranki.`)
     : result(form, "success", "Commande et historique enregistrés. L’e-mail au client n’a pas pu être envoyé : contactez-le directement.", "Naročilo in zgodovina sta shranjena. E-sporočila stranki ni bilo mogoče poslati; obvestite jo neposredno.");
+}
+
+/** Resends the payment details (bank instructions or card payment link) for an order awaiting payment. */
+export async function resendPaymentInformation(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {
+  const supabase = await adminClient();
+  if (!supabase) return result(form, "error", "Cette action nécessite une session administrateur valide.", "Za to dejanje potrebujete veljavno skrbniško sejo.");
+  const orderId = String(form.get("orderId") ?? "");
+  if (!/^[0-9a-f-]{36}$/i.test(orderId)) return result(form, "error", "Commande introuvable.", "Naročila ni mogoče najti.");
+  const { data: order } = await supabase.from("orders").select("status").eq("id", orderId).maybeSingle();
+  if (order?.status !== "awaiting_payment") return result(form, "error", "Les informations de paiement s’envoient uniquement pour une commande en attente de paiement.", "Podatke za plačilo lahko pošljete samo za naročilo, ki čaka na plačilo.");
+  const sent = await notifyOrderStatus(supabase, orderId, "awaiting_payment", `payment-info:${orderId}:${Date.now()}`);
+  if (sent === null) return result(form, "error", "Cette commande n’a ni virement bancaire ni paiement par carte à envoyer.", "To naročilo nima bančnega nakazila ali plačila s kartico za pošiljanje.");
+  return sent
+    ? result(form, "success", "Informations de paiement envoyées au client.", "Podatki za plačilo so poslani stranki.")
+    : result(form, "error", "L’e-mail n’a pas pu être envoyé. Vérifiez la messagerie puis réessayez.", "E-sporočila ni bilo mogoče poslati. Preverite e-poštni predal in poskusite znova.");
 }
 
 export async function confirmTransferProof(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {

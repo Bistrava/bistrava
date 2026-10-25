@@ -14,6 +14,7 @@ import {
   updateGoogleConsent,
   type ConsentChoice,
 } from "@/lib/analytics/consent";
+import { allowsAdvertising, GOOGLE_ADS_ID } from "@/lib/analytics/google-ads";
 
 // Shown (Instaon SRL) advertising tag manager; loaded only with advertising consent.
 const SHOWN_PIXEL_SRC = "https://shown.io/metrics/L73YrjA78M";
@@ -22,6 +23,8 @@ export function Analytics() {
   const pathname = usePathname();
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   const ga4Id = process.env.NEXT_PUBLIC_GA4_ID;
+  const adsId = GOOGLE_ADS_ID;
+  // Withdrawing "Dovoli vse" already reloads below, which also removes the Google Ads tag.
   const hasTags = Boolean(gtmId || ga4Id);
   const [choice, setChoice] = useState<ConsentChoice | null>(null);
   const [ready, setReady] = useState(false);
@@ -41,6 +44,7 @@ export function Analytics() {
       currentChoice.current = saved;
       setChoice(saved);
       setReady(true);
+      window.dispatchEvent(new CustomEvent("bistrava:consent", { detail: saved }));
       if (withdrawn) window.location.reload();
     }
 
@@ -69,11 +73,18 @@ export function Analytics() {
     updateGoogleConsent(window, next);
     currentChoice.current = next;
     setChoice(next);
+    window.dispatchEvent(new CustomEvent("bistrava:consent", { detail: next }));
     if (withdrawn) window.location.reload();
     return true;
   }
 
   if (pathname.startsWith("/admin")) return null;
+
+  // GA4 runs with statistics consent; Google Ads conversion measurement only with "Dovoli vse".
+  const useGa4 = allowsStatistics(choice) && Boolean(ga4Id) && !gtmId;
+  const useAds = allowsAdvertising(choice) && Boolean(adsId);
+  const loadGtag = useGa4 || useAds;
+  const gtagLoaderId = useGa4 ? ga4Id : adsId;
 
   return (
     <>
@@ -86,13 +97,23 @@ export function Analytics() {
           })(window,document,'script','dataLayer','${gtmId}');`}
         </Script>
       ) : null}
-      {allowsStatistics(choice) && ga4Id && !gtmId ? (
+      {loadGtag ? (
         <>
-          <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} strategy="afterInteractive" />
-          <Script id="ga4-config" strategy="afterInteractive">
-            {`window.gtag('js', new Date()); window.gtag('config', '${ga4Id}', { send_page_view: true });`}
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${gtagLoaderId}`} strategy="afterInteractive" />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`window.gtag('js', new Date());`}
           </Script>
         </>
+      ) : null}
+      {useGa4 ? (
+        <Script id="ga4-config" strategy="afterInteractive">
+          {`window.gtag('config', '${ga4Id}', { send_page_view: true });`}
+        </Script>
+      ) : null}
+      {useAds ? (
+        <Script id="google-ads-config" strategy="afterInteractive">
+          {`window.gtag('config', '${adsId}'); window.__bistravaAdsReady = true; window.dispatchEvent(new Event('bistrava:ads-ready'));`}
+        </Script>
       ) : null}
       {choice === "marketing" ? <Script id="shown-pixel" src={SHOWN_PIXEL_SRC} strategy="afterInteractive" /> : null}
       <ConsentBanner ready={ready} choice={choice} onChoose={chooseConsent} />

@@ -38,32 +38,37 @@ export async function sendOrderConfirmation(input: {
   const to = emailRecipientSchema.parse(input.to);
   const data = orderConfirmationEmailSchema.parse(input.data);
   const idempotencyKey = z.string().min(8).max(256).parse(input.idempotencyKey);
-  if (data.bankTransfer && mailboxConfigured()) {
+  if ((data.bankTransfer || data.cardPaid) && mailboxConfigured()) {
     const db=createAdminClient();
     if (!db) return {ok:false as const,reason:'not_configured' as const};
     const html = await render(OrderConfirmationEmail(data));
     const bank=data.bankTransfer;
     const eventId=randomUUID();
     const messageId=`<${eventId}@bistrava.com>`;
-    const reserved=await db.from('email_events').insert({id:eventId,email_type:'order_bank_transfer',recipient_hash:createHash('sha256').update(to).digest('hex'),
+    const reserved=await db.from('email_events').insert({id:eventId,email_type:bank?'order_bank_transfer':'order_card_paid',recipient_hash:createHash('sha256').update(to).digest('hex'),
       idempotency_key:idempotencyKey,status:'queued',provider_message_id:messageId});
     if(reserved.error) {
       const previous=await db.from('email_events').select('status,provider_message_id').eq('idempotency_key',idempotencyKey).maybeSingle();
       return {ok:previous.data?.status==='sent',providerMessageId:previous.data?.provider_message_id};
     }
-    const text=[`Pozdravljeni, ${data.customerName}.`,'',`Prejeli smo naročilo ${data.orderReference}. Plačilo še ni prejeto.`,
-      ...data.items.map(item=>`${item.quantity} × ${item.name}: ${formatMoney(item.lineTotalCents)}`),'',
+    const itemLines=data.items.map(item=>`${item.quantity} × ${item.name}: ${formatMoney(item.lineTotalCents)}`);
+    const text=(bank?[`Pozdravljeni, ${data.customerName}.`,'',`Prejeli smo naročilo ${data.orderReference}. Plačilo še ni prejeto.`,
+      ...itemLines,'',
       `Končni znesek za nakazilo (z dostavo in upoštevanimi popusti): ${formatMoney(data.totalCents)}`,'',
       'NAVODILA ZA BANČNO NAKAZILO',`Prejemnik: ${bank.beneficiary}`,`IBAN: ${bank.iban}`,`Banka: ${bank.bankName}`,
       ...(bank.bic?[`BIC / SWIFT: ${bank.bic}`]:[]),'Valuta: EUR',`Namen / referenca: ${data.orderReference}`,'',
       'Nakazilo izvedite v svoji spletni ali mobilni banki. V namen plačila vpišite zgornjo referenco naročila.',
       `Po opravljenem nakazilu odgovorite na to e-sporočilo ali pišite na ${mailboxAddress} ter priložite potrdilo o nakazilu in navedite referenco ${data.orderReference}, da pospešimo obdelavo naročila.`,
       'Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu. Prejem sredstev preverimo ločeno. Če ste že plačali, ne nakazujte ponovno.',
-      `Za pomoč odgovorite na to sporočilo ali pišite na ${mailboxAddress}.`].join('\n');
+      `Za pomoč odgovorite na to sporočilo ali pišite na ${mailboxAddress}.`]
+      :[`Pozdravljeni, ${data.customerName}.`,'',`Prejeli smo naročilo ${data.orderReference} in plačilo s kartico je uspešno potrjeno.`,
+      ...itemLines,'',`Plačano skupaj (z dostavo in upoštevanimi popusti): ${formatMoney(data.totalCents)}`,'',
+      'Ko bo naročilo pripravljeno za odpremo, boste prejeli novo sporočilo.',`Naročilo: ${data.orderUrl}`,'',
+      `Za pomoč odgovorite na to sporočilo ali pišite na ${mailboxAddress}.`]).join('\n');
     const transport=smtpTransport();
     try {
       const sent=await transport.sendMail({from:{name:'Bistrava',address:mailboxAddress},to,replyTo:mailboxAddress,
-        subject:`Bistrava — navodila za plačilo ${data.orderReference}`,text,html,messageId});
+        subject:bank?`Bistrava — navodila za plačilo ${data.orderReference}`:`Bistrava — potrditev plačila ${data.orderReference}`,text,html,messageId});
       const ok=sent.accepted.length>0;
       await db.from('email_events').update({status:ok?'sent':'failed',error_code:ok?null:'smtp_rejected',occurred_at:new Date().toISOString()}).eq('id',eventId);
       return {ok,providerMessageId:messageId};

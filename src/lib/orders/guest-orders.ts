@@ -12,6 +12,8 @@ export type GuestOrder = {
   subtotalCents: number;
   discountCents: number;
   bankTransfer: boolean;
+  /** Present for card orders; the PaymentIntent id lets the page re-check a delayed Stripe confirmation. */
+  cardPayment: { status: string; intentId: string | null } | null;
   transferProofReceivedAt: string | null;
   shippingCents: number;
   totalCents: number;
@@ -44,7 +46,7 @@ export async function getGuestOrder(reference: string): Promise<GuestOrder | nul
   const { data, error } = await supabase
     .from("orders")
     .select(
-      "reference,status,email,subtotal_cents,discount_cents,checkout_mode,transfer_proof_received_at,shipping_cents,total_cents,shipping_address_snapshot,created_at,order_items(product_name,sku,quantity,unit_price_cents,line_total_cents)",
+      "reference,status,email,subtotal_cents,discount_cents,checkout_mode,transfer_proof_received_at,shipping_cents,total_cents,shipping_address_snapshot,created_at,order_items(product_name,sku,quantity,unit_price_cents,line_total_cents),payments(status,provider,provider_reference)",
     )
     .eq("reference", reference)
     .eq("guest_access_token_hash", hashGuestOrderToken(token))
@@ -52,6 +54,7 @@ export async function getGuestOrder(reference: string): Promise<GuestOrder | nul
 
   if (error || !data) return null;
   const address = data.shipping_address_snapshot;
+  const stripePayment = Array.isArray(data.payments) ? data.payments.find((payment) => payment.provider === "stripe") : undefined;
   return {
     reference: String(data.reference),
     status: String(data.status),
@@ -59,6 +62,9 @@ export async function getGuestOrder(reference: string): Promise<GuestOrder | nul
     subtotalCents: Number(data.subtotal_cents),
     discountCents:Number(data.discount_cents),
     bankTransfer: data.checkout_mode === 'bank_transfer',
+    cardPayment: data.checkout_mode === "card"
+      ? { status: String(stripePayment?.status ?? "pending"), intentId: stripePayment?.provider_reference ? String(stripePayment.provider_reference) : null }
+      : null,
     transferProofReceivedAt: data.transfer_proof_received_at ?? null,
     shippingCents: Number(data.shipping_cents),
     totalCents: Number(data.total_cents),

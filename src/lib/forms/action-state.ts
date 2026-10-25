@@ -8,7 +8,8 @@ export type AdminProductActionState = Omit<FormActionState, "redirectUrl"> & {
   redirectUrl?: `/admin/izdelki/${string}`;
   updatedAt?: string;
 };
-export type CheckoutActionState = FormActionState;
+/** clientSecret is returned only for card orders, so the browser can confirm the Stripe payment. */
+export type CheckoutActionState = FormActionState & { clientSecret?: string };
 export type InquiryActionState = FormActionState;
 export const initialAdminProductActionState: AdminProductActionState = { status: "idle", message: "" };
 export const initialCheckoutState: CheckoutActionState = { status: "idle", message: "" };

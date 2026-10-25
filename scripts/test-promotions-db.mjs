@@ -220,6 +220,8 @@ try {
   await db.exec(await readFile(new URL("../supabase/tests/bank_transfer.sql", import.meta.url), "utf8")); checks++;
   stage = "payment settings permissions, concurrency and checkout account changes";
   await db.exec(await readFile(new URL("../supabase/tests/payment_settings.sql", import.meta.url), "utf8")); checks++;
+  stage = "Stripe card orders, verified payment events and idempotent confirmation";
+  await db.exec(await readFile(new URL("../supabase/tests/card_payments.sql", import.meta.url), "utf8")); checks++;
   console.log(JSON.stringify({ status: "passed", checks, migrations: migrations.length, database: "ephemeral PGlite; no Supabase writes" }));
 } catch (error) {
   console.error(JSON.stringify({ status: "failed", stage, checks, message: error.message, detail: error.detail, where: error.where }));

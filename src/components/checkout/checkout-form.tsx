@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, LockKeyhole, ShoppingBag, Truck } from "lucide-react";
+import { CheckCircle2, CreditCard, Landmark, LockKeyhole, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 import type { Route } from "next";
 import Link from "next/link";
@@ -11,8 +11,9 @@ import {
   createCheckoutOrder,
   quoteCheckout,
 } from "@/actions/checkout";
-import { initialCheckoutState } from "@/lib/forms/action-state";
+import { initialCheckoutState, type CheckoutActionState } from "@/lib/forms/action-state";
 import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
+import { CardPayment, type CardPaymentApi } from "@/components/checkout/card-payment";
 import { CartReviewNotice } from "@/components/cart/cart-page-client";
 import type { CartCatalogSnapshot } from "@/lib/cart/cart";
 import { formatMoney } from "@/lib/commerce/money";
@@ -28,17 +29,31 @@ export function CheckoutForm({
   orderingEnabled,
   catalog,
   bankTransfer = false,
+  standardCheckout = true,
+  cardPublishableKey = null,
   paymentSettingsVersion = 'env',
 }: {
   rates: ShippingRate[];
   orderingEnabled: boolean;
   catalog: CartCatalogSnapshot;
   bankTransfer?: boolean;
+  /** False when only card payment is open (bank transfer / manual review disabled). */
+  standardCheckout?: boolean;
+  cardPublishableKey?: string | null;
   paymentSettingsVersion?: string;
 }) {
   const { lines, changes, subtotalCents, hydrated, clearCart, acknowledgeChanges } = useCart();
   const catalogCurrent = useCartCatalog(catalog);
-  const [state, formAction, pending] = useActionState(createCheckoutOrder, initialCheckoutState);
+  const [actionState, formAction, actionPending] = useActionState(createCheckoutOrder, initialCheckoutState);
+  const [paymentMethod, setPaymentMethod] = useState<"standard" | "card">(standardCheckout || !cardPublishableKey ? "standard" : "card");
+  const payByCard = paymentMethod === "card" && Boolean(cardPublishableKey);
+  const cardApiRef = useRef<CardPaymentApi | null>(null);
+  const [cardState, setCardState] = useState<CheckoutActionState>(initialCheckoutState);
+  const [cardPending, setCardPending] = useState(false);
+  // Once the card order exists, retries reuse it instead of creating another order.
+  const [cardSession, setCardSession] = useState<{ clientSecret: string; redirectUrl: string } | null>(null);
+  const state = payByCard ? cardState : actionState;
+  const pending = actionPending || cardPending;
   const [preferredShippingRateId, setShippingRateId] = useState("");
   const idempotencyRef = useRef<HTMLInputElement>(null);
   const guestTokenRef = useRef<HTMLInputElement>(null);
@@ -63,10 +78,53 @@ export function CheckoutForm({
     orderingEnabled && Boolean(shippingRate) && !pending && !quoting && promotionReady;
 
   useEffect(() => {
-    if (state.status !== "success" || !state.redirectUrl) return;
+    if (actionState.status !== "success" || !actionState.redirectUrl) return;
     clearCart();
-    router.replace(state.redirectUrl as Route);
-  }, [clearCart, router, state.redirectUrl, state.status]);
+    router.replace(actionState.redirectUrl as Route);
+  }, [clearCart, router, actionState.redirectUrl, actionState.status]);
+
+  const payWithCard = async (form: HTMLFormElement) => {
+    const api = cardApiRef.current;
+    if (!api) {
+      setCardState({ status: "error", message: "Plačilni obrazec se še nalaga. Poskusite čez trenutek." });
+      return;
+    }
+    setCardPending(true);
+    setCardState({ status: "idle", message: "" });
+    try {
+      const { error: fieldsError } = await api.elements.submit();
+      if (fieldsError) {
+        setCardState({ status: "error", message: fieldsError.message || "Preverite podatke kartice." });
+        return;
+      }
+      let session = cardSession;
+      if (!session) {
+        const result = await createCheckoutOrder(initialCheckoutState, new FormData(form));
+        if (result.status !== "success" || !result.clientSecret || !result.redirectUrl) {
+          setCardState(result.status === "success" ? { status: "error", message: "Plačila s kartico ni bilo mogoče začeti." } : result);
+          return;
+        }
+        session = { clientSecret: result.clientSecret, redirectUrl: result.redirectUrl };
+        setCardSession(session);
+      }
+      const { error } = await api.stripe.confirmPayment({
+        elements: api.elements,
+        clientSecret: session.clientSecret,
+        confirmParams: { return_url: new URL(`${session.redirectUrl}?placilo=kartica`, window.location.origin).toString() },
+        redirect: "if_required",
+      });
+      if (error) {
+        setCardState({ status: "error", message: `${error.message || "Plačilo ni uspelo."} Naročilo je shranjeno; poskusite znova z isto ali drugo kartico.` });
+        return;
+      }
+      clearCart();
+      router.replace(`${session.redirectUrl}?placilo=kartica` as Route);
+    } catch {
+      setCardState({ status: "error", message: "Plačila trenutno ni bilo mogoče izvesti. Poskusite znova ali pišite na kontakt@bistrava.com." });
+    } finally {
+      setCardPending(false);
+    }
+  };
 
   const prepareSubmission = (event: FormEvent<HTMLFormElement>) => {
     if (!canSubmit) {
@@ -94,6 +152,10 @@ export function CheckoutForm({
         })),
       },
     });
+    if (payByCard) {
+      event.preventDefault();
+      void payWithCard(event.currentTarget);
+    }
   };
 
   if (!hydrated || (catalog.verified && !catalogCurrent)) {
@@ -130,6 +192,7 @@ export function CheckoutForm({
         ) : null}
         <CartReviewNotice changes={changes} onAcknowledge={catalogCurrent ? acknowledgeChanges : undefined} />
 
+        <fieldset className="checkout-lock" disabled={Boolean(cardSession)}>
         <section className="checkout-section card" aria-labelledby="contact-heading">
           <p className="section-kicker">1. Kontakt</p>
           <h2 id="contact-heading">Kontaktni podatki</h2>
@@ -214,13 +277,37 @@ export function CheckoutForm({
           </div>
         </section>
 
-        {bankTransfer ? <section className="checkout-section card" aria-labelledby="payment-heading">
-          <p className="section-kicker">3. Plačilo</p><h2 id="payment-heading">Bančno nakazilo</h2>
-          <p>Po potrditvi naročila boste samodejno prejeli e-sporočilo z bančnimi podatki, točnim zneskom in referenco za nakazilo.</p>
-          <p>Po opravljenem nakazilu odgovorite na to e-sporočilo in priložite potrdilo o nakazilu, da pospešimo obdelavo. Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu.</p>
+        </fieldset>
+
+        {bankTransfer || cardPublishableKey ? <section className="checkout-section card" aria-labelledby="payment-heading">
+          <p className="section-kicker">3. Plačilo</p>
+          {cardPublishableKey && standardCheckout ? <>
+            <h2 id="payment-heading">Način plačila</h2>
+            <div className="payment-methods" role="radiogroup" aria-labelledby="payment-heading">
+              <label className={!payByCard ? "payment-method is-selected" : "payment-method"}>
+                <input type="radio" name="paymentChoice" value="standard" checked={!payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("standard")} />
+                <Landmark aria-hidden="true" size={20} />
+                <span><strong>{bankTransfer ? "Bančno nakazilo" : "Naročilo v pregled"}</strong><small>{bankTransfer ? "Bančne podatke prejmete po e-pošti." : "Plačilo po potrditvi naročila."}</small></span>
+              </label>
+              <label className={payByCard ? "payment-method is-selected" : "payment-method"}>
+                <input type="radio" name="paymentChoice" value="card" checked={payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("card")} />
+                <CreditCard aria-hidden="true" size={20} />
+                <span><strong>Plačilo s kartico</strong><small>Mastercard, Visa in druge plačilne kartice.</small></span>
+              </label>
+            </div>
+          </> : <h2 id="payment-heading">{payByCard ? "Plačilo s kartico" : "Bančno nakazilo"}</h2>}
+          {!payByCard && bankTransfer ? <>
+            <p>Po potrditvi naročila boste samodejno prejeli e-sporočilo z bančnimi podatki, točnim zneskom in referenco za nakazilo.</p>
+            <p>Po opravljenem nakazilu odgovorite na to e-sporočilo in priložite potrdilo o nakazilu, da pospešimo obdelavo. Vaše naročilo bo dokončno potrjeno ob prejemu potrdila o nakazilu.</p>
+          </> : null}
+          {payByCard && cardPublishableKey ? <>
+            <p>Vnesite številko kartice, datum veljavnosti in varnostno kodo. Podatke kartice varno obdela plačilni sistem Stripe; Bistrava jih ne prejme in ne hrani. Banka lahko zahteva dodatno potrditev v mobilni aplikaciji.</p>
+            <CardPayment publishableKey={cardPublishableKey} amountCents={totalCents} apiRef={cardApiRef} />
+            {cardSession ? <p className="form-status">Naročilo je shranjeno in čaka na plačilo. Za ponovni poskus znova kliknite gumb za plačilo.</p> : null}
+          </> : null}
         </section>:null}
         <section className="checkout-section card" aria-labelledby="confirmation-heading">
-          <p className="section-kicker">{bankTransfer?'4. Potrditev':'3. Potrditev'}</p>
+          <p className="section-kicker">{bankTransfer || cardPublishableKey ? '4. Potrditev' : '3. Potrditev'}</p>
           <h2 id="confirmation-heading">Pregled in soglasje</h2>
           <label className="consent-field">
             <input type="checkbox" name="termsAccepted" required />
@@ -237,6 +324,7 @@ export function CheckoutForm({
           </div>
           <input type="hidden" name="cart" value={cartPayload} />
           <input type="hidden" name="paymentSettingsVersion" value={paymentSettingsVersion} />
+          <input type="hidden" name="paymentMethod" value={payByCard ? "card" : "standard"} />
           <input type="hidden" name="discountCode" value={appliedQuote?.code ?? ""} />
           <input type="hidden" name="expectedTotalCents" value={totalCents} />
           <input type="hidden" name="discountAcknowledged" value={appliedQuote && acknowledgedQuote === quoteKey ? "on" : ""} />
@@ -246,10 +334,10 @@ export function CheckoutForm({
             {state.message}
           </p>
           <button className="button button-primary checkout-submit" type="submit" disabled={!canSubmit}>
-            <CheckCircle2 aria-hidden="true" size={20} />
-            {pending ? "Oddajanje …" : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
+            {payByCard ? <CreditCard aria-hidden="true" size={20} /> : <CheckCircle2 aria-hidden="true" size={20} />}
+            {pending ? (payByCard ? "Plačilo v teku …" : "Oddajanje …") : payByCard ? `Naročilo s plačilom ${formatMoney(totalCents)}` : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
           </button>
-          <small>{!orderingEnabled ? 'Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.' : bankTransfer ? 'Bančne podatke prejmete po e-pošti. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila o nakazilu.' : 'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
+          <small>{!orderingEnabled ? 'Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.' : payByCard ? 'Kartica bo bremenjena ob potrditvi plačila. Naročilo je potrjeno, ko plačilni sistem potrdi plačilo.' : bankTransfer ? 'Bančne podatke prejmete po e-pošti. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila o nakazilu.' : 'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
         </section>
       </div>
 
@@ -273,7 +361,7 @@ export function CheckoutForm({
         <div className="form-field">
           <label htmlFor="promotion-code">Promocijska koda <span>(neobvezno)</span></label>
           <input id="promotion-code" maxLength={40} value={discountCode} onChange={(event) => { setDiscountCode(event.target.value.toUpperCase()); setAcknowledgedQuote(""); }} autoCapitalize="characters" autoComplete="off" />
-          <button className="button button-secondary" type="button" disabled={!normalizedCode || !shippingRate || !catalogCurrent || quoting || pending} onClick={() => startQuote(async () => {
+          <button className="button button-secondary" type="button" disabled={!normalizedCode || !shippingRate || !catalogCurrent || quoting || pending || Boolean(cardSession)} onClick={() => startQuote(async () => {
             const key = quoteKey;
             try { setQuoteState({ key, result: await quoteCheckout({ cart: cartPayload, shippingRateId, discountCode: normalizedCode }) }); }
             catch { setQuoteState({ key, result: { status: "error", message: "Preverjanje ni uspelo. Poskusite ponovno." } }); }

@@ -80,6 +80,18 @@ Local validation passed 38 files/215 tests, TypeScript and targeted lint. The ex
 
 The migration-before-deployment order is mandatory because the new repository query selects the added columns. The final grouped approval for migration, subsequent fiscal deployment and store opening is still to be requested. Production ordering and bank transfer remain disabled; the one authorized contact test did not create an order or send bank instructions.
 
+## Card payments (Stripe)
+
+Card number, expiry and security code are entered in Stripe's Payment Element inside the checkout page. They go directly to Stripe; no card data reaches Bistrava's server, database, logs or admin (PCI DSS scope stays at SAQ A). The admin shows only the payment state, amount and PaymentIntent id.
+
+1. The customer chooses "Plačilo s kartico". The browser validates the Stripe fields, then the checkout action creates the order through `create_card_order` (same stock reservation, discounts and idempotency as other orders; status `awaiting_payment`, `checkout_mode='card'`, payment provider `stripe`).
+2. The server creates a PaymentIntent for the amount stored on the order (`allowed_payment_method_types: ['card']`, idempotency key per order) and stores its id with `attach_card_payment_intent`. Only the client secret goes back to the browser, which confirms the payment (3-D Secure when the bank requires it).
+3. `POST /api/stripe/webhook` verifies the Stripe signature and passes `payment_intent.succeeded`, `payment_intent.payment_failed` and `payment_intent.canceled` to `record_card_payment_event`. Each event id is applied once; success requires the exact EUR amount of the order, marks payment and order paid, writes an audit log and triggers one confirmation e-mail (`card-paid:<order id>`). A wrong amount is recorded as `amount_mismatch` and never marks the order paid; a payment after cancellation is recorded as `paid_after_cancellation` for staff refund.
+4. If the webhook is late, the protected order page retrieves the PaymentIntent from Stripe and records its final state the same way.
+5. A declined card leaves the order `awaiting_payment` with payment `failed`; the customer can retry from the checkout page without creating a second order. Unpaid card orders keep their reservation until staff cancel them, like bank transfers.
+
+Activation: apply `20261025000100_stripe_card_payments.sql`, set `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` and `STRIPE_WEBHOOK_SECRET` (test keys first) in Render, register the webhook endpoint `https://bistrava.com/api/stripe/webhook` for the three events above, then redeploy. Without all three keys the card option stays hidden and the store keeps working with bank transfer only. Refunds are made in the Stripe Dashboard.
+
 ## Staff operation
 
 Staff should review unpaid bank-transfer orders daily because stock remains reserved without an automatic bank-transfer expiry. Record received proof using the dedicated proof form, then check the actual bank statement and match the full amount and order reference before confirming funds. Review failed/uncertain confirmation deliveries in the email-event queue and verify delivery status before manually contacting the customer or retrying, to avoid duplicate instructions. Bank instructions are supplied by email only. The operator decides when to contact the customer or cancel an unpaid order; the system does not invent an automatic deadline.

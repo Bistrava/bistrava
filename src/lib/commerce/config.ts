@@ -1,6 +1,13 @@
 import "server-only";
 import { bankTransferSchema } from '@/lib/payments/bank-transfer';
+import { parseStripeConfig } from '@/lib/payments/stripe-config';
 import { createAdminClient } from '@/lib/supabase/admin';
+
+/** Card payments are offered only while ordering is open and all Stripe keys are configured. */
+export function getCardPaymentConfig() {
+  const stripe = parseStripeConfig(process.env);
+  return process.env.CHECKOUT_ORDERING_ENABLED === 'true' && stripe ? { publishableKey: stripe.publishableKey } : null;
+}
 
 export type CheckoutMode = "manual_review" | "bank_transfer";
 

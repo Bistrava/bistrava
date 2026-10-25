@@ -9,6 +9,7 @@ export const orderConfirmationEmailSchema = z.object({
   orderUrl: z.string().url(),
   totalCents: z.number().int().nonnegative(),
   bankTransfer:bankTransferSchema.optional(),
+  cardPaid: z.boolean().optional(),
   items: z
     .array(
       z.object({

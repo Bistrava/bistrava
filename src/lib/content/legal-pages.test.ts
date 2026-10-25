@@ -56,10 +56,12 @@ describe("public seller information", () => {
   it("describes the bank transfer launch without claiming card processing or a future payment provider", () => {
     const payments = JSON.stringify(legalPages.placila);
     const privacy = JSON.stringify(legalPages.zasebnost);
-    expect(payments).toContain("plačilo s kartico in plačilo po povzetju trenutno nista na voljo");
-    expect(payments).not.toContain("Kartični podatki se obdelujejo pri izbranem ponudniku plačil");
+    expect(payments).toContain("plačilo s kartico (Mastercard, Visa in druge plačilne kartice) prek plačilnega sistema Stripe, kadar je omogočeno na blagajni");
+    expect(payments).toContain("Ti podatki ne prehajajo prek strežnikov Bistrave in jih Bistrava ne hrani");
+    expect(payments).toContain("plačilo po povzetju trenutno ni na voljo");
     expect(privacy).toContain("banke pri izvedbi nakazila");
     expect(privacy).not.toContain("prihodnji ponudnik plačil");
+    expect(privacy).toContain("Stripe Payments Europe, Limited (Irska)");
     expect(payments).toContain("1–2 delovnih dneh po potrjenem prejemu celotnega bančnega nakazila");
     expect(payments).toContain("dodatnih 1–3 delovnih dni po odpremi");
     expect(payments).toContain("Bančni podatki niso prikazani na blagajni ali potrditveni strani");

@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { headers } from "next/headers";
 
 import { getCardPaymentConfig, getCheckoutConfig } from "@/lib/commerce/config";
-import { sendOrderConfirmation } from "@/lib/email/send";
+import { sendBankOrderNotification, sendOrderConfirmation } from "@/lib/email/send";
 import { hashGuestOrderToken, orderCookieName } from "@/lib/orders/guest-orders";
 import { createCardPaymentIntent } from "@/lib/payments/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -172,13 +172,13 @@ export async function createCheckoutOrder(
 
   const { data: order } = await supabase
     .from("orders")
-    .select("email,shipping_address_snapshot,total_cents,bank_transfer_snapshot,order_items(product_name,quantity,line_total_cents)")
+    .select("email,phone,status,shipping_address_snapshot,total_cents,bank_transfer_snapshot,order_items(product_name,quantity,line_total_cents)")
     .eq("id", orderId)
     .single();
   if (order && Array.isArray(order.order_items)) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://bistrava.com";
     // Email failure must never turn a successfully committed order into failure.
-    await sendOrderConfirmation({
+    const confirmation = {
       to: String(order.email),
       idempotencyKey: `order-confirmation:${orderId}`,
       data: {
@@ -193,7 +193,17 @@ export async function createCheckoutOrder(
           lineTotalCents: Number(item.line_total_cents),
         })),
       },
-    }).catch(()=>({ok:false as const,reason:'provider_error' as const}));
+    };
+    const address = order.shipping_address_snapshot ?? {};
+    await Promise.all([
+      sendOrderConfirmation(confirmation).catch(() => ({ ok: false })),
+      bankTransfer && order.status === 'awaiting_payment'
+        ? sendBankOrderNotification({ orderId, data: {
+          ...confirmation.data, bankTransfer: undefined,
+          email: String(order.email), phone: String(order.phone ?? ''),
+          address: [address.company, address.addressLine1, address.addressLine2, address.postalCode, address.city, address.countryCode].filter(Boolean).join(', '),
+        } }).catch(() => ({ ok: false })) : Promise.resolve(null),
+    ]);
   }
 
   return {

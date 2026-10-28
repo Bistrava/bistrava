@@ -97,3 +97,13 @@ node scripts/test-promotions-db.mjs
 Le script applique les migrations à PostgreSQL en mémoire, contrôle les permissions, remises, stocks, annulations, clients, messages, guides, bornes de livraison et conflits concurrents. Il n’utilise aucun secret et n’écrit pas dans Supabase. Les suites complémentaires `supabase/tests/admin_products.sql` et `supabase/tests/shipping_thresholds.sql` s’exécutent dans des transactions annulées.
 
 Le renouvellement des sessions se trouve dans `src/proxy.ts`, à côté de `src/app`, avec un périmètre limité à `/admin`. Les pages et chaque action conservent leurs propres contrôles d’autorisation.
+
+## Commandes et messagerie — 28 octobre 2026
+
+La validation d’une commande par virement encore en attente de paiement envoie une notification interne à kontakt@bistrava.com, en plus de la confirmation client. Elle contient la référence, les coordonnées et le récapitulatif enregistrés. La clé d’idempotence utilise l’identifiant de commande. Un échec SMTP ne remet pas en cause la commande ; consulter le journal des e-mails pour le diagnostic.
+
+Un administrateur peut déplacer une commande dans la corbeille depuis sa fiche, après confirmation. Le filtre « Afficher » donne accès à la corbeille et à la restauration. Cette action conserve les pièces comptables et l’historique : elle n’annule pas la commande, ne rembourse pas et ne libère pas le stock. Les éditeurs n’ont pas ce droit.
+
+La boîte mail charge 50 messages par page ; « Charger les e-mails plus anciens » ajoute les suivants sans limite globale. La recherche porte sur tous les messages synchronisés. Les messages non lus sont bleus et portent un badge ; la lecture est propre à chaque membre de l’équipe et n’est enregistrée qu’après affichage du contenu.
+
+Déploiement : appliquer `20261028014222_admin_order_trash_mailbox_paging.sql` avant la nouvelle application. Les tests SQL isolés couvrent les droits, conflits de modification, restauration, conservation des paiements et pagination ; le parcours navigateur utilise uniquement des commandes et e-mails synthétiques sur Supabase local.

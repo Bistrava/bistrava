@@ -263,6 +263,42 @@ test.describe("connected checkout on disposable local Supabase", () => {
       const accountingImage = testInfo.outputPath("admin-accounting.png");
       await accountingDetail.screenshot({ path: accountingImage });
       await testInfo.attach("admin-accounting", { path: accountingImage, contentType: "image/png" });
+      await adminPage.goto(`/admin/narocila?order=${first.id}`);
+      const trashForm = adminPage.locator('form.admin-order-trash');
+      await trashForm.locator('input[name="confirmed"]').check();
+      await trashForm.getByRole('button', { name: 'Premakni v koš', exact: true }).click();
+      await expect.poll(async () => (await oneRow(clients, 'orders', 'id', first.id)).deleted_at).not.toBeNull();
+      await adminPage.goto(`/admin/narocila?order=${first.id}`);
+      await trashForm.locator('input[name="confirmed"]').check();
+      await trashForm.getByRole('button', { name: 'Obnovi', exact: true }).click();
+      await expect.poll(async () => (await oneRow(clients, 'orders', 'id', first.id)).deleted_at).toBeNull();
+      expect(await stock(clients)).toBe(2);
+
+      const mailFixtures = Array.from({length:105}, (_,index) => ({
+        mailbox:'kontakt@bistrava.com',uid_validity:'e2e-paging',imap_uid:index+1,
+        sender_name:'Pagination fixture',sender_address:'fixture@example.test',
+        subject:`E2E mailbox ${String(index).padStart(3,'0')}`,body_text:'Synthetic local mail',
+        received_at:new Date(Date.UTC(2026,9,28,0,0,index)).toISOString(),
+      }));
+      const seededMail = await clients.privileged.from('mailbox_messages').insert(mailFixtures);
+      expect(seededMail.error).toBeNull();
+      await adminPage.goto('/admin/e-posta');
+      const mailList = adminPage.locator('.mailbox-scroll');
+      await expect(mailList.locator('button[aria-pressed]')).toHaveCount(50);
+      const older = mailList.locator('.mailbox-load-more');
+      await older.click();
+      await expect(mailList.locator('button[aria-pressed]')).toHaveCount(100);
+      await older.click();
+      await expect(mailList.locator('button[aria-pressed]')).toHaveCount(105);
+      await expect(older).toHaveCount(0);
+      const oldest = mailList.getByRole('button', {name:/E2E mailbox 000/});
+      await expect(oldest).toHaveClass(/is-unread/);
+      await oldest.click();
+      await expect(adminPage.locator('.mailbox-detail h2')).toHaveText('E2E mailbox 000');
+      await expect(oldest).not.toHaveClass(/is-unread/);
+      await adminPage.locator('.mailbox-list input[type="search"]').fill('E2E mailbox 000');
+      await expect(mailList.locator('button[aria-pressed]')).toHaveCount(1);
+      await expect(oldest).not.toHaveClass(/is-unread/);
       expect(blocked).toEqual([]);
     } catch (error) {
       await adminPage.screenshot({ path: testInfo.outputPath("admin-failure.png"), fullPage: true }).catch(() => {});

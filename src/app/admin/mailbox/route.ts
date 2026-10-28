@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { getAdminAccess } from '@/lib/auth/admin';
 import { createClient } from '@/lib/supabase/server';
+import { mailboxPageSchema } from '@/lib/email/mailbox-types';
 import { mailboxAddress, mailboxConfigured, syncMailbox, verifyMailboxSmtp, sendMailboxReply } from '@/lib/email/mailbox';
 
 export const runtime = 'nodejs';
@@ -37,12 +38,16 @@ export async function GET(request:Request) {
       if (!message.data) return json({error:'not_found'},404);
       return json({...message.data,replies:replies.data});
     }
+    const page = mailboxPageSchema.safeParse({ before: url.searchParams.get('before'), beforeId: url.searchParams.get('beforeId'), search: url.searchParams.get('search') ?? '' });
+    if (!page.success) return json({error:'invalid'},400);
     const [messages,state] = await Promise.all([
-      client.from('mailbox_messages').select(fields).order('received_at',{ascending:false}).limit(100),
+      client.rpc('get_admin_mailbox_page', { input_before: page.data.before, input_before_id: page.data.beforeId, input_search: page.data.search, input_limit: 51 }),
       client.from('mailbox_sync').select('last_success_at,last_error,smtp_verified_at').eq('mailbox',mailboxAddress).single(),
     ]);
     if (messages.error || state.error) return json({error:'unavailable'},503);
-    return json({messages:messages.data,state:state.data,configured:mailboxConfigured()});
+    const visible = (messages.data ?? []).slice(0,50);
+    const last = visible.at(-1);
+    return json({messages:visible,nextCursor:messages.data?.length > 50 && last ? {before:last.received_at,beforeId:last.id} : null,state:state.data,configured:mailboxConfigured()});
   } catch { return json({error:'unavailable'},503); }
 }
 

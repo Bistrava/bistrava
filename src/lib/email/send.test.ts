@@ -11,7 +11,7 @@ vi.mock('@/lib/supabase/admin', () => ({ createAdminClient: () => ({ from: () =>
   update: (value: unknown) => ({ eq: async () => mocks.update(value) }),
   select: () => ({ eq: () => ({ maybeSingle: mocks.previous }) }),
 }) }) }));
-import { sendCardAttemptNotification, sendOrderConfirmation } from './send';
+import { sendBankOrderNotification, sendCardAttemptNotification, sendOrderConfirmation } from './send';
 import { renderToStaticMarkup } from 'react-dom/server';
 import OrderConfirmationEmail from '@/emails/order-confirmation';
 import { orderConfirmationEmailSchema } from '@/lib/validation/email';
@@ -39,6 +39,20 @@ beforeEach(() => {
   vi.resetAllMocks();
   mocks.insert.mockResolvedValue({ error: null });
   mocks.send.mockResolvedValue({ accepted: ['customer@example.com'] });
+});
+it('notifies the store once per saved bank order with unpaid status, contacts and items', async () => {
+  const orderId = '20000000-0000-4000-8000-000000000001';
+  const bankInput = { orderId, data: {...input.data, email:'customer@example.com', phone:'+38640000000', address:'Test address, Ljubljana'} };
+  expect((await sendBankOrderNotification(bankInput)).ok).toBe(true);
+  const mail = mocks.send.mock.calls[0][0];
+  expect(mail.to).toBe('kontakt@bistrava.com');
+  for (const value of ['BIS-TEST-123','čaka na plačilo','customer@example.com','Example filter','14,50',`/admin/narocila?order=${orderId}`]) expect(mail.text).toContain(value);
+  expect(mail.text).not.toContain('GB82WEST');
+  expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({idempotency_key:`bank-order-admin:${orderId}`,email_type:'order_bank_transfer_admin'}));
+  mocks.insert.mockResolvedValue({error:{code:'23505'}});
+  mocks.previous.mockResolvedValue({data:{status:'sent'}});
+  await sendBankOrderNotification(bankInput);
+  expect(mocks.send).toHaveBeenCalledOnce();
 });
 it('sends a clearly unpaid cart attempt only to the store, escaping text and excluding tokens and unknown fields', async () => {
   expect((await sendCardAttemptNotification(attempt)).ok).toBe(true);

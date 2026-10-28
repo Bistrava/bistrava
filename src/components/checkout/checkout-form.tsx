@@ -12,6 +12,8 @@ import {
   quoteCheckout,
 } from "@/actions/checkout";
 import { initialCheckoutState, type CheckoutActionState } from "@/lib/forms/action-state";
+import { notifyCardAttempt } from "@/actions/card-attempt";
+import { cardUnavailableMessage } from "@/lib/payments/card-unavailable";
 import { useCart, useCartCatalog } from "@/components/cart/cart-provider";
 import { CardPayment, type CardPaymentApi } from "@/components/checkout/card-payment";
 import { CartReviewNotice } from "@/components/cart/cart-page-client";
@@ -46,7 +48,9 @@ export function CheckoutForm({
   const catalogCurrent = useCartCatalog(catalog);
   const [actionState, formAction, actionPending] = useActionState(createCheckoutOrder, initialCheckoutState);
   const [paymentMethod, setPaymentMethod] = useState<"standard" | "card">(cardPublishableKey ? "card" : "standard");
-  const payByCard = paymentMethod === "card" && Boolean(cardPublishableKey);
+  const payByCard = paymentMethod === "card";
+  const cardUnavailable = payByCard && !cardPublishableKey;
+  const [cardAttempted, setCardAttempted] = useState(false);
   const cardApiRef = useRef<CardPaymentApi | null>(null);
   const [cardState, setCardState] = useState<CheckoutActionState>(initialCheckoutState);
   const [cardPending, setCardPending] = useState(false);
@@ -84,6 +88,20 @@ export function CheckoutForm({
   }, [clearCart, router, actionState.redirectUrl, actionState.status]);
 
   const payWithCard = async (form: HTMLFormElement) => {
+    if (!cardPublishableKey) {
+      const formData = new FormData(form);
+      setCardAttempted(true);
+      setCardState({ status: "error", message: cardUnavailableMessage });
+      setCardPending(true);
+      try {
+        setCardState(await notifyCardAttempt(formData));
+      } catch {
+        setCardState({ status: "error", message: cardUnavailableMessage });
+      } finally {
+        setCardPending(false);
+      }
+      return;
+    }
     const api = cardApiRef.current;
     if (!api) {
       setCardState({ status: "error", message: "Plačilni obrazec se še nalaga. Poskusite čez trenutek." });
@@ -279,20 +297,20 @@ export function CheckoutForm({
 
         </fieldset>
 
-        {bankTransfer || cardPublishableKey ? <section className="checkout-section card" aria-labelledby="payment-heading">
+        <section className="checkout-section card" aria-labelledby="payment-heading">
           <p className="section-kicker">3. Plačilo</p>
-          {cardPublishableKey && standardCheckout ? <>
+          {standardCheckout || !cardPublishableKey ? <>
             <h2 id="payment-heading">Način plačila</h2>
             <div className="payment-methods" role="radiogroup" aria-labelledby="payment-heading">
               <label className={payByCard ? "payment-method is-selected" : "payment-method"}>
-                <input type="radio" name="paymentChoice" value="card" checked={payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("card")} />
+                <input type="radio" name="paymentChoice" value="card" checked={payByCard} disabled={pending || Boolean(cardSession)} onChange={() => setPaymentMethod("card")} />
                 <CreditCard aria-hidden="true" size={20} />
-                <span><strong>Plačilo s kartico</strong><small>Mastercard, Visa in druge plačilne kartice.</small></span>
+                <span><strong>Plačilo s kartico</strong>{cardPublishableKey ? <small>Mastercard, Visa in druge plačilne kartice.</small> : null}</span>
               </label>
               <label className={!payByCard ? "payment-method is-selected" : "payment-method"}>
-                <input type="radio" name="paymentChoice" value="standard" checked={!payByCard} disabled={Boolean(cardSession)} onChange={() => setPaymentMethod("standard")} />
+                <input type="radio" name="paymentChoice" value="standard" checked={!payByCard} disabled={pending || Boolean(cardSession)} onChange={() => setPaymentMethod("standard")} />
                 <Landmark aria-hidden="true" size={20} />
-                <span><strong>{bankTransfer ? "Bančno nakazilo" : "Naročilo v pregled"}</strong><small>{bankTransfer ? "Bančne podatke prejmete po e-pošti." : "Plačilo po potrditvi naročila."}</small></span>
+                <span><strong>{bankTransfer || !standardCheckout ? "Bančno nakazilo" : "Naročilo v pregled"}</strong><small>{!standardCheckout ? "Trenutno ni na voljo." : bankTransfer ? "Bančne podatke prejmete po e-pošti." : "Plačilo po potrditvi naročila."}</small></span>
               </label>
             </div>
           </> : <h2 id="payment-heading">{payByCard ? "Plačilo s kartico" : "Bančno nakazilo"}</h2>}
@@ -305,9 +323,9 @@ export function CheckoutForm({
             <CardPayment publishableKey={cardPublishableKey} amountCents={totalCents} apiRef={cardApiRef} />
             {cardSession ? <p className="form-status">Naročilo je shranjeno in čaka na plačilo. Za ponovni poskus znova kliknite gumb za plačilo.</p> : null}
           </> : null}
-        </section>:null}
+        </section>
         <section className="checkout-section card" aria-labelledby="confirmation-heading">
-          <p className="section-kicker">{bankTransfer || cardPublishableKey ? '4. Potrditev' : '3. Potrditev'}</p>
+          <p className="section-kicker">4. Potrditev</p>
           <h2 id="confirmation-heading">Pregled in soglasje</h2>
           <label className="consent-field">
             <input type="checkbox" name="termsAccepted" required />
@@ -333,11 +351,15 @@ export function CheckoutForm({
           <p className={state.status === "error" ? "form-status form-status-error" : "form-status"} aria-live="polite">
             {state.message}
           </p>
+          {cardUnavailable && cardAttempted && bankTransfer && standardCheckout ? <button
+            className="button button-secondary" type="button" disabled={pending}
+            onClick={() => setPaymentMethod("standard")}
+          >Izberite bančno nakazilo</button> : null}
           <button className="button button-primary checkout-submit" type="submit" disabled={!canSubmit}>
             {payByCard ? <CreditCard aria-hidden="true" size={20} /> : <CheckCircle2 aria-hidden="true" size={20} />}
-            {pending ? (payByCard ? "Plačilo v teku …" : "Oddajanje …") : payByCard ? `Naročilo s plačilom ${formatMoney(totalCents)}` : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
+            {pending ? (cardUnavailable ? "Preverjanje …" : payByCard ? "Plačilo v teku …" : "Oddajanje …") : payByCard ? `Plačaj ${formatMoney(totalCents)}` : bankTransfer ? "Naročilo z obveznostjo plačila" : "Oddajte naročilo v pregled"}
           </button>
-          <small>{!orderingEnabled ? 'Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.' : payByCard ? 'Kartica bo bremenjena ob potrditvi plačila. Naročilo je potrjeno, ko plačilni sistem potrdi plačilo.' : bankTransfer ? 'Bančne podatke prejmete po e-pošti. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila o nakazilu.' : 'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
+          <small>{!orderingEnabled ? 'Oddaja naročila trenutno ni na voljo. Poskusite ponovno ali pišite na kontakt@bistrava.com.' : cardUnavailable ? 'Podatkov kartice ne zahtevamo. Ob kliku bomo trgovini poslali vaše kontaktne podatke in povzetek košarice.' : payByCard ? 'Kartica bo bremenjena ob potrditvi plačila. Naročilo je potrjeno, ko plačilni sistem potrdi plačilo.' : bankTransfer ? 'Bančne podatke prejmete po e-pošti. Naročilo bo dokončno potrjeno ob prejemu vašega potrdila o nakazilu.' : 'Naročilo ni plačano, dokler prejem plačila ni potrjen.'}</small>
         </section>
       </div>
 

@@ -11,7 +11,7 @@ vi.mock('@/lib/supabase/admin', () => ({ createAdminClient: () => ({ from: () =>
   update: (value: unknown) => ({ eq: async () => mocks.update(value) }),
   select: () => ({ eq: () => ({ maybeSingle: mocks.previous }) }),
 }) }) }));
-import { sendOrderConfirmation } from './send';
+import { sendCardAttemptNotification, sendOrderConfirmation } from './send';
 import { renderToStaticMarkup } from 'react-dom/server';
 import OrderConfirmationEmail from '@/emails/order-confirmation';
 import { orderConfirmationEmailSchema } from '@/lib/validation/email';
@@ -25,10 +25,36 @@ const input = {
     bankTransfer: { beneficiary: 'EXAMPLE TEST ONLY', iban: 'GB82WEST12345698765432', bankName: 'Example Bank', bic: 'DEUTDEFF', currency: 'EUR' },
   },
 };
+const attempt = {
+  data: {
+    email: 'maja@example.com', phone: '+38640111222', firstName: '<Maja>', lastName: 'Novak',
+    addressLine1: 'Slovenska cesta 1', postalCode: '1000', city: 'Ljubljana', countryCode: 'SI',
+    shippingRateId: '10000000-0000-4000-8000-000000000001', termsAccepted: 'on',
+    idempotencyKey: '20000000-0000-4000-8000-000000000001', guestToken: 'PRIVATE_TOKEN'.repeat(4),
+    expectedTotalCents: 1450, cart: [{ sku: 'BIS-030', quantity: 2 }], cardNumber: 'EXCLUDED_CARD_FIELD',
+  },
+  quote: { subtotalCents: 1000, shippingCents: 450, discountCents: 0, totalCents: 1450 },
+};
 beforeEach(() => {
   vi.resetAllMocks();
   mocks.insert.mockResolvedValue({ error: null });
   mocks.send.mockResolvedValue({ accepted: ['customer@example.com'] });
+});
+it('sends a clearly unpaid cart attempt only to the store, escaping text and excluding tokens and unknown fields', async () => {
+  expect((await sendCardAttemptNotification(attempt)).ok).toBe(true);
+  const mail = mocks.send.mock.calls[0][0];
+  expect(mail.to).toBe('kontakt@bistrava.com');
+  for (const value of ['maja@example.com', 'BIS-030', '14,50', 'Naročilo ni ustvarjeno']) expect(mail.text).toContain(value);
+  expect(mail.html).toContain('&lt;Maja&gt;');
+  expect(JSON.stringify(mail)).not.toContain('PRIVATE_TOKEN');
+  expect(JSON.stringify(mail)).not.toContain('EXCLUDED_CARD_FIELD');
+  expect(mocks.insert).toHaveBeenCalledWith(expect.objectContaining({ email_type: 'checkout_card_attempt', idempotency_key: `card-attempt:${attempt.data.idempotencyKey}` }));
+});
+it('does not send a second card-attempt notification for an already reserved submission', async () => {
+  mocks.insert.mockResolvedValue({ error: { code: '23505' } });
+  mocks.previous.mockResolvedValue({ data: { status: 'sent' } });
+  await sendCardAttemptNotification(attempt);
+  expect(mocks.send).not.toHaveBeenCalled();
 });
 it('includes the saved account, exact total and reference without claiming payment receipt', async () => {
   expect((await sendOrderConfirmation(input)).ok).toBe(true);

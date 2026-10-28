@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-// Card payments stay hidden until all three Stripe keys are configured on the server.
+// Actual card processing requires all three keys; checkout otherwise offers the unavailable-card flow.
 const stripeConfigSchema = z.object({
   secretKey: z.string().regex(/^(sk|rk)_(test|live)_[A-Za-z0-9]{10,}$/),
   publishableKey: z.string().regex(/^pk_(test|live)_[A-Za-z0-9]{10,}$/),

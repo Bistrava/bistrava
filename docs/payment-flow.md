@@ -82,6 +82,14 @@ The migration-before-deployment order is mandatory because the new repository qu
 
 ## Card payments (Stripe)
 
+Checkout also displays the card option when Stripe is unconfigured, without any card fields or “coming soon” label. With ordering open and a valid checkout form, clicking Pay shows the temporary-unavailability message and a button to select bank transfer. Contact details and the cart remain in the form; no order, stock reservation or payment is created by this attempt. The existing store-opening gate still applies.
+
+The `notifyCardAttempt` action validates the checkout and reuses the rate-limited server quote before sending a `checkout_card_attempt` notification to `kontakt@bistrava.com`. The email explicitly describes an unpaid attempt, with contact/address details, item SKUs and quantities, delivery, discount and server-calculated total. Only explicitly selected fields enter the email; access tokens and arbitrary extra fields do not. No card fields are rendered in this flow. The customer sees a notice that their contact details and cart summary will be sent to the store when they click.
+
+The existing SMTP transport reserves a unique `card-attempt:<checkout idempotency key>` in `email_events`, preventing duplicate or uncertain sends from being retried. Resend is the existing fallback when SMTP is not configured, using the same provider idempotency key. Delivery failures never block the switch to bank transfer and never claim successful notification to the customer. Actual delivery requires the existing mail and database configuration; local verification uses mocked transport, not a real customer email.
+
+Configured Stripe payments continue to use the secure Payment Element.
+
 Card number, expiry and security code are entered in Stripe's Payment Element inside the checkout page. They go directly to Stripe; no card data reaches Bistrava's server, database, logs or admin (PCI DSS scope stays at SAQ A). The admin shows only the payment state, amount and PaymentIntent id.
 
 1. The customer chooses "Plačilo s kartico". The browser validates the Stripe fields, then the checkout action creates the order through `create_card_order` (same stock reservation, discounts and idempotency as other orders; status `awaiting_payment`, `checkout_mode='card'`, payment provider `stripe`).
@@ -91,7 +99,7 @@ Card number, expiry and security code are entered in Stripe's Payment Element in
 5. Payment details by e-mail: moving an order to `awaiting_payment` in the admin, or the "Send payment details" button on an order awaiting payment, e-mails the bank instructions (bank-transfer orders) or a signed card payment link `/placilo/<reference>?k=<HMAC>` (card orders; key derived from `RATE_LIMIT_SALT`). The page shows only the reference, items and amount, and pays the order's existing PaymentIntent, so an earlier checkout attempt can never be paid twice.
 6. A declined card leaves the order `awaiting_payment` with payment `failed`; the customer can retry from the checkout page without creating a second order. Unpaid card orders keep their reservation until staff cancel them, like bank transfers.
 
-Activation: apply `20261025000100_stripe_card_payments.sql`, set `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` and `STRIPE_WEBHOOK_SECRET` (test keys first) in Render, register the webhook endpoint `https://bistrava.com/api/stripe/webhook` for the three events above, then redeploy. Without all three keys the card option stays hidden and the store keeps working with bank transfer only. Refunds are made in the Stripe Dashboard.
+Activation: apply `20261025000100_stripe_card_payments.sql`, set `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` and `STRIPE_WEBHOOK_SECRET` (test keys first) in Render, register the webhook endpoint `https://bistrava.com/api/stripe/webhook` for the three events above, then redeploy. Without all three keys the visible card option uses the unavailable-card notification flow above; it cannot collect card details or payment. Refunds are made in the Stripe Dashboard.
 
 ## Staff operation
 

@@ -7,6 +7,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { mailboxAddress, mailboxConfigured, smtpTransport } from './mailbox';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { formatMoney } from '@/lib/commerce/money';
+import { checkoutFormSchema } from '@/lib/validation/checkout';
 
 import OrderConfirmationEmail from "@/emails/order-confirmation";
 import OrderStatusUpdateEmail from "@/emails/order-status-update";
@@ -31,6 +32,38 @@ function getEmailConfig() {
   });
 
   return result.success ? result.data : null;
+}
+
+/** Explicit field selection prevents extra form fields or access tokens entering e-mail. */
+export async function sendCardAttemptNotification(input: { data: unknown; quote: unknown }) {
+  const data = checkoutFormSchema.parse(input.data);
+  const amount = z.number().int().min(0).max(100_000_000);
+  const quote = z.object({ subtotalCents: amount, shippingCents: amount, discountCents: amount, totalCents: amount }).parse(input.quote);
+  const idempotencyKey = `card-attempt:${data.idempotencyKey}`;
+  const subject = 'Bistrava — poskus izbire plačila s kartico (neplačano)';
+  const text = [
+    'Stranka je na blagajni izbrala kartico in kliknila gumb za plačilo.',
+    'Plačilo s kartico ni na voljo. Stranko smo usmerili na bančno nakazilo.',
+    'To ni potrjeno naročilo. Naročilo ni ustvarjeno, zaloga ni rezervirana in plačilo ni izvedeno.',
+    'Podatki kartice niso bili zahtevani ali zbrani.', '',
+    `Ime: ${data.firstName} ${data.lastName}`, `E-pošta: ${data.email}`, `Telefon: ${data.phone}`,
+    ...(data.company ? [`Podjetje: ${data.company}`] : []),
+    `Naslov: ${[data.addressLine1, data.addressLine2, data.postalCode, data.city, data.countryCode].filter(Boolean).join(', ')}`,
+    '', 'Košarica (SKU in količina):', ...data.cart.map(item => `${item.sku}: ${item.quantity} ×`),
+    `Izdelki: ${formatMoney(quote.subtotalCents)}`, `Dostava: ${formatMoney(quote.shippingCents)}`,
+    `Popust: ${formatMoney(quote.discountCents)}`, `Skupaj: ${formatMoney(quote.totalCents)}`,
+    ...(data.discountCode ? [`Promocijska koda: ${data.discountCode}`] : []),
+    ...(data.customerNote ? [`Opomba: ${data.customerNote}`] : []),
+  ].join('\n');
+  const escaped = text.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!);
+  const html = `<div style="white-space:pre-wrap;font-family:Arial,sans-serif">${escaped}</div>`;
+  if (mailboxConfigured()) return sendThroughMailbox({ to: mailboxAddress, idempotencyKey, emailType: 'checkout_card_attempt', subject, text, html });
+  const config = getEmailConfig();
+  if (!config) return { ok: false as const, reason: 'not_configured' as const };
+  const result = await new Resend(config.apiKey).emails.send(
+    { from: config.from, to: [mailboxAddress], replyTo: config.replyTo, subject, text, html }, { idempotencyKey },
+  );
+  return { ok: !result.error };
 }
 
 // Sends from the LWS mailbox once per idempotency key; email_events records the outcome for staff.

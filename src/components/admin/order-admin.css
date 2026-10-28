@@ -40,3 +40,4 @@
 .admin-payment-info .button { display: inline-flex; align-items: center; gap: .5rem; }
 .admin-order-trash { padding:1.25rem; margin:1rem 0; border:1px solid #d6e5e9; }
 .admin-order-trash p { margin:.75rem 0; }
+@media (min-width:951px) { .admin-orders .admin-order-filters { grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); } }

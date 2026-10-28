@@ -523,7 +523,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
             ))}
             {filteredCustomers.length === 0 ? <p className="admin-operational-empty">{labels.noCustomers}</p> : null}
           </section>
-          {selectedCustomer ? <CustomerDetail customer={selectedCustomer} formatDate={formatDate} formatMoney={formatMoney} labels={labels} onOpenOrder={(id) => { setSelectedOrderId(id); setOrderOpen(true); setView("orders"); setQuery(""); }} statusLabel={statusLabel} /> : null}
+          {selectedCustomer ? <CustomerDetail customer={selectedCustomer} formatDate={formatDate} formatMoney={formatMoney} labels={labels} onOpenOrder={(id) => { setSelectedOrderId(id); setShowTrash(Boolean(data.orders.find(order => order.id === id)?.deletedAt)); setStatus("all"); setOrderOpen(true); setView("orders"); setQuery(""); }} statusLabel={statusLabel} /> : null}
         </div>
       )}
     </div>

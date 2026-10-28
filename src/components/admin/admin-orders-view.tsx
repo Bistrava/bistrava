@@ -25,6 +25,7 @@ import { type ReactNode, useDeferredValue, useEffect, useMemo, useRef, useState 
 import { useAdminLanguage } from "@/components/admin/admin-i18n";
 import { AdminNotificationsSeen } from "./admin-notifications";
 import { OrderManagementForm } from "@/components/admin/order-management-form";
+import { OrderTrashForm } from "@/components/admin/order-trash-form";
 import { orderItemNetCents, orderTaxGroups } from "@/lib/admin/order-tax";
 import "@/components/admin/order-admin.css";
 import type {
@@ -380,6 +381,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const deferredQueryValue = useDeferredValue(query.trim().toLocaleLowerCase(locale));
   const deferredQuery = query.trim() ? deferredQueryValue : "";
   const [status, setStatus] = useState<"all" | AdminOrderStatus>("all");
+  const [showTrash, setShowTrash] = useState(() => Boolean(data.orders.find(order => order.id === initialOrderId)?.deletedAt));
   const [selectedOrderId, setSelectedOrderId] = useState(initialOrderId || data.orders[0]?.id || "");
   const [linkedOrderId, setLinkedOrderId] = useState(initialOrderId);
   // The detail opens full screen on click (or from a notification link) instead of below the list.
@@ -394,6 +396,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
       setView("orders");
       setQuery("");
       setStatus("all");
+      setShowTrash(Boolean(data.orders.find(order => order.id === initialOrderId)?.deletedAt));
     }
   }
   const customers = useMemo(
@@ -405,13 +408,13 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
   const filteredOrders = useMemo(() => data.orders.filter((order) => {
     const matchesStatus = status === "all" || order.status === status;
     const content = `${order.reference} ${customerName(order)} ${order.email} ${order.phone ?? ""} ${order.items.map((item) => item.sku).join(" ")}`.toLocaleLowerCase(locale);
-    return matchesStatus && (!deferredQuery || content.includes(deferredQuery));
-  }), [data.orders, deferredQuery, locale, status]);
+    return Boolean(order.deletedAt) === showTrash && matchesStatus && (!deferredQuery || content.includes(deferredQuery));
+  }), [data.orders, deferredQuery, locale, status, showTrash]);
   const filteredCustomers = useMemo(() => customers.filter((customer) => {
     const content = `${customer.name} ${customer.email} ${customer.phone ?? ""} ${customer.company ?? ""}`.toLocaleLowerCase(locale);
     return !deferredQuery || content.includes(deferredQuery);
   }), [customers, deferredQuery, locale]);
-  const selectedOrder = filteredOrders.find((order) => order.id === selectedOrderId) ?? filteredOrders[0] ?? null;
+  const selectedOrder = filteredOrders.find((order) => order.id === selectedOrderId) ?? (orderOpen ? null : filteredOrders[0] ?? null);
   const selectedCustomer = filteredCustomers.find((customer) => customer.id === selectedCustomerId) ?? filteredCustomers[0] ?? null;
 
   const formatMoney = (cents: number) => new Intl.NumberFormat(locale === "fr" ? "fr-FR" : "sl-SI", {
@@ -483,6 +486,7 @@ export function AdminOrdersView({ data, canManage = false, initialView = "orders
       </div>
 
       <div className="admin-order-filters card">
+        {view === 'orders' ? <label><span>{locale === 'fr' ? 'Afficher' : 'Prikaži'}</span><select value={showTrash ? 'trash' : 'active'} onChange={event => { setShowTrash(event.target.value === 'trash'); setOrderOpen(false); }}><option value="active">{locale === 'fr' ? 'Commandes' : 'Naročila'}</option><option value="trash">{locale === 'fr' ? 'Corbeille' : 'Koš'}</option></select></label> : null}
         <label className="admin-search-field"><span>{view === "orders" ? labels.orders : labels.customers}</span><span className="admin-search-input"><Search aria-hidden="true" size={19} /><input onChange={(event) => setQuery(event.target.value)} placeholder={view === "orders" ? labels.searchOrders : labels.searchCustomers} type="search" value={query} /></span></label>
         {view === "orders" ? <label><span>{labels.status}</span><select onChange={(event) => setStatus(event.target.value as "all" | AdminOrderStatus)} value={status}><option value="all">{labels.allStatuses}</option>{(Object.keys(statusTone) as AdminOrderStatus[]).map((value) => <option key={value} value={value}>{statusLabel(value)}</option>)}</select></label> : null}
       </div>
@@ -577,7 +581,8 @@ function OrderDetail({ order, labels, formatDate, formatMoney, statusLabel, paym
         <section><h3><ClipboardList size={17} />{labels.notes}</h3><div><strong>{labels.customerNote}</strong><p>{order.customerNote ?? labels.noNote}</p></div><div><strong>{labels.internalNote}</strong><p>{order.internalNote ?? labels.noNote}</p></div></section>
         <section><h3><CalendarDays size={17} />{labels.history}</h3><ol>{timeline.map((event) => <li key={`${event.label}-${event.date}`}><CheckCircle2 size={16} /><span><strong>{event.label}</strong><small>{formatDate(event.date)}</small></span></li>)}</ol></section>
       </div>
-      {canManage ? <OrderManagementForm key={order.id} order={order} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
+      {canManage && !order.deletedAt ? <OrderManagementForm key={order.id} order={order} shipmentStatusLabel={shipmentStatusLabel} statusLabel={statusLabel} /> : null}
+      {canManage ? <OrderTrashForm key={`${order.id}:${order.deletedAt ?? 'active'}`} order={order} /> : null}
     </aside>
   );
 }

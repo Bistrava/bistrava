@@ -34,6 +34,31 @@ function getEmailConfig() {
   return result.success ? result.data : null;
 }
 
+export async function sendBankOrderNotification(input: { orderId: string; data: unknown }) {
+  const orderId = z.uuid().parse(input.orderId);
+  const data = orderConfirmationEmailSchema.extend({
+    email: emailRecipientSchema, phone: z.string().max(40), address: z.string().max(800),
+  }).parse(input.data);
+  const idempotencyKey = `bank-order-admin:${orderId}`;
+  const subject = `Bistrava — novo naročilo ${data.orderReference} čaka na bančno nakazilo`;
+  const text = [
+    `Novo naročilo: ${data.orderReference}`, 'Status: čaka na plačilo z bančnim nakazilom.',
+    'Plačilo še ni potrjeno. Pred pripravo naročila preverite prejem sredstev.', '',
+    `Kupec: ${data.customerName}`, `E-pošta: ${data.email}`, `Telefon: ${data.phone}`,
+    `Naslov za dostavo: ${data.address}`, '',
+    ...data.items.map(item => `${item.quantity} × ${item.name}: ${formatMoney(item.lineTotalCents)}`),
+    `Skupaj z dostavo in popusti: ${formatMoney(data.totalCents)}`, '',
+    `Administracija: ${new URL(`/admin/narocila?order=${orderId}`, process.env.NEXT_PUBLIC_SITE_URL || 'https://bistrava.com')}`,
+  ].join('\n');
+  const escaped = text.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!);
+  const html = `<div style="white-space:pre-wrap;font-family:Arial,sans-serif">${escaped}</div>`;
+  if (mailboxConfigured()) return sendThroughMailbox({ to: mailboxAddress, idempotencyKey, emailType: 'order_bank_transfer_admin', subject, text, html });
+  const config = getEmailConfig();
+  if (!config) return { ok: false as const, reason: 'not_configured' as const };
+  const sent = await new Resend(config.apiKey).emails.send({ from: config.from, to: [mailboxAddress], replyTo: config.replyTo, subject, text, html }, { idempotencyKey });
+  return { ok: !sent.error };
+}
+
 /** Explicit field selection prevents extra form fields or access tokens entering e-mail. */
 export async function sendCardAttemptNotification(input: { data: unknown; quote: unknown }) {
   const data = checkoutFormSchema.parse(input.data);

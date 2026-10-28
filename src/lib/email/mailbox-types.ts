@@ -5,9 +5,15 @@ export const mailboxReplySchema = z.object({
 }).strict();
 
 export type MailboxMessage = {
+  is_read?: boolean;
   id: string; sender_name: string; sender_address: string; reply_address: string | null;
   subject: string; received_at: string; body_limited: boolean;
 };
+export type MailboxCursor = { before: string; beforeId: string };
+export const mailboxPageSchema = z.object({
+  before: z.string().datetime({ offset: true }).nullable(), beforeId: z.uuid().nullable(),
+  search: z.string().trim().max(120),
+}).refine(value => Boolean(value.before) === Boolean(value.beforeId));
 export type MailboxDetail = MailboxMessage & {
   body_text: string;
   attachments: Array<{ name: string; size: number }>;

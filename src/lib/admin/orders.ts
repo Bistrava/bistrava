@@ -72,6 +72,7 @@ export type AdminShipmentSummary = {
 };
 
 export type AdminOrder = {
+  deletedAt?: string | null;
   id: string;
   reference: string;
   profileId: string | null;

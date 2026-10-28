@@ -9,6 +9,11 @@
 .mailbox-list>div { max-height:70vh; overflow-y:auto; }
 .mailbox-list button { display:flex; flex-direction:column; width:100%; text-align:left; padding:1rem; gap:.35rem; background:white; border:0; border-top:1px solid #e4edf0; cursor:pointer; overflow-wrap:anywhere; }
 .mailbox-list button:hover,.mailbox-list button.is-selected { background:#e7f6f5; }.mailbox-list button.is-selected { box-shadow:inset 4px 0 #12a79d; }
+.mailbox-list button.is-unread { background:#edf3ff; box-shadow:inset 4px 0 #3566b8; color:#153d78; }
+.mailbox-list button.is-unread.is-selected { background:#dce9ff; }
+.mailbox-list .mailbox-unread-badge { align-self:flex-start; background:#244f97; color:white; border-radius:20px; padding:.15rem .5rem; font-size:.7rem; font-weight:700; }
+.mailbox-list .mailbox-load-more { align-items:center; color:#126c66; font-weight:700; background:#f0faf9; }
+.mailbox-scroll { scrollbar-gutter:stable; overscroll-behavior:contain; }
 .mailbox-list button span { font-size:.9rem; }.mailbox-list time,.mailbox-detail time { font-size:.75rem; color:#657b87; }
 .mailbox-detail { padding:1.4rem; }.mailbox-detail h2 { font-size:1.4rem; overflow-wrap:anywhere; }.mailbox-detail header p { overflow-wrap:anywhere; }
 .mailbox-body { white-space:pre-wrap; overflow-wrap:anywhere; padding:1.5rem 0; line-height:1.7; font-size:.95rem; }

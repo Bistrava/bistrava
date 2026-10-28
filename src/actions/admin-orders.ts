@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 import { getAdminAccess } from "@/lib/auth/admin";
 import { createClient } from "@/lib/supabase/server";
 import { sendOrderConfirmation, sendOrderStatusEmail } from "@/lib/email/send";
@@ -68,6 +69,22 @@ async function notifyOrderStatus(supabase: SessionClient, orderId: string, statu
 function invalidateCommerce() {
   for (const path of ["/admin", "/admin/narocila", "/admin/stranke", "/admin/dostava", "/admin/zaloga", "/admin/izdelki", "/kosarica", "/blagajna", "/dostava", "/splosni-pogoji-poslovanja", "/mehcalci-vode", "/"]) revalidatePath(path);
   revalidatePath("/izdelki/[slug]", "page");
+}
+
+export async function setOrderTrash(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {
+  const supabase = await adminClient();
+  if (!supabase) return result(form, 'error', 'Session administrateur requise.', 'Potrebna je skrbniška seja.');
+  const parsed = z.object({ orderId: z.uuid(), expectedUpdatedAt: z.string().datetime({ offset: true }),
+    deleted: z.enum(['yes', 'no']), confirmed: z.literal('on'),
+  }).safeParse(Object.fromEntries(form));
+  if (!parsed.success) return result(form, 'error', 'Confirmez votre choix.', 'Potrdite svojo izbiro.');
+  const { error } = await supabase.rpc('admin_set_order_deleted', {
+    input_order_id: parsed.data.orderId, input_expected_updated_at: parsed.data.expectedUpdatedAt,
+    input_deleted: parsed.data.deleted === 'yes',
+  });
+  if (error) return result(form, 'error', 'Action impossible. La commande a peut-être changé : actualisez puis réessayez.', 'Dejanje ni uspelo. Naročilo se je morda spremenilo: osvežite stran in poskusite znova.');
+  invalidateCommerce();
+  return result(form, 'success', parsed.data.deleted === 'yes' ? 'Commande déplacée dans la corbeille.' : 'Commande restaurée.', parsed.data.deleted === 'yes' ? 'Naročilo je premaknjeno v koš.' : 'Naročilo je obnovljeno.');
 }
 
 export async function saveAdminOrder(_previous: AdminOrderActionState, form: FormData): Promise<AdminOrderActionState> {

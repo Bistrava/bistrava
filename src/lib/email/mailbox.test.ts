@@ -49,3 +49,24 @@ describe('untrusted mail headers',()=>{
     expect(mailboxReplySchema.safeParse({id,messageId:id,body:'x'.repeat(20001)}).success).toBe(false);
   });
 });
+
+describe('mailbox cursor API', () => {
+  it('returns 50 messages and a cursor without bodies, and passes search as a bound argument', async () => {
+    const data = Array.from({length:51},(_,index)=>({id:`item-${index}`,received_at:'2026-10-01T12:00:00+00:00',is_read:index===0}));
+    const rpc=vi.fn().mockResolvedValue({data,error:null});
+    mocks.client.mockResolvedValue({rpc,from:()=>({select:()=>({eq:()=>({single:async()=>({data:{},error:null})})})})});
+    const response=await GET(new Request('https://bistrava.com/admin/mailbox?search=older'));
+    const body=await response.json();
+    expect(body.messages).toHaveLength(50);
+    expect(body.nextCursor).toEqual({before:data[49].received_at,beforeId:data[49].id});
+    expect(body.messages[0].is_read).toBe(true);
+    expect(rpc).toHaveBeenCalledWith('get_admin_mailbox_page',{input_before:null,input_before_id:null,input_search:'older',input_limit:51});
+  });
+  it('rejects malformed or incomplete cursors before querying', async () => {
+    const rpc=vi.fn(); mocks.client.mockResolvedValue({rpc});
+    for(const query of ['before=2026-10-01T12:00:00Z','beforeId=invalid','search='+ 'x'.repeat(121)]) {
+      expect((await GET(new Request(`https://bistrava.com/admin/mailbox?${query}`))).status).toBe(400);
+    }
+    expect(rpc).not.toHaveBeenCalled();
+  });
+});

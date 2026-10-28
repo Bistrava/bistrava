@@ -188,7 +188,7 @@ export function useAdminNotifications() {
 }
 
 /** Place this marker at the start of the rendered record or selected detail. */
-export function AdminNotificationsSeen({ category, entityIds }: { category: AdminNotificationCategory; entityIds: readonly string[] }) {
+export function AdminNotificationsSeen({ category, entityIds, onRead }: { category: AdminNotificationCategory; entityIds: readonly string[]; onRead?: (ids: readonly string[]) => void }) {
   const { enabled, markRead } = useAdminNotifications();
   const marker = useRef<HTMLSpanElement>(null);
   const seen = useRef(new Set<string>());
@@ -215,6 +215,7 @@ export function AdminNotificationsSeen({ category, entityIds }: { category: Admi
           pending.current.delete(`${category}:${id}`);
           if (result.status === "success") seen.current.add(`${category}:${id}`);
         });
+        if (active && result.status === 'success') onRead?.(ids);
       });
     };
     const observer = new IntersectionObserver(entries => {
@@ -240,7 +241,7 @@ export function AdminNotificationsSeen({ category, entityIds }: { category: Admi
       window.removeEventListener("focus", markVisible);
       window.removeEventListener("online", markVisible);
     };
-  }, [category, idsKey, enabled, markRead]);
+  }, [category, idsKey, enabled, markRead, onRead]);
   return <span className="admin-notifications-seen" aria-hidden="true" ref={marker} />;
 }
 

@@ -17,7 +17,7 @@ import { mapOrderItemTaxSnapshot, mapOrderShippingTax } from "@/lib/admin/order-
 
 type UnknownRecord = Record<string, unknown>;
 
-const adminOrderSelect = "id,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,shipping_tax_cents,shipping_tax_snapshot,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,transfer_proof_received_at,transfer_proof_reference,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents,product_snapshot),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)";
+const adminOrderSelect = "id,deleted_at,reference,profile_id,status,email,phone,currency,subtotal_cents,discount_cents,shipping_cents,shipping_tax_cents,shipping_tax_snapshot,tax_cents,total_cents,billing_address_snapshot,shipping_address_snapshot,customer_note,internal_note,checkout_mode,placed_at,created_at,updated_at,cancelled_at,completed_at,transfer_proof_received_at,transfer_proof_reference,order_items(id,product_name,variant_name,sku,quantity,unit_price_cents,tax_cents,line_total_cents,product_snapshot),payments(provider,provider_reference,status,amount_cents,refunded_cents,paid_at,created_at),shipments(status,carrier,service,tracking_number,tracking_url,shipped_at,delivered_at,created_at)";
 
 function record(value: unknown): UnknownRecord {
   return value && typeof value === "object" && !Array.isArray(value)
@@ -61,6 +61,7 @@ function mapOrder(row: UnknownRecord): AdminOrder {
   const items = Array.isArray(row.order_items) ? row.order_items : [];
 
   return {
+    deletedAt: nullableText(row.deleted_at),
     id: text(row.id),
     reference: text(row.reference),
     profileId: nullableText(row.profile_id),
